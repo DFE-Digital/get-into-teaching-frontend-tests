@@ -13,7 +13,7 @@ describe("Get-into-teaching - Homepage", () => {
 			.should("exist")
 			.should(
 				"have.text",
-				"\n    Coronavirus (COVID-19)\n    Whether you're currently training to be a teacher, ready to apply for teacher training or exploring teaching as a potential career, you may have questions about the impact of COVID-19.\n    Please check here for updates\n"
+				"\n        Coronavirus (COVID-19)\n        Whether you're currently training to be a teacher, ready to apply for teacher training or exploring teaching as a potential career, you may have questions about the impact of COVID-19.\n        Please check here for updates\n    "
 			);
 		homePage.getTeachingImage().should("exist");
 		homePage.getHomeHyperLink().should("have.text", "Home");
