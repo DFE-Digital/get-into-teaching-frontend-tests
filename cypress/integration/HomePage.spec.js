@@ -1,36 +1,40 @@
-/// <reference types="cypress" />
+/// <reference types="Cypress" />
 import HomePage from "../support/PageObjectsMap/HomePage";
 
 describe("Get-into-teaching - Homepage", () => {
-	beforeEach(() => {
+	const homePage = new HomePage();
+	beforeEach(function () {
+		cy.fixture("expectedTestData").then((expectedData) => {
+			this.expectedData = expectedData;
+		});
 		cy.logintoApp();
 	});
 
-	it("It shows the home page", () => {
-		const homePage = new HomePage();
+	it("It shows the home page", function () {
 		homePage
-			.getCovid()
+			.getCovidMessage()
+			.should("exist")
+			.should("have.text", this.expectedData.covidMessage);
+		homePage.getTeachingImage().should("exist");
+		homePage
+			.getHomeBannerText()
+			.should("exist")
+			.should("have.text", "Inspire the next generation")
+			.next()
 			.should("exist")
 			.should(
 				"have.text",
-				"\n        Coronavirus (COVID-19)\n        Whether you're currently training to be a teacher, ready to apply for teacher training or exploring teaching as a potential career, you may have questions about the impact of COVID-19.\n        Please check here for updates\n    "
+				"Get information and support to help you become a teacher"
 			);
-		homePage.getTeachingImage().should("exist");
-		homePage.getHomeHyperLink().should("have.text", "Home");
-		cy.contains("Funding your training").should("exist");
-		cy.contains("Steps to become a teacher").should("exist");
-		cy.contains("Teaching as a career").should("exist");
-		cy.contains("Salaries and Benefits").should("exist");
-		cy.contains("Find an event near you").should("exist");
-		cy.get(".home-hero__mailing-strip__text")
+
+		homePage
+			.getMailingStripText()
 			.should("exist")
-			.should(
-				"include.text",
-				"Stay up-to-date with personalised information to help you get into teaching"
-			)
+			.should("include.text", this.expectedData.mailingStripText)
 			.siblings()
 			.should("exist")
-			.should("include.text", "Learn more");
+			.should("include.text", this.expectedData.mailingStripButtonText);
+		cy.shouldHavePageNavigation();
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -42,12 +46,56 @@ describe("Get-into-teaching - Homepage", () => {
 			})
 			.click();
 		cy.location("pathname").should("equal", "/covid-19/index");
+		cy.shouldHavePageNavigation();
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Learn more"', () => {
-		cy.get(".home-hero__mailing-strip__button__inner > p").click();
+		homePage.getMailingStripButton().dblclick();
 		cy.location("pathname").should("equal", "/mailinglist/register/1");
+	});
+	it('Links through to "My story into teaching"', () => {
+		homePage.getMyStoryInToTeaching().click();
+		homePage.getBannerText().should("have.text", "My story into teaching");
+		homePage.getContentVideo().click();
+		homePage.getVideoContainer().should("exist");
+		homePage.getVideoCloseIcon().click();
+		cy.shouldHavePageNavigation();
+		cy.shouldHaveTalkToUsSection();
+		cy.shouldHaveFooter();
+	});
+	it('Links through to "Find events"', () => {
+		cy.contains("Find events")
+			.should((el) => {
+				expect(el).to.have.attr("href", "./events");
+			})
+			.click();
+		cy.location("pathname").should("equal", "/events");
+		homePage
+			.getBannerText()
+			.should("exist")
+			.should("have.text", "Find an event near you");
+		cy.shouldHavePageNavigation();
+		cy.shouldHaveTalkToUsSection();
+		cy.shouldHaveFooter();
+	});
+	it('Links through to "Check your qualifications"', () => {
+		cy.contains("Check your")
+			.should((el) => {
+				expect(el).to.have.attr(
+					"href",
+					"/steps-to-become-a-teacher/index#step-1"
+				);
+			})
+			.click();
+		cy.location("pathname").should("equal", "/steps-to-become-a-teacher/index");
+		homePage
+			.getBannerText()
+			.should("exist")
+			.should("have.text", "Steps to become a teacher");
+		cy.shouldHavePageNavigation();
+		cy.shouldHaveTalkToUsSection();
+		cy.shouldHaveFooter();
 	});
 });
