@@ -183,4 +183,30 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 			.should("exist")
 			.should("have.text", "Enter your postcode");
 	});
+
+	it('It shows "Enter a valid postcode" message', () => {
+		cy.get("div.find-an-event__right p:nth-child(3) > a.git-link").click();
+		cy.get("#events_search_postcode").type("TF32BTP");
+		cy.get(".request-button").click();
+		cy.get(".search-for-events__content__errors > div")
+			.should("exist")
+			.should("have.text", "Enter a valid postcode");
+	});
+	it("It matches the event date, time and location with previous page", () => {
+		cy.get("div.find-an-event__right p:nth-child(3) > a.git-link").click();
+		cy.get(
+			":nth-child(2) > .events-featured__items > :nth-child(1) > .event-resultbox > .event-resultbox__datetime"
+		)
+			.should("exist")
+			.then(function (dateAndTime) {
+				cy.get(
+					":nth-child(2) > .events-featured__items > :nth-child(1)"
+				).click();
+
+				cy.get(".event-resultboxshort__header > h1").should(
+					"have.text",
+					dateAndTime.text().trim()
+				);
+			});
+	});
 });

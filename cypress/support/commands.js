@@ -28,6 +28,7 @@ Cypress.Commands.add("logintoApp", () => {
 	cy.visit(Cypress.env("baseUrl"), {
 		auth: { username: "getintoteaching", password: "userneeds" },
 	});
+	cy.get(".cookie-acceptance__dialog > .call-to-action-button").click();
 });
 
 Cypress.Commands.add("shouldHaveTalkToUsSection", () => {
