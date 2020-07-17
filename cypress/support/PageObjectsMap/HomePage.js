@@ -6,7 +6,7 @@ class HomePage {
 		return cy.get(".covid > a");
 	}
 	getTeachingImage() {
-		return cy.get("a > img");
+		return cy.get(".logo__image");
 	}
 	getHomeHyperLink() {
 		return cy.get(":nth-child(1) > ul > :nth-child(3) > a");
