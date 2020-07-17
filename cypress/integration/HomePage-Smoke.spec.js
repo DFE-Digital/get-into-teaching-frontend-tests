@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
-import HomePage from "../support/PageObjectsMap/HomePage";
+import Homepage from "../support/pageobjects/Homepage";
 
-describe("Get-into-teaching - Homepage - Smoke Tests", () => {
-	const homePage = new HomePage();
+describe("Get-into-teaching - Homepage - smoke tests", () => {
+	const homePage = new Homepage();
 	beforeEach(function () {
 		cy.logintoApp();
 	});
@@ -16,7 +16,7 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 	});
 
 	it('Links through to "Funding your training"', () => {
-		cy.get(":nth-child(1) > ul > :nth-child(2) > a").then(function (linkText) {
+		homePage.getFundingyourTrainingLink().then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
 					expect(el).to.have.attr("href", "/funding-your-training/index");
@@ -29,7 +29,7 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 	});
 
 	it('Links through to "Steps to become a teacher"', () => {
-		cy.get(":nth-child(1) > ul > :nth-child(1) > a").then(function (linkText) {
+		homePage.getStepstoBecomeTeacherLink().then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
 					expect(el).to.have.attr("href", "/steps-to-become-a-teacher/index");
@@ -42,33 +42,29 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 	});
 
 	it('Links through to "Teaching as a career"', () => {
-		cy.get(".navbar__desktop > :nth-child(2) > ul > :nth-child(4) > a").then(
-			function (linkText) {
-				cy.contains(linkText.text())
-					.should((el) => {
-						expect(el).to.have.attr("href", "/life-as-a-teacher/index");
-					})
-					.click();
-			}
-		);
+		homePage.getTeachingAsaCareerLink().then(function (linkText) {
+			cy.contains(linkText.text())
+				.should((el) => {
+					expect(el).to.have.attr("href", "/life-as-a-teacher/index");
+				})
+				.click();
+		});
 		cy.location("pathname").should("equal", "/life-as-a-teacher/index");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Salaries and benefits"', () => {
-		cy.get(".navbar__desktop > :nth-child(2) > ul > :nth-child(3) > a").then(
-			function (linkText) {
-				cy.contains(linkText.text())
-					.should((el) => {
-						expect(el).to.have.attr(
-							"href",
-							"/life-as-a-teacher/teachers-salaries-and-benefits"
-						);
-					})
-					.click();
-			}
-		);
+		homePage.getSalariesAndBenefitsLink().then(function (linkText) {
+			cy.contains(linkText.text())
+				.should((el) => {
+					expect(el).to.have.attr(
+						"href",
+						"/life-as-a-teacher/teachers-salaries-and-benefits"
+					);
+				})
+				.click();
+		});
 		cy.location("pathname").should(
 			"equal",
 			"/life-as-a-teacher/teachers-salaries-and-benefits"
@@ -78,15 +74,13 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 	});
 
 	it('Links through to "Find an event near you"', () => {
-		cy.get(".navbar__desktop > :nth-child(2) > ul > :nth-child(2) > a").then(
-			function (linkText) {
-				cy.contains(linkText.text())
-					.should((el) => {
-						expect(el).to.have.attr("href", "/apievents");
-					})
-					.click();
-			}
-		);
+		homePage.getFindanEventNearYouLink().then(function (linkText) {
+			cy.contains(linkText.text())
+				.should((el) => {
+					expect(el).to.have.attr("href", "/apievents");
+				})
+				.click();
+		});
 		cy.location("pathname").should("equal", "/apievents");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
@@ -118,7 +112,7 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 		cy.shouldHaveFooter();
 	});
 	it('Links through to "Find events"', () => {
-		cy.get("div.find-an-event__right p:nth-child(3) > a.git-link").click();
+		homePage.getFindEventLink().click();
 		cy.location("pathname").should("equal", "/apievents");
 		homePage.getBannerText().should("exist");
 		cy.shouldHavePageNavigation();
@@ -131,7 +125,7 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 	 2. Other than this, all link should be closed/not expanded. 
 	*/
 	it('Links through to "Check your qualifications"', () => {
-		cy.get(":nth-child(1) > .steps__link > :nth-child(1)").click();
+		homePage.getCheckYourQualificationsLink().click();
 		cy.location("pathname").should("equal", "/steps-to-become-a-teacher/index");
 		homePage.getBannerText().should("exist");
 		cy.get("#collapsable-icon-1").should(
@@ -156,7 +150,7 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 	 link should not be visible.
 	*/
 	it('Links through to "Ways to train"', () => {
-		cy.get(":nth-child(3) > .steps__number").siblings().click();
+		homePage.getWaystoTrainLink().siblings().click();
 		cy.location("pathname").should("equal", "/steps-to-become-a-teacher/index");
 		homePage.getBannerText().should("exist");
 		cy.get("#collapsable-icon-1").should(
@@ -169,31 +163,40 @@ describe("Get-into-teaching - Homepage - Smoke Tests", () => {
 			"class",
 			"fas fa-chevron-up"
 		);
-		cy.get("#collapsable-content-1 > :nth-child(1)").should("not.be.visible");
-		cy.get("#collapsable-content-2 > :nth-child(1)").should("not.be.visible");
-		cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");
+		//cy.get("#collapsable-content-1 > :nth-child(1)").should("not.be.visible");
+		//cy.get("#collapsable-content-2 > :nth-child(1)").should("not.be.visible");
+		//cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
+	it("It doesn't show Postcode field if location is nationwide", () => {
+		homePage.getFindEventLink().click();
+		homePage.getEventLocation().select("Nationwide");
+		homePage.getEventPostCode().should("be.disabled");
+		homePage.getEventPostCode().should("not.be.visible");
+	});
+
 	it('It shows "Enter your postcode" message', () => {
-		cy.get("div.find-an-event__right p:nth-child(3) > a.git-link").click();
-		cy.get(".request-button").click();
+		homePage.getFindEventLink().click();
+		homePage.getEventLocation().select("Within 30 miles");
+		homePage.getUpdateResultsButton().click();
 		cy.get(".search-for-events__content__errors > div")
 			.should("exist")
 			.should("have.text", "Enter your postcode");
 	});
 
 	it('It shows "Enter a valid postcode" message', () => {
-		cy.get("div.find-an-event__right p:nth-child(3) > a.git-link").click();
-		cy.get("#events_search_postcode").type("TF32BTP");
-		cy.get(".request-button").click();
+		homePage.getFindEventLink().click();
+		homePage.getEventLocation().select("Within 30 miles");
+		homePage.getEventPostCode().type("TF32BTP");
+		homePage.getUpdateResultsButton().click();
 		cy.get(".search-for-events__content__errors > div")
 			.should("exist")
 			.should("have.text", "Enter a valid postcode");
 	});
 	it("It matches the event date, time and location with previous page", () => {
-		cy.get("div.find-an-event__right p:nth-child(3) > a.git-link").click();
+		homePage.getFindEventLink().click();
 		cy.get(
 			":nth-child(2) > .events-featured__items > :nth-child(1) > .event-resultbox > .event-resultbox__datetime"
 		)
