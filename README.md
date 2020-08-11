@@ -51,4 +51,7 @@ npm run test -- --headless --browser browser_name (Ex. npm run test -- --headle
 npm run test -- --spec 'cypress/integration/spec_file_name.js
 ```
 
-
+### Running on Docker
+```bash
+docker run -i -v $PWD:/test -w /test cypress/included:4.2.0
+```
