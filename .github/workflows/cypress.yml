@@ -3,7 +3,7 @@ name: Cypress Testing
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '* 22 * * *'
+    - cron:  '6 22 * * *'
 jobs:
   siege:
     name: Run Cypress Tests
