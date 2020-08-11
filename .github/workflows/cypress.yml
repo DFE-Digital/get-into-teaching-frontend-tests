@@ -14,11 +14,12 @@ jobs:
 
       - name:   Run the Tests
         run: |
-             docker run -it -v $PWD:/test -w /test cypress/included:4.2.0
+             docker run -i -v $PWD:/test -w /test cypress/included:4.2.0
         
       - name: Upload artifact
         if: always()
         uses: actions/upload-artifact@v1.0.0
+        if: always()
         with:
           name: Videos
           path: ./cypress/videos/
@@ -26,6 +27,7 @@ jobs:
       - name: Upload artifact
         if: always()
         uses: actions/upload-artifact@v1.0.0
+        if: always()
         with:
           name: Screenshots
           path: ./cypress/screenshots/
