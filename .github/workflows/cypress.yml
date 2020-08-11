@@ -1,0 +1,28 @@
+---
+name: Cypress Testing
+on:
+  workflow_dispatch:
+jobs:
+  siege:
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name:   Run the Tests
+        run: |
+             docker run -it -v $PWD:/test -w /test cypress/included:4.2.0
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: Videos
+          path: ./cypress/videos/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: Screenshots
+          path: ./cypress/screenshots/
+
