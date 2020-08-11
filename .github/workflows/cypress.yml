@@ -2,7 +2,7 @@
 name: Cypress Testing
 on:
   schedule:
-    - cron:  '10 22 * * 1-5'
+  - cron:  "15 22 * * 1-5"
       
 jobs:
   siege:
