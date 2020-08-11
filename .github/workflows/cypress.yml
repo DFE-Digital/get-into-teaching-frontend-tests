@@ -16,12 +16,14 @@ jobs:
         
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
+        if: always()
         with:
           name: Videos
           path: ./cypress/videos/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
+        if: always()
         with:
           name: Screenshots
           path: ./cypress/screenshots/
