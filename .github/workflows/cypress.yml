@@ -15,12 +15,14 @@ jobs:
              docker run -it -v $PWD:/test -w /test cypress/included:4.2.0
         
       - name: Upload artifact
+        if: always()
         uses: actions/upload-artifact@v1.0.0
         with:
           name: Videos
           path: ./cypress/videos/
 
       - name: Upload artifact
+        if: always()
         uses: actions/upload-artifact@v1.0.0
         with:
           name: Screenshots
