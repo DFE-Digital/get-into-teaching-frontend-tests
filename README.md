@@ -21,7 +21,7 @@ npm install
 
 ### Run the tests via CLI
 
-### Invoke all tests by default in Electron browser headlessly
+### Invoke all tests in Electron (default) browser headlessly
 
 ```bash
 npm test
