@@ -21,13 +21,37 @@ npm install
 
 ### Run the tests via CLI
 
+### Invoke all tests in Electron (default) browser headlessly
+
 ```bash
 npm test
+```
+
+### Invoke all tests in Electron browser in headed mode
+
+```bash
+npm run test -- --headed
+```
+
+### Invoke all tests in specific browser in headed mode
+
+```bash
+npm run test -- --browser browser_name (Ex. npm run test -- --browser chrome)
+```
+
+### Invoke all tests in specific browser headlessly
+
+```bash
+npm run test -- --headless --browser browser_name (Ex. npm run test -- --headless --browser chrome)
 ```
 
 ### Run the specific spec file
 
 ```bash
-npm run test spec-file-name.spec.js
+npm run test -- --spec 'cypress/integration/spec_file_name.js
 ```
 
+### Running on Docker
+```bash
+docker run -i -v $PWD:/test -w /test cypress/included:4.2.0
+```

@@ -1,0 +1,32 @@
+---
+name: Cypress Testing
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 23 * * *"
+jobs:
+  siege:
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name:   Run the Tests
+        run: |
+             docker run -i -v $PWD:/test -w /test cypress/included:4.2.0
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        if: always()
+        with:
+          name: Videos
+          path: ./cypress/videos/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        if: always()
+        with:
+          name: Screenshots
+          path: ./cypress/screenshots/
+
