@@ -1,0 +1,33 @@
+---
+name: Cypress Testing (QA)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 22 * * *"
+jobs:
+  cypress:
+    name: Run Cypress Tests (QA)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+             ref: passive_tests
+
+      - name:   Run the Tests
+        run: |
+             docker run -i -v $PWD:/test -w /test cypress/included:4.2.0 --config-file cypress-qa.json
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        if: always()
+        with:
+          name: Videos
+          path: ./cypress/videos/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        if: always()
+        with:
+          name: Screenshots
+          path: ./cypress/screenshots/
