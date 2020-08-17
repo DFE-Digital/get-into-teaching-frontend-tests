@@ -19,11 +19,11 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		homePage.getFundingyourTrainingLink().then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr("href", "/funding-your-training/index");
+					expect(el).to.have.attr("href", "/funding-your-training");
 				})
 				.click();
 		});
-		cy.location("pathname").should("equal", "/funding-your-training/index");
+		cy.location("pathname").should("equal", "/funding-your-training");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -32,11 +32,11 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		homePage.getStepstoBecomeTeacherLink().then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr("href", "/steps-to-become-a-teacher/index");
+					expect(el).to.have.attr("href", "/steps-to-become-a-teacher");
 				})
 				.click();
 		});
-		cy.location("pathname").should("equal", "/steps-to-become-a-teacher/index");
+		cy.location("pathname").should("equal", "/steps-to-become-a-teacher");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -45,11 +45,11 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		homePage.getTeachingAsaCareerLink().then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr("href", "/life-as-a-teacher/index");
+					expect(el).to.have.attr("href", "/life-as-a-teacher");
 				})
 				.click();
 		});
-		cy.location("pathname").should("equal", "/life-as-a-teacher/index");
+		cy.location("pathname").should("equal", "/life-as-a-teacher");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -77,11 +77,11 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		homePage.getFindanEventNearYouLink().then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr("href", "/apievents");
+					expect(el).to.have.attr("href", "/events");
 				})
 				.click();
 		});
-		cy.location("pathname").should("equal", "/apievents");
+		cy.location("pathname").should("equal", "/events");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -90,30 +90,87 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		cy.get(".covid > a").then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr("href", "/covid-19/index");
+					expect(el).to.have.attr("href", "/covid-19");
 				})
 				.click();
 		});
-		cy.location("pathname").should("equal", "/covid-19/index");
+		cy.location("pathname").should("equal", "/covid-19");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
-	it('Links through to "Learn more"', () => {
+	it('Links through to "Sign up here"', () => {
 		homePage.getMailingStripButton().dblclick();
 		cy.location("pathname").should("equal", "/mailinglist/signup");
 	});
 	it('Links through to "My story into teaching"', () => {
 		homePage.getMyStoryInToTeaching().click();
-		homePage.getContentVideo().click();
+		cy.location("pathname").should(
+			"equal",
+			"/life-as-a-teacher/my-story-into-teaching"
+		);
+
+		/*homePage.getContentVideo().click();
 		homePage.getVideoContainer().should("exist");
-		homePage.getVideoCloseIcon().click();
+		homePage.getVideoCloseIcon().click();*/
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
+	it('Links through to "career-changers stories"', () => {
+		homePage.getMyStoryInToTeaching().click();
+		cy.get(":nth-child(3) > .content__left > .call-to-action-button").click();
+		cy.location("pathname").should(
+			"equal",
+			"/life-as-a-teacher/my-story-into-teaching/career-changers"
+		);
+	});
+
+	it('Links through to "international-career-changers"', () => {
+		homePage.getMyStoryInToTeaching().click();
+		cy.get(":nth-child(6) > .content__left > .call-to-action-button").click();
+		cy.location("pathname").should(
+			"equal",
+			"/life-as-a-teacher/my-story-into-teaching/international-career-changers"
+		);
+	});
+
+	it('Links through to "teacher-training-stories"', () => {
+		homePage.getMyStoryInToTeaching().click();
+		cy.get(":nth-child(9) > .content__left > .call-to-action-button").click();
+		cy.location("pathname").should(
+			"equal",
+			"/life-as-a-teacher/my-story-into-teaching/teacher-training-stories"
+		);
+	});
+	it('Links through to "making-a-difference"', () => {
+		homePage.getMyStoryInToTeaching().click();
+		cy.get(":nth-child(12) > .content__left > .call-to-action-button").click();
+		cy.location("pathname").should(
+			"equal",
+			"/life-as-a-teacher/my-story-into-teaching/making-a-difference"
+		);
+	});
+
+	it('Links through to "career-progression"', () => {
+		homePage.getMyStoryInToTeaching().click();
+		cy.get(":nth-child(15) > .content__left > .call-to-action-button").click();
+		cy.location("pathname").should(
+			"equal",
+			"/life-as-a-teacher/my-story-into-teaching/career-progression"
+		);
+	});
+	it('Links through to "returning to teaching"', () => {
+		homePage.getMyStoryInToTeaching().click();
+		cy.get(":nth-child(18) > .content__left > .call-to-action-button").click();
+		cy.location("pathname").should(
+			"equal",
+			"/life-as-a-teacher/my-story-into-teaching/returners"
+		);
+	});
+
 	it('Links through to "Find events"', () => {
 		homePage.getFindEventLink().click();
-		cy.location("pathname").should("equal", "/apievents");
+		cy.location("pathname").should("equal", "/events");
 		homePage.getBannerText().should("exist");
 		cy.shouldHavePageNavigation();
 		cy.shouldHaveTalkToUsSection();
@@ -126,7 +183,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	*/
 	it('Links through to "Check your qualifications"', () => {
 		homePage.getCheckYourQualificationsLink().click();
-		cy.location("pathname").should("equal", "/steps-to-become-a-teacher/index");
+		cy.location("pathname").should("equal", "/steps-to-become-a-teacher");
 		homePage.getBannerText().should("exist");
 		cy.get("#collapsable-icon-1").should(
 			"have.attr",
@@ -151,7 +208,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	*/
 	it('Links through to "Ways to train"', () => {
 		homePage.getWaystoTrainLink().siblings().click();
-		cy.location("pathname").should("equal", "/steps-to-become-a-teacher/index");
+		cy.location("pathname").should("equal", "/steps-to-become-a-teacher");
 		homePage.getBannerText().should("exist");
 		cy.get("#collapsable-icon-1").should(
 			"have.attr",
@@ -163,9 +220,9 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			"class",
 			"fas fa-chevron-up"
 		);
-		//cy.get("#collapsable-content-1 > :nth-child(1)").should("not.be.visible");
-		//cy.get("#collapsable-content-2 > :nth-child(1)").should("not.be.visible");
-		//cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");
+		cy.get("#collapsable-content-1 > :nth-child(1)").should("not.be.visible");
+		cy.get("#collapsable-content-2 > :nth-child(1)").should("not.be.visible");
+		cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -196,20 +253,38 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			.should("have.text", "Enter a valid postcode");
 	});
 	it("It matches the event date, time and location with previous page", () => {
+		var eventDate;
+		var eventTime;
 		homePage.getFindEventLink().click();
-		cy.get(
-			":nth-child(2) > .events-featured__items > :nth-child(1) > .event-resultbox > .event-resultbox__datetime"
-		)
+		cy.get(".event-resultbox__header")
+			.as("1steventName")
 			.should("exist")
-			.then(function (dateAndTime) {
-				cy.get(
-					":nth-child(2) > .events-featured__items > :nth-child(1)"
-				).click();
-
-				cy.get(".event-resultboxshort__header > h1").should(
-					"have.text",
-					dateAndTime.text().trim()
-				);
+			.eq(0)
+			.then(function (eventName) {
+				cy.log("Event Name : " + eventName.text());
+				cy.get("@1steventName")
+					.siblings()
+					.eq(0)
+					.then(function (eventDateandTime) {
+						cy.log("Event date and Time : " + eventDateandTime.text());
+						var a = eventDateandTime.text().split(",");
+						eventDate = a[0];
+						eventTime = a[1].replace("at", "");
+						cy.get("@1steventName").eq(0).click();
+						cy.get(".hero__banner__text > h1").should(
+							"contain.text",
+							eventName.text().trim()
+						);
+					});
 			});
+
+		cy.get(".event-resultboxshort__header > h1").then(function (
+			eventDateandTimeonNextPage
+		) {
+			cy.log(eventDateandTimeonNextPage.text());
+			var a = eventDateandTimeonNextPage.text().split(",");
+			expect(eventDate.trim()).to.equal(a[0].trim());
+			expect(eventTime.trim()).to.equal(a[1].trim());
+		});
 	});
 });

@@ -40,11 +40,11 @@ Cypress.Commands.add("shouldHavePageNavigation", () => {
 		"Funding your training",
 		"Steps to become a teacher",
 		"Teaching as a career",
-		"Salaries and Benefits",
+		"My story into teaching",
+		"Salaries and benefits",
 		"Find an event near you",
-		"Talk to us",
 	].forEach((text) => {
-		cy.get("div.navbar__desktop").should("contain", text);
+		cy.get(".navbar__desktop > ul").should("contain", text);
 	});
 });
 
