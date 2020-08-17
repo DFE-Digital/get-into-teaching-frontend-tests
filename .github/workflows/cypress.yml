@@ -1,5 +1,5 @@
 ---
-name: Cypress Testing (dev)
+name: Cypress Testing (dev) (passive)
 on:
   workflow_dispatch:
   schedule:
