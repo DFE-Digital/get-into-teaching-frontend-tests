@@ -109,10 +109,6 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			"equal",
 			"/life-as-a-teacher/my-story-into-teaching"
 		);
-
-		/*homePage.getContentVideo().click();
-		homePage.getVideoContainer().should("exist");
-		homePage.getVideoCloseIcon().click();*/
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -227,31 +223,6 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		cy.shouldHaveFooter();
 	});
 
-	it("It doesn't show Postcode field if location is nationwide", () => {
-		homePage.getFindEventLink().click();
-		homePage.getEventLocation().select("Nationwide");
-		homePage.getEventPostCode().should("be.disabled");
-		homePage.getEventPostCode().should("not.be.visible");
-	});
-
-	it('It shows "Enter your postcode" message', () => {
-		homePage.getFindEventLink().click();
-		homePage.getEventLocation().select("Within 30 miles");
-		homePage.getUpdateResultsButton().click();
-		cy.get(".search-for-events__content__errors > div")
-			.should("exist")
-			.should("have.text", "Enter your postcode");
-	});
-
-	it('It shows "Enter a valid postcode" message', () => {
-		homePage.getFindEventLink().click();
-		homePage.getEventLocation().select("Within 30 miles");
-		homePage.getEventPostCode().type("TF32BTP");
-		homePage.getUpdateResultsButton().click();
-		cy.get(".search-for-events__content__errors > div")
-			.should("exist")
-			.should("have.text", "Enter a valid postcode");
-	});
 	it("It matches the event date, time and location with previous page", () => {
 		var eventDate;
 		var eventTime;
