@@ -1,5 +1,5 @@
 ---
-name: Cypress Testing (dev) (active)
+name: Cypress Testing (dev) (passive)
 on:
   workflow_dispatch:
   schedule:
@@ -11,11 +11,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: passive_tests 
 
       - name:   Run the Tests
         run: |
              docker build . -t cypress-image
-             docker run -i -v $PWD:/test -w /test cypress-image 
+             docker run -i -v $PWD:/test -w /test cypressi-image
         
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
@@ -30,4 +32,3 @@ jobs:
         with:
           name: Screenshots
           path: ./cypress/screenshots/
-

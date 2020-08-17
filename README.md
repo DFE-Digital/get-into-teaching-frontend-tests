@@ -2,6 +2,16 @@
 
 Front End automation collection using Cypress.io. This will be used for live journey checks and a regression and smoke pack.
 
+## Automated Test Schedule
+We have 2 environments which we want to execute the tests on, Development and QA. Using GitHub actions we have set up the following test runs:
+
+- Development Active ( Master Branch) (cypress.json). Ran automatically at 23:00 UTC 
+- Development Passive ( Passive_test branch ) (cypress.json) Ran automatically at 23:00 UTC 
+- QA Passive ( Passive_test branch) ( cypress-qa.json ) Ran automatically at 22:00 UTC
+
+It is possible to run these actions manually at any time.
+
+
 ## Running locally
 
 ### Install System dependencies
@@ -51,7 +61,17 @@ npm run test -- --headless --browser browser_name (Ex. npm run test -- --headle
 npm run test -- --spec 'cypress/integration/spec_file_name.js
 ```
 
-### Running on Docker
+# Docker
+## Building on Docker
+```bash
+docker build . -t <tagname>
+```
+## Running on Docker with default settings
 ```bash
 docker run -i -v $PWD:/test -w /test cypress/included:4.2.0
 ```
+## With Different environments
+```bash
+docker run -i -v $PWD:/test -w /test cypress/included:4.2.0 --config-file cypress-qa.json
+```
+
