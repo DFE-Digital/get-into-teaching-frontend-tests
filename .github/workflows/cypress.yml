@@ -1,12 +1,12 @@
 ---
-name: Cypress Testing
+name: Cypress Testing (dev)
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 23 * * *"
 jobs:
   cypress:
-    name: Run Cypress Tests
+    name: Run Cypress Tests (dev)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
