@@ -16,7 +16,8 @@ jobs:
 
       - name:   Run the Tests
         run: |
-             docker run -i -v $PWD:/test -w /test cypress/included:4.2.0 --config-file cypress-qa.json
+             docker build . -t cypress-image
+             docker run -i -v $PWD:/test -w /test cypress-image  --config-file cypress-qa.json
         
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
