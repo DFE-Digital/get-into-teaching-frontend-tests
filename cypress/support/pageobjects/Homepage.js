@@ -12,13 +12,13 @@ class HomePage {
 		return cy.get(":nth-child(1) > ul > :nth-child(3) > a");
 	}
 	getMailingStripText() {
-		return cy.get(".home-hero__mailing-strip__text");
+		return cy.get(".hero__mailing-strip__text");
 	}
 	getMailingStripButton() {
-		return cy.get(".home-hero__mailing-strip__button__inner > p");
+		return cy.get(".hero__mailing-strip__button > span");
 	}
 	getMyStoryInToTeaching() {
-		return cy.get("div.my-story__right p:nth-child(3) > a.git-link");
+		return cy.get(".navbar__desktop > ul > :nth-child(5) > a");
 	}
 
 	getHomeBannerText() {
@@ -43,23 +43,23 @@ class HomePage {
 	}
 
 	getFundingyourTrainingLink() {
-		return cy.get(":nth-child(1) > ul > :nth-child(2) > a");
+		return cy.get(".navbar__desktop > ul > :nth-child(2) > a");
 	}
 
 	getStepstoBecomeTeacherLink() {
-		return cy.get(":nth-child(1) > ul > :nth-child(1) > a");
+		return cy.get(".navbar__desktop > ul > :nth-child(3) > a");
 	}
 
 	getTeachingAsaCareerLink() {
-		return cy.get(".navbar__desktop > :nth-child(2) > ul > :nth-child(4) > a");
+		return cy.get(".navbar__desktop > ul > :nth-child(4) > a");
 	}
 
 	getSalariesAndBenefitsLink() {
-		return cy.get(".navbar__desktop > :nth-child(2) > ul > :nth-child(3) > a");
+		return cy.get(".navbar__desktop > ul > :nth-child(6) > a");
 	}
 
 	getFindanEventNearYouLink() {
-		return cy.get(".navbar__desktop > :nth-child(2) > ul > :nth-child(2) > a");
+		return cy.get(".navbar__desktop > ul > :nth-child(7) > a");
 	}
 
 	getFindEventLink() {
