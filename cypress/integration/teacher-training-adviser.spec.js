@@ -130,7 +130,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
-		cy.selectStage("Secondry");
+		cy.selectStage("Secondary");
 		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
 			"No",
 			"Secondry"
@@ -242,7 +242,6 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
 		cy.selectStage("Secondary");
-
 		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
 			"No",
 			"Secondary"
@@ -495,7 +494,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			.should("have.text", "Enter your town or city")
 			.next()
 			.should("have.text", "Enter a real postcode");
-		cy.get("#degree-uk-candidate-address-line-1-field-error").type(
+		cy.get("#degree-uk-candidate-address-line1-field-error").type(
 			this.testData.address_Line1
 		);
 		cy.get("#degree-uk-candidate-address-city-field-error").type(
@@ -528,5 +527,140 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			"#accept-privacy-policy-accepted-policy-id-0a203956-e935-ea11-a813-000d3a44a8e9-field"
 		).click();
 		teacherTrainingAdviser.getContinueButton().click();
+	});
+
+	it("It shows Privacy policy details to the user if he clicks on link", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = true));
+		cy.havePreviousTeacherReferenceNumber(
+			(havePreviousTeacherReferenceNumber = true)
+		);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Computing");
+		cy.selectSubjectLikeToTeach("Physics");
+		cy.enterDateOfBirth("25", "02", "1986", (returner = true));
+		cy.whereDoYouLive("UK");
+		cy.enterUKCandidateAddress(
+			"55",
+			"Hollinswood",
+			"Telford",
+			"TF3 2BT",
+			(returner = true)
+		);
+		cy.enterUKTelephoneNumber("012345678");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.get(".govuk-form-group > a").click();
+		cy.get("h2").should("exist").should("have.text", "Privacy Policy");
+		cy.get("h3").should("exist").should("have.text", "Legal information");
+		cy.get(".govuk-footer__meta").should("exist");
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner have an equivalent qualification from another country', function () {
+		var stage;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree(
+			"I have an equivalent qualification from another country"
+		);
+		cy.selectStage("Equivalent-Secondary");
+		cy.whichSubjectAreYouInterestedInTeaching("Equivalent-Computing");
+		cy.whenDoYouWantToStartYourTeacherTraining("Equivalent-2021");
+		cy.get("#equivalent_date_of_birth_date_of_birth_3i").type("27");
+		cy.get("#equivalent_date_of_birth_date_of_birth_2i").type("07");
+		cy.get("#equivalent_date_of_birth_date_of_birth_1i").type("1983");
+		cy.clickOnContinueButton();
+		cy.get("#equivalent-uk-or-overseas-uk-or-overseas-overseas-field").click();
+		cy.clickOnContinueButton();
+		cy.get("#equivalent-overseas-country-country-id-field").select("Austria");
+		cy.clickOnContinueButton();
+		cy.get("#equivalent-overseas-candidate-telephone-field").type("0125234490");
+		cy.clickOnContinueButton();
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner have an equivalent qualification from another country interested in primary stage teaching', function () {
+		var stage;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree(
+			"I have an equivalent qualification from another country"
+		);
+		cy.selectStage("Equivalent-Primary");
+		cy.whenDoYouWantToStartYourTeacherTraining("Equivalent-2021");
+		cy.typeDateOfBirth("22", "08", "2000", true);
+		cy.whereDoYouLive("UK", false, true);
+		cy.get("#equivalent-uk-candidate-address-line1-field").type("25");
+		cy.get("#equivalent-uk-candidate-address-line2-field").type(
+			"Delbury Court"
+		);
+		cy.get("#equivalent-uk-candidate-address-city-field").type("Telford");
+		cy.get("#equivalent-uk-candidate-address-postcode-field").type("TF3 2BP");
+		cy.clickOnContinueButton();
+		cy.enterUKTelephoneNumber("0123454748", true);
+
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner who is studying for a degree', function () {
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Final year");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Secondary");
+		cy.haveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes", "Secondary");
+		cy.whichSubjectAreYouInterestedInTeaching("Studying-Dance");
+		cy.whenDoYouWantToStartYourTeacherTraining("Studying-2022");
+		cy.typeDateOfBirth("22", "08", "2000", false);
+		cy.whereDoYouLive("Austria", true, false);
+		cy.get("#studying-overseas-telephone-telephone-field").type("0125234490");
+		cy.clickOnContinueButton();
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
 	});
 });
