@@ -1,6 +1,7 @@
 {
 	"baseUrl": "https://get-into-teaching-app-dev.london.cloudapps.digital/",
 	"env": {
-		"baseUrl": "https://get-into-teaching-app-dev.london.cloudapps.digital/"
+		"baseUrl": "https://get-into-teaching-app-dev.london.cloudapps.digital/",
+		"baseurl_tta_flow": "https://get-teacher-training-adviser-service-dev.london.cloudapps.digital/registrations/identity"
 	}
 }

@@ -1,6 +1,24 @@
 /// <reference types="Cypress" />
 import Homepage from "../support/pageobjects/Homepage";
 
+
+function terminalLog(violations) {
+     cy.task( 'log',
+             `${violations.length} accessibility violation${
+               violations.length === 1 ? '' : 's'
+             } ${violations.length === 1 ? 'was' : 'were'} detected`
+           )
+     const violationData = violations.map(
+             ({ id, impact, description, nodes }) => ({
+               id,
+               impact,
+               description,
+               nodes: nodes.length
+             })
+     )
+     cy.task('table', violationData)
+}
+
 describe("Get-into-teaching - Homepage - smoke tests", () => {
 	const homePage = new Homepage();
 	beforeEach(function () {
@@ -109,10 +127,6 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			"equal",
 			"/life-as-a-teacher/my-story-into-teaching"
 		);
-
-		/*homePage.getContentVideo().click();
-		homePage.getVideoContainer().should("exist");
-		homePage.getVideoCloseIcon().click();*/
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -230,31 +244,6 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		cy.shouldHaveFooter();
 	});
 
-	it("It doesn't show Postcode field if location is nationwide", () => {
-		homePage.getFindEventLink().click();
-		homePage.getEventLocation().select("Nationwide");
-		homePage.getEventPostCode().should("be.disabled");
-		homePage.getEventPostCode().should("not.be.visible");
-	});
-
-	it('It shows "Enter your postcode" message', () => {
-		homePage.getFindEventLink().click();
-		homePage.getEventLocation().select("Within 30 miles");
-		homePage.getUpdateResultsButton().click();
-		cy.get(".search-for-events__content__errors > div")
-			.should("exist")
-			.should("have.text", "Enter your postcode");
-	});
-
-	it('It shows "Enter a valid postcode" message', () => {
-		homePage.getFindEventLink().click();
-		homePage.getEventLocation().select("Within 30 miles");
-		homePage.getEventPostCode().type("TF32BTP");
-		homePage.getUpdateResultsButton().click();
-		cy.get(".search-for-events__content__errors > div")
-			.should("exist")
-			.should("have.text", "Enter a valid postcode");
-	});
 	it("It matches the event date, time and location with previous page", () => {
 		var eventDate;
 		var eventTime;
@@ -290,4 +279,21 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			expect(eventTime.trim()).to.equal(a[1].trim());
 		});
 	});
+
+	// Basic usage
+        it('Has no detectable a11y violations on load', () => {
+          // Test the page at initial load
+          cy.checkA11y()
+        })
+
+        it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', () => {
+          // Test on initial load, only report and assert for critical impact items
+          cy.checkA11y(null, {
+            includedImpacts: ['critical']
+          })
+        })
+
+        it('Logs violations to the terminal', () => {
+           cy.checkA11y(null, null, terminalLog)
+        })
 });

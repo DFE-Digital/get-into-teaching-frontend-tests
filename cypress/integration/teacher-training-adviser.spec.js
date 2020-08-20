@@ -1,5 +1,22 @@
 import TeacherTrainingAdviser from "../support/pageobjects/TeacherTrainingAdviser";
 
+function terminalLog(violations) {
+     cy.task( 'log',
+             `${violations.length} accessibility violation${
+               violations.length === 1 ? '' : 's'
+             } ${violations.length === 1 ? 'was' : 'were'} detected`
+           )
+     const violationData = violations.map(
+             ({ id, impact, description, nodes }) => ({
+               id,
+               impact,
+               description,
+               nodes: nodes.length
+             })
+     )
+     cy.task('table', violationData)
+}
+
 describe("Get-into-teaching - teachet training adviser flow", () => {
 	var returner;
 	var havePreviousTeacherReferenceNumber;
@@ -8,12 +25,11 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.fixture("tta-signup-test-data.json").then((testData) => {
 			this.testData = testData;
 		});
-		cy.visit(
-			"https://get-teacher-training-adviser-service-dev.london.cloudapps.digital/registrations/identity",
-			{
-				auth: { username: "getintoteaching", password: "userneeds" },
-			}
-		);
+
+		cy.visit(Cypress.env("baseurl_tta_flow"), {
+			auth: { username: "getintoteaching", password: "userneeds" },
+		});
+                cy.injectAxe();
 	});
 	it('It shows "Thank you  Sign up complete" message to UK returner user', function () {
 		cy.enterFirstNameLastNameandEmail(
@@ -187,7 +203,6 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").should("exist");
 		cy.get(".govuk-panel__title").then(function (signuptext) {
 			signuptext = signuptext.text().trim();
 			expect(signuptext).to.equal("Thank you  Sign up complete");
@@ -230,6 +245,22 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			expect(signuptext).to.equal("Thank you  Sign up complete");
 		});
 	});
+
+  it('Has no detectable a11y violations on load', function ()  {
+    // Test the page at initial load
+    cy.checkA11y()
+  });
+
+  it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', function ()  {
+  // Test on initial load, only report and assert for critical impact items
+    cy.checkA11y(null, {
+      includedImpacts: ['critical']
+    })
+  });
+
+  it('Logs violations to the terminal', function () {
+     cy.checkA11y(null, null, terminalLog)
+  });
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" if user has no degree', function () {
 		cy.enterFirstNameLastNameandEmail(
@@ -295,83 +326,6 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(".govuk-fieldset__heading")
 			.should("exist")
 			.should("have.text", "Are you returning to teaching?");
-	});
-
-	it("It shows the error message if user wrong date of birth", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
-		cy.returningToTeaching((returner = false));
-		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Secondary");
-
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Secondary"
-		);
-		cy.whichSubjectAreYouInterestedInTeaching("English");
-		cy.whenDoYouWantToStartYourTeacherTraining("2022");
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title")
-			.should("exist")
-			.should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "You need to enter your date of birth");
-		cy.get("#degree-date-of-birth-date-of-birth-error").should(
-			"have.text",
-			"Error: You need to enter your date of birth"
-		);
-		cy.get("#degree-date-of-birth-date-of-birth-field-error").type("31");
-		cy.get("#degree_date_of_birth_date_of_birth_2i").type("3");
-		cy.get("#degree_date_of_birth_date_of_birth_1i").type("1885");
-		cy.get(".govuk-button").click();
-		cy.get("#error-summary-title")
-			.should("exist")
-			.should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "You must be less than 70 years old");
-		cy.get("#degree-date-of-birth-date-of-birth-error").should(
-			"have.text",
-			"Error: You must be less than 70 years old"
-		);
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").clear();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").type("2004");
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title")
-			.should("exist")
-			.should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "You must be 18 years or older to use this service");
-		cy.get("#degree-date-of-birth-date-of-birth-error").should(
-			"have.text",
-			"Error: You must be 18 years or older to use this service"
-		);
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").clear();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").type("2030");
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title")
-			.should("exist")
-			.should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "Date can't be in the future");
-		cy.get("#degree-date-of-birth-date-of-birth-error").should(
-			"have.text",
-			"Error: Date can't be in the future"
-		);
 	});
 
 	it("It shows the error message if user clicks continiue button without entering the mandatory or correct details", function () {
