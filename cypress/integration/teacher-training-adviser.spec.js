@@ -29,6 +29,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
 			auth: { username: "getintoteaching", password: "userneeds" },
 		});
+                cy.injectAxe();
 	});
 	it('It shows "Thank you  Sign up complete" message to UK returner user', function () {
 		cy.enterFirstNameLastNameandEmail(
@@ -245,20 +246,19 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 	});
 
-	// Basic usage
-        it('Has no detectable a11y violations on load', () => {
+        it('Has no detectable a11y violations on load', function ()  {
           // Test the page at initial load
           cy.checkA11y()
-        })
+        });
 
-        it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', () => {
+        it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', function ()  {
           // Test on initial load, only report and assert for critical impact items
           cy.checkA11y(null, {
             includedImpacts: ['critical']
           })
-        })
+        });
 
-        it('Logs violations to the terminal', () => {
+        it('Logs violations to the terminal', function () {
            cy.checkA11y(null, null, terminalLog)
-        })
+        });
 });
