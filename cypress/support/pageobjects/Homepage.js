@@ -85,5 +85,14 @@ class HomePage {
 	getUpdateResultsButton() {
 		return cy.get(".request-button");
 	}
+	getEventsType() {
+		return cy.get("#events_search_type");
+	}
+	getEventsMonth() {
+		return cy.get("#events_search_month");
+	}
+	getSearchforEventsHeading() {
+		return cy.get("#searchforevents");
+	}
 }
 export default HomePage;
