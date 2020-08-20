@@ -1,6 +1,9 @@
 Cypress.Commands.add("logintoApp", () => {
 	cy.visit(Cypress.env("baseUrl"), {
-		auth: { username: Cypress.env("HTTPAUTH_USERNAME" ), password:  Cypress.env("HTTPAUTH_PASSWORD" )  },
+		auth: {
+			username: Cypress.env("HTTPAUTH_USERNAME"),
+			password: Cypress.env("HTTPAUTH_PASSWORD"),
+		},
 	});
 	cy.injectAxe();
 	cy.get(".cookie-acceptance__dialog > .call-to-action-button").click();
@@ -256,16 +259,16 @@ Cypress.Commands.add("enterTelephoneNumber", (number, country = "UK") => {
 Cypress.Commands.add("doYouHaveDegree", (degree) => {
 	switch (degree) {
 		case "Yes":
-			cy.get("#have-a-degree-degree-status-id-222750000-field").click();
+			cy.get("#have-a-degree-degree-options-degree-field").click();
 			break;
 		case "No":
-			cy.get("#have-a-degree-degree-status-id-222750004-field").click();
+			cy.get("#have-a-degree-degree-options-no-field").click();
 			break;
 		case "I'm studying for a degree":
-			cy.get("#have-a-degree-degree-status-id-1-field").click();
+			cy.get("#have-a-degree-degree-options-studying-field").click();
 			break;
 		case "I have an equivalent qualification from another country":
-			cy.get("#have-a-degree-degree-status-id-222750005-field").click();
+			cy.get("#have-a-degree-degree-options-equivalent-field").click();
 			break;
 	}
 	cy.get(".govuk-button").click();

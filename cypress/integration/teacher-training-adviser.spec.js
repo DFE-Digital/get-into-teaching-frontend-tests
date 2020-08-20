@@ -1,20 +1,21 @@
 import TeacherTrainingAdviser from "../support/pageobjects/TeacherTrainingAdviser";
 
 function terminalLog(violations) {
-     cy.task( 'log',
-             `${violations.length} accessibility violation${
-               violations.length === 1 ? '' : 's'
-             } ${violations.length === 1 ? 'was' : 'were'} detected`
-           )
-     const violationData = violations.map(
-             ({ id, impact, description, nodes }) => ({
-               id,
-               impact,
-               description,
-               nodes: nodes.length
-             })
-     )
-     cy.task('table', violationData)
+	cy.task(
+		"log",
+		`${violations.length} accessibility violation${
+			violations.length === 1 ? "" : "s"
+		} ${violations.length === 1 ? "was" : "were"} detected`
+	);
+	const violationData = violations.map(
+		({ id, impact, description, nodes }) => ({
+			id,
+			impact,
+			description,
+			nodes: nodes.length,
+		})
+	);
+	cy.task("table", violationData);
 }
 
 describe("Get-into-teaching - teachet training adviser flow", () => {
@@ -27,9 +28,12 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
-			auth: { username: "getintoteaching", password: "userneeds" },
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
 		});
-                cy.injectAxe();
+		cy.injectAxe();
 	});
 	it('It shows "Thank you  Sign up complete" message to UK returner user', function () {
 		cy.enterFirstNameLastNameandEmail(
@@ -246,21 +250,21 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 	});
 
-  it('Has no detectable a11y violations on load', function ()  {
-    // Test the page at initial load
-    cy.checkA11y()
-  });
+	it("Has no detectable a11y violations on load", function () {
+		// Test the page at initial load
+		cy.checkA11y();
+	});
 
-  it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', function ()  {
-  // Test on initial load, only report and assert for critical impact items
-    cy.checkA11y(null, {
-      includedImpacts: ['critical']
-    })
-  });
+	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", function () {
+		// Test on initial load, only report and assert for critical impact items
+		cy.checkA11y(null, {
+			includedImpacts: ["critical"],
+		});
+	});
 
-  it('Logs violations to the terminal', function () {
-     cy.checkA11y(null, null, terminalLog)
-  });
+	it("Logs violations to the terminal", function () {
+		cy.checkA11y(null, null, terminalLog);
+	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" if user has no degree', function () {
 		cy.enterFirstNameLastNameandEmail(
