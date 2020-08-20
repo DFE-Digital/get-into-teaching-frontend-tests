@@ -1,6 +1,24 @@
 /// <reference types="Cypress" />
 import Homepage from "../support/pageobjects/Homepage";
 
+
+function terminalLog(violations) {
+     cy.task( 'log',
+             `${violations.length} accessibility violation${
+               violations.length === 1 ? '' : 's'
+             } ${violations.length === 1 ? 'was' : 'were'} detected`
+           )
+     const violationData = violations.map(
+             ({ id, impact, description, nodes }) => ({
+               id,
+               impact,
+               description,
+               nodes: nodes.length
+             })
+     )
+     cy.task('table', violationData)
+}
+
 describe("Get-into-teaching - Homepage - smoke tests", () => {
 	const homePage = new Homepage();
 	beforeEach(function () {
@@ -181,7 +199,8 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		homePage.getCheckYourQualificationsLink().click();
 		cy.location("pathname").should("equal", "/steps-to-become-a-teacher");
 		homePage.getBannerText().should("exist");
-		cy.get("#collapsable-icon-1").should(
+		//Below property has been removed
+		/*cy.get("#collapsable-icon-1").should(
 			"have.attr",
 			"class",
 			"fas fa-chevron-up"
@@ -190,7 +209,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			"have.attr",
 			"class",
 			"fas fa-chevron-down"
-		);
+		);*/
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -202,11 +221,13 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	 2.Other than this all link should be closed/not expand. Content of unexpanded 
 	 link should not be visible.
 	*/
+
 	it('Links through to "Ways to train"', () => {
 		homePage.getWaystoTrainLink().siblings().click();
 		cy.location("pathname").should("equal", "/steps-to-become-a-teacher");
 		homePage.getBannerText().should("exist");
-		cy.get("#collapsable-icon-1").should(
+		//Below property has been removed
+		/*cy.get("#collapsable-icon-1").should(
 			"have.attr",
 			"class",
 			"fas fa-chevron-down"
@@ -218,7 +239,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		);
 		cy.get("#collapsable-content-1 > :nth-child(1)").should("not.be.visible");
 		cy.get("#collapsable-content-2 > :nth-child(1)").should("not.be.visible");
-		cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");
+		cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");*/
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -258,4 +279,21 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			expect(eventTime.trim()).to.equal(a[1].trim());
 		});
 	});
+
+	// Basic usage
+        it('Has no detectable a11y violations on load', () => {
+          // Test the page at initial load
+          cy.checkA11y()
+        })
+
+        it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', () => {
+          // Test on initial load, only report and assert for critical impact items
+          cy.checkA11y(null, {
+            includedImpacts: ['critical']
+          })
+        })
+
+        it('Logs violations to the terminal', () => {
+           cy.checkA11y(null, null, terminalLog)
+        })
 });
