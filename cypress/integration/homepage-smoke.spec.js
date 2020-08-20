@@ -199,7 +199,8 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		homePage.getCheckYourQualificationsLink().click();
 		cy.location("pathname").should("equal", "/steps-to-become-a-teacher");
 		homePage.getBannerText().should("exist");
-		cy.get("#collapsable-icon-1").should(
+		//Below property has been removed
+		/*cy.get("#collapsable-icon-1").should(
 			"have.attr",
 			"class",
 			"fas fa-chevron-up"
@@ -208,7 +209,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 			"have.attr",
 			"class",
 			"fas fa-chevron-down"
-		);
+		);*/
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -220,11 +221,13 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	 2.Other than this all link should be closed/not expand. Content of unexpanded 
 	 link should not be visible.
 	*/
+
 	it('Links through to "Ways to train"', () => {
 		homePage.getWaystoTrainLink().siblings().click();
 		cy.location("pathname").should("equal", "/steps-to-become-a-teacher");
 		homePage.getBannerText().should("exist");
-		cy.get("#collapsable-icon-1").should(
+		//Below property has been removed
+		/*cy.get("#collapsable-icon-1").should(
 			"have.attr",
 			"class",
 			"fas fa-chevron-down"
@@ -236,7 +239,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		);
 		cy.get("#collapsable-content-1 > :nth-child(1)").should("not.be.visible");
 		cy.get("#collapsable-content-2 > :nth-child(1)").should("not.be.visible");
-		cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");
+		cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");*/
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
