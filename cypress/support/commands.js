@@ -1,6 +1,6 @@
 Cypress.Commands.add("logintoApp", () => {
 	cy.visit(Cypress.env("baseUrl"), {
-		auth: { username: "getintoteaching", password: "userneeds" },
+		auth: { username: Cypress.env("HTTPAUTH_USERNAME" ), password:  Cypress.env("HTTPAUTH_PASSWORD" )  },
 	});
 	cy.injectAxe();
 	cy.get(".cookie-acceptance__dialog > .call-to-action-button").click();

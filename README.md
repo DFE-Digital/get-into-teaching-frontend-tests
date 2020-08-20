@@ -14,6 +14,12 @@ It is possible to run these actions manually at any time.
 
 ## Running locally
 
+## Environment Variables
+The following Environment variables need to be set:
+
+-- CYPRESS_HTTPAUTH_USERNAME
+-- CYPRESS_HTTPAUTH_PASSWORD
+
 ### Install System dependencies
 
 System dependencies required to run the tests locally
@@ -27,6 +33,7 @@ Once you've aquired the system dependencies, you can now install the project dep
 
 ```bash
 npm install
+npm install -D cypress-axe
 ```
 
 ### Run the tests via CLI
@@ -67,11 +74,12 @@ npm run test -- --spec 'cypress/integration/spec_file_name.js
 docker build . -t <tagname>
 ```
 ## Running on Docker with default settings
+Note: Shared Memory size may need to be increased depending on the number of tests
 ```bash
-docker run -i -v $PWD:/test -w /test cypress/included:4.2.0
+docker run -i -v $PWD:/test --shm-size=1g -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME -w /test cypress/included:4.2.0
 ```
 ## With Different environments
 ```bash
-docker run -i -v $PWD:/test -w /test cypress/included:4.2.0 --config-file cypress-qa.json
+docker run -i -v $PWD:/test --shm-size=1g -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -w /test cypress/included:4.2.0 --config-file cypress-qa.json
 ```
 
