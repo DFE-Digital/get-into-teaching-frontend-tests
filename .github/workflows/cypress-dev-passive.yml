@@ -17,7 +17,7 @@ jobs:
       - name:   Run the Tests
         run: |
              docker build . -t cypress-image
-             docker run -i -v $PWD:/test -w /test cypressi-image
+             docker run -i --shm-size=1g  -v $PWD:/test -w /test cypressi-image
         
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0

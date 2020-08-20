@@ -1,5 +1,22 @@
 import TeacherTrainingAdviser from "../support/pageobjects/TeacherTrainingAdviser";
 
+function terminalLog(violations) {
+     cy.task( 'log',
+             `${violations.length} accessibility violation${
+               violations.length === 1 ? '' : 's'
+             } ${violations.length === 1 ? 'was' : 'were'} detected`
+           )
+     const violationData = violations.map(
+             ({ id, impact, description, nodes }) => ({
+               id,
+               impact,
+               description,
+               nodes: nodes.length
+             })
+     )
+     cy.task('table', violationData)
+}
+
 describe("Get-into-teaching - teachet training adviser flow", () => {
 	var returner;
 	var havePreviousTeacherReferenceNumber;
@@ -227,4 +244,21 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			expect(signuptext).to.equal("Thank you  Sign up complete");
 		});
 	});
+
+	// Basic usage
+        it('Has no detectable a11y violations on load', () => {
+          // Test the page at initial load
+          cy.checkA11y()
+        })
+
+        it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', () => {
+          // Test on initial load, only report and assert for critical impact items
+          cy.checkA11y(null, {
+            includedImpacts: ['critical']
+          })
+        })
+
+        it('Logs violations to the terminal', () => {
+           cy.checkA11y(null, null, terminalLog)
+        })
 });
