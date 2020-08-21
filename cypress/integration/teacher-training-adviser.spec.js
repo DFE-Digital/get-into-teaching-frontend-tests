@@ -590,7 +590,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 	});
 
-	it('It shows "Thank you  Sign up complete" to non-returner who is studying for a degree', function () {
+	it('It shows "Thank you  Sign up complete" to non-returner who is studying for a degree and interested to teach in secondary stage', function () {
 		var stage;
 		var haveEquivalentDegreeFromAnotherCountry = true;
 		cy.enterFirstNameLastNameandEmail(
@@ -606,6 +606,40 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.selectStage("Studying-Secondary");
 		cy.haveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes", "Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Studying-Dance");
+		cy.whenDoYouWantToStartYourTeacherTraining("Studying-2022");
+		cy.typeDateOfBirth("22", "08", "2000", false);
+		cy.whereDoYouLive("Austria", true, false);
+		cy.get("#studying-overseas-telephone-telephone-field").type("0125234490");
+		cy.clickOnContinueButton();
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+	it('It shows "Thank you  Sign up complete" to non-returner who is studying for a degree and interested to teach in primary stage', function () {
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Final year");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Primary");
+		cy.haveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes", "Primary");
+		cy.get(
+			"#studying-science-grade4-has-gcse-science-id-222750000-field"
+		).click();
+		cy.clickOnContinueButton();
 		cy.whenDoYouWantToStartYourTeacherTraining("Studying-2022");
 		cy.typeDateOfBirth("22", "08", "2000", false);
 		cy.whereDoYouLive("Austria", true, false);
