@@ -45,5 +45,20 @@ class EventSignupPage {
 	getCompleteSignup() {
 		return cy.contains("Complete sign up");
 	}
+	getSignupCompleteMessage() {
+		return cy.get(".content__left > .strapline");
+	}
+	getSignupEventName() {
+		return cy.get(".content__left > b");
+	}
+	getResendVerificationLink() {
+		return cy.get(
+			"#events-steps-authenticate-timed-one-time-password-hint > a"
+		);
+	}
+
+	getErrorTitle() {
+		return cy.get("#error-summary-title");
+	}
 }
 export default EventSignupPage;
