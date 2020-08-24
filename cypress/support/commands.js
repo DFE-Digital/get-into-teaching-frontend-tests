@@ -610,3 +610,18 @@ Cypress.Commands.add(
 		cy.get(".govuk-button").click();
 	}
 );
+
+Cypress.Commands.add("enterVerificationCode", (verificationCode, error) => {
+	if (error) {
+		cy.get(
+			"#events-steps-authenticate-timed-one-time-password-field-error"
+		).clear();
+		cy.get(
+			"#events-steps-authenticate-timed-one-time-password-field-error"
+		).type(verificationCode);
+	} else {
+		cy.get("#events-steps-authenticate-timed-one-time-password-field").type(
+			verificationCode
+		);
+	}
+});
