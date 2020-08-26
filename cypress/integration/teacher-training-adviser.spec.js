@@ -1,5 +1,5 @@
 import TeacherTrainingAdviser from "../support/pageobjects/TeacherTrainingAdviser";
-
+/// <reference types="Cypress" />
 function terminalLog(violations) {
 	cy.task(
 		"log",
@@ -377,11 +377,11 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get("li > a")
 			.should("exist")
 			.should("have.text", "Select an option from the list");
-		cy.get("#have-a-degree-degree-status-id-error").should(
+		cy.get("#have-a-degree-degree-options-error").should(
 			"have.text",
 			"Error: Select an option from the list"
 		);
-		cy.get("#have-a-degree-degree-status-id-222750000-field").click();
+		cy.get("#have-a-degree-degree-options-degree-field").click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get("#degree-what-degree-class-uk-degree-grade-id-field").select(
@@ -654,5 +654,240 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			signuptext = signuptext.text().trim();
 			expect(signuptext).to.equal("Thank you  Sign up complete");
 		});
+	});
+	it("It allow user to change his details on answers page is he wishes", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("Yes");
+		cy.selectWhatSubjectIsYourDegree("Biology");
+		cy.selectWhichClassIsYourDegree("First class");
+		cy.selectStage("Secondary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Secondary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Secondary"
+		);
+		cy.whichSubjectAreYouInterestedInTeaching("English");
+		cy.whenDoYouWantToStartYourTeacherTraining("2022");
+		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
+		cy.youLiveIn("Cyprus");
+		cy.enterTelephoneNumber("02834", "Cyprus");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.get(":nth-child(10) > .govuk-summary-list__actions > a").click();
+		cy.selectCountry(this.testData.country);
+		cy.enterTelephoneNumber(
+			this.testData.new_phoneNumber,
+			this.testData.country
+		);
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.get(":nth-child(4) > .govuk-summary-list__value > .govuk-body").should(
+			"have.text",
+			this.testData.new_phoneNumber
+		);
+		cy.get(":nth-child(10) > .govuk-summary-list__value > .govuk-body").should(
+			"have.text",
+			this.testData.country
+		);
+	});
+	it("It shows error message to user if he enters invalid telephone number - UK user", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("Yes");
+		cy.selectWhatSubjectIsYourDegree("Biology");
+		cy.selectWhichClassIsYourDegree("First class");
+		cy.selectStage("Secondary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Secondary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Secondary"
+		);
+		cy.whichSubjectAreYouInterestedInTeaching("English");
+		cy.whenDoYouWantToStartYourTeacherTraining("2022");
+		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
+		cy.youLiveIn("Cyprus");
+		cy.enterTelephoneNumber("0834", "Cyprus");
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("#degree-overseas-telephone-telephone-error")
+			.should("exist")
+			.should(
+				"have.text",
+				"Error: Telephone number is too short (minimum is 5 characters)"
+			);
+		cy.get("#degree-overseas-telephone-telephone-field-error").clear();
+		cy.get("#degree-overseas-telephone-telephone-field-error").type(
+			"0123456789011223344566"
+		);
+		cy.get(".govuk-button").click();
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("#degree-overseas-telephone-telephone-error")
+			.should("exist")
+			.should(
+				"have.text",
+				"Error: Telephone number is too long (maximum is 20 characters)"
+			);
+	});
+
+	it("It shows error message to user if he enters invalid telephone number - overseas user", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("Yes");
+		cy.selectWhatSubjectIsYourDegree("Biology");
+		cy.selectWhichClassIsYourDegree("First class");
+		cy.selectStage("Secondary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Secondary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Secondary"
+		);
+		cy.whichSubjectAreYouInterestedInTeaching("English");
+		cy.whenDoYouWantToStartYourTeacherTraining("2022");
+		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
+		cy.youLiveIn("Cyprus");
+		cy.enterTelephoneNumber("0834", "Cyprus");
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("#degree-overseas-telephone-telephone-error")
+			.should("exist")
+			.should(
+				"have.text",
+				"Error: Telephone number is too short (minimum is 5 characters)"
+			);
+		cy.get("#degree-overseas-telephone-telephone-field-error").clear();
+		cy.get("#degree-overseas-telephone-telephone-field-error").type(
+			"0123456789011223344566"
+		);
+		cy.get(".govuk-button").click();
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("#degree-overseas-telephone-telephone-error")
+			.should("exist")
+			.should(
+				"have.text",
+				"Error: Telephone number is too long (maximum is 20 characters)"
+			);
+	});
+	it("It shows the error message to user if he enters invalid date of birth", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("Yes");
+		cy.selectWhatSubjectIsYourDegree("Biology");
+		cy.selectWhichClassIsYourDegree("First class");
+		cy.selectStage("Secondary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Secondary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Secondary"
+		);
+		cy.whichSubjectAreYouInterestedInTeaching("English");
+		cy.whenDoYouWantToStartYourTeacherTraining("2022");
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("li > a")
+			.should("exist")
+			.should("have.text", "You need to enter your date of birth");
+		cy.get("#degree-date-of-birth-date-of-birth-error").should(
+			"have.text",
+			"Error: You need to enter your date of birth"
+		);
+		cy.get("#degree-date-of-birth-date-of-birth-field-error").type("31");
+		cy.get("#degree_date_of_birth_date_of_birth_2i").type("3");
+		cy.get("#degree_date_of_birth_date_of_birth_1i").type("1885");
+		cy.get(".govuk-button").click();
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("li > a")
+			.should("exist")
+			.should("have.text", "You must be less than 70 years old");
+		cy.get("#degree-date-of-birth-date-of-birth-error").should(
+			"have.text",
+			"Error: You must be less than 70 years old"
+		);
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.get("#degree_date_of_birth_date_of_birth_1i").clear();
+		cy.get("#degree_date_of_birth_date_of_birth_1i").type("2004");
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("li > a")
+			.should("exist")
+			.should("have.text", "You must be 18 years or older to use this service");
+		cy.get("#degree-date-of-birth-date-of-birth-error").should(
+			"have.text",
+			"Error: You must be 18 years or older to use this service"
+		);
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.get("#degree_date_of_birth_date_of_birth_1i").clear();
+		cy.get("#degree_date_of_birth_date_of_birth_1i").type("2030");
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem");
+		cy.get("li > a")
+			.should("exist")
+			.should("have.text", "Date can't be in the future");
+		cy.get("#degree-date-of-birth-date-of-birth-error").should(
+			"have.text",
+			"Error: Date can't be in the future"
+		);
+	});
+	it("It shows the error message to user if he enters invalid email address format", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.invalidEmail
+		);
+		cy.verifyEmailAddressError();
+		cy.enterEmail("$%^&@");
+		cy.verifyEmailAddressError();
+		cy.enterEmail("$%^&@.com");
+		cy.verifyEmailAddressError();
+		cy.enterEmail("$%^&@gmail.com");
+		cy.verifyEmailAddressError();
 	});
 });

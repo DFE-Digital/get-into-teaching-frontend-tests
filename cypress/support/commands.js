@@ -625,3 +625,19 @@ Cypress.Commands.add("enterVerificationCode", (verificationCode, error) => {
 		);
 	}
 });
+Cypress.Commands.add("selectCountry", (location) => {
+	cy.get("#degree-overseas-country-country-id-field").select(location);
+	cy.get(".govuk-button").click();
+});
+
+Cypress.Commands.add("enterEmail", (emailAddress) => {
+	cy.contains("Email address").next().next().clear();
+	cy.contains("Email address").type(emailAddress);
+});
+
+Cypress.Commands.add("verifyEmailAddressError", () => {
+	cy.get("#error-summary-title")
+		.should("exist")
+		.should("have.text", "There is a problem");
+	cy.get("li > a").should("have.text", "You need to enter you email address");
+});
