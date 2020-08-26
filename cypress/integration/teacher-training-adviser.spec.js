@@ -35,7 +35,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 		cy.injectAxe();
 	});
-	it('It shows "Thank you  Sign up complete" message to UK returner user', function () {
+	it.only('It shows "Thank you  Sign up complete" message to UK returner user', function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -48,25 +48,14 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Physics");
-		cy.enterDateOfBirth("25", "02", "1986", (returner = true));
+		cy.enterDateOfBirth("25", "02", "1986");
 		cy.whereDoYouLive("UK");
-		cy.enterUKCandidateAddress(
-			"55",
-			"Hollinswood",
-			"Telford",
-			"TF3 2BT",
-			(returner = true)
-		);
+		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas returner user', function () {
