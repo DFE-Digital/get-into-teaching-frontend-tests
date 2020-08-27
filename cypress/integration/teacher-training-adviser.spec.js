@@ -35,7 +35,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 		cy.injectAxe();
 	});
-	it.only('It shows "Thank you  Sign up complete" message to UK returner user', function () {
+	it('It shows "Thank you  Sign up complete" message to UK returner user', function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -71,18 +71,14 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Biology");
 		cy.selectSubjectLikeToTeach("Maths");
-		cy.enterDateOfBirth("20", "07", "2000", (returner = true));
-		cy.whereDoYouLive("Switzerland");
+		cy.enterDateOfBirth("20", "07", "2000");
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Swaziland");
 		cy.enteroverseasTelephoneNumber("0012354758");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it('It shows "Thank you  Sign up complete" message to UK, primary stage, non-returner', function () {
@@ -94,38 +90,26 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Dance");
-		cy.selectWhichClassIsYourDegree("2:2");
-		cy.selectStage("Primary");
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Primary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Primary"
-		);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.whatSubjectIsYourDegree("Dance");
+		cy.whichClassIsYourDegree("2:2");
+		cy.whichStageAreYouInterestedInTeaching("Primary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("Yes");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
-		cy.youLiveIn("UK");
+		cy.enterDateOfBirth("31", "03", "1985");
+		cy.whereDoYouLive("UK");
 		cy.enterUKCandidateAddress(
 			"21",
 			"Victoria Embankment",
 			"Darlington",
-			"DL1 5JR",
-			(returner = false)
+			"DL1 5JR"
 		);
-		cy.enterTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.enterUKTelephoneNumber("0125234490");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it('It shows "Thank you  Sign up complete" message to UK, secondery stage, non-returner', function () {
@@ -137,38 +121,26 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Dance");
-		cy.selectWhichClassIsYourDegree("2:2");
-		cy.selectStage("Secondary");
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondry"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Secondry"
-		);
+		cy.whatSubjectIsYourDegree("Dance");
+		cy.whichClassIsYourDegree("2:2");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("Yes");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
-		cy.youLiveIn("UK");
+		cy.enterDateOfBirth("31", "03", "1985");
+		cy.whereDoYouLive("UK");
 		cy.enterUKCandidateAddress(
 			"21",
 			"Victoria Embankment",
 			"Darlington",
-			"DL1 5JR",
-			(returner = false)
+			"DL1 5JR"
 		);
-		cy.enterTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.enterUKTelephoneNumber("0125234490");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas, primary stage, non- returner', function () {
@@ -179,27 +151,20 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Primary");
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"Yes",
-			"Primary"
-		);
+		cy.whatSubjectIsYourDegree("Biology");
+		cy.whichClassIsYourDegree("First class");
+		cy.whichStageAreYouInterestedInTeaching("Primary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes");
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn("Denmark");
-		cy.enterTelephoneNumber(this.testData.phoneNumber, "Denmark");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Denmark");
+		cy.enteroverseasTelephoneNumber("+50445550");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas, secondary stage, non- returner', function () {
@@ -210,33 +175,21 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Secondary");
-
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Secondary"
-		);
+		cy.whatSubjectIsYourDegree("Biology");
+		cy.whichClassIsYourDegree("First class");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("Yes");
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn("Cyprus");
-		cy.enterTelephoneNumber("02834830405", "Cyprus");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Cyprus");
+		cy.enteroverseasTelephoneNumber("02834830405");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").should("exist");
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it("Has no detectable a11y violations on load", function () {
@@ -263,17 +216,11 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Secondary");
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"No",
-			"Secondary"
-		);
+		cy.whatSubjectIsYourDegree("Biology");
+		cy.whichClassIsYourDegree("First class");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("No");
 		cy.get(".govuk-heading-l").then(function (headingText) {
 			headingText = headingText.text().trim();
 			expect(headingText).to.equal(
@@ -282,7 +229,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 	});
 
-	it("Error message link navigates to its respective field", function () {
+	xit("Error message link navigates to its respective field", function () {
 		teacherTrainingAdviser.getFirstName();
 		teacherTrainingAdviser.getLastName();
 		teacherTrainingAdviser.getEmailAddress();
@@ -321,7 +268,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			.should("have.text", "Are you returning to teaching?");
 	});
 
-	it("It shows the error message if user clicks continiue button without entering the mandatory or correct details", function () {
+	xit("It shows the error message if user clicks continiue button without entering the mandatory or correct details", function () {
 		teacherTrainingAdviser.getFirstName();
 		teacherTrainingAdviser.getLastName();
 		teacherTrainingAdviser.getEmailAddress();
@@ -489,19 +436,11 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Physics");
-		cy.enterDateOfBirth("25", "02", "1986", (returner = true));
+		cy.enterDateOfBirth("25", "02", "1986");
 		cy.whereDoYouLive("UK");
-		cy.enterUKCandidateAddress(
-			"55",
-			"Hollinswood",
-			"Telford",
-			"TF3 2BT",
-			(returner = true)
-		);
+		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.get(".govuk-form-group > a").click();
 		cy.get("h2").should("exist").should("have.text", "Privacy Policy");
@@ -520,28 +459,18 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.doYouHaveDegree(
 			"I have an equivalent qualification from another country"
 		);
-		cy.selectStage("Equivalent-Secondary");
-		cy.whichSubjectAreYouInterestedInTeaching("Equivalent-Computing");
-		cy.whenDoYouWantToStartYourTeacherTraining("Equivalent-2021");
-		cy.get("#equivalent_date_of_birth_date_of_birth_3i").type("27");
-		cy.get("#equivalent_date_of_birth_date_of_birth_2i").type("07");
-		cy.get("#equivalent_date_of_birth_date_of_birth_1i").type("1983");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.whichSubjectAreYouInterestedInTeaching("Computing");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("27", "03", "1983");
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Swaziland");
+		cy.contains("Contact telephone number *").type("0112526374");
 		cy.clickOnContinueButton();
-		cy.get("#equivalent-uk-or-overseas-uk-or-overseas-overseas-field").click();
-		cy.clickOnContinueButton();
-		cy.get("#equivalent-overseas-country-country-id-field").select("Austria");
-		cy.clickOnContinueButton();
-		cy.get("#equivalent-overseas-candidate-telephone-field").type("0125234490");
-		cy.clickOnContinueButton();
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner have an equivalent qualification from another country interested in primary stage teaching', function () {
@@ -555,28 +484,16 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.doYouHaveDegree(
 			"I have an equivalent qualification from another country"
 		);
-		cy.selectStage("Equivalent-Primary");
-		cy.whenDoYouWantToStartYourTeacherTraining("Equivalent-2021");
-		cy.typeDateOfBirth("22", "08", "2000", true);
-		cy.whereDoYouLive("UK", false, true);
-		cy.get("#equivalent-uk-candidate-address-line1-field").type("25");
-		cy.get("#equivalent-uk-candidate-address-line2-field").type(
-			"Delbury Court"
-		);
-		cy.get("#equivalent-uk-candidate-address-city-field").type("Telford");
-		cy.get("#equivalent-uk-candidate-address-postcode-field").type("TF3 2BP");
-		cy.clickOnContinueButton();
-		cy.enterUKTelephoneNumber("0123454748", true);
-
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.whichStageAreYouInterestedInTeaching("Primary");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("27", "03", "1983");
+		cy.whereDoYouLive("UK");
+		cy.enterUKCandidateAddress("25", "Delbury Court", "Telford", "TF3 2BP");
+		cy.enterUKTelephoneNumber("0125234490");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner who is studying for a degree and interested to teach in secondary stage', function () {
@@ -590,25 +507,20 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
-		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatSubjectIsYourDegree("Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
-		cy.selectStage("Studying-Secondary");
-		cy.haveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes", "Secondary");
-		cy.whichSubjectAreYouInterestedInTeaching("Studying-Dance");
-		cy.whenDoYouWantToStartYourTeacherTraining("Studying-2022");
-		cy.typeDateOfBirth("22", "08", "2000", false);
-		cy.whereDoYouLive("Austria", true, false);
-		cy.get("#studying-overseas-telephone-telephone-field").type("0125234490");
-		cy.clickOnContinueButton();
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes");
+		cy.whichSubjectAreYouInterestedInTeaching("Dance");
+		cy.whenDoYouWantToStartYourTeacherTraining("2022");
+		cy.enterDateOfBirth("25", "02", "1986");
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Austria");
+		cy.enteroverseasTelephoneNumber("0125234490");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 	it('It shows "Thank you  Sign up complete" to non-returner who is studying for a degree and interested to teach in primary stage', function () {
 		var stage;
@@ -621,28 +533,24 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
-		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatSubjectIsYourDegree("Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
-		cy.selectStage("Studying-Primary");
-		cy.haveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes", "Primary");
+		cy.whichStageAreYouInterestedInTeaching("Primary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("Yes");
 		cy.get(
 			"#studying-science-grade4-has-gcse-science-id-222750000-field"
 		).click();
 		cy.clickOnContinueButton();
-		cy.whenDoYouWantToStartYourTeacherTraining("Studying-2022");
-		cy.typeDateOfBirth("22", "08", "2000", false);
-		cy.whereDoYouLive("Austria", true, false);
-		cy.get("#studying-overseas-telephone-telephone-field").type("0125234490");
-		cy.clickOnContinueButton();
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.whenDoYouWantToStartYourTeacherTraining("2022");
+
+		cy.enterDateOfBirth("22", "08", "2000");
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Austria");
+		cy.enteroverseasTelephoneNumber("0125234490");
+		cy.verifyAnswersPageHeading();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignupCompleteHeading();
 	});
 	it("It allow user to change his details on answers page is he wishes", function () {
 		cy.enterFirstNameLastNameandEmail(
@@ -652,35 +560,23 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Secondary");
-
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Secondary"
-		);
+		cy.whatSubjectIsYourDegree("Biology");
+		cy.whichClassIsYourDegree("First class");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("Yes");
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn("Cyprus");
-		cy.enterTelephoneNumber("02834", "Cyprus");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Cyprus");
+		cy.enteroverseasTelephoneNumber("0112526374");
+		cy.verifyAnswersPageHeading();
 		cy.get(":nth-child(10) > .govuk-summary-list__actions > a").click();
-		cy.selectCountry(this.testData.country);
-		cy.enterTelephoneNumber(
-			this.testData.new_phoneNumber,
-			this.testData.country
-		);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.wait(100);
+		cy.whichCountryDoYouLiveIn(this.testData.country);
+		cy.enteroverseasTelephoneNumber(this.testData.new_phoneNumber);
+		cy.verifyAnswersPageHeading();
 		cy.get(":nth-child(4) > .govuk-summary-list__value > .govuk-body").should(
 			"have.text",
 			this.testData.new_phoneNumber
@@ -698,41 +594,32 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Secondary");
-
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Secondary"
-		);
+		cy.whatSubjectIsYourDegree("Biology");
+		cy.whichClassIsYourDegree("First class");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("Yes");
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn("Cyprus");
-		cy.enterTelephoneNumber("0834", "Cyprus");
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive("UK");
+		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
+		cy.enterUKTelephoneNumber("5678");
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
-		cy.get("#degree-overseas-telephone-telephone-error")
+		cy.get("#degree-uk-telephone-telephone-error")
 			.should("exist")
 			.should(
 				"have.text",
 				"Error: Telephone number is too short (minimum is 5 characters)"
 			);
-		cy.get("#degree-overseas-telephone-telephone-field-error").clear();
-		cy.get("#degree-overseas-telephone-telephone-field-error").type(
-			"0123456789011223344566"
-		);
-		cy.get(".govuk-button").click();
+		cy.enterUKTelephoneNumber("0102038484858569697979");
+		cy.clickOnContinueButton();
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
-		cy.get("#degree-overseas-telephone-telephone-error")
+		cy.get("#degree-uk-telephone-telephone-error")
 			.should("exist")
 			.should(
 				"have.text",
@@ -748,23 +635,17 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Secondary");
-
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Secondary"
-		);
+		cy.whatSubjectIsYourDegree("Biology");
+		cy.whichClassIsYourDegree("First class");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("Yes");
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn("Cyprus");
-		cy.enterTelephoneNumber("0834", "Cyprus");
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive("Overseas");
+		cy.whichCountryDoYouLiveIn("Cyprus");
+		cy.enteroverseasTelephoneNumber("5264");
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
@@ -778,7 +659,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get("#degree-overseas-telephone-telephone-field-error").type(
 			"0123456789011223344566"
 		);
-		cy.get(".govuk-button").click();
+		cy.clickOnContinueButton();
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
@@ -797,18 +678,11 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("Yes");
-		cy.selectWhatSubjectIsYourDegree("Biology");
-		cy.selectWhichClassIsYourDegree("First class");
-		cy.selectStage("Secondary");
-
-		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
-			"No",
-			"Secondary"
-		);
-		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
-			"Yes",
-			"Secondary"
-		);
+		cy.whatSubjectIsYourDegree("Biology");
+		cy.whichClassIsYourDegree("First class");
+		cy.whichStageAreYouInterestedInTeaching("Secondary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent("No");
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent("Yes");
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
 		teacherTrainingAdviser.getContinueButton().click();
@@ -822,10 +696,10 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			"have.text",
 			"Error: You need to enter your date of birth"
 		);
-		cy.get("#degree-date-of-birth-date-of-birth-field-error").type("31");
-		cy.get("#degree_date_of_birth_date_of_birth_2i").type("3");
-		cy.get("#degree_date_of_birth_date_of_birth_1i").type("1885");
-		cy.get(".govuk-button").click();
+		cy.contains("Day").type("31");
+		cy.contains("Month").type("3");
+		cy.contains("Year").type("1885");
+		cy.clickOnContinueButton();
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
@@ -837,8 +711,15 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			"Error: You must be less than 70 years old"
 		);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").clear();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").type("2004");
+
+		cy.contains("Year")
+			.invoke("attr", "for")
+			.then(function (val) {
+				let id = "#" + val;
+				cy.get(id).clear();
+			});
+
+		cy.contains("Year").type("2005");
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get("#error-summary-title")
 			.should("exist")
@@ -851,8 +732,13 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			"Error: You must be 18 years or older to use this service"
 		);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").clear();
-		cy.get("#degree_date_of_birth_date_of_birth_1i").type("2030");
+		cy.contains("Year")
+			.invoke("attr", "for")
+			.then(function (val) {
+				let id = "#" + val;
+				cy.get(id).clear();
+			});
+		cy.contains("Year").type("2030");
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get("#error-summary-title")
 			.should("exist")

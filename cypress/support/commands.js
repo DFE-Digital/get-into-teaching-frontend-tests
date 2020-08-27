@@ -112,10 +112,10 @@ Cypress.Commands.add("acceptCookie", () => {
 Cypress.Commands.add(
 	"enterFirstNameLastNameandEmail",
 	(firstName, lastName, email) => {
-		cy.contains("First name").next().type(firstName);
-		cy.contains("Surname").next().type(lastName);
-		cy.contains("Email address").next().type(email);
-		cy.contains("Continue").click();
+		cy.contains("First name").type(firstName);
+		cy.contains("Surname").type(lastName);
+		cy.contains("Email address").type(email);
+		cy.clickOnContinueButton();
 	}
 );
 
@@ -147,9 +147,9 @@ Cypress.Commands.add(
 Cypress.Commands.add(
 	"enterPreviousTeacherReferenceNumber",
 	(teacherReferenceNumber) => {
-		cy.contains("Teacher reference number (optional).")
-			.next()
-			.type(teacherReferenceNumber);
+		cy.contains("Teacher reference number (optional).").type(
+			teacherReferenceNumber
+		);
 		cy.clickOnContinueButton();
 	}
 );
@@ -178,29 +178,6 @@ Cypress.Commands.add("selectSubjectLikeToTeach", (subject) => {
 	}
 	cy.clickOnContinueButton();
 });
-
-Cypress.Commands.add("youLiveIn", (location) => {
-	if (location == "UK") {
-		cy.get("#degree-uk-or-overseas-uk-or-overseas-uk-field").click();
-	} else {
-		cy.get("#degree-uk-or-overseas-uk-or-overseas-overseas-field").click();
-		cy.get(".govuk-button").click();
-		cy.get("#degree-overseas-country-country-id-field").select(location);
-	}
-	cy.get(".govuk-button").click();
-});
-
-/*Cypress.Commands.add("whereDoYouLive", (location) => {
-	if (location == "UK") {
-		cy.get("#uk-or-overseas-uk-or-overseas-uk-field").click();
-	} else {
-		cy.get("#uk-or-overseas-uk-or-overseas-overseas-field").click();
-		cy.get(".govuk-button").click();
-		cy.get("#overseas-country-country-id-field").select(location);
-	}
-	cy.get(".govuk-button").click();
-});*/
-
 Cypress.Commands.add("whereDoYouLive", (location) => {
 	if (location == "Overseas") {
 		cy.contains("Overseas").click();
@@ -210,195 +187,114 @@ Cypress.Commands.add("whereDoYouLive", (location) => {
 	cy.clickOnContinueButton();
 });
 
+Cypress.Commands.add("whichCountryDoYouLiveIn", (country) => {
+	cy.contains("Which country do you live in?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(country);
+		});
+	cy.clickOnContinueButton();
+});
+
 Cypress.Commands.add("enterUKTelephoneNumber", (number) => {
 	cy.contains("UK telephone number (optional)").type(number);
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("enterTelephoneNumber", (number, country = "UK") => {
-	if (country == "UK") {
-		cy.get("#degree-uk-telephone-telephone-field").type(number);
-	} else {
-		cy.get("#degree-overseas-telephone-telephone-field").type(number);
-	}
-	cy.get(".govuk-button").click();
-});
-
 Cypress.Commands.add("doYouHaveDegree", (degree) => {
 	switch (degree) {
 		case "Yes":
-			cy.get("#have-a-degree-degree-options-degree-field").click();
+			cy.contains("Yes").click();
 			break;
 		case "No":
-			cy.get("#have-a-degree-degree-options-no-field").click();
+			cy.contains("No").click();
 			break;
 		case "I'm studying for a degree":
-			cy.get("#have-a-degree-degree-options-studying-field").click();
+			cy.contains("I'm studying for a degree").click();
 			break;
 		case "I have an equivalent qualification from another country":
-			cy.get("#have-a-degree-degree-options-equivalent-field").click();
-			break;
-	}
-	cy.get(".govuk-button").click();
-});
-
-Cypress.Commands.add("selectWhatSubjectIsYourDegree", (subject) => {
-	var subject = subject.split("-");
-	switch (subject[0]) {
-		case "Studying":
-			cy.get("#studying-what-subject-degree-degree-subject-field").select(
-				subject[1]
-			);
-			break;
-		case "Secondary":
-			cy.get(
-				"#degree-stage-interested-teaching-preferred-education-phase-id-222750001-field"
+			cy.contains(
+				"I have an equivalent qualification from another country"
 			).click();
 			break;
-		default:
-			cy.get("#degree-what-subject-degree-degree-subject-field").select(
-				subject[0]
-			);
 	}
-	cy.get(".govuk-button").click();
+	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("selectWhichClassIsYourDegree", (degreeClass) => {
-	cy.get("#degree-what-degree-class-uk-degree-grade-id-field").select(
-		degreeClass
-	);
-	cy.get(".govuk-button").click();
+Cypress.Commands.add("whatSubjectIsYourDegree", (subject) => {
+	cy.contains("What subject is your degree?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(subject);
+		});
+	cy.clickOnContinueButton();
+});
+Cypress.Commands.add("whichClassIsYourDegree", (degreeClass) => {
+	cy.contains("Which class is your degree?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(degreeClass);
+		});
+	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add("whatDegreeClassAreYouPredictedToGet", (degreeClass) => {
-	cy.get("#studying-what-degree-class-uk-degree-grade-id-field").select(
-		degreeClass
-	);
-	cy.get(".govuk-button").click();
+	cy.contains("What degree class are you predicted to get?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(degreeClass);
+		});
+	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add("whichSubjectAreYouInterestedInTeaching", (subject) => {
-	var subject = subject.split("-");
-	switch (subject[0]) {
-		case "Equivalent":
-			cy.get(
-				"#equivalent-subject-interested-teaching-teaching-subject-field"
-			).select(subject[1]);
-			break;
-		case "Studying":
-			cy.get(
-				"#studying-subject-interested-teaching-teaching-subject-field"
-			).select(subject[1]);
-			break;
-		case "Secondary":
-			cy.get(
-				"#degree-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-			).click();
-			break;
-		case "Equivalent-Secondary":
-			cy.get(
-				"#equivalent-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-			).click();
-			break;
-		case "Equivalent-Primary":
-			cy.get(
-				"#equivalent-stage-interested-teaching-preferred-education-phase-id-222750000-field"
-			).click();
-			break;
-		default:
-			cy.get(
-				"#degree-subject-interested-teaching-teaching-subject-field"
-			).select(subject[0]);
-	}
-
-	cy.get(".govuk-button").click();
+	cy.contains("Which subject are you interested in teaching?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(subject);
+		});
+	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add(
 	"doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent",
-	(haveGrade, stage) => {
-		if (stage == "Primary") {
-			if (haveGrade == "Yes") {
-				cy.get(
-					"#degree-primary-maths-english-grade4-has-gcse-maths-and-english-id-222750000-field"
-				).click();
-			} else {
-				cy.get(
-					"#degree-primary-maths-english-grade4-has-gcse-maths-and-english-id-222750001-field"
-				).click();
-			}
+	(haveGrade) => {
+		if (haveGrade == "Yes") {
+			cy.contains("Yes").click();
 		} else {
-			if (haveGrade == "Yes") {
-				cy.get(
-					"#degree-secondary-maths-english-grade4-has-gcse-maths-and-english-id-222750000-field"
-				).click();
-			} else {
-				cy.get(
-					"#degree-secondary-maths-english-grade4-has-gcse-maths-and-english-id-222750001-field"
-				).click();
-			}
+			cy.contains("No").click();
 		}
-
-		cy.get(".govuk-button").click();
+		cy.clickOnContinueButton();
 	}
 );
 
 Cypress.Commands.add(
 	"whenDoYouWantToStartYourTeacherTraining",
 	(trainingYear) => {
-		var trainingYear = trainingYear.split("-");
-		switch (trainingYear[0]) {
-			case "Equivalent":
-				cy.get(
-					"#equivalent-start-teacher-training-initial-teacher-training-year-id-field"
-				).select(trainingYear[1]);
-				break;
-			case "Studying":
-				cy.get(
-					"#studying-start-teacher-training-initial-teacher-training-year-id-field"
-				).select(trainingYear[1]);
-				break;
-			case "Secondary":
-				cy.get(
-					"#degree-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-				).click();
-				break;
-			default:
-				cy.get(
-					"#degree-start-teacher-training-initial-teacher-training-year-id-field"
-				).select(trainingYear[0]);
-		}
-
-		cy.get(".govuk-button").click();
+		cy.contains("When do you want to start your teacher training?")
+			.invoke("attr", "for")
+			.then(function (val) {
+				let id = "#" + val;
+				cy.get(id).select(trainingYear);
+			});
+		cy.clickOnContinueButton();
 	}
 );
 
 Cypress.Commands.add(
 	"areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent",
-	(planning, stage) => {
-		if (stage == "Primary") {
-			if (planning == "Yes") {
-				cy.get(
-					"#degree-primary-retake-english-maths-planning-to-retake-gcse-maths-and-english-id-222750000-field"
-				).click();
-			} else {
-				cy.get(
-					"#degree-primary-retake-english-maths-planning-to-retake-gcse-maths-and-english-id-222750001-field"
-				).click();
-			}
+	(planning) => {
+		if (planning == "Yes") {
+			cy.contains("Yes").click();
 		} else {
-			if (planning == "Yes") {
-				cy.get(
-					"#degree-retake-english-maths-planning-to-retake-gcse-maths-and-english-id-222750000-field"
-				).click();
-			} else {
-				cy.get(
-					"#degree-retake-english-maths-planning-to-retake-gcse-maths-and-english-id-222750001-field"
-				).click();
-			}
+			cy.contains("No").click();
 		}
-
-		cy.get(".govuk-button").click();
+		cy.clickOnContinueButton();
 	}
 );
 
@@ -406,69 +302,26 @@ Cypress.Commands.add(
 	"doYouHaveGrade4CorAboveInGCSEScienceorEquivalent",
 	(grade) => {
 		if (grade == "Yes") {
-			cy.get(
-				"#degree-science-grade4-has-gcse-science-id-222750000-field"
-			).click();
+			cy.contains("Yes").click();
 		} else {
-			cy.get(
-				"#degree-science-grade4-has-gcse-science-id-222750001-field"
-			).click();
+			cy.contains("No").click();
 		}
-		cy.get(".govuk-button").click();
+		cy.clickOnContinueButton();
 	}
 );
 
-Cypress.Commands.add("selectStage", (stage) => {
-	switch (stage) {
-		case "Primary":
-			cy.get(
-				"#degree-stage-interested-teaching-preferred-education-phase-id-222750000-field"
-			).click();
-			break;
-		case "Secondary":
-			cy.get(
-				"#degree-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-			).click();
-			break;
-		case "Equivalent-Secondary":
-			cy.get(
-				"#equivalent-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-			).click();
-			break;
-		case "Equivalent-Primary":
-			cy.get(
-				"#equivalent-stage-interested-teaching-preferred-education-phase-id-222750000-field"
-			).click();
-			break;
-		case "Studying-Secondary":
-			cy.get(
-				"#studying-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-			).click();
-			break;
-		case "Studying-Primary":
-			cy.get(
-				"#studying-stage-interested-teaching-preferred-education-phase-id-222750000-field"
-			).click();
-			break;
-	}
-	cy.get(".govuk-button").click();
-
-	/*if (stage == "Primary") {
-		cy.get(
-			"#degree-stage-interested-teaching-preferred-education-phase-id-222750000-field"
-		).click();
+Cypress.Commands.add("whichStageAreYouInterestedInTeaching", (stage) => {
+	if (stage == "Primary") {
+		cy.contains("Primary").click();
 	} else {
-		//stage=secondary
-		cy.get(
-			"#degree-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-		).click();
+		cy.contains("Secondary").click();
 	}
-	cy.get(".govuk-button").click();*/
+	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add("enteroverseasTelephoneNumber", (number) => {
-	cy.get("#overseas-telephone-telephone-field").type(number);
-	cy.get(".govuk-button").click();
+	cy.contains("Overseas telephone number (optional)").type(number);
+	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add("acceptPolicy", () => {
@@ -497,72 +350,20 @@ Cypress.Commands.add(
 Cypress.Commands.add("inWhichYearAreYouStudying", (stage) => {
 	switch (stage) {
 		case "Final year":
-			cy.get(
-				"#studying-stage-of-degree-degree-status-id-222750001-field"
-			).click();
+			cy.contains("Final year").click();
 			break;
 		case "Second year":
-			cy.get(
-				"#studying-stage-of-degree-degree-status-id-222750002-field"
-			).click();
+			cy.contains("Second year").click();
 			break;
 		case "First year":
-			cy.get(
-				"#studying-stage-of-degree-degree-status-id-222750003-field"
-			).click();
+			cy.contains("First year").click();
 			break;
 		case "Other":
-			cy.get(
-				"#studying-stage-of-degree-degree-status-id-222750005-field"
-			).click();
+			cy.contains("First year").click();
 			break;
 	}
-	cy.get(".govuk-button").click();
+	cy.clickOnContinueButton();
 });
-Cypress.Commands.add(
-	"haveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent",
-	(haveGrade, stage) => {
-		if (stage == "Primary") {
-			if (haveGrade == "Yes") {
-				cy.get(
-					"#studying-primary-maths-english-grade4-has-gcse-maths-and-english-id-222750000-field"
-				).click();
-			} else {
-				cy.get(
-					"#studying-primary-maths-english-grade4-has-gcse-maths-and-english-id-222750001-field"
-				).click();
-			}
-		} else {
-			if (haveGrade == "Yes") {
-				cy.get(
-					"#studying-secondary-maths-english-grade4-has-gcse-maths-and-english-id-222750000-field"
-				).click();
-			} else {
-				cy.get(
-					"#studying-secondary-maths-english-grade4-has-gcse-maths-and-english-id-222750001-field"
-				).click();
-			}
-		}
-
-		cy.get(".govuk-button").click();
-	}
-);
-
-Cypress.Commands.add(
-	"typeDateOfBirth",
-	(day, month, year, haveEquivalentDegreeFromAnotherCountry) => {
-		if (haveEquivalentDegreeFromAnotherCountry) {
-			cy.get("#equivalent_date_of_birth_date_of_birth_3i").type(day);
-			cy.get("#equivalent_date_of_birth_date_of_birth_2i").type(month);
-			cy.get("#equivalent_date_of_birth_date_of_birth_1i").type(year);
-		} else {
-			cy.get("#studying_date_of_birth_date_of_birth_3i").type(day);
-			cy.get("#studying_date_of_birth_date_of_birth_2i").type(month);
-			cy.get("#studying_date_of_birth_date_of_birth_1i").type(year);
-		}
-		cy.get(".govuk-button").click();
-	}
-);
 
 Cypress.Commands.add("enterVerificationCode", (verificationCode, error) => {
 	if (error) {
@@ -584,7 +385,12 @@ Cypress.Commands.add("selectCountry", (location) => {
 });
 
 Cypress.Commands.add("enterEmail", (emailAddress) => {
-	cy.contains("Email address").next().next().clear();
+	cy.contains("Email address")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).clear();
+		});
 	cy.contains("Email address").type(emailAddress);
 });
 
