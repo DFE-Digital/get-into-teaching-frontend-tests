@@ -111,8 +111,12 @@ Cypress.Commands.add("acceptCookie", () => {
 Cypress.Commands.add(
 	"enterFirstNameLastNameandEmail",
 	(firstName, lastName, email) => {
-		cy.get("#teacher-training-adviser-steps-identity-first-name-field").type(firstName);
-		cy.get("#teacher-training-adviser-steps-identity-last-name-field").type(lastName);
+		cy.get("#teacher-training-adviser-steps-identity-first-name-field").type(
+			firstName
+		);
+		cy.get("#teacher-training-adviser-steps-identity-last-name-field").type(
+			lastName
+		);
 		cy.get("#teacher-training-adviser-steps-identity-email-field").type(email);
 		cy.get(".govuk-button").click();
 	}
@@ -124,9 +128,13 @@ Cypress.Commands.add("clickOnContinueButton", () => {
 
 Cypress.Commands.add("returningToTeaching", (returner) => {
 	if (returner) {
-		cy.get("#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-true-field").click();
+		cy.get(
+			"#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-true-field"
+		).click();
 	} else {
-		cy.get("#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-field").click();
+		cy.get(
+			"#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-field"
+		).click();
 	}
 	cy.get(".govuk-button").click();
 });
@@ -135,10 +143,14 @@ Cypress.Commands.add(
 	"havePreviousTeacherReferenceNumber",
 	(havePreviousTeacherReferenceNumber) => {
 		if (havePreviousTeacherReferenceNumber) {
-			cy.get("#teacher-training-adviser-steps-has-teacher-id-has-id-true-field").click();
+			cy.get(
+				"#teacher-training-adviser-steps-has-teacher-id-has-id-true-field"
+			).click();
 			cy.get(".govuk-button").click();
 		} else {
-			cy.get("#teacher-training-adviser-steps-has-teacher-id-has-id-field").click();
+			cy.get(
+				"#teacher-training-adviser-steps-has-teacher-id-has-id-field"
+			).click();
 			cy.get(".govuk-button").click();
 		}
 	}
@@ -147,13 +159,17 @@ Cypress.Commands.add(
 Cypress.Commands.add(
 	"enterPreviousTeacherReferenceNumber",
 	(teacherReferenceNumber) => {
-		cy.get("#teacher-training-adviser-steps-previous-teacher-id-teacher-id-field").type(teacherReferenceNumber);
+		cy.get(
+			"#teacher-training-adviser-steps-previous-teacher-id-teacher-id-field"
+		).type(teacherReferenceNumber);
 		cy.get(".govuk-button").click();
 	}
 );
 
 Cypress.Commands.add("selectPreviuosMainSubject", (previousSubject) => {
-	cy.get("#teacher-training-adviser-steps-subject-taught-subject-taught-id-field").select(previousSubject);
+	cy.get(
+		"#teacher-training-adviser-steps-subject-taught-subject-taught-id-field"
+	).select(previousSubject);
 	cy.get(".govuk-button").click();
 });
 
@@ -180,11 +196,17 @@ Cypress.Commands.add("selectSubjectLikeToTeach", (subject) => {
 
 Cypress.Commands.add("youLiveIn", (location) => {
 	if (location == "UK") {
-		cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field").click();
+		cy.get(
+			"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field"
+		).click();
 	} else {
-		cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field").click();
+		cy.get(
+			"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field"
+		).click();
 		cy.get(".govuk-button").click();
-		cy.get("#teacher-training-adviser-steps-overseas-country-country-id-field").select(location);
+		cy.get(
+			"#teacher-training-adviser-steps-overseas-country-country-id-field"
+		).select(location);
 	}
 	cy.get(".govuk-button").click();
 });
@@ -204,33 +226,47 @@ Cypress.Commands.add("whereDoYouLive", (location, studying, equivalent) => {
 	switch (true) {
 		case studying:
 			if (location == "UK") {
-				cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field").click();
+				cy.get(
+					"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field"
+				).click();
 			} else {
 				cy.get(
 					"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field"
 				).click();
 				cy.get(".govuk-button").click();
-				cy.get("#teacher-training-adviser-steps-overseas-country-country-id-field").select(location);
+				cy.get(
+					"#teacher-training-adviser-steps-overseas-country-country-id-field"
+				).select(location);
 			}
 			break;
 		case equivalent:
 			if (location == "UK") {
-				cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field").click();
+				cy.get(
+					"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field"
+				).click();
 			} else {
 				cy.get(
 					"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field"
 				).click();
 				cy.get(".govuk-button").click();
-				cy.get("#teacher-training-adviser-steps-overseas-country-country-id-field").select(location);
+				cy.get(
+					"#teacher-training-adviser-steps-overseas-country-country-id-field"
+				).select(location);
 			}
 			break;
 		default:
 			if (location == "UK") {
-				cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field").click();
+				cy.get(
+					"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field"
+				).click();
 			} else {
-				cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field").click();
+				cy.get(
+					"#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field"
+				).click();
 				cy.get(".govuk-button").click();
-				cy.get("#teacher-training-adviser-steps-overseas-country-country-id-field").select(location);
+				cy.get(
+					"#teacher-training-adviser-steps-overseas-country-country-id-field"
+				).select(location);
 			}
 	}
 
@@ -239,9 +275,13 @@ Cypress.Commands.add("whereDoYouLive", (location, studying, equivalent) => {
 
 Cypress.Commands.add("enterUKTelephoneNumber", (number, equivalent) => {
 	if (equivalent) {
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type("0125234490");
+		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
+			"0125234490"
+		);
 	} else {
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(number);
+		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
+			number
+		);
 	}
 
 	cy.get(".govuk-button").click();
@@ -249,9 +289,13 @@ Cypress.Commands.add("enterUKTelephoneNumber", (number, equivalent) => {
 
 Cypress.Commands.add("enterTelephoneNumber", (number, country = "UK") => {
 	if (country == "UK") {
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(number);
+		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
+			number
+		);
 	} else {
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field").type(number);
+		cy.get(
+			"#teacher-training-adviser-steps-overseas-telephone-telephone-field"
+		).type(number);
 	}
 	cy.get(".govuk-button").click();
 });
@@ -259,16 +303,24 @@ Cypress.Commands.add("enterTelephoneNumber", (number, country = "UK") => {
 Cypress.Commands.add("doYouHaveDegree", (degree) => {
 	switch (degree) {
 		case "Yes":
-			cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-degree-field").click();
+			cy.get(
+				"#teacher-training-adviser-steps-have-a-degree-degree-options-degree-field"
+			).click();
 			break;
 		case "No":
-			cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-no-field").click();
+			cy.get(
+				"#teacher-training-adviser-steps-have-a-degree-degree-options-no-field"
+			).click();
 			break;
 		case "I'm studying for a degree":
-			cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-studying-field").click();
+			cy.get(
+				"#teacher-training-adviser-steps-have-a-degree-degree-options-studying-field"
+			).click();
 			break;
 		case "I have an equivalent qualification from another country":
-			cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-equivalent-field").click();
+			cy.get(
+				"#teacher-training-adviser-steps-have-a-degree-degree-options-equivalent-field"
+			).click();
 			break;
 	}
 	cy.get(".govuk-button").click();
@@ -278,9 +330,9 @@ Cypress.Commands.add("selectWhatSubjectIsYourDegree", (subject) => {
 	var subject = subject.split("-");
 	switch (subject[0]) {
 		case "Studying":
-			cy.get("#teacher-training-adviser-steps-what-subject-degree-degree-subject-field").select(
-				subject[1]
-			);
+			cy.get(
+				"#teacher-training-adviser-steps-what-subject-degree-degree-subject-field"
+			).select(subject[1]);
 			break;
 		case "Secondary":
 			cy.get(
@@ -288,24 +340,24 @@ Cypress.Commands.add("selectWhatSubjectIsYourDegree", (subject) => {
 			).click();
 			break;
 		default:
-			cy.get("#teacher-training-adviser-steps-what-subject-degree-degree-subject-field").select(
-				subject[0]
-			);
+			cy.get(
+				"#teacher-training-adviser-steps-what-subject-degree-degree-subject-field"
+			).select(subject[0]);
 	}
 	cy.get(".govuk-button").click();
 });
 
 Cypress.Commands.add("selectWhichClassIsYourDegree", (degreeClass) => {
-	cy.get("#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field").select(
-		degreeClass
-	);
+	cy.get(
+		"#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field"
+	).select(degreeClass);
 	cy.get(".govuk-button").click();
 });
 
 Cypress.Commands.add("whatDegreeClassAreYouPredictedToGet", (degreeClass) => {
-	cy.get("#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field").select(
-		degreeClass
-	);
+	cy.get(
+		"#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field"
+	).select(degreeClass);
 	cy.get(".govuk-button").click();
 });
 
@@ -499,7 +551,9 @@ Cypress.Commands.add("selectStage", (stage) => {
 });
 
 Cypress.Commands.add("enteroverseasTelephoneNumber", (number) => {
-	cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field").type(number);
+	cy.get(
+		"#teacher-training-adviser-steps-overseas-telephone-telephone-field"
+	).type(number);
 	cy.get(".govuk-button").click();
 });
 
@@ -512,13 +566,25 @@ Cypress.Commands.add("acceptPolicy", () => {
 
 Cypress.Commands.add("enterDateOfBirth", (day, month, year, returner) => {
 	if (returner) {
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type(day);
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type(month);
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type(year);
+		cy.get(
+			"#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i"
+		).type(day);
+		cy.get(
+			"#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i"
+		).type(month);
+		cy.get(
+			"#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i"
+		).type(year);
 	} else {
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type(day);
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type(month);
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type(year);
+		cy.get(
+			"#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i"
+		).type(day);
+		cy.get(
+			"#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i"
+		).type(month);
+		cy.get(
+			"#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i"
+		).type(year);
 	}
 	cy.get(".govuk-button").click();
 });
@@ -526,10 +592,18 @@ Cypress.Commands.add("enterDateOfBirth", (day, month, year, returner) => {
 Cypress.Commands.add(
 	"enterUKCandidateAddress",
 	(addressline1, addressline2, city, postcode, returner) => {
-    cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field").type(addressline1);
-    cy.get("#teacher-training-adviser-steps-uk-address-address-line2-field").type(addressline2);
-    cy.get("#teacher-training-adviser-steps-uk-address-address-city-field").type(city);
-    cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field").type(postcode);
+		cy.get(
+			"#teacher-training-adviser-steps-uk-address-address-line1-field"
+		).type(addressline1);
+		cy.get(
+			"#teacher-training-adviser-steps-uk-address-address-line2-field"
+		).type(addressline2);
+		cy.get(
+			"#teacher-training-adviser-steps-uk-address-address-city-field"
+		).type(city);
+		cy.get(
+			"#teacher-training-adviser-steps-uk-address-address-postcode-field"
+		).type(postcode);
 		cy.get(".govuk-button").click();
 	}
 );
@@ -592,13 +666,25 @@ Cypress.Commands.add(
 	"typeDateOfBirth",
 	(day, month, year, haveEquivalentDegreeFromAnotherCountry) => {
 		if (haveEquivalentDegreeFromAnotherCountry) {
-			cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type(day);
-			cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type(month);
-			cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type(year);
+			cy.get(
+				"#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i"
+			).type(day);
+			cy.get(
+				"#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i"
+			).type(month);
+			cy.get(
+				"#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i"
+			).type(year);
 		} else {
-			cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type(day);
-			cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type(month);
-			cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type(year);
+			cy.get(
+				"#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i"
+			).type(day);
+			cy.get(
+				"#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i"
+			).type(month);
+			cy.get(
+				"#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i"
+			).type(year);
 		}
 		cy.get(".govuk-button").click();
 	}
@@ -633,4 +719,17 @@ Cypress.Commands.add("verifyEmailAddressError", () => {
 		.should("exist")
 		.should("have.text", "There is a problem");
 	cy.get("li > a").should("have.text", "You need to enter you email address");
+});
+
+Cypress.Commands.add("clickOnBackButton", () => {
+	cy.get(".govuk-back-link").click();
+});
+
+Cypress.Commands.add("areYouPlanningToRetakeYourScienceGCSE", (planning) => {
+	if (planning == "Yes") {
+		cy.contains("Yes").click();
+	} else {
+		cy.contains("No").click();
+	}
+	cy.get(".govuk-button").click();
 });
