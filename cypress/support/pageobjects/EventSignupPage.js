@@ -15,9 +15,7 @@ class EventSignupPage {
 		return cy.get("#events-steps-personal-details-email-field");
 	}
 	getSearchedEventName() {
-		return cy.get(
-			'[href="/events/1203_-_TTT_-_London3-Summer_2020-Test300589108"] > .event-resultbox > .event-resultbox__header > h2'
-		);
+		return cy.get(".event-resultbox__header > h2");
 	}
 	getNextStep() {
 		return cy.contains("Next Step");
@@ -30,6 +28,26 @@ class EventSignupPage {
 	}
 	getPrivacyPolicy() {
 		return cy.get("#events-steps-further-details-privacy-policy-true-field");
+	}
+
+	getWouldYouLikeToReceiveInformationAboutFutureEventsInYourArea(
+		futureEventDetails
+	) {
+		if (futureEventDetails == "Yes") {
+			return cy.get("#events-steps-further-details-future-events-true-field");
+		} else {
+			return cy.get("#events-steps-further-details-future-events-field");
+		}
+	}
+
+	getWouldYouLikeToReceivePersonalisedInformationToHelpYouGetIntoTeaching(
+		personalisedInformation
+	) {
+		if (personalisedInformation == "Yes") {
+			return cy.get("#events-steps-further-details-mailing-list-true-field");
+		} else {
+			return cy.get("#events-steps-further-details-mailing-list-field");
+		}
 	}
 	getFutureEventInfo() {
 		return cy.get("#events-steps-further-details-future-events-true-field");

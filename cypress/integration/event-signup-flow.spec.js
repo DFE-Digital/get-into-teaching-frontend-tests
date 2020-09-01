@@ -103,6 +103,14 @@ describe("Get-into-teaching - Event sign up flow", () => {
 				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 				eventSignup.getNextStep().click();
 				eventSignup.getPrivacyPolicy().click();
+				eventSignup
+					.getWouldYouLikeToReceiveInformationAboutFutureEventsInYourArea("Yes")
+					.click();
+				eventSignup
+					.getWouldYouLikeToReceivePersonalisedInformationToHelpYouGetIntoTeaching(
+						"Yes"
+					)
+					.click();
 				eventSignup.getPostcode().clear();
 				eventSignup.getPostcode().type(this.testData.postcode);
 				eventSignup.getCompleteSignup().click();
@@ -148,6 +156,14 @@ describe("Get-into-teaching - Event sign up flow", () => {
 				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 				eventSignup.getNextStep().click();
 				eventSignup.getPrivacyPolicy().click();
+				eventSignup
+					.getWouldYouLikeToReceiveInformationAboutFutureEventsInYourArea("Yes")
+					.click();
+				eventSignup
+					.getWouldYouLikeToReceivePersonalisedInformationToHelpYouGetIntoTeaching(
+						"Yes"
+					)
+					.click();
 				eventSignup.getPostcode().clear();
 				eventSignup.getPostcode().type(this.testData.postcode);
 				eventSignup.getCompleteSignup().click();
