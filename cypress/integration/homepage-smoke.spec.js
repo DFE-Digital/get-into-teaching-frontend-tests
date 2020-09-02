@@ -1,22 +1,22 @@
 /// <reference types="Cypress" />
 import Homepage from "../support/pageobjects/Homepage";
 
-
 function terminalLog(violations) {
-     cy.task( 'log',
-             `${violations.length} accessibility violation${
-               violations.length === 1 ? '' : 's'
-             } ${violations.length === 1 ? 'was' : 'were'} detected`
-           )
-     const violationData = violations.map(
-             ({ id, impact, description, nodes }) => ({
-               id,
-               impact,
-               description,
-               nodes: nodes.length
-             })
-     )
-     cy.task('table', violationData)
+	cy.task(
+		"log",
+		`${violations.length} accessibility violation${
+			violations.length === 1 ? "" : "s"
+		} ${violations.length === 1 ? "was" : "were"} detected`
+	);
+	const violationData = violations.map(
+		({ id, impact, description, nodes }) => ({
+			id,
+			impact,
+			description,
+			nodes: nodes.length,
+		})
+	);
+	cy.task("table", violationData);
 }
 
 describe("Get-into-teaching - Homepage - smoke tests", () => {
@@ -270,7 +270,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 					});
 			});
 
-		cy.get(".event-resultboxshort__header > h1").then(function (
+		cy.get(".event-resultboxshort__header > h2").then(function (
 			eventDateandTimeonNextPage
 		) {
 			cy.log(eventDateandTimeonNextPage.text());
@@ -281,19 +281,19 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	});
 
 	// Basic usage
-        it('Has no detectable a11y violations on load', () => {
-          // Test the page at initial load
-          cy.checkA11y()
-        })
+	it("Has no detectable a11y violations on load", () => {
+		// Test the page at initial load
+		cy.checkA11y();
+	});
 
-        it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', () => {
-          // Test on initial load, only report and assert for critical impact items
-          cy.checkA11y(null, {
-            includedImpacts: ['critical']
-          })
-        })
+	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
+		// Test on initial load, only report and assert for critical impact items
+		cy.checkA11y(null, {
+			includedImpacts: ["critical"],
+		});
+	});
 
-        it('Logs violations to the terminal', () => {
-           cy.checkA11y(null, null, terminalLog)
-        })
+	it("Logs violations to the terminal", () => {
+		cy.checkA11y(null, null, terminalLog);
+	});
 });

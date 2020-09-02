@@ -97,13 +97,13 @@ describe("Get-into-teaching - Mailinglist registration flow", () => {
 
 		cy.enterEmailVerificationCodeForMailinglist();
 		mailingListSignUp.getNextStep().click();
-		cy.get(
+		/*cy.get(
 			"#edit_mailing_list_steps_already_subscribed_already_subscribed > h1"
 		)
 			.should("exist")
-			.should("have.text", "You’ve already signed up");
+			.should("have.text", "You’ve already signed up");*/
 
-		/*mailingListSignUp
+		mailingListSignUp
 			.getStage()
 			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
@@ -111,13 +111,15 @@ describe("Get-into-teaching - Mailinglist registration flow", () => {
 			.getSubjectToTeach()
 			.select(this.testInputData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getPostcode().clear();
 		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
 		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getPhone().clear();
 		mailingListSignUp.getPhone().type(this.testInputData.phone);
 		//mailingListSignUp.getMoreDetails().type(this.testInputData.moreDetail);
 		cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field").click();
 		mailingListSignUp.getCompleteSignUpButton().click();
-		mailingListSignUp.getContent().should("have.text", "You've signed up");*/
+		mailingListSignUp.getContent().should("have.text", "You've signed up");
 	});
 
 	it('It shows "You’ve signed up" message for new candidate', function () {
