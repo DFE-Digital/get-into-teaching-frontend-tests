@@ -349,14 +349,14 @@ Cypress.Commands.add("selectWhatSubjectIsYourDegree", (subject) => {
 
 Cypress.Commands.add("selectWhichClassIsYourDegree", (degreeClass) => {
 	cy.get(
-		"#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field"
+		"#teacher_training_adviser_steps_what_degree_class_uk_degree_grade_id"
 	).select(degreeClass);
 	cy.get(".govuk-button").click();
 });
 
 Cypress.Commands.add("whatDegreeClassAreYouPredictedToGet", (degreeClass) => {
 	cy.get(
-		"#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field"
+		"#teacher_training_adviser_steps_what_degree_class_uk_degree_grade_id"
 	).select(degreeClass);
 	cy.get(".govuk-button").click();
 });
@@ -718,7 +718,7 @@ Cypress.Commands.add("verifyEmailAddressError", () => {
 	cy.get("#error-summary-title")
 		.should("exist")
 		.should("have.text", "There is a problem");
-	cy.get("li > a").should("have.text", "You need to enter you email address");
+	cy.get("li > a").should("have.text", "You need to enter your email address");
 });
 
 Cypress.Commands.add("clickOnBackButton", () => {
