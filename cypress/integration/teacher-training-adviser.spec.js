@@ -1694,9 +1694,8 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			"#teacher-training-adviser-steps-overseas-country-country-id-field"
 		).select("Austria");
 		cy.clickOnContinueButton();
-		cy.get(
-			"#teacher-training-adviser-steps-overseas-callback-telephone-field"
-		).type("0125234490");
+		cy.contains("Contact telephone number *").type("0125234490");
+		cy.clickOnContinueButton();
 		cy.clickOnContinueButton();
 		cy.get(".govuk-heading-l")
 			.should("exist")
@@ -1785,9 +1784,8 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.whenDoYouWantToStartYourTeacherTraining("Equivalent-2021");
 		cy.typeDateOfBirth("22", "08", "2000", true);
 		cy.whereDoYouLive("Austria", false, true);
-		cy.get(
-			"#teacher-training-adviser-steps-overseas-callback-telephone-field"
-		).type("0125234490");
+		cy.contains("Contact telephone number *").type("0125234490");
+		cy.clickOnContinueButton();
 		cy.clickOnContinueButton();
 		cy.get(".govuk-heading-l")
 			.should("exist")
@@ -1914,7 +1912,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		teacherTrainingAdviser.getLastName();
 		teacherTrainingAdviser.getEmailAddress();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.contains("You need to enter you email address")
+		cy.contains("You need to enter your email address")
 			.should((el) => {
 				expect(el).to.have.attr(
 					"href",
@@ -1972,7 +1970,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			.next()
 			.should("exist");
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
-			.should("have.text", "You need to enter you email address")
+			.should("have.text", "You need to enter your email address")
 			.next()
 			.should("have.text", "You need to enter your first name")
 			.next()
@@ -2016,9 +2014,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		).click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get(
-			"#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field"
-		).select("First class");
+		cy.selectWhichClassIsYourDegree("First class");
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get("#error-summary-title")
