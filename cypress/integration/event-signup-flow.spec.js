@@ -27,7 +27,7 @@ describe("Get-into-teaching - Event sign up flow", () => {
 		let signedUpeventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup.getSearchedEventName().then(function (eventName) {
 			cy.contains(eventName.text().trim()).click();
@@ -43,7 +43,7 @@ describe("Get-into-teaching - Event sign up flow", () => {
 		let signedUpeventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup.getSearchedEventName().then(function (eventName) {
 			eventSignup.getSearchedEventName().click();
@@ -78,7 +78,7 @@ describe("Get-into-teaching - Event sign up flow", () => {
 		let signedUpeventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -125,7 +125,7 @@ describe("Get-into-teaching - Event sign up flow", () => {
 		let signedupEventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -179,7 +179,7 @@ describe("Get-into-teaching - Event sign up flow", () => {
 		let error = false;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -240,7 +240,7 @@ describe("Get-into-teaching - Event sign up flow", () => {
 		let signedupEventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -278,7 +278,7 @@ describe("Get-into-teaching - Event sign up flow", () => {
 		let signedupEventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
