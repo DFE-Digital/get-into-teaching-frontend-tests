@@ -1695,6 +1695,9 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		).select("Austria");
 		cy.clickOnContinueButton();
 		cy.contains("Contact telephone number *").type("0125234490");
+		/*cy.get(
+			"#teacher_training_adviser_steps_overseas_timezone_time_zone"
+		).select("");*/
 		cy.clickOnContinueButton();
 		cy.clickOnContinueButton();
 		cy.get(".govuk-heading-l")
