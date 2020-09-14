@@ -44,9 +44,14 @@ class EventSignupPage {
 		personalisedInformation
 	) {
 		if (personalisedInformation == "Yes") {
-			return cy.get("#events-steps-further-details-mailing-list-true-field");
+			return cy.get(
+				"#events-steps-further-details-subscribe-to-mailing-list-true-field"
+			);
+			cy.contains("Next step").click();
 		} else {
-			return cy.get("#events-steps-further-details-mailing-list-field");
+			return cy.get(
+				"#events-steps-further-details-subscribe-to-mailing-list-field"
+			);
 		}
 	}
 	getFutureEventInfo() {

@@ -6,7 +6,7 @@ Cypress.Commands.add("logintoApp", () => {
 		},
 	});
 	cy.injectAxe();
-	cy.get(".cookie-acceptance__dialog > .call-to-action-button").click();
+	cy.get("#cookies-agree").click();
 });
 
 Cypress.Commands.add("shouldHaveTalkToUsSection", () => {
@@ -53,7 +53,7 @@ Cypress.Commands.add("shouldHavePageNavigation", () => {
 });
 
 Cypress.Commands.add("enterEmailVerificationCode", () => {
-	cy.wait(5000);
+	cy.wait(2000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -105,12 +105,15 @@ Cypress.Commands.add("enterEmailVerificationCodeForMailinglist", () => {
 });
 
 Cypress.Commands.add("acceptCookie", () => {
-	cy.get(".cookie-acceptance__dialog > .call-to-action-button").click();
+	cy.get("#cookies-agree").click();
 });
 
 Cypress.Commands.add(
 	"enterFirstNameLastNameandEmail",
 	(firstName, lastName, email) => {
+		let rnum = Math.floor(Math.random() * 1000000 + 1);
+		firstName = "First_" + rnum + "_name";
+		lastName = "Last_" + rnum + "_name";
 		cy.get("#teacher-training-adviser-steps-identity-first-name-field").type(
 			firstName
 		);
@@ -558,9 +561,7 @@ Cypress.Commands.add("enteroverseasTelephoneNumber", (number) => {
 });
 
 Cypress.Commands.add("acceptPolicy", () => {
-	cy.get(
-		"#teacher-training-adviser-steps-accept-privacy-policy-accepted-policy-id-0a203956-e935-ea11-a813-000d3a44a8e9-field"
-	).click();
+	cy.contains("Accept the privacy policy").click();
 	cy.get(".govuk-button").click();
 });
 
@@ -733,3 +734,51 @@ Cypress.Commands.add("areYouPlanningToRetakeYourScienceGCSE", (planning) => {
 	}
 	cy.get(".govuk-button").click();
 });
+
+Cypress.Commands.add("verifyYourEmailAddress", () => {
+	cy.wait(2000);
+	let newURL;
+	var latestEmailID;
+	var code;
+	cy.request(
+		"https://mailsac.com/api/addresses/testuser@mailsac.com/messages?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
+	).as("topMostEmail");
+	cy.get("@topMostEmail").then((response) => {
+		latestEmailID = response.body[0]._id;
+		cy.log("latestEmailID = " + latestEmailID);
+		newURL =
+			"https://mailsac.com/api/text/testuser@mailsac.com/" +
+			latestEmailID +
+			"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
+		cy.request(newURL).as("verificationCode");
+		cy.get("@verificationCode").then((response) => {
+			var startpos = response.body.search("is");
+			code = response.body.toString().substr(startpos + 2, 7);
+			cy.get(
+				"#teacher-training-adviser-steps-authenticate-timed-one-time-password-field"
+			)
+				.as("getOTPField")
+				.type(code);
+			cy.get(".govuk-button").click();
+		});
+	});
+});
+Cypress.Commands.add("clickOnStartNowButton", () => {
+	cy.get(".govuk-button").click();
+});
+
+Cypress.Commands.add(
+	"wouldYouLikeToReceivePersonalisedInformation",
+	(personalisedInformation) => {
+		if (personalisedInformation == "Yes") {
+			cy.get(
+				"#events-steps-further-details-subscribe-to-mailing-list-true-field"
+			).click();
+		} else {
+			cy.get(
+				"#events-steps-further-details-subscribe-to-mailing-list-field"
+			).click();
+			cy.contains("Complete sign up").click();
+		}
+	}
+);
