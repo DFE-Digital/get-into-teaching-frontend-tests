@@ -105,7 +105,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	});
 
 	it('Links through to "Please check here for updates"', () => {
-		cy.get(".covid > a").then(function (linkText) {
+		cy.contains("Please check here for updates").then(function (linkText) {
 			cy.contains(linkText.text())
 				.should((el) => {
 					expect(el).to.have.attr("href", "/covid-19");
