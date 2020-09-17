@@ -38,27 +38,28 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
+		cy.acceptAllCookies();
 		cy.clickOnStartNowButton();
 		cy.injectAxe();
 	});
-	it("Has no detectable a11y violations on load", function () {
+	xit("Has no detectable a11y violations on load", function () {
 		// Test the page at initial load
 		cy.checkA11y();
 	});
 
-	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", function () {
+	xit("Has no detectable a11y violations on load (filtering to only include critical impact violations)", function () {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
 			includedImpacts: ["critical"],
 		});
 	});
 
-	it("Logs violations to the terminal", function () {
+	xit("Logs violations to the terminal", function () {
 		cy.checkA11y(null, null, terminalLog);
 	});
 
 	it('It shows "Thank you  Sign up complete" message to UK returner user', function () {
-		let rnum = Math.floor(Math.random() * 10000 + 1);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
 		teacherTrainingAdviser.getFirstName().type(firstName);
@@ -1188,7 +1189,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 	});
 
-	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Final year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
 		  Are you returning to teaching? - No
 		  Do you have a degree? - I'm studying for a degree
@@ -1246,7 +1247,181 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		});
 	});
 
-	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Second year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+		/*
+		  Are you returning to teaching? - No
+		  Do you have a degree? - I'm studying for a degree
+		  Which stage are you interested in teaching? - primary
+		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
+		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
+		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - No
+		  Are you planning to retake your science GCSE? - Yes
+		  UK user	  
+		 	   
+		*/
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Second year");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Primary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Primary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Primary"
+		);
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
+		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
+		cy.youLiveIn("UK");
+		cy.enterUKCandidateAddress(
+			"21",
+			"Victoria Embankment",
+			"Darlington",
+			"DL1 5JR",
+			(returner = false)
+		);
+		cy.enterTelephoneNumber("0125234490");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- First year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+		/*
+		  Are you returning to teaching? - No
+		  Do you have a degree? - I'm studying for a degree
+		  Which stage are you interested in teaching? - primary
+		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
+		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
+		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - No
+		  Are you planning to retake your science GCSE? - Yes
+		  UK user	  
+		 	   
+		*/
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("First year");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Primary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Primary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Primary"
+		);
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
+		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
+		cy.youLiveIn("UK");
+		cy.enterUKCandidateAddress(
+			"21",
+			"Victoria Embankment",
+			"Darlington",
+			"DL1 5JR",
+			(returner = false)
+		);
+		cy.enterTelephoneNumber("0125234490");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Other, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+		/*
+		  Are you returning to teaching? - No
+		  Do you have a degree? - I'm studying for a degree
+		  Which stage are you interested in teaching? - primary
+		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
+		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
+		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - No
+		  Are you planning to retake your science GCSE? - Yes
+		  UK user	  
+		 	   
+		*/
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Other");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Primary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Primary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Primary"
+		);
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
+		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
+		cy.youLiveIn("UK");
+		cy.enterUKCandidateAddress(
+			"21",
+			"Victoria Embankment",
+			"Darlington",
+			"DL1 5JR",
+			(returner = false)
+		);
+		cy.enterTelephoneNumber("0125234490");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Final year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
 		  Are you returning to teaching? - No
 		  Do you have a degree? - I'm studying for a degree
@@ -1268,6 +1443,158 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Primary");
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Primary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Primary"
+		);
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
+		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
+		cy.youLiveIn("Chile");
+		cy.enterTelephoneNumber(this.testData.phoneNumber, "Chile");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Second year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+		/*
+		  Are you returning to teaching? - No
+		  Do you have a degree? - I'm studying for a degree
+		  Which stage are you interested in teaching? - primary
+		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
+		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
+		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - No
+		  Are you planning to retake your science GCSE? - Yes
+		  Overseas user	  
+		 	   
+		*/
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Second year");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Primary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Primary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Primary"
+		);
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
+		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
+		cy.youLiveIn("Chile");
+		cy.enterTelephoneNumber(this.testData.phoneNumber, "Chile");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - First year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+		/*
+		  Are you returning to teaching? - No
+		  Do you have a degree? - I'm studying for a degree
+		  Which stage are you interested in teaching? - primary
+		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
+		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
+		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - No
+		  Are you planning to retake your science GCSE? - Yes
+		  Overseas user	  
+		 	   
+		*/
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("First year");
+		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Studying-Primary");
+
+		cy.doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent(
+			"No",
+			"Primary"
+		);
+		cy.areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent(
+			"Yes",
+			"Primary"
+		);
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
+		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("31", "03", "1985", (returner = false));
+		cy.youLiveIn("Chile");
+		cy.enterTelephoneNumber(this.testData.phoneNumber, "Chile");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+	});
+
+	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Other, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
+		/*
+		  Are you returning to teaching? - No
+		  Do you have a degree? - I'm studying for a degree
+		  Which stage are you interested in teaching? - primary
+		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
+		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
+		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - No
+		  Are you planning to retake your science GCSE? - Yes
+		  Overseas user	  
+		 	   
+		*/
+		var stage;
+		var haveEquivalentDegreeFromAnotherCountry = true;
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching((returner = false));
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Other");
 		cy.selectWhatSubjectIsYourDegree("Studying-Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Studying-Primary");
@@ -1939,7 +2266,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 			.should("have.text", "You need to enter your first name")
 			.next()
-			.should("have.text", "You need to enter your last name");
+			.should("have.text", "You need to enter your surname");
 		cy.contains("You need to enter your first name")
 			.should((el) => {
 				expect(el).to.have.attr(
@@ -1952,9 +2279,9 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should(
 			"have.text",
-			"You need to enter your last name"
+			"You need to enter your surname"
 		);
-		cy.contains("You need to enter your last name")
+		cy.contains("You need to enter your surname")
 			.should((el) => {
 				expect(el).to.have.attr(
 					"href",
@@ -1984,11 +2311,11 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			.next()
 			.should("exist");
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
-			.should("have.text", "You need to enter your email address")
-			.next()
 			.should("have.text", "You need to enter your first name")
 			.next()
-			.should("have.text", "You need to enter your last name");
+			.should("have.text", "You need to enter your surname")
+			.next()
+			.should("have.text", "You need to enter your email address");
 
 		let rnum = Math.floor(Math.random() * 10000 + 1);
 		let firstName = "First_" + rnum + "_name";
@@ -2126,7 +2453,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		);
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		teacherTrainingAdviser.getContinueButton().click();
+		cy.clickOnCompleteButton();
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
@@ -2359,7 +2686,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(
 			"#teacher-training-adviser-steps-uk-telephone-telephone-field-error"
 		).type("0123456789011223344566");
-		cy.get(".govuk-button").click();
+		cy.clickOnContinueButton();
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
@@ -2411,7 +2738,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(
 			"#teacher-training-adviser-steps-overseas-telephone-telephone-field-error"
 		).type("0123456789011223344566");
-		cy.get(".govuk-button").click();
+		cy.clickOnContinueButton();
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
@@ -2463,7 +2790,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(
 			"#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i"
 		).type("1885");
-		cy.get(".govuk-button").click();
+		cy.clickOnContinueButton();
 		cy.get("#error-summary-title")
 			.should("exist")
 			.should("have.text", "There is a problem");
@@ -2506,10 +2833,13 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			.should("have.text", "There is a problem");
 		cy.get("li > a")
 			.should("exist")
-			.should("have.text", "Date can't be in the future");
+			.should("have.text", "You must be 18 years or older to use this service");
 		cy.get(
 			"#teacher-training-adviser-steps-date-of-birth-date-of-birth-error"
-		).should("have.text", "Error: Date can't be in the future");
+		).should(
+			"have.text",
+			"Error: You must be 18 years or older to use this service"
+		);
 	});
 	it("It shows the error message to user if he enters invalid email address format", function () {
 		cy.enterFirstNameLastNameandEmail(
