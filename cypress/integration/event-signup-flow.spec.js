@@ -1,7 +1,7 @@
 import Homepage from "../support/pageobjects/Homepage";
 import EventSignupPage from "../support/pageobjects/EventSignupPage";
 
-describe("Get-into-teaching - Event sign up flow", () => {
+xdescribe("Get-into-teaching - Event sign up flow", () => {
 	const searchForEvent = new Homepage();
 	const eventSignup = new EventSignupPage();
 	beforeEach(function () {

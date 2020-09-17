@@ -281,19 +281,19 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	});
 
 	// Basic usage
-	it("Has no detectable a11y violations on load", () => {
+	xit("Has no detectable a11y violations on load", () => {
 		// Test the page at initial load
 		cy.checkA11y();
 	});
 
-	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
+	xit("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
 			includedImpacts: ["critical"],
 		});
 	});
 
-	it("Logs violations to the terminal", () => {
+	xit("Logs violations to the terminal", () => {
 		cy.checkA11y(null, null, terminalLog);
 	});
 });

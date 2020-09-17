@@ -9,7 +9,7 @@ class TeacherTrainingAdviser {
 		return cy.get("#teacher-training-adviser-steps-identity-email-field");
 	}
 	getContinueButton() {
-		return cy.get(".govuk-button");
+		return cy.contains("Continue");
 	}
 }
 export default TeacherTrainingAdviser;
