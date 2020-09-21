@@ -42,19 +42,19 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.clickOnStartNowButton();
 		cy.injectAxe();
 	});
-	xit("Has no detectable a11y violations on load", function () {
+	it("Has no detectable a11y violations on load", function () {
 		// Test the page at initial load
 		cy.checkA11y();
 	});
 
-	xit("Has no detectable a11y violations on load (filtering to only include critical impact violations)", function () {
+	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", function () {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
 			includedImpacts: ["critical"],
 		});
 	});
 
-	xit("Logs violations to the terminal", function () {
+	it("Logs violations to the terminal", function () {
 		cy.checkA11y(null, null, terminalLog);
 	});
 
@@ -2029,7 +2029,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			"#teacher-training-adviser-steps-overseas-country-country-id-field"
 		).select("Austria");
 		cy.clickOnContinueButton();
-		cy.contains("Contact telephone number *").type("0125234490");
+		cy.contains("Contact telephone number").type("0125234490");
 		/*cy.get(
 			"#teacher_training_adviser_steps_overseas_timezone_time_zone"
 		).select("");*/
@@ -2123,7 +2123,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.whenDoYouWantToStartYourTeacherTraining("Equivalent-2021");
 		cy.typeDateOfBirth("22", "08", "2000", true);
 		cy.whereDoYouLive("Austria", false, true);
-		cy.contains("Contact telephone number *").type("0125234490");
+		cy.contains("Contact telephone number").type("0125234490");
 		cy.clickOnContinueButton();
 		cy.clickOnContinueButton();
 		cy.get(".govuk-heading-l")
