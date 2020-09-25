@@ -248,6 +248,8 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		var eventDate;
 		var eventTime;
 		homePage.getFindEventLink().click();
+		cy.get("#events_search_month").select("October 2020");
+		cy.get(".request-button").click();
 		cy.get(".event-resultbox__header")
 			.as("1steventName")
 			.should("exist")
@@ -281,19 +283,19 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	});
 
 	// Basic usage
-	xit("Has no detectable a11y violations on load", () => {
+	it("Has no detectable a11y violations on load", () => {
 		// Test the page at initial load
 		cy.checkA11y();
 	});
 
-	xit("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
+	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
 			includedImpacts: ["critical"],
 		});
 	});
 
-	xit("Logs violations to the terminal", () => {
+	it("Logs violations to the terminal", () => {
 		cy.checkA11y(null, null, terminalLog);
 	});
 });

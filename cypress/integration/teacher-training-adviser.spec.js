@@ -19,12 +19,13 @@ function terminalLog(violations) {
 	cy.task("table", violationData);
 }
 
-describe("Get-into-teaching - teachet training adviser flow", () => {
+describe("Get-into-teaching - teacher training adviser service", () => {
 	var returner;
 	var havePreviousTeacherReferenceNumber;
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
 	const mailingListSignUp = new MailingListSignUp();
 	beforeEach(function () {
+		//cy.viewport("samsung-s10");
 		cy.fixture("tta-signup-test-data.json").then((testData) => {
 			this.testData = testData;
 		});
@@ -2193,6 +2194,7 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(
 			"#teacher-training-adviser-steps-overseas-telephone-telephone-field"
 		).should("have.value", "01234567890");
+		cy.wait(100);
 		cy.clickOnBackButton();
 		cy.wait(100);
 		cy.clickOnBackButton();
@@ -2204,7 +2206,6 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 				cy.get(id).should("be.checked");
 			});
 		cy.clickOnBackButton();
-
 		cy.contains("Day")
 			.invoke("attr", "for")
 			.then(function (val) {
@@ -2532,7 +2533,10 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Check your answers before you continue");
-		cy.contains("Email").next().next().click();
+		//cy.contains("Email").next().next().click();
+		cy.get(
+			":nth-child(3) > :nth-child(1) > .govuk-summary-list__actions > .govuk-link"
+		).click();
 		teacherTrainingAdviser.getFirstName().should("have.value", "Sushant");
 		teacherTrainingAdviser.getLastName().should("have.value", "Kumar");
 		teacherTrainingAdviser
@@ -2919,7 +2923,6 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 			},
 		});
 		cy.clickOnStartNowButton();
-
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
@@ -2928,5 +2931,176 @@ describe("Get-into-teaching - teachet training adviser flow", () => {
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "You have already signed up to this service");
+	});
+
+	it("It prevents mailing list sign up if already signed up for TTA", function () {
+		let rnum = Math.floor(Math.random() * 1000 + 1);
+		let firstName = "First_" + rnum + "_name";
+		let lastName = "Last_" + rnum + "_name";
+		teacherTrainingAdviser.getFirstName().type(firstName);
+		teacherTrainingAdviser.getLastName().type(lastName);
+		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.returningToTeaching((returner = true));
+		cy.havePreviousTeacherReferenceNumber(
+			(havePreviousTeacherReferenceNumber = true)
+		);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Computing");
+		cy.selectSubjectLikeToTeach("Physics");
+		cy.enterDateOfBirth("25", "02", "1986", (returner = true));
+		cy.whereDoYouLive("UK");
+		cy.enterUKCandidateAddress(
+			"55",
+			"Hollinswood",
+			"Telford",
+			"TF3 2BT",
+			(returner = true)
+		);
+		cy.enterUKTelephoneNumber("012345678");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.contains("Name")
+			.next()
+			.contains(firstName + " " + lastName);
+		cy.contains("Date of birth").next().contains("25 02 1986");
+		cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
+		cy.contains("Email").next().contains(this.testData.email);
+		cy.contains("Telephone").next().contains("012345678");
+		cy.contains("Are you returning to teaching?").next().contains("Yes");
+		cy.contains("What is your previous teacher reference number?")
+			.next()
+			.contains("23478463");
+		cy.contains("Which main subject did you previously teach?")
+			.next()
+			.contains("Computing");
+		cy.contains(
+			"Which subject would you like to teach if you return to teaching?"
+		)
+			.next()
+			.contains("Physics");
+		cy.contains("Where do you live?").next().contains("UK");
+
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+		cy.visit("/mailinglist/signup/name", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		mailingListSignUp.getFirstName().type(firstName);
+		mailingListSignUp.getLastName().type(lastName);
+		mailingListSignUp.getEmailAddress().type(this.testData.email);
+		cy.get("#mailing-list-steps-name-degree-status-id-field").select(
+			"Final year"
+		);
+		mailingListSignUp.getNextStep().click();
+		cy.enterEmailVerificationCodeForMailinglist();
+		mailingListSignUp.getNextStep().click();
+		cy.get("h1")
+			.should("exist")
+			.should("have.text", "You have already signed up to an adviser");
+	});
+
+	it("Match back feature - It should allow user to sign up for teacher training adviser service if he already signed up for mailing list", function () {
+		let rnum = Math.floor(Math.random() * 1000 + 1);
+		let firstName = "First_" + rnum + "_name";
+		let lastName = "Last_" + rnum + "_name";
+		cy.visit("/mailinglist/signup/name", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		mailingListSignUp.getFirstName().type(firstName);
+		mailingListSignUp.getLastName().type(lastName);
+		mailingListSignUp.getEmailAddress().type(this.testData.email);
+		cy.get("#mailing-list-steps-name-degree-status-id-field").select(
+			"Final year"
+		);
+		mailingListSignUp.getNextStep().click();
+
+		mailingListSignUp
+			.getStage()
+			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getPhone().type(this.testInputData.phone);
+		cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field").click();
+		mailingListSignUp.getCompleteSignUpButton().click();
+		mailingListSignUp.getContent().should("have.text", "You've signed up");
+		cy.contains("Get an adviser").click();
+		cy.contains("Start now").click();
+		teacherTrainingAdviser.getFirstName().type(firstName);
+		teacherTrainingAdviser.getLastName().type(lastName);
+		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.enterEmailVerificationCodeForTeacherTrainingAdviser();
+		cy.clickOnContinueButton();
+		cy.returningToTeaching((returner = true));
+		cy.havePreviousTeacherReferenceNumber(
+			(havePreviousTeacherReferenceNumber = true)
+		);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Computing");
+		cy.selectSubjectLikeToTeach("Physics");
+		cy.enterDateOfBirth("25", "02", "1986", (returner = true));
+		cy.whereDoYouLive("UK");
+		cy.get(
+			"#teacher-training-adviser-steps-uk-address-address-postcode-field"
+		).should("have.value", "TF3 2BT");
+		cy.enterUKCandidateAddress(
+			"55",
+			"Hollinswood",
+			"Telford",
+			"TF3 2BT",
+			(returner = true)
+		);
+		cy.get(
+			"#teacher-training-adviser-steps-uk-telephone-telephone-field"
+		).should("have.value", this.testInputData.phone);
+		cy.clickOnContinueButton();
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.contains("Name")
+			.next()
+			.contains(firstName + " " + lastName);
+		cy.contains("Date of birth").next().contains("25 02 1986");
+		cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
+		cy.contains("Email").next().contains(this.testData.email);
+		cy.contains("Telephone").next().contains(this.testInputData.phone);
+		cy.contains("Are you returning to teaching?").next().contains("Yes");
+		cy.contains("What is your previous teacher reference number?")
+			.next()
+			.contains("23478463");
+		cy.contains("Which main subject did you previously teach?")
+			.next()
+			.contains("Computing");
+		cy.contains(
+			"Which subject would you like to teach if you return to teaching?"
+		)
+			.next()
+			.contains("Physics");
+		cy.contains("Where do you live?").next().contains("UK");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
 	});
 });

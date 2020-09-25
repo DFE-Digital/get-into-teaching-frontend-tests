@@ -4,6 +4,7 @@ describe("Get-into-teaching - Mailinglist registration flow", () => {
 	const mailingListSignUp = new MailingListSignUp();
 
 	beforeEach(function () {
+		//cy.viewport("iphone-5");
 		cy.fixture("mailinglist-signup-test-data.json").then((testInputData) => {
 			this.testInputData = testInputData;
 		});
@@ -215,9 +216,7 @@ describe("Get-into-teaching - Mailinglist registration flow", () => {
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select(
 			"Final year"
 		);
-
 		mailingListSignUp.getNextStep().click();
-
 		mailingListSignUp
 			.getStage()
 			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
@@ -241,11 +240,9 @@ describe("Get-into-teaching - Mailinglist registration flow", () => {
 		mailingListSignUp.getFirstName().type(firstName);
 		mailingListSignUp.getLastName().type(lastName);
 		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
-
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select(
 			"Final year"
 		);
-
 		mailingListSignUp.getNextStep().click();
 		cy.get(
 			"#mailing-list-steps-authenticate-timed-one-time-password-field"

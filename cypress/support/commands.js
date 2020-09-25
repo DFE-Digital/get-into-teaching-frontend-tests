@@ -286,9 +286,9 @@ Cypress.Commands.add("enterUKTelephoneNumber", (number, equivalent) => {
 			"0125234490"
 		);
 	} else {
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
-			number
-		);
+		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field")
+			.clear()
+			.type(number);
 	}
 	cy.clickOnContinueButton();
 });
@@ -603,9 +603,9 @@ Cypress.Commands.add(
 		cy.get(
 			"#teacher-training-adviser-steps-uk-address-address-city-field"
 		).type(city);
-		cy.get(
-			"#teacher-training-adviser-steps-uk-address-address-postcode-field"
-		).type(postcode);
+		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field")
+			.clear()
+			.type(postcode);
 		cy.clickOnContinueButton();
 	}
 );
@@ -724,7 +724,8 @@ Cypress.Commands.add("verifyEmailAddressError", () => {
 });
 
 Cypress.Commands.add("clickOnBackButton", () => {
-	cy.get(".govuk-back-link").click();
+	//cy.get(".govuk-back-link").click();
+	cy.contains("Back").click();
 });
 
 Cypress.Commands.add("areYouPlanningToRetakeYourScienceGCSE", (planning) => {
@@ -737,7 +738,7 @@ Cypress.Commands.add("areYouPlanningToRetakeYourScienceGCSE", (planning) => {
 });
 
 Cypress.Commands.add("verifyYourEmailAddress", () => {
-	cy.wait(2000);
+	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -785,5 +786,36 @@ Cypress.Commands.add(
 			).click();
 			cy.contains("Complete sign up").click();
 		}
+	}
+);
+
+Cypress.Commands.add(
+	"enterEmailVerificationCodeForTeacherTrainingAdviser",
+	() => {
+		cy.wait(5000);
+		let newURL;
+		var latestEmailID;
+		var code;
+		cy.request(
+			"https://mailsac.com/api/addresses/testuser@mailsac.com/messages?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
+		).as("topMostEmail");
+		cy.get("@topMostEmail").then((response) => {
+			latestEmailID = response.body[0]._id;
+			cy.log("latestEmailID = " + latestEmailID);
+			newURL =
+				"https://mailsac.com/api/text/testuser@mailsac.com/" +
+				latestEmailID +
+				"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
+			cy.request(newURL).as("verificationCode");
+			cy.get("@verificationCode").then((response) => {
+				var startpos = response.body.search("is");
+				code = response.body.toString().substr(startpos + 2, 7);
+				cy.get(
+					"#teacher-training-adviser-steps-authenticate-timed-one-time-password-field"
+				)
+					.as("getOTPField")
+					.type(code);
+			});
+		});
 	}
 );
