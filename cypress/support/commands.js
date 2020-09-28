@@ -1,5 +1,5 @@
 Cypress.Commands.add("logintoApp", () => {
-	cy.visit(Cypress.env("baseUrl"), {
+	cy.visit("/", {
 		auth: {
 			username: Cypress.env("HTTPAUTH_USERNAME"),
 			password: Cypress.env("HTTPAUTH_PASSWORD"),
