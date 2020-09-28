@@ -2933,7 +2933,7 @@ describe("Get-into-teaching - teacher training adviser service", () => {
 			.should("have.text", "You have already signed up to this service");
 	});
 
-	xit("It prevents mailing list sign up if user already signed up for a teacher training adviser service", function () {
+	it.skip("It prevents mailing list sign up if user already signed up for a teacher training adviser service", function () {
 		let rnum = Math.floor(Math.random() * 1000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
@@ -3009,7 +3009,7 @@ describe("Get-into-teaching - teacher training adviser service", () => {
 			.should("have.text", "You have already signed up to an adviser");
 	});
 
-	xit("Match back feature - It should allow user to sign up for teacher training adviser service if he already signed up for mailing list", function () {
+	it.skip("Match back feature - It should allow user to sign up for teacher training adviser service if he already signed up for mailing list", function () {
 		let rnum = Math.floor(Math.random() * 1000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
