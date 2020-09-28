@@ -2956,7 +2956,7 @@ describe("Matchback feature", () => {
 		firstName = "First_" + rnum + "_name";
 		lastName = "Last_" + rnum + "_name";
 		let name = firstName + ":" + lastName;
-		cy.writeFile("cypress/fixtures/users_name.txt", name);
+		cy.writeFile("cypress/fixtures/user.txt", name);
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
@@ -3019,7 +3019,7 @@ describe("Matchback feature", () => {
 	});
 
 	it("It prevents mailing list sign up if user already signed up for a teacher training adviser service", function () {
-		cy.readFile("cypress/fixtures/users_name.txt").then((value) => {
+		cy.readFile("cypress/fixtures/user.txt").then((value) => {
 			let name = value;
 			firstName = name.split(":")[0];
 			lastName = name.split(":")[1];
@@ -3050,7 +3050,7 @@ describe("Matchback feature", () => {
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
 		let name = firstName + ":" + lastName;
-		cy.writeFile("cypress/fixtures/users_name.txt", name);
+		cy.writeFile("cypress/fixtures/user.txt", name);
 		cy.visit("/mailinglist/signup/name", {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
@@ -3083,7 +3083,7 @@ describe("Matchback feature", () => {
 	});
 
 	it("It should allow user to sign up for teacher training adviser service if he already signed up for mailing list", function () {
-		cy.readFile("cypress/fixtures/users_name.txt").then((value) => {
+		cy.readFile("cypress/fixtures/user.txt").then((value) => {
 			let name = value;
 			firstName = name.split(":")[0];
 			lastName = name.split(":")[1];
