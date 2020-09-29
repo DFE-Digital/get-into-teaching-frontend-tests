@@ -21,7 +21,7 @@ class EventSignupPage {
 		return cy.contains("Next Step");
 	}
 	getBackButton() {
-		return cy.get(".govuk-back-link");
+		return cy.contains("Back");
 	}
 	getPhoneNumber() {
 		return cy.get("#events-steps-contact-details-telephone-field");
