@@ -53,7 +53,7 @@ Cypress.Commands.add("shouldHavePageNavigation", () => {
 });
 
 Cypress.Commands.add("enterEmailVerificationCode", () => {
-	cy.wait(2000);
+	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -774,7 +774,7 @@ Cypress.Commands.add("acceptAllCookies", () => {
 });
 
 Cypress.Commands.add(
-	"wouldYouLikeToReceivePersonalisedInformation",
+	"wouldYouLikeToReceiveEmailUpdate",
 	(personalisedInformation) => {
 		if (personalisedInformation == "Yes") {
 			cy.get(

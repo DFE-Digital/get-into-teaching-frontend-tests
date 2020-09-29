@@ -1,7 +1,7 @@
 import Homepage from "../support/pageobjects/Homepage";
 import EventSignupPage from "../support/pageobjects/EventSignupPage";
 
-xdescribe("Get-into-teaching - Event sign up flow", () => {
+describe("Get-into-teaching - Event sign up flow", () => {
 	const searchForEvent = new Homepage();
 	const eventSignup = new EventSignupPage();
 	beforeEach(function () {
@@ -29,96 +29,20 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
 		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
 		searchForEvent.getUpdateResultsButton().click();
-		eventSignup.getSearchedEventName().then(function (eventName) {
-			cy.contains(eventName.text().trim()).click();
-			eventSignup.getSignupForThisEventButton().click();
-			eventSignup
-				.getEventNameHeader()
-				.should("have.text", eventName.text().trim());
-			signedUpeventName = eventName.text().trim();
-		});
+		eventSignup
+			.getSearchedEventName()
+			.eq(0)
+			.then(function (eventName) {
+				cy.contains(eventName.text().trim()).click();
+				eventSignup.getSignupForThisEventButton().click();
+				eventSignup
+					.getEventNameHeader()
+					.should("have.text", eventName.text().trim());
+				signedUpeventName = eventName.text().trim();
+			});
 	});
 
-	it("It shows the Sign up complete message - for new candidate who doesn't like to receive personalised information", function () {
-		let signedUpeventName;
-		searchForEvent.getEventsType().select(this.testData.eventsType);
-		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
-		searchForEvent.getUpdateResultsButton().click();
-		eventSignup.getSearchedEventName().then(function (eventName) {
-			eventSignup.getSearchedEventName().click();
-			eventSignup.getSignupForThisEventButton().click();
-			eventSignup
-				.getEventNameHeader()
-				.should("have.text", eventName.text().trim());
-			signedUpeventName = eventName.text().trim();
-
-			eventSignup.getFirstName().type(this.testData.firstName);
-			eventSignup.getLastName().type(this.testData.lastName);
-			let rnum = Math.floor(Math.random() * 1000000 + 1);
-			let email = "testuser" + rnum.toString() + "@gmail.co.uk";
-			eventSignup.getEmail().type(email);
-			eventSignup.getNextStep().click();
-			eventSignup.getBackButton().should("exist").should("have.text", "Back");
-			eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
-			eventSignup.getNextStep().click();
-			eventSignup.getPrivacyPolicy().click();
-			cy.wouldYouLikeToReceivePersonalisedInformation("No");
-			/*eventSignup.getFutureEventInfo().click();			
-			eventSignup.getPostcode().type(this.testData.postcode);
-			eventSignup.getCompleteSignup().click();*/
-			eventSignup
-				.getSignupCompleteMessage()
-				.should("have.text", "Sign up complete");
-			eventSignup.getSignupEventName().should("have.text", signedUpeventName);
-		});
-	});
-
-	it("It shows the Sign up complete message - for new candidate who like to receive personalised information", function () {
-		//Would  LikeTo Receive Personalised Information
-		let signedUpeventName;
-		searchForEvent.getEventsType().select(this.testData.eventsType);
-		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
-		searchForEvent.getUpdateResultsButton().click();
-		eventSignup.getSearchedEventName().then(function (eventName) {
-			eventSignup.getSearchedEventName().click();
-			eventSignup.getSignupForThisEventButton().click();
-			eventSignup
-				.getEventNameHeader()
-				.should("have.text", eventName.text().trim());
-			signedUpeventName = eventName.text().trim();
-
-			eventSignup.getFirstName().type(this.testData.firstName);
-			eventSignup.getLastName().type(this.testData.lastName);
-			let rnum = Math.floor(Math.random() * 1000000 + 1);
-			let email = "testuser" + rnum.toString() + "@gmail.co.uk";
-			eventSignup.getEmail().type(email);
-			eventSignup.getNextStep().click();
-			eventSignup.getBackButton().should("exist").should("have.text", "Back");
-			eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
-			eventSignup.getNextStep().click();
-			eventSignup.getPrivacyPolicy().click();
-			cy.wouldYouLikeToReceivePersonalisedInformation("Yes");
-			eventSignup.getNextStep().click();
-			cy.get(
-				"#events-steps-personalised-updates-degree-status-id-field"
-			).select("Final year");
-			cy.get(
-				"#events-steps-personalised-updates-consideration-journey-stage-id-field"
-			).select("I’m fairly sure and exploring my options");
-			cy.get(
-				"#events-steps-personalised-updates-preferred-teaching-subject-id-field"
-			).select("English");
-			eventSignup.getCompleteSignup().click();
-			eventSignup
-				.getSignupCompleteMessage()
-				.should("have.text", "Sign up complete");
-			eventSignup.getSignupEventName().should("have.text", signedUpeventName);
-		});
-	});
-
-	it.only("It shows the Sign up complete message - for existing candidate who like to receive personalised information", function () {
+	it("It shows the Sign up complete message - for new candidate who doesn't like to receive email updates", function () {
 		let signedUpeventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
@@ -126,9 +50,9 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
-			.first()
+			.eq(0)
 			.then(function (eventName) {
-				cy.contains(eventName.text().trim()).click();
+				eventSignup.getSearchedEventName().eq(0).click();
 				eventSignup.getSignupForThisEventButton().click();
 				eventSignup
 					.getEventNameHeader()
@@ -137,22 +61,54 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 
 				eventSignup.getFirstName().type(this.testData.firstName);
 				eventSignup.getLastName().type(this.testData.lastName);
-				eventSignup.getEmail().type(this.testData.email);
-				eventSignup.getNextStep().click();
-				cy.enterEmailVerificationCode();
+				let rnum = Math.floor(Math.random() * 1000000 + 1);
+				let email = "testuser" + rnum.toString() + "@gmail.co.uk";
+				eventSignup.getEmail().type(email);
 				eventSignup.getNextStep().click();
 				eventSignup.getBackButton().should("exist").should("have.text", "Back");
-				cy.log(this.testData.phoneNumber);
-				eventSignup.getPhoneNumber().clear();
 				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 				eventSignup.getNextStep().click();
 				eventSignup.getPrivacyPolicy().click();
-				/*eventSignup
-					.getWouldYouLikeToReceiveInformationAboutFutureEventsInYourArea("Yes")
-					.click();*/
-				cy.wouldYouLikeToReceivePersonalisedInformation("Yes");
-				//eventSignup.getPostcode().clear();
-				//eventSignup.getPostcode().type(this.testData.postcode);
+				cy.wouldYouLikeToReceiveEmailUpdate("No");
+				/*eventSignup.getFutureEventInfo().click();			
+			eventSignup.getPostcode().type(this.testData.postcode);
+			eventSignup.getCompleteSignup().click();*/
+				eventSignup
+					.getSignupCompleteMessage()
+					.should("have.text", "Sign up complete");
+				eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+			});
+	});
+
+	it("It shows the Sign up complete message - for new candidate who like to receive email updates", function () {
+		// like to receive email updates
+		let signedUpeventName;
+		searchForEvent.getEventsType().select(this.testData.eventsType);
+		searchForEvent.getEventLocation().select(this.testData.eventLocation);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getUpdateResultsButton().click();
+		eventSignup
+			.getSearchedEventName()
+			.eq(0)
+			.then(function (eventName) {
+				eventSignup.getSearchedEventName().eq(0).click();
+				eventSignup.getSignupForThisEventButton().click();
+				eventSignup
+					.getEventNameHeader()
+					.should("have.text", eventName.text().trim());
+				signedUpeventName = eventName.text().trim();
+
+				eventSignup.getFirstName().type(this.testData.firstName);
+				eventSignup.getLastName().type(this.testData.lastName);
+				let rnum = Math.floor(Math.random() * 1000000 + 1);
+				let email = "testuser" + rnum.toString() + "@gmail.co.uk";
+				eventSignup.getEmail().type(email);
+				eventSignup.getNextStep().click();
+				eventSignup.getBackButton().should("exist").should("have.text", "Back");
+				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+				eventSignup.getNextStep().click();
+				eventSignup.getPrivacyPolicy().click();
+				cy.wouldYouLikeToReceiveEmailUpdate("Yes");
 				eventSignup.getNextStep().click();
 				cy.get(
 					"#events-steps-personalised-updates-degree-status-id-field"
@@ -171,8 +127,57 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 			});
 	});
 
-	it("It shows the Sign up complete message - for existing candidate who doesn't like to receive personalised information", function () {
+	it("It shows the Sign up complete message - for existing candidate", function () {
 		let signedUpeventName;
+		let rnum = Math.floor(Math.random() * 1000000 + 1);
+		let firstName = "User_" + rnum + "_firstname";
+		let lastName = "User_" + rnum + "_lastname";
+		searchForEvent.getEventsType().select(this.testData.eventsType);
+		searchForEvent.getEventLocation().select(this.testData.eventLocation);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getUpdateResultsButton().click();
+		eventSignup
+			.getSearchedEventName()
+			.eq(0)
+			.then(function (eventName) {
+				eventSignup.getSearchedEventName().eq(0).click();
+				eventSignup.getSignupForThisEventButton().click();
+				eventSignup
+					.getEventNameHeader()
+					.should("have.text", eventName.text().trim());
+				signedUpeventName = eventName.text().trim();
+				eventSignup.getFirstName().type(firstName);
+				eventSignup.getLastName().type(lastName);
+				eventSignup.getEmail().type(this.testData.email);
+				eventSignup.getNextStep().click();
+				eventSignup.getBackButton().should("exist").should("have.text", "Back");
+				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+				eventSignup.getNextStep().click();
+				eventSignup.getPrivacyPolicy().click();
+				cy.wouldYouLikeToReceiveEmailUpdate("Yes");
+				eventSignup.getNextStep().click();
+				cy.get(
+					"#events-steps-personalised-updates-degree-status-id-field"
+				).select("Final year");
+				cy.get(
+					"#events-steps-personalised-updates-consideration-journey-stage-id-field"
+				).select("I’m fairly sure and exploring my options");
+				cy.get(
+					"#events-steps-personalised-updates-preferred-teaching-subject-id-field"
+				).select("English");
+				eventSignup.getCompleteSignup().click();
+				eventSignup
+					.getSignupCompleteMessage()
+					.should("have.text", "Sign up complete");
+				eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+				eventSignup
+					.getSignupEventName()
+					.next()
+					.next()
+					.should("have.text", "You've also signed up for email updates");
+			});
+
+		cy.contains("Find an event near you").click();
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
 		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
@@ -187,9 +192,8 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 					.getEventNameHeader()
 					.should("have.text", eventName.text().trim());
 				signedUpeventName = eventName.text().trim();
-
-				eventSignup.getFirstName().type(this.testData.firstName);
-				eventSignup.getLastName().type(this.testData.lastName);
+				eventSignup.getFirstName().type(firstName);
+				eventSignup.getLastName().type(lastName);
 				eventSignup.getEmail().type(this.testData.email);
 				eventSignup.getNextStep().click();
 				cy.enterEmailVerificationCode();
@@ -200,10 +204,7 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 				eventSignup.getNextStep().click();
 				eventSignup.getPrivacyPolicy().click();
-				/*eventSignup
-					.getWouldYouLikeToReceiveInformationAboutFutureEventsInYourArea("Yes")
-					.click();*/
-				cy.wouldYouLikeToReceivePersonalisedInformation("No");
+				eventSignup.getCompleteSignup().click();
 				eventSignup
 					.getSignupCompleteMessage()
 					.should("have.text", "Sign up complete");
@@ -212,7 +213,56 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 	});
 
 	it('It sends the another email evrification code if user clicks on "resend verification" link', function () {
-		let signedupEventName;
+		let signedUpeventName;
+		let rnum = Math.floor(Math.random() * 1000000 + 1);
+		let firstName = "User_" + rnum + "_firstname";
+		let lastName = "User_" + rnum + "_lastname";
+		searchForEvent.getEventsType().select(this.testData.eventsType);
+		searchForEvent.getEventLocation().select(this.testData.eventLocation);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getUpdateResultsButton().click();
+		eventSignup
+			.getSearchedEventName()
+			.first()
+			.then(function (eventName) {
+				eventSignup.getSearchedEventName().first().click();
+				eventSignup.getSignupForThisEventButton().click();
+				eventSignup
+					.getEventNameHeader()
+					.should("have.text", eventName.text().trim());
+				signedUpeventName = eventName.text().trim();
+				eventSignup.getFirstName().type(firstName);
+				eventSignup.getLastName().type(lastName);
+				eventSignup.getEmail().type(this.testData.email);
+				eventSignup.getNextStep().click();
+				eventSignup.getBackButton().should("exist").should("have.text", "Back");
+				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+				eventSignup.getNextStep().click();
+				eventSignup.getPrivacyPolicy().click();
+				cy.wouldYouLikeToReceiveEmailUpdate("Yes");
+				eventSignup.getNextStep().click();
+				cy.get(
+					"#events-steps-personalised-updates-degree-status-id-field"
+				).select("Final year");
+				cy.get(
+					"#events-steps-personalised-updates-consideration-journey-stage-id-field"
+				).select("I’m fairly sure and exploring my options");
+				cy.get(
+					"#events-steps-personalised-updates-preferred-teaching-subject-id-field"
+				).select("English");
+				eventSignup.getCompleteSignup().click();
+				eventSignup
+					.getSignupCompleteMessage()
+					.should("have.text", "Sign up complete");
+				eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+				eventSignup
+					.getSignupEventName()
+					.next()
+					.next()
+					.should("have.text", "You've also signed up for email updates");
+			});
+
+		cy.contains("Find an event near you").click();
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
 		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
@@ -226,9 +276,9 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 				eventSignup
 					.getEventNameHeader()
 					.should("have.text", eventName.text().trim());
-				signedupEventName = eventName.text().trim();
-				eventSignup.getFirstName().type(this.testData.firstName);
-				eventSignup.getLastName().type(this.testData.lastName);
+				signedUpeventName = eventName.text().trim();
+				eventSignup.getFirstName().type(firstName);
+				eventSignup.getLastName().type(lastName);
 				eventSignup.getEmail().type(this.testData.email);
 				eventSignup.getNextStep().click();
 				cy.enterVerificationCode("123456");
@@ -246,27 +296,66 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 				eventSignup.getNextStep().click();
 				eventSignup.getPrivacyPolicy().click();
-				eventSignup
-					.getWouldYouLikeToReceiveInformationAboutFutureEventsInYourArea("Yes")
-					.click();
-				eventSignup
-					.getWouldYouLikeToReceivePersonalisedInformationToHelpYouGetIntoTeaching(
-						"Yes"
-					)
-					.click();
-				eventSignup.getPostcode().clear();
-				eventSignup.getPostcode().type(this.testData.postcode);
 				eventSignup.getCompleteSignup().click();
 				eventSignup
 					.getSignupCompleteMessage()
 					.should("have.text", "Sign up complete");
-				eventSignup.getSignupEventName().should("have.text", signedupEventName);
+				eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 			});
 	});
 
 	it("It shows error message if user enters wrong email verification code", function () {
-		let signedupEventName;
+		let signedUpeventName;
 		let error = false;
+		let rnum = Math.floor(Math.random() * 1000000 + 1);
+		let firstName = "User_" + rnum + "_firstname";
+		let lastName = "User_" + rnum + "_lastname";
+		searchForEvent.getEventsType().select(this.testData.eventsType);
+		searchForEvent.getEventLocation().select(this.testData.eventLocation);
+		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getUpdateResultsButton().click();
+		eventSignup
+			.getSearchedEventName()
+			.first()
+			.then(function (eventName) {
+				eventSignup.getSearchedEventName().first().click();
+				eventSignup.getSignupForThisEventButton().click();
+				eventSignup
+					.getEventNameHeader()
+					.should("have.text", eventName.text().trim());
+				signedUpeventName = eventName.text().trim();
+				eventSignup.getFirstName().type(firstName);
+				eventSignup.getLastName().type(lastName);
+				eventSignup.getEmail().type(this.testData.email);
+				eventSignup.getNextStep().click();
+				eventSignup.getBackButton().should("exist").should("have.text", "Back");
+				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+				eventSignup.getNextStep().click();
+				eventSignup.getPrivacyPolicy().click();
+				cy.wouldYouLikeToReceiveEmailUpdate("Yes");
+				eventSignup.getNextStep().click();
+				cy.get(
+					"#events-steps-personalised-updates-degree-status-id-field"
+				).select("Final year");
+				cy.get(
+					"#events-steps-personalised-updates-consideration-journey-stage-id-field"
+				).select("I’m fairly sure and exploring my options");
+				cy.get(
+					"#events-steps-personalised-updates-preferred-teaching-subject-id-field"
+				).select("English");
+				eventSignup.getCompleteSignup().click();
+				eventSignup
+					.getSignupCompleteMessage()
+					.should("have.text", "Sign up complete");
+				eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+				eventSignup
+					.getSignupEventName()
+					.next()
+					.next()
+					.should("have.text", "You've also signed up for email updates");
+			});
+
+		cy.contains("Find an event near you").click();
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
 		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
@@ -280,11 +369,12 @@ xdescribe("Get-into-teaching - Event sign up flow", () => {
 				eventSignup
 					.getEventNameHeader()
 					.should("have.text", eventName.text().trim());
-				signedupEventName = eventName.text().trim();
-				eventSignup.getFirstName().type(this.testData.firstName);
-				eventSignup.getLastName().type(this.testData.lastName);
+				signedUpeventName = eventName.text().trim();
+				eventSignup.getFirstName().type(firstName);
+				eventSignup.getLastName().type(lastName);
 				eventSignup.getEmail().type(this.testData.email);
 				eventSignup.getNextStep().click();
+
 				cy.enterVerificationCode("12345", (error = false));
 				eventSignup.getNextStep().click();
 				eventSignup
