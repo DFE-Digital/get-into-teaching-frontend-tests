@@ -33,7 +33,7 @@ If you want to run the tests visually, whilst only focusing on a single test pac
 npm run test -- --headed --spec './cypress/integration/homepage-smoke.spec.js'
 ```
 
-To target your test run at a specific browser, use the --browser variable instead of the --headed variable (using a browser impli). A list of browsers supported by Cypress can be fund [here](https://docs.cypress.io/guides/guides/launching-browsers.html#Browsers)
+To target your test run at a specific browser, use the --browser variable instead of the --headed variable (using a browser implies this will be run with a header so no need to also include the --headed). A list of browsers supported by Cypress can be fund [here](https://docs.cypress.io/guides/guides/launching-browsers.html#Browsers)
 ```bash
 npm run test --  --browser chrome --spec './cypress/integration/homepage-smoke.spec.js'
 ```
