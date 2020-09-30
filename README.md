@@ -1,72 +1,53 @@
 # DfE - Get Into Teaching Automated Cypress Tests
+Front End automation collection using [Cypress](https://www.cypress.io/). This will be used for live journey checks and a regression and also features a smoke pack.
 
-Front End automation collection using Cypress.io. This will be used for live journey checks and a regression and smoke pack.
-
-## Automated Test Schedule
-We have 2 environments which we want to execute the tests on, Development and QA. Using GitHub actions we have set up the following test runs:
-
-- Development Active ( Master Branch) (cypress.json). Ran automatically at 23:00 UTC 
-- Development Passive ( Passive_test branch ) (cypress.json) Ran automatically at 23:00 UTC 
-- QA Passive ( Passive_test branch) ( cypress-qa.json ) Ran automatically at 22:00 UTC
-
-It is possible to run these actions manually at any time.
-
-
-## Running locally
-
-## Environment Variables
-The following Environment variables need to be set:
-
--- CYPRESS_HTTPAUTH_USERNAME
--- CYPRESS_HTTPAUTH_PASSWORD
-
-### Install System dependencies
-
-System dependencies required to run the tests locally
-
-- [Node.js](https://nodejs.org/en/download/package-manager/#windows) - JavaScript runtime environment.
-
-
-### Install project dependencies
-
-Once you've aquired the system dependencies, you can now install the project depnendencies.
-
-```bash
-npm install
-npm install -D cypress-axe
+## Setup
+- Install the latest version of [node](https://nodejs.org/en/)
+- Run the following comands from the terminal 
+```bash 
+    npm install
+    npm install -D cypress-axe
+```
+- In the `cypress.json` file edit the `env` section and replace the redacted credentials with real ones, you will need to get these from another dev or team member
+```
+"env": {
+	"baseurl_tta_flow": "https://get-teacher-training-adviser-service-test.london.cloudapps.digital/",
+	"HTTPAUTH_USERNAME": "g*************g",
+    "HTTPAUTH_PASSWORD": "u*******s"
+}
 ```
 
-### Run the tests via CLI
-
-### Invoke all tests in Electron (default) browser headlessly
-
+## Running
+The commands are built into the test command within the `package.json.`  By default the tests will run in a headerless browser and output results to the terminal.  The tests take a significant chunk of time to execute so it is best to not run them in batch in this way. To do so, use the following command.
 ```bash
 npm test
 ```
 
-### Invoke all tests in Electron browser in headed mode
-
+To target a single 'pack' of tests, and execute them in headerless mode as above, pass the --spec variable along with the test pack filename. The test packs are located at 'cypress/integration/' this is the command to run the `homepage-smoke.spec.js`
 ```bash
-npm run test -- --headed
+npm run test -- --spec './cypress/integration/homepage-smoke.spec.js'
 ```
 
-### Invoke all tests in specific browser in headed mode
-
+If you want to run the tests visually, whilst only focusing on a single test pack (this would be the recommended workflow) then add the --headed varaible too, and run the following command
 ```bash
-npm run test -- --browser browser_name (Ex. npm run test -- --browser chrome)
+npm run test -- --headed --spec './cypress/integration/homepage-smoke.spec.js'
 ```
 
-### Invoke all tests in specific browser headlessly
-
+To target your test run at a specific browser, use the --browser variable instead of the --headed variable (using a browser impli). A list of browsers supported by Cypress can be fund [here](https://docs.cypress.io/guides/guides/launching-browsers.html#Browsers)
 ```bash
-npm run test -- --headless --browser browser_name (Ex. npm run test -- --headless --browser chrome)
+npm run test --  --browser chrome --spec './cypress/integration/homepage-smoke.spec.js'
 ```
 
-### Run the specific spec file
+## Automated Test Schedule
+We have 2 environments which we want to execute the tests on, Development and QA. Using GitHub actions we have set up the following scheduled test runs:
 
-```bash
-npm run test -- --spec 'cypress/integration/spec_file_name.js
-```
+| Environment         | Git Branch   | Scheduled Run Time |
+| ------------------- | ------------ | ------------------ |
+| Development Active  | master       | 23:00 UTC          |
+| Development Passive | passive_test | 23:00 UTC          |
+| QA Passive          | passive_test | 22:00 UTC          |
+
+It is possible to run these actions manually at any time using [GitHub actions](https://github.com/DFE-Digital/get-into-teaching-frontend-tests/actions)
 
 # Docker
 ## Building on Docker
