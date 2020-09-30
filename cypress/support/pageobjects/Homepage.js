@@ -63,7 +63,7 @@ class HomePage {
 	}
 
 	getFindEventLink() {
-		return cy.get("div.find-an-event__right p:nth-child(3) > a.git-link");
+		return cy.get(".featured-content__item-wide__link");
 	}
 
 	getCheckYourQualificationsLink() {

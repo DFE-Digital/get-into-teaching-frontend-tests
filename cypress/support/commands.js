@@ -111,7 +111,7 @@ Cypress.Commands.add("acceptCookie", () => {
 Cypress.Commands.add(
 	"enterFirstNameLastNameandEmail",
 	(firstName, lastName, email) => {
-		let rnum = Math.floor(Math.random() * 100000000 + 1);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		firstName = "First_" + rnum + "_name";
 		lastName = "Last_" + rnum + "_name";
 		cy.get("#teacher-training-adviser-steps-identity-first-name-field").type(

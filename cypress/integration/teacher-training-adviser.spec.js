@@ -2197,7 +2197,7 @@ describe("Get-into-teaching - teacher training adviser service", () => {
 		cy.clickOnBackButton();
 		cy.wait(100);
 		cy.clickOnBackButton();
-		cy.wait(100);
+		cy.wait(500);
 		cy.contains("Overseas")
 			.invoke("attr", "for")
 			.then(function (val) {
