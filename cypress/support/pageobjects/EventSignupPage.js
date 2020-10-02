@@ -1,6 +1,6 @@
 class EventSignupPage {
 	getSignupForThisEventButton() {
-		return cy.get(".content__left > .call-to-action-button");
+		return cy.get(".content__right > .call-to-action-button");
 	}
 	getEventNameHeader() {
 		return cy.get(".content__left > h2");
@@ -40,20 +40,6 @@ class EventSignupPage {
 		}
 	}
 
-	getWouldYouLikeToReceivePersonalisedInformationToHelpYouGetIntoTeaching(
-		personalisedInformation
-	) {
-		if (personalisedInformation == "Yes") {
-			return cy.get(
-				"#events-steps-further-details-subscribe-to-mailing-list-true-field"
-			);
-			cy.contains("Next step").click();
-		} else {
-			return cy.get(
-				"#events-steps-further-details-subscribe-to-mailing-list-field"
-			);
-		}
-	}
 	getFutureEventInfo() {
 		return cy.get("#events-steps-further-details-future-events-true-field");
 	}
