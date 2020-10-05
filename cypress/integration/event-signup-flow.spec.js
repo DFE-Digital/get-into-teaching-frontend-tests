@@ -55,9 +55,9 @@ describe(
 			searchForEvent.getUpdateResultsButton().click();
 			eventSignup
 				.getSearchedEventName()
-				.eq(0)
+				.first()
 				.then(function (eventName) {
-					eventSignup.getSearchedEventName().eq(0).click();
+					eventSignup.getSearchedEventName().first().click();
 					eventSignup.getSignupForThisEventButton().click();
 					eventSignup
 						.getEventNameHeader()
