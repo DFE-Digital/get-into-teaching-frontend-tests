@@ -2138,7 +2138,7 @@ describe("Get-into-teaching - teacher training adviser service", () => {
 	});
 
 	it("It should retain the candidate details if he navigates back  ", function () {
-		let rnum = Math.floor(Math.random() * 10000 + 1);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
 		teacherTrainingAdviser.getFirstName().type(firstName);
@@ -2317,7 +2317,7 @@ describe("Get-into-teaching - teacher training adviser service", () => {
 			.next()
 			.should("have.text", "You need to enter your email address");
 
-		let rnum = Math.floor(Math.random() * 10000 + 1);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
 		cy.get(
@@ -2860,7 +2860,7 @@ describe("Get-into-teaching - teacher training adviser service", () => {
 	});
 
 	it('It shows " You have already signed up to this service" message to previously signed up user', function () {
-		let rnum = Math.floor(Math.random() * 100 + 1);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
 		teacherTrainingAdviser.getFirstName().type(firstName);
@@ -2952,7 +2952,7 @@ describe("Matchback feature", () => {
 	});
 
 	it('It shows "Thank you  Sign up complete" ', function () {
-		let rnum = Math.floor(Math.random() * 100000 + 1);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		firstName = "First_" + rnum + "_name";
 		lastName = "Last_" + rnum + "_name";
 		let name = firstName + ":" + lastName;
@@ -3046,7 +3046,7 @@ describe("Matchback feature", () => {
 	});
 
 	it('It shows "You’ve signed up" ', function () {
-		let rnum = Math.floor(Math.random() * 1000 + 1);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
 		let name = firstName + ":" + lastName;

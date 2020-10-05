@@ -283,10 +283,10 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 	});
 
 	// Basic usage
-	it.skip("Has no detectable a11y violations on load", () => {
+	/*it.skip("Has no detectable a11y violations on load", () => {
 		// Test the page at initial load
 		cy.checkA11y();
-	});
+	});*/
 
 	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 		// Test on initial load, only report and assert for critical impact items
@@ -295,7 +295,7 @@ describe("Get-into-teaching - Homepage - smoke tests", () => {
 		});
 	});
 
-	it.skip("Logs violations to the terminal", () => {
+	/*it.skip("Logs violations to the terminal", () => {
 		cy.checkA11y(null, null, terminalLog);
-	});
+	});*/
 });
