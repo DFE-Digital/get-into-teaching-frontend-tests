@@ -1,7 +1,7 @@
 import Homepage from "../support/pageobjects/Homepage";
 import EventSignupPage from "../support/pageobjects/EventSignupPage";
 
-describe(
+xdescribe(
 	"Feature - Event sign up : Tests execution date and time : " + new Date(),
 	() => {
 		const searchForEvent = new Homepage();
