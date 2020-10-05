@@ -2,9 +2,7 @@ import Homepage from "../support/pageobjects/Homepage";
 import EventSignupPage from "../support/pageobjects/EventSignupPage";
 
 describe(
-	"Feature - Get-into-teaching - Event sign up " +
-		": Tests execution date and time : " +
-		new Date(),
+	"Feature - Event sign up : Tests execution date and time : " + new Date(),
 	() => {
 		const searchForEvent = new Homepage();
 		const eventSignup = new EventSignupPage();
