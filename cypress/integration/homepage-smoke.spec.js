@@ -37,11 +37,9 @@ describe(
 
 		it('Links through to "Funding your training"', () => {
 			homePage.getFundingyourTrainingLink().then(function (linkText) {
-				cy.contains(linkText.text())
-					.should((el) => {
-						expect(el).to.have.attr("href", "/funding-your-training");
-					})
-					.click();
+				cy.contains(linkText.text()).should((el) => {
+					expect(el).to.have.attr("href", "/funding-your-training");
+				}).click();
 			});
 			cy.location("pathname").should("equal", "/funding-your-training");
 			cy.shouldHaveTalkToUsSection();
