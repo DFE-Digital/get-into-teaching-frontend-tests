@@ -20,7 +20,7 @@ function terminalLog(violations) {
 }
 
 describe(
-	"Home page tests : Tests execution date and time : " + new Date(),
+	`Home page tests : Tests execution date and time : ${new Date()}`,
 	() => {
 		const homePage = new Homepage();
 		beforeEach(function () {
