@@ -161,11 +161,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			cy.shouldHaveFooter();
 		});
 
-	/*
-	Below test meets the following criteria -
-		1. It should only open/expand the Check your qualifications link. 
-		2. Other than this, all link should be closed/not expanded. 
-	*/
 		it('Links through to "Check your qualifications"', () => {
 			homePage.getCheckYourQualificationsLink().click();
 			cy.location('pathname').should('equal', Navlinks.stepsToBecomeATeacher);
@@ -173,14 +168,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			cy.shouldHaveTalkToUsSection();
 			cy.shouldHaveFooter();
 		});
-
-		/*
-	Below test meets the following creteria -
-	 1.It should only open/expand the "Ways to train" link and it's content should 
-	 be visiable on top.
-	 2.Other than this all link should be closed/not expand. Content of unexpanded 
-	 link should not be visible.
-	*/
 
 		it('Links through to "Ways to train"', () => {
 			homePage.getWaystoTrainLink().siblings().click();
