@@ -115,63 +115,41 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			cy.shouldHaveTalkToUsSection();
 			cy.shouldHaveFooter();
 		});
-		
+
 		it('Links through to "career-changers stories"', () => {
 			homePage.getMyStoryInToTeaching().click();
 			cy.get(':nth-child(3) > .content__left > .call-to-action-button').click();
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.careerChangers
-			);
+			cy.location('pathname').should('equal',Navlinks.careerChangers);
 		});
 
 		it('Links through to "international-career-changers"', () => {
 			homePage.getMyStoryInToTeaching().click();
 			cy.get(':nth-child(6) > .content__left > .call-to-action-button').click();
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.internationalCareerChangers
-			);
+			cy.location('pathname').should('equal',Navlinks.internationalCareerChangers);
 		});
 
 		it('Links through to "teacher-training-stories"', () => {
 			homePage.getMyStoryInToTeaching().click();
 			cy.get(':nth-child(9) > .content__left > .call-to-action-button').click();
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.teacherTrainingStories
-			);
+			cy.location('pathname').should('equal',Navlinks.teacherTrainingStories);
 		});
+
 		it('Links through to "making-a-difference"', () => {
 			homePage.getMyStoryInToTeaching().click();
-			cy.get(
-				':nth-child(12) > .content__left > .call-to-action-button'
-			).click();
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.makingADifference
-			);
+			cy.get(':nth-child(12) > .content__left > .call-to-action-button').click();
+			cy.location('pathname').should('equal',Navlinks.makingADifference);
 		});
 
 		it('Links through to "career-progression"', () => {
 			homePage.getMyStoryInToTeaching().click();
-			cy.get(
-				':nth-child(15) > .content__left > .call-to-action-button'
-			).click();
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.careerProgression
-			);
+			cy.get(':nth-child(15) > .content__left > .call-to-action-button').click();
+			cy.location('pathname').should('equal',Navlinks.careerProgression);
 		});
+
 		it('Links through to "returning to teaching"', () => {
 			homePage.getMyStoryInToTeaching().click();
-			cy.get(
-				':nth-child(18) > .content__left > .call-to-action-button'
-			).click();
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.returners
-			);
+			cy.get(':nth-child(18) > .content__left > .call-to-action-button').click();
+			cy.location('pathname').should('equal',Navlinks.returners);
 		});
 
 		it('Links through to "Find events"', () => {
