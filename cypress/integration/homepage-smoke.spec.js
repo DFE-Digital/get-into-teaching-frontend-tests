@@ -183,28 +183,17 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			homePage.getFindEventLink().click();
 			cy.get('#events_search_month').select('October 2020');
 			cy.get('.request-button').click();
-			cy.get('.event-resultbox__header')
-				.as('1steventName')
-				.should('exist')
-				.eq(0)
-				.then((eventName) => {
-					cy.log('Event Name : ' + eventName.text());
-					cy.get('@1steventName')
-						.siblings()
-						.eq(0)
-						.then((eventDateandTime) => {
-							cy.log('Event date and Time : ' + eventDateandTime.text());
-							var a = eventDateandTime.text().split(',');
-							eventDate = a[0];
-							eventTime = a[1].replace('at', '');
-							cy.get('@1steventName').eq(0).click();
-							cy.get('.hero__banner__text > h1').should(
-								'contain.text',
-								eventName.text().trim()
-							);
-						});
+			cy.get('.event-resultbox__header').as('1steventName').should('exist').eq(0).then((eventName) => {
+				cy.log('Event Name : ' + eventName.text());
+				cy.get('@1steventName').siblings().eq(0).then((eventDateandTime) => {
+					cy.log('Event date and Time : ' + eventDateandTime.text());
+					var a = eventDateandTime.text().split(',');
+					eventDate = a[0];
+					eventTime = a[1].replace('at', '');
+					cy.get('@1steventName').eq(0).click();
+					cy.get('.hero__banner__text > h1').should('contain.text',eventName.text().trim());
 				});
-
+			});
 			cy.get('.event-resultboxshort__header > h2').then((eventDateandTimeonNextPage) => {
 				cy.log(eventDateandTimeonNextPage.text());
 				var a = eventDateandTimeonNextPage.text().split(',');
@@ -219,5 +208,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 				includedImpacts: ['critical'],
 			});
 		});
+		
 	}
 );
