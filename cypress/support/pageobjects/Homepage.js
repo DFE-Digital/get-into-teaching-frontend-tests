@@ -1,4 +1,5 @@
-class HomePage {
+module.exports = class HomePage {
+	
 	getCovidMessage() {
 		return cy.get(".covid");
 	}
@@ -94,5 +95,5 @@ class HomePage {
 	getSearchforEventsHeading() {
 		return cy.get("#searchforevents");
 	}
+	
 }
-export default HomePage;
