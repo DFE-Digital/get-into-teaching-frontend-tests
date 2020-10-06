@@ -2273,53 +2273,6 @@ describe(
 		});*/
 		});
 
-		it.skip("Error message link navigates to its respective field", function () {
-			teacherTrainingAdviser.getFirstName();
-			teacherTrainingAdviser.getLastName();
-			teacherTrainingAdviser.getEmailAddress();
-			teacherTrainingAdviser.getContinueButton().click();
-			cy.contains("You need to enter your email address")
-				.should((el) => {
-					expect(el).to.have.attr(
-						"href",
-						"#teacher-training-adviser-steps-identity-email-field-error"
-					);
-				})
-				.click()
-				.type("Test_email@gmail.com");
-			teacherTrainingAdviser.getContinueButton().click();
-			cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
-				.should("have.text", "You need to enter your first name")
-				.next()
-				.should("have.text", "You need to enter your surname");
-			cy.contains("You need to enter your first name")
-				.should((el) => {
-					expect(el).to.have.attr(
-						"href",
-						"#teacher-training-adviser-steps-identity-first-name-field-error"
-					);
-				})
-				.click()
-				.type("Test_First_Name");
-			teacherTrainingAdviser.getContinueButton().click();
-			cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should(
-				"have.text",
-				"You need to enter your surname"
-			);
-			cy.contains("You need to enter your surname")
-				.should((el) => {
-					expect(el).to.have.attr(
-						"href",
-						"#teacher-training-adviser-steps-identity-last-name-field-error"
-					);
-				})
-				.click()
-				.type("Test_Last_Name");
-			teacherTrainingAdviser.getContinueButton().click();
-			cy.get(".govuk-fieldset__heading")
-				.should("exist")
-				.should("have.text", "Are you returning to teaching?");
-		});
 		it("It shows the error message if user clicks continiue button without entering the mandatory or correct details", function () {
 			teacherTrainingAdviser.getFirstName();
 			teacherTrainingAdviser.getLastName();
@@ -2900,6 +2853,54 @@ describe(
 			cy.verifyEmailAddressError();
 			cy.enterEmail("$%^&@gmail.com");
 			cy.verifyEmailAddressError();
+		});
+
+		it("Error message link navigates to its respective field", function () {
+			teacherTrainingAdviser.getFirstName();
+			teacherTrainingAdviser.getLastName();
+			teacherTrainingAdviser.getEmailAddress();
+			teacherTrainingAdviser.getContinueButton().click();
+			cy.contains("You need to enter your email address")
+				.should((el) => {
+					expect(el).to.have.attr(
+						"href",
+						"#teacher-training-adviser-steps-identity-email-field-error"
+					);
+				})
+				.click()
+				.type("Test_email@gmail.com");
+			teacherTrainingAdviser.getContinueButton().click();
+			cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
+				.should("have.text", "You need to enter your first name")
+				.next()
+				.should("have.text", "You need to enter your surname");
+			cy.contains("You need to enter your first name")
+				.should((el) => {
+					expect(el).to.have.attr(
+						"href",
+						"#teacher-training-adviser-steps-identity-first-name-field-error"
+					);
+				})
+				.click()
+				.type("Test_First_Name");
+			teacherTrainingAdviser.getContinueButton().click();
+			cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should(
+				"have.text",
+				"You need to enter your surname"
+			);
+			cy.contains("You need to enter your surname")
+				.should((el) => {
+					expect(el).to.have.attr(
+						"href",
+						"#teacher-training-adviser-steps-identity-last-name-field-error"
+					);
+				})
+				.click()
+				.type("Test_Last_Name");
+			teacherTrainingAdviser.getContinueButton().click();
+			cy.get(".govuk-fieldset__heading")
+				.should("exist")
+				.should("have.text", "Are you returning to teaching?");
 		});
 
 		it('It shows " You have already signed up to this service" message to previously signed up user', function () {
