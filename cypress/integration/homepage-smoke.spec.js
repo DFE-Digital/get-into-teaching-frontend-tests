@@ -20,15 +20,14 @@ function terminalLog(violations) {
 	cy.task("table", violationData);
 }
 
-describe(
-	`Home page tests : Tests execution date and time : ${new Date()}`,
-	() => {
+describe(`Home page tests : Tests execution date and time : ${new Date()}`,() => {
+		
 		const homePage = new Homepage();
-		beforeEach(function () {
+		beforeEach(() => {
 			cy.logintoApp();
 		});
 
-		it("It shows the home page", function () {
+		it("It shows the home page", () => {
 			homePage.getCovidMessage().should("exist");
 			homePage.getTeachingImage().should("exist");
 			homePage.getMailingStripText().should("exist").siblings().should("exist");
@@ -37,7 +36,7 @@ describe(
 		});
 
 		it('Links through to "Funding your training"', () => {
-			homePage.getFundingyourTrainingLink().then(function (linkText) {
+			homePage.getFundingyourTrainingLink().then((linkText) => {
 				cy.contains(linkText.text()).should((el) => {
 					expect(el).to.have.attr("href", Navlinks.fundingYourTraining);
 				}).click();
@@ -48,7 +47,7 @@ describe(
 		});
 
 		it('Links through to "Steps to become a teacher"', () => {
-			homePage.getStepstoBecomeTeacherLink().then(function (linkText) {
+			homePage.getStepstoBecomeTeacherLink().then((linkText) => {
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr("href", Navlinks.stepsToBecomeATeacher);
@@ -61,7 +60,7 @@ describe(
 		});
 
 		it('Links through to "Teaching as a career"', () => {
-			homePage.getTeachingAsaCareerLink().then(function (linkText) {
+			homePage.getTeachingAsaCareerLink().then((linkText) => {
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr("href", Navlinks.lifeAsATeacher);
@@ -74,7 +73,7 @@ describe(
 		});
 
 		it('Links through to "Salaries and benefits"', () => {
-			homePage.getSalariesAndBenefitsLink().then(function (linkText) {
+			homePage.getSalariesAndBenefitsLink().then((linkText) => {
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr("href",Navlinks.salariesAndBenefits);
@@ -90,7 +89,7 @@ describe(
 		});
 
 		it('Links through to "Find an event near you"', () => {
-			homePage.getFindanEventNearYouLink().then(function (linkText) {
+			homePage.getFindanEventNearYouLink().then((linkText) => {
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr("href", Navlinks.events);
@@ -103,7 +102,7 @@ describe(
 		});
 
 		it('Links through to "Please check here for updates"', () => {
-			cy.contains("Please check here for updates").then(function (linkText) {
+			cy.contains("Please check here for updates").then((linkText) => {
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr("href", Navlinks.covid19);
@@ -259,12 +258,12 @@ describe(
 				.as("1steventName")
 				.should("exist")
 				.eq(0)
-				.then(function (eventName) {
+				.then((eventName) => {
 					cy.log("Event Name : " + eventName.text());
 					cy.get("@1steventName")
 						.siblings()
 						.eq(0)
-						.then(function (eventDateandTime) {
+						.then((eventDateandTime) => {
 							cy.log("Event date and Time : " + eventDateandTime.text());
 							var a = eventDateandTime.text().split(",");
 							eventDate = a[0];
@@ -277,9 +276,7 @@ describe(
 						});
 				});
 
-			cy.get(".event-resultboxshort__header > h2").then(function (
-				eventDateandTimeonNextPage
-			) {
+			cy.get(".event-resultboxshort__header > h2").then((eventDateandTimeonNextPage) => {
 				cy.log(eventDateandTimeonNextPage.text());
 				var a = eventDateandTimeonNextPage.text().split(",");
 				expect(eventDate.trim()).to.equal(a[0].trim());
