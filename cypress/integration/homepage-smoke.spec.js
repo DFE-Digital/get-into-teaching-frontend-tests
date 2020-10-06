@@ -203,17 +203,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			homePage.getCheckYourQualificationsLink().click();
 			cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
 			homePage.getBannerText().should("exist");
-			//Below property has been removed
-			/*cy.get("#collapsable-icon-1").should(
-			"have.attr",
-			"class",
-			"fas fa-chevron-up"
-		);
-		cy.get("#collapsable-icon-3").should(
-			"have.attr",
-			"class",
-			"fas fa-chevron-down"
-		);*/
 			cy.shouldHaveTalkToUsSection();
 			cy.shouldHaveFooter();
 		});
@@ -230,20 +219,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			homePage.getWaystoTrainLink().siblings().click();
 			cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
 			homePage.getBannerText().should("exist");
-			//Below property has been removed
-			/*cy.get("#collapsable-icon-1").should(
-			"have.attr",
-			"class",
-			"fas fa-chevron-down"
-		);
-		cy.get("#collapsable-icon-3").should(
-			"have.attr",
-			"class",
-			"fas fa-chevron-up"
-		);
-		cy.get("#collapsable-content-1 > :nth-child(1)").should("not.be.visible");
-		cy.get("#collapsable-content-2 > :nth-child(1)").should("not.be.visible");
-		cy.get("#collapsable-content-3 > :nth-child(1)").should("be.visible");*/
 			cy.shouldHaveTalkToUsSection();
 			cy.shouldHaveFooter();
 		});
@@ -284,21 +259,11 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			});
 		});
 
-		// Basic usage
-		/*it.skip("Has no detectable a11y violations on load", () => {
-		// Test the page at initial load
-		cy.checkA11y();
-	});*/
-
 		it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 			// Test on initial load, only report and assert for critical impact items
 			cy.checkA11y(null, {
 				includedImpacts: ["critical"],
 			});
 		});
-
-		/*it.skip("Logs violations to the terminal", () => {
-		cy.checkA11y(null, null, terminalLog);
-	});*/
 	}
 );
