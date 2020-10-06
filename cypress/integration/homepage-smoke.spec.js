@@ -4,19 +4,14 @@ import Navlinks from '../support/pageobjects/Navlinks';
 
 function terminalLog(violations) {
 	cy.task(
-		'log',
-		`${violations.length} accessibility violation${
-			violations.length === 1 ? '' : 's'
-		} ${violations.length === 1 ? 'was' : 'were'} detected`
+		'log',`${violations.length} accessibility violation${violations.length === 1 ? '' : 's'} ${violations.length === 1 ? 'was' : 'were'} detected`
 	);
-	const violationData = violations.map(
-		({ id, impact, description, nodes }) => ({
-			id,
-			impact,
-			description,
-			nodes: nodes.length,
-		})
-	);
+	const violationData = violations.map(({ id, impact, description, nodes }) => ({
+		id,
+		impact,
+		description,
+		nodes: nodes.length,
+	}));
 	cy.task('table', violationData);
 }
 
@@ -30,7 +25,8 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 		it('It shows the home page', () => {
 			homePage.getCovidMessage().should('exist');
 			homePage.getTeachingImage().should('exist');
-			homePage.getMailingStripText().should('exist').siblings().should('exist');
+			homePage.getMailingStripText().should('exist')
+			homePage.getMailingStripText().siblings().should('exist');
 			cy.shouldHaveTalkToUsSection();
 			cy.shouldHaveFooter();
 		});
@@ -77,13 +73,9 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr('href',Navlinks.salariesAndBenefits);
-					})
-					.click();
+					}).click();
 			});
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.salariesAndBenefits
-			);
+			cy.location('pathname').should('equal',Navlinks.salariesAndBenefits);
 			cy.shouldHaveTalkToUsSection();
 			cy.shouldHaveFooter();
 		});
@@ -93,8 +85,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr('href', Navlinks.events);
-					})
-					.click();
+					}).click();
 			});
 			cy.location('pathname').should('equal', Navlinks.events);
 			cy.shouldHaveTalkToUsSection();
@@ -106,8 +97,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 				cy.contains(linkText.text())
 					.should((el) => {
 						expect(el).to.have.attr('href', Navlinks.covid19);
-					})
-					.click();
+					}).click();
 			});
 			cy.location('pathname').should('equal', Navlinks.covid19);
 			cy.shouldHaveTalkToUsSection();
@@ -118,15 +108,14 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`,() =>
 			homePage.getMailingStripButton().dblclick();
 			cy.location('pathname').should('equal', Navlinks.mailingListSignup);
 		});
+
 		it('Links through to "My story into teaching"', () => {
 			homePage.getMyStoryInToTeaching().click();
-			cy.location('pathname').should(
-				'equal',
-				Navlinks.myStoryIntoTeaching
-			);
+			cy.location('pathname').should('equal',Navlinks.myStoryIntoTeaching);
 			cy.shouldHaveTalkToUsSection();
 			cy.shouldHaveFooter();
 		});
+		
 		it('Links through to "career-changers stories"', () => {
 			homePage.getMyStoryInToTeaching().click();
 			cy.get(':nth-child(3) > .content__left > .call-to-action-button').click();
