@@ -26,13 +26,15 @@ jobs:
         with:
           name: Videos
           path: ./cypress/videos/
-
+          if-no-files-found: ignore 
+          
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
         if: always()
         with:
           name: Screenshots
           path: ./cypress/screenshots/
+          if-no-files-found: ignore
 
       - name: Slack Notification
         if: failure()
