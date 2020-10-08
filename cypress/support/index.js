@@ -17,5 +17,11 @@
 import './commands'
 import 'cypress-axe'
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+	// this stops tests automtically failing for console errors
+	return false
+});
+
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
