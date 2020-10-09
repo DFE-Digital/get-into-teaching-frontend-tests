@@ -31,11 +31,10 @@ Cypress.Commands.add('shouldHaveTalkToUsSection', () => {
 });
 
 Cypress.Commands.add('shouldHaveFooter', () => {
-	cy.get('.footer-bottom')
-		.should('exist')
-		.then(function (linkText) {
-			cy.log(linkText.text());
-		});
+	cy.get('.site-footer-top__social')
+		.should('exist').next().should('exist');
+		cy.get('.site-footer-bottom__logo-container')
+		.should('exist').next().should('exist');
 });
 
 Cypress.Commands.add('shouldHavePageNavigation', () => {
@@ -282,22 +281,16 @@ Cypress.Commands.add('enterTelephoneNumber', (number, country = 'UK') => {
 Cypress.Commands.add('doYouHaveDegree', (degree) => {
 	switch (degree) {
 		case 'Yes':
-			cy.get(
-				'#teacher-training-adviser-steps-have-a-degree-degree-options-degree-field'
-			).click();
+			cy.get('#teacher-training-adviser-steps-have-a-degree-degree-options-yes-field').click();
 			break;
 		case 'No':
 			cy.get('#teacher-training-adviser-steps-have-a-degree-degree-options-no-field').click();
 			break;
 		case "I'm studying for a degree":
-			cy.get(
-				'#teacher-training-adviser-steps-have-a-degree-degree-options-studying-field'
-			).click();
+			cy.get('#teacher-training-adviser-steps-have-a-degree-degree-options-studying-field').click();
 			break;
 		case 'I have an equivalent qualification from another country':
-			cy.get(
-				'#teacher-training-adviser-steps-have-a-degree-degree-options-equivalent-field'
-			).click();
+			cy.get('#teacher-training-adviser-steps-have-a-degree-degree-options-equivalent-field').click();
 			break;
 	}
 	cy.clickOnContinueButton();
