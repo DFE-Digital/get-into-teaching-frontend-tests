@@ -28,7 +28,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let signedUpeventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -45,7 +45,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let signedUpeventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -80,7 +80,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let signedUpeventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -125,7 +125,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let lastName = 'User_' + rnum + '_lastname';
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -167,7 +167,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		cy.contains('Find an event near you').click();
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -202,7 +202,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let lastName = 'User_' + rnum + '_lastname';
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -244,7 +244,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		cy.contains('Find an event near you').click();
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -287,7 +287,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let lastName = 'User_' + rnum + '_lastname';
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -329,7 +329,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		cy.contains('Find an event near you').click();
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -389,7 +389,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let signedupEventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
@@ -425,7 +425,7 @@ describe('Feature - Event sign up : Tests execution date and time : ' + new Date
 		let signedupEventName;
 		searchForEvent.getEventsType().select(this.testData.eventsType);
 		searchForEvent.getEventLocation().select(this.testData.eventLocation);
-		searchForEvent.getEventsMonth().select(this.testData.eventsNextMonth);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
 		searchForEvent.getUpdateResultsButton().click();
 		eventSignup
 			.getSearchedEventName()
