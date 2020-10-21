@@ -212,7 +212,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 						);
 					});
 			});
-			cy.get('.event-box__header > h2').then((eventDateandTimeonNextPage) => {
+			cy.get('.event-box__header > h4').then((eventDateandTimeonNextPage) => {
 			cy.log(eventDateandTimeonNextPage.text());
 			var a = eventDateandTimeonNextPage.text().split(',');
 			expect(eventDate.trim()).to.equal(a[0].trim());

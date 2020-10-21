@@ -15,7 +15,7 @@ class EventSignupPage {
 		return cy.get('#events-steps-personal-details-email-field');
 	}
 	getSearchedEventName() {
-		return cy.get('.event-box__header > h2');
+		return cy.get('.event-box__header > h4');
 	}
 	getNextStep() {
 		return cy.contains('Next Step');
