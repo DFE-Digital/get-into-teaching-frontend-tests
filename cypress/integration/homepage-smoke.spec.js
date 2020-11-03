@@ -188,7 +188,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		var eventDate;
 		var eventTime;
 		homePage.getFindEventLink().click();
-		cy.get('#events_search_month').select('October 2020');
+		cy.get('#events_search_month').select('November 2020');
 		cy.get('.request-button').click();
 		cy.get('.event-box__header')
 			.as('1steventName')
