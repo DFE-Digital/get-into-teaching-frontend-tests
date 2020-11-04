@@ -9,7 +9,7 @@
 	"author": "Sushant Kumar",
 	"license": "ISC",
 	"devDependencies": {
-		"cypress": "^5.0.0",
+		"cypress": "^5.5.0",
 		"cypress-axe": "^0.8.1",
 		"cypress-iframe": "^1.0.1",
 		"mailslurp-client": "^8.7.8",
