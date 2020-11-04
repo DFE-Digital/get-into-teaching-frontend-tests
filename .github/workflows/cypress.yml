@@ -14,7 +14,7 @@ jobs:
 
       - name:   Run the Tests
         run: |
-             docker build . -t cypress-image
+             docker build . -t cypress-image --pull
              docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
