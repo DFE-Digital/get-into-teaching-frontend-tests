@@ -722,3 +722,9 @@ Cypress.Commands.add('enterEmailVerificationCodeForTeacherTrainingAdviser', () =
 		});
 	});
 });
+
+Cypress.Commands.add('verify404ErrorMessage', () => {
+	cy.get('.govuk-caption-xl').should("have.text","404")
+    cy.get('.govuk-heading-xl').should("have.text","Not Found")
+	cy.get('small').should("have.text","unknown_route")
+});

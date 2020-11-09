@@ -226,4 +226,24 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 			includedImpacts: ['critical'],
 		});
 	});
+
+	
 });
+
+
+describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+	
+	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {	
+		
+		cy.visit({
+			url: 'https://get-into-teaching-apps-test.london.cloudapps.digital/',
+			method: 'GET',
+			failOnStatusCode: false
+		  })
+		cy.verify404ErrorMessage();
+		
+		});
+		
+});
+
+
