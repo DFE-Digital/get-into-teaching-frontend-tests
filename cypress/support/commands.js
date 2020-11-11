@@ -369,28 +369,15 @@ Cypress.Commands.add('whichSubjectAreYouInterestedInTeaching', (subject) => {
 
 Cypress.Commands.add(
 	'doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent',
-	(haveGrade, stage) => {
-		if (stage == 'Primary') {
-			if (haveGrade == 'Yes') {
-				cy.get(
-					'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750000-field'
-				).click();
-			} else {
-				cy.get(
-					'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750001-field'
-				).click();
-			}
-		} else {
-			if (haveGrade == 'Yes') {
-				cy.get(
-					'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750000-field'
-				).click();
-			} else {
-				cy.get(
-					'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750001-field'
-				).click();
-			}
+	(haveGrade) => {
+		if(haveGrade=="No")
+		{
+            cy.contains("No").click();
 		}
+		else
+		{
+			cy.contains("Yes").click();
+		}		
 		cy.clickOnContinueButton();
 	}
 );
@@ -424,29 +411,15 @@ Cypress.Commands.add('whenDoYouWantToStartYourTeacherTraining', (trainingYear) =
 
 Cypress.Commands.add(
 	'areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent',
-	(planning, stage) => {
-		if (stage == 'Primary') {
-			if (planning == 'Yes') {
-				cy.get(
-					'#teacher-training-adviser-steps-retake-gcse-maths-english-planning-to-retake-gcse-maths-and-english-id-222750000-field'
-				).click();
-			} else {
-				cy.get(
-					'#teacher-training-adviser-steps-retake-gcse-maths-english-planning-to-retake-gcse-maths-and-english-id-222750001-field'
-				).click();
-			}
-		} else {
-			if (planning == 'Yes') {
-				cy.get(
-					'#teacher-training-adviser-steps-retake-gcse-maths-english-planning-to-retake-gcse-maths-and-english-id-222750000-field'
-				).click();
-			} else {
-				cy.get(
-					'#teacher-training-adviser-steps-retake-gcse-maths-english-planning-to-retake-gcse-maths-and-english-id-222750001-field'
-				).click();
-			}
+	(planning) => {
+		if(planning=="No")
+		{
+            cy.contains("No").click();
 		}
-
+		else
+		{
+			cy.contains("Yes").click();
+		}
 		cy.clickOnContinueButton();
 	}
 );
