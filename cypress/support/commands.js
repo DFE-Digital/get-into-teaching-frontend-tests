@@ -368,15 +368,15 @@ Cypress.Commands.add('whichSubjectAreYouInterestedInTeaching', (subject) => {
 });
 
 Cypress.Commands.add(
-	'doYouHaveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent',
+	'gcseMathsAndEnglish',
 	(haveGrade) => {
-		if(haveGrade=="No")
+		if(haveGrade)
 		{
-            cy.contains("No").click();
+			cy.contains("Yes").click();			
 		}
 		else
 		{
-			cy.contains("Yes").click();
+			cy.contains("No").click();
 		}		
 		cy.clickOnContinueButton();
 	}
@@ -410,15 +410,15 @@ Cypress.Commands.add('whenDoYouWantToStartYourTeacherTraining', (trainingYear) =
 });
 
 Cypress.Commands.add(
-	'areYouPlanningToRetakeEitherEnglishorMathsorBothGCSEsorEquivalent',
+	'planningToRetakeGCSEMathsAndEnglish',
 	(planning) => {
-		if(planning=="No")
-		{
-            cy.contains("No").click();
+		if(planning)
+		{			
+			cy.contains("Yes").click();
 		}
 		else
 		{
-			cy.contains("Yes").click();
+			cy.contains("No").click();
 		}
 		cy.clickOnContinueButton();
 	}
