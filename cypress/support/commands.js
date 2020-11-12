@@ -193,8 +193,8 @@ Cypress.Commands.add("whichCountryDoYouLiveIn", (country) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("doYouLiveInTheUk", (location)  =>{
-	if(location)
+Cypress.Commands.add("doYouLiveInTheUk", (uk)  =>{
+	if(uk)
 	{
 		cy.get(".govuk-radios__label").first().click();
 	}
