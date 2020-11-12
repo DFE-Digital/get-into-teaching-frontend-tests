@@ -183,98 +183,27 @@ Cypress.Commands.add('selectSubjectLikeToTeach', (subject) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add('youLiveIn', (location) => {
-	if (location == 'UK') {
-		cy.get('#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field').click();
+Cypress.Commands.add("whichCountryDoYouLiveIn", (country) => {
+	cy.contains("Which country do you live in?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(country);
+		});
+	cy.clickOnContinueButton();
+});
+
+Cypress.Commands.add("whereDoYouLive", (location) => {
+	if (location == "Overseas") {
+		cy.contains("Overseas").click();
 	} else {
-		cy.get(
-			'#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field'
-		).click();
-		cy.clickOnContinueButton();
-		cy.get('#teacher-training-adviser-steps-overseas-country-country-id-field').select(
-			location
-		);
+		cy.get(".govuk-radios__label").first().click();
 	}
 	cy.clickOnContinueButton();
 });
 
-/*Cypress.Commands.add("whereDoYouLive", (location) => {
-	if (location == "UK") {
-		cy.get("#uk-or-overseas-uk-or-overseas-uk-field").click();
-	} else {
-		cy.get("#uk-or-overseas-uk-or-overseas-overseas-field").click();
-		cy.get(".govuk-button").click();
-		cy.get("#overseas-country-country-id-field").select(location);
-	}
-	cy.get(".govuk-button").click();
-});*/
-
-Cypress.Commands.add('whereDoYouLive', (location, studying, equivalent) => {
-	switch (true) {
-		case studying:
-			if (location == 'UK') {
-				cy.get(
-					'#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field'
-				).click();
-			} else {
-				cy.get(
-					'#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field'
-				).click();
-				cy.clickOnContinueButton();
-				cy.get('#teacher-training-adviser-steps-overseas-country-country-id-field').select(
-					location
-				);
-			}
-			break;
-		case equivalent:
-			if (location == 'UK') {
-				cy.get(
-					'#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field'
-				).click();
-			} else {
-				cy.get(
-					'#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field'
-				).click();
-				cy.clickOnContinueButton();
-				cy.get('#teacher-training-adviser-steps-overseas-country-country-id-field').select(
-					location
-				);
-			}
-			break;
-		default:
-			if (location == 'UK') {
-				cy.get(
-					'#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field'
-				).click();
-			} else {
-				cy.get(
-					'#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field'
-				).click();
-				cy.clickOnContinueButton();
-				cy.get('#teacher-training-adviser-steps-overseas-country-country-id-field').select(
-					location
-				);
-			}
-	}
-
-	cy.clickOnContinueButton();
-});
-
-Cypress.Commands.add('enterUKTelephoneNumber', (number, equivalent) => {
-	if (equivalent) {
-		cy.get('#teacher-training-adviser-steps-uk-telephone-telephone-field').type('0125234490');
-	} else {
-		cy.get('#teacher-training-adviser-steps-uk-telephone-telephone-field').clear().type(number);
-	}
-	cy.clickOnContinueButton();
-});
-
-Cypress.Commands.add('enterTelephoneNumber', (number, country = 'UK') => {
-	if (country == 'UK') {
-		cy.get('#teacher-training-adviser-steps-uk-telephone-telephone-field').type(number);
-	} else {
-		cy.get('#teacher-training-adviser-steps-overseas-telephone-telephone-field').type(number);
-	}
+Cypress.Commands.add("enterUKTelephoneNumber", (number) => {
+	cy.contains("UK telephone number (optional)").type(number);
 	cy.clickOnContinueButton();
 });
 
@@ -296,24 +225,13 @@ Cypress.Commands.add('doYouHaveDegree', (degree) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add('selectWhatSubjectIsYourDegree', (subject) => {
-	var subject = subject.split('-');
-	switch (subject[0]) {
-		case 'Studying':
-			cy.get(
-				'#teacher-training-adviser-steps-what-subject-degree-degree-subject-field'
-			).select(subject[1]);
-			break;
-		case 'Secondary':
-			cy.get(
-				'#teacher-training-adviser-steps-degree-stage-interested-teaching-preferred-education-phase-id-222750001-field'
-			).click();
-			break;
-		default:
-			cy.get(
-				'#teacher-training-adviser-steps-what-subject-degree-degree-subject-field'
-			).select(subject[0]);
-	}
+Cypress.Commands.add("selectWhatSubjectIsYourDegree", (subject) => {
+	cy.contains("What subject is your degree?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(subject);
+		});
 	cy.clickOnContinueButton();
 });
 
@@ -331,39 +249,13 @@ Cypress.Commands.add('whatDegreeClassAreYouPredictedToGet', (degreeClass) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add('whichSubjectAreYouInterestedInTeaching', (subject) => {
-	var subject = subject.split('-');
-	switch (subject[0]) {
-		case 'Equivalent':
-			cy.get(
-				'#teacher-training-adviser-steps-subject-interested-teaching-preferred-teaching-subject-id-field'
-			).select(subject[1]);
-			break;
-		case 'Studying':
-			cy.get(
-				'#teacher-training-adviser-steps-subject-interested-teaching-preferred-teaching-subject-id-field'
-			).select(subject[1]);
-			break;
-		case 'Secondary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750001-field'
-			).click();
-			break;
-		case 'Equivalent-Secondary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750001-field'
-			).click();
-			break;
-		case 'Equivalent-Primary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750000-field'
-			).click();
-			break;
-		default:
-			cy.get(
-				'#teacher-training-adviser-steps-subject-interested-teaching-preferred-teaching-subject-id-field'
-			).select(subject[0]);
-	}
+Cypress.Commands.add("whichSubjectAreYouInterestedInTeaching", (subject) => {
+	cy.contains("Which subject would you like to teach?")
+		.invoke("attr", "for")
+		.then(function (val) {
+			let id = "#" + val;
+			cy.get(id).select(subject);
+		});
 	cy.clickOnContinueButton();
 });
 
@@ -382,32 +274,18 @@ Cypress.Commands.add(
 	}
 );
 
-Cypress.Commands.add('whenDoYouWantToStartYourTeacherTraining', (trainingYear) => {
-	var trainingYear = trainingYear.split('-');
-	switch (trainingYear[0]) {
-		case 'Equivalent':
-			cy.get(
-				'#teacher-training-adviser-steps-start-teacher-training-initial-teacher-training-year-id-field'
-			).select(trainingYear[1]);
-			break;
-		case 'Studying':
-			cy.get(
-				'#teacher-training-adviser-steps-start-teacher-training-initial-teacher-training-year-id-field'
-			).select(trainingYear[1]);
-			break;
-		case 'Secondary':
-			cy.get(
-				'#teacher-training-adviser-stepsdegree-stage-interested-teaching-preferred-education-phase-id-222750001-field'
-			).click();
-			break;
-		default:
-			cy.get(
-				'#teacher-training-adviser-steps-start-teacher-training-initial-teacher-training-year-id-field'
-			).select(trainingYear[0]);
+Cypress.Commands.add(
+	"whenDoYouWantToStartYourTeacherTraining",
+	(trainingYear) => {
+		cy.contains("When do you want to start your teacher training?")
+			.invoke("attr", "for")
+			.then(function (val) {
+				let id = "#" + val;
+				cy.get(id).select(trainingYear);
+			});
+		cy.clickOnContinueButton();
 	}
-
-	cy.clickOnContinueButton();
-});
+);
 
 Cypress.Commands.add(
 	'planningToRetakeGCSEMathsAndEnglish',
@@ -437,52 +315,9 @@ Cypress.Commands.add('doYouHaveGrade4CorAboveInGCSEScienceorEquivalent', (grade)
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add('selectStage', (stage) => {
-	switch (stage) {
-		case 'Primary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750000-field'
-			).click();
-			break;
-		case 'Secondary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750001-field'
-			).click();
-			break;
-		case 'Equivalent-Secondary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750001-field'
-			).click();
-			break;
-		case 'Equivalent-Primary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750000-field'
-			).click();
-			break;
-		case 'Studying-Secondary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750001-field'
-			).click();
-			break;
-		case 'Studying-Primary':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750000-field'
-			).click();
-			break;
-	}
-	cy.clickOnContinueButton();
-
-	/*if (stage == "Primary") {
-		cy.get(
-			"#degree-stage-interested-teaching-preferred-education-phase-id-222750000-field"
-		).click();
-	} else {
-		//stage=secondary
-		cy.get(
-			"#degree-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-		).click();
-	}
-	cy.get(".govuk-button").click();*/
+Cypress.Commands.add('selectStage', (stage) => {	
+    cy.contains(stage).click();	
+	cy.clickOnContinueButton();	
 });
 
 Cypress.Commands.add('enteroverseasTelephoneNumber', (number) => {
@@ -495,22 +330,16 @@ Cypress.Commands.add('acceptPolicy', () => {
 	cy.clickOnCompleteButton();
 });
 
-Cypress.Commands.add('enterDateOfBirth', (day, month, year, returner) => {
-	if (returner) {
+Cypress.Commands.add('enterDateOfBirth', (day, month, year) => {	
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i').type(day);
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i').type(month);
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i').type(year);
-	} else {
-		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i').type(day);
-		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i').type(month);
-		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i').type(year);
-	}
 	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add(
 	'enterUKCandidateAddress',
-	(addressline1, addressline2, city, postcode, returner) => {
+	(addressline1, addressline2, city, postcode) => {
 		cy.get('#teacher-training-adviser-steps-uk-address-address-line1-field').type(addressline1);
 		cy.get('#teacher-training-adviser-steps-uk-address-address-line2-field').type(addressline2);
 		cy.get('#teacher-training-adviser-steps-uk-address-address-city-field').type(city);
@@ -521,69 +350,31 @@ Cypress.Commands.add(
 	}
 );
 
-Cypress.Commands.add('inWhichYearAreYouStudying', (stage) => {
+Cypress.Commands.add("inWhichYearAreYouStudying", (stage) => {
 	switch (stage) {
-		case 'Final year':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-of-degree-degree-status-id-222750001-field'
-			).click();
+		case "Final year":
+			cy.contains("Final year").click();
 			break;
-		case 'Second year':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-of-degree-degree-status-id-222750002-field'
-			).click();
+		case "Second year":
+			cy.contains("Second year").click();
 			break;
-		case 'First year':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-of-degree-degree-status-id-222750003-field'
-			).click();
+		case "First year":
+			cy.contains("First year").click();
 			break;
-		case 'Other':
-			cy.get(
-				'#teacher-training-adviser-steps-stage-of-degree-degree-status-id-222750005-field'
-			).click();
+		case "Other":
+			cy.contains("Other").click();
 			break;
 	}
 	cy.clickOnContinueButton();
 });
-Cypress.Commands.add('haveGrade4CorAboveInEnglishAndMathsGCSEsorEuivalent', (haveGrade, stage) => {
-	if (stage == 'Primary') {
-		if (haveGrade == 'Yes') {
-			cy.get(
-				'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750000-field'
-			).click();
-		} else {
-			cy.get(
-				'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750001-field'
-			).click();
-		}
-	} else {
-		if (haveGrade == 'Yes') {
-			cy.get(
-				'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750000-field'
-			).click();
-		} else {
-			cy.get(
-				'#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-222750001-field'
-			).click();
-		}
-	}
 
-	cy.clickOnContinueButton();
-});
 
 Cypress.Commands.add(
 	'typeDateOfBirth',
-	(day, month, year, haveEquivalentDegreeFromAnotherCountry) => {
-		if (haveEquivalentDegreeFromAnotherCountry) {
-			cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i').type(day);
-			cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i').type(month);
-			cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i').type(year);
-		} else {
-			cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i').type(day);
-			cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i').type(month);
-			cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i').type(year);
-		}
+	(day, month, year) => {		
+		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i').type(day);
+		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i').type(month);
+		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i').type(year);
 		cy.clickOnContinueButton();
 	}
 );

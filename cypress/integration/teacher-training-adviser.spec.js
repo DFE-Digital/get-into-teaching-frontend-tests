@@ -70,9 +70,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject('Computing');
 		cy.selectSubjectLikeToTeach('Physics');
-		cy.enterDateOfBirth('25', '02', '1986', (returner = true));
+		cy.enterDateOfBirth('25', '02', '1986');
 		cy.whereDoYouLive('UK');
-		cy.enterUKCandidateAddress('55', 'Hollinswood', 'Telford', 'TF3 2BT', (returner = true));
+		cy.enterUKCandidateAddress('55', 'Hollinswood', 'Telford', 'TF3 2BT');
 		cy.enterUKTelephoneNumber('012345678');
 		cy.get('.govuk-heading-l')
 			.should('exist')
@@ -101,6 +101,7 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas returner user', function () {
+		     
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -111,8 +112,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject('Biology');
 		cy.selectSubjectLikeToTeach('Maths');
-		cy.enterDateOfBirth('20', '07', '2000', (returner = true));
-		cy.whereDoYouLive('Switzerland');
+		cy.enterDateOfBirth('20', '07', '2000');
+		cy.whereDoYouLive('Overseas');
+		cy.whichCountryDoYouLiveIn('Switzerland')		
 		cy.enteroverseasTelephoneNumber('0012354758');
 		cy.get('.govuk-heading-l')
 			.should('exist')
@@ -148,16 +150,15 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -192,9 +193,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Brazil');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Brazil');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Brazil');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -231,16 +233,15 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -277,9 +278,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Poland');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Poland');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Poland');
+		cy.enteroverseasTelephoneNumber('38494102834');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -346,16 +348,15 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -392,9 +393,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Cuba');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Cuba');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cuba');
+		cy.enteroverseasTelephoneNumber('38484102834');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -433,16 +435,15 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK')
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -481,9 +482,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Cuba');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Cuba');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cuba');
+		cy.enteroverseasTelephoneNumber('839494102834');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -580,16 +582,15 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.gcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Computing');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -624,9 +625,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.gcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Computing');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Cyprus');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Cyprus');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cyprus');
+		cy.enteroverseasTelephoneNumber('36347485102834');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -663,16 +665,15 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Dance');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -709,9 +710,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Dance');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Cyprus');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Cyprus');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cyprus');
+		cy.enteroverseasTelephoneNumber('1028343784');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -789,22 +791,21 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -836,15 +837,16 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Denmark');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Denmark');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Denmark');
+		cy.enteroverseasTelephoneNumber('02637485859');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -877,23 +879,22 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -926,16 +927,17 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('India');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'India');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('India');
+		cy.enteroverseasTelephoneNumber('+91-9663717251');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -968,9 +970,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('No');
@@ -1000,23 +1002,22 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1049,16 +1050,17 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Estonia');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Estonia');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Estonia');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1092,25 +1094,23 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
-
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1144,25 +1144,23 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Second year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
-
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1196,25 +1194,23 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('First year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
-
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1248,25 +1244,23 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Other');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
-
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1300,17 +1294,18 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Chile');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Chile');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Chile');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1344,18 +1339,18 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Second year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
-
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Chile');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Chile');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Chile');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1389,18 +1384,18 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('First year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
-
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Chile');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Chile');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Chile');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1434,18 +1429,18 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Other');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
-
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
 		cy.areYouPlanningToRetakeYourScienceGCSE('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Chile');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Chile');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Chile');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1478,9 +1473,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('No');
@@ -1509,9 +1504,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Primary');
+		cy.selectStage('Primary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(false);
 		cy.get('.govuk-heading-l')
@@ -1538,22 +1533,21 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Secondary');
+		cy.selectStage('Secondary');
 		cy.gcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Computing');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK')
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1583,15 +1577,16 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Secondary');
+		cy.selectStage('Secondary');
 		cy.gcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Computing');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Cyprus');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Cyprus');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cyprus');
+		cy.enteroverseasTelephoneNumber('47485102834');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1622,23 +1617,22 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Secondary');
+		cy.selectStage('Secondary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Dance');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('UK');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('UK')
 		cy.enterUKCandidateAddress(
 			'21',
 			'Victoria Embankment',
 			'Darlington',
-			'DL1 5JR',
-			(returner = false)
+			'DL1 5JR'
 		);
-		cy.enterTelephoneNumber('0125234490');
+		cy.enterUKTelephoneNumber('0125234490');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1669,16 +1663,17 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Secondary');
+		cy.selectStage('Secondary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('Dance');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth('31', '03', '1985', (returner = false));
-		cy.youLiveIn('Cyprus');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Cyprus');
+		cy.enterDateOfBirth('31', '03', '1985');
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cyprus');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);		
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1709,9 +1704,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying('Final year');
-		cy.selectWhatSubjectIsYourDegree('Studying-Computing');
+		cy.selectWhatSubjectIsYourDegree('Computing');
 		cy.whatDegreeClassAreYouPredictedToGet('2:2');
-		cy.selectStage('Studying-Secondary');
+		cy.selectStage('Secondary');
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(false);
 		cy.get('.govuk-heading-l')
@@ -1735,9 +1730,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree('I have an equivalent qualification from another country');
-		cy.selectStage('Equivalent-Secondary');
-		cy.whichSubjectAreYouInterestedInTeaching('Equivalent-Computing');
-		cy.whenDoYouWantToStartYourTeacherTraining('Equivalent-2021');
+		cy.selectStage('Secondary');
+		cy.whichSubjectAreYouInterestedInTeaching('Computing');
+		cy.whenDoYouWantToStartYourTeacherTraining('2021');
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i').type('27');
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i').type('07');
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i').type('1983');
@@ -1785,9 +1780,9 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree('I have an equivalent qualification from another country');
-		cy.selectStage('Equivalent-Secondary');
-		cy.whichSubjectAreYouInterestedInTeaching('Equivalent-Computing');
-		cy.whenDoYouWantToStartYourTeacherTraining('Equivalent-2021');
+		cy.selectStage('Secondary');
+		cy.whichSubjectAreYouInterestedInTeaching('Computing');
+		cy.whenDoYouWantToStartYourTeacherTraining('2021');
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i').type('27');
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i').type('07');
 		cy.get('#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i').type('1983');
@@ -1831,10 +1826,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		);
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree('I have an equivalent qualification from another country');
-		cy.selectStage('Equivalent-Primary');
-		cy.whenDoYouWantToStartYourTeacherTraining('Equivalent-2021');
-		cy.typeDateOfBirth('22', '08', '2000', true);
-		cy.whereDoYouLive('UK', false, true);
+		cy.selectStage('Primary');
+		cy.whenDoYouWantToStartYourTeacherTraining('2021');
+		cy.typeDateOfBirth('22', '08', '2000');
+		cy.whereDoYouLive('UK');
 		cy.get('#teacher-training-adviser-steps-uk-address-address-line1-field').type('25');
 		cy.get('#teacher-training-adviser-steps-uk-address-address-line2-field').type(
 			'Delbury Court'
@@ -1877,13 +1872,13 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		//cy.verifyYourEmailAddress();
 		cy.returningToTeaching((returner = false));
 		cy.doYouHaveDegree('I have an equivalent qualification from another country');
-		cy.selectStage('Equivalent-Primary');
-		cy.whenDoYouWantToStartYourTeacherTraining('Equivalent-2021');
-		cy.typeDateOfBirth('22', '08', '2000', true);
-		cy.whereDoYouLive('Austria', false, true);
+		cy.selectStage('Primary');
+		cy.whenDoYouWantToStartYourTeacherTraining('2021');
+		cy.typeDateOfBirth('22', '08', '2000');
+		cy.whereDoYouLive('Overseas');
+		cy.whichCountryDoYouLiveIn('Austria');
 		cy.contains('Contact telephone number').type('0125234490');
-		cy.clickOnContinueButton();
-		//cy.clickOnContinueButton();
+		cy.clickOnContinueButton();		
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -1911,9 +1906,10 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.gcseMathsAndEnglish(true);
 		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent('Yes');
 		cy.whenDoYouWantToStartYourTeacherTraining('2021');
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn('Denmark');
-		cy.enterTelephoneNumber(this.testData.phoneNumber, 'Denmark');
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Denmark');
+		cy.enteroverseasTelephoneNumber(this.testData.phoneNumber);
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
@@ -2152,7 +2148,7 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject('Computing');
 		cy.selectSubjectLikeToTeach('Physics');
-		cy.enterDateOfBirth('25', '02', '1986', (returner = true));
+		cy.enterDateOfBirth('25', '02', '1986');
 		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress('55', 'Hollinswood', 'Telford', 'TF3 2BT', (returner = true));
 		cy.enterUKTelephoneNumber('012345678');
@@ -2175,18 +2171,17 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.selectWhatSubjectIsYourDegree('Biology');
 		cy.selectWhichClassIsYourDegree('First class');
 		cy.selectStage('Secondary');
-
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('English');
 		cy.whenDoYouWantToStartYourTeacherTraining('2022');
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn('Cyprus');
-		cy.enterTelephoneNumber('102834', 'Cyprus');
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cyprus');
+		cy.enteroverseasTelephoneNumber('102834');
 		cy.get('.govuk-heading-l')
 			.should('exist')
 			.should('have.text', 'Check your answers before you continue');
-		//cy.contains("Email").next().next().click();
 		cy.get(
 			':nth-child(3) > :nth-child(1) > .govuk-summary-list__actions > .govuk-link'
 		).click();
@@ -2300,15 +2295,14 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.selectWhatSubjectIsYourDegree('Biology');
 		cy.selectWhichClassIsYourDegree('First class');
 		cy.selectStage('Secondary');
-
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('English');
 		cy.whenDoYouWantToStartYourTeacherTraining('2022');
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
+		cy.enterDateOfBirth(31, 3, 1985);
 		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress('55', 'Hollinswood', 'Telford', 'TF3 2BT', (returner = true));
-		cy.enterTelephoneNumber('0834');
+		cy.enterUKTelephoneNumber('0834');
 		cy.get('#error-summary-title').should('exist').should('have.text', 'There is a problem');
 		cy.get('#teacher-training-adviser-steps-uk-telephone-telephone-error')
 			.should('exist')
@@ -2335,14 +2329,14 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.selectWhatSubjectIsYourDegree('Biology');
 		cy.selectWhichClassIsYourDegree('First class');
 		cy.selectStage('Secondary');
-
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching('English');
 		cy.whenDoYouWantToStartYourTeacherTraining('2022');
-		cy.enterDateOfBirth(31, 3, 1985, (returner = false));
-		cy.youLiveIn('Cyprus');
-		cy.enterTelephoneNumber('0834', 'Cyprus');
+		cy.enterDateOfBirth(31, 3, 1985);
+		cy.whereDoYouLive('Overseas')
+		cy.whichCountryDoYouLiveIn('Cyprus');
+		cy.enteroverseasTelephoneNumber('0495')
 		cy.get('#error-summary-title').should('exist').should('have.text', 'There is a problem');
 		cy.get('#teacher-training-adviser-steps-overseas-telephone-telephone-error')
 			.should('exist')
@@ -2495,7 +2489,7 @@ describe('Feature - Get an adviser : Tests execution date and time : ' + new Dat
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject('Computing');
 		cy.selectSubjectLikeToTeach('Physics');
-		cy.enterDateOfBirth('25', '02', '1986', (returner = true));
+		cy.enterDateOfBirth('25', '02', '1986');
 		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress('55', 'Hollinswood', 'Telford', 'TF3 2BT', (returner = true));
 		cy.enterUKTelephoneNumber('012345678');
@@ -2583,7 +2577,7 @@ describe('Matchback feature', () => {
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject('Computing');
 		cy.selectSubjectLikeToTeach('Physics');
-		cy.enterDateOfBirth('25', '02', '1986', (returner = true));
+		cy.enterDateOfBirth('25', '02', '1986');
 		cy.whereDoYouLive('UK');
 		cy.enterUKCandidateAddress('55', 'Hollinswood', 'Telford', 'TF3 2BT', (returner = true));
 		cy.enterUKTelephoneNumber('012345678');
@@ -2604,7 +2598,6 @@ describe('Matchback feature', () => {
 			.next()
 			.contains('Physics');
 		cy.contains('Where do you live?').next().contains('UK');
-
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.get('.govuk-panel__title').then(function (signuptext) {
@@ -2697,7 +2690,7 @@ describe('Matchback feature', () => {
 			cy.enterPreviousTeacherReferenceNumber(23478463);
 			cy.selectPreviuosMainSubject('Computing');
 			cy.selectSubjectLikeToTeach('Physics');
-			cy.enterDateOfBirth('25', '02', '1986', (returner = true));
+			cy.enterDateOfBirth('25', '02', '1986');
 			cy.whereDoYouLive('UK');
 			cy.get('#teacher-training-adviser-steps-uk-address-address-postcode-field').should(
 				'have.value',
