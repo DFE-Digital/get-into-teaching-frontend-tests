@@ -64,7 +64,7 @@ module.exports = class HomePage {
 	}
 
 	getFindEventLink() {
-		return cy.get(".featured-content__item-wide__link");
+		return cy.contains("Find Events");
 	}
 
 	getCheckYourQualificationsLink() {
