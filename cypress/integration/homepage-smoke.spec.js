@@ -184,10 +184,13 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.shouldHaveFooter();
 	});
 
+
 	it('It matches the event date, time and location with previous page', () => {
 		var eventDateAndTime;		
 		homePage.getFindEventLink().click();
-		cy.get('#events_search_month').select('November 2020');
+		cy.get('#events_search_month').as('month').children().first().then((option) => {
+			cy.get('@month').select(option.text())
+		});
 		cy.get('.request-button').click();
 		cy.get('.event-box__header')
 			.as('1steventName')
