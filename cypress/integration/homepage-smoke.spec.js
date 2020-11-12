@@ -185,8 +185,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 
 	it('It matches the event date, time and location with previous page', () => {
-		var eventDate;
-		var eventTime;
+		var eventDateAndTime;		
 		homePage.getFindEventLink().click();
 		cy.get('#events_search_month').select('November 2020');
 		cy.get('.request-button').click();
@@ -201,10 +200,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 					.eq(0)
 					.then((eventDateandTime) => {
 						cy.log('Event date and Time : ' + eventDateandTime.text());
-						var a = eventDateandTime.text().split(',');
-						eventDate = a[0];
-						//eventTime = a[1].replace('at', '');
-						eventTime = a[1];
+						eventDateAndTime = eventDateandTime.text();						
 						cy.get('@1steventName').eq(0).click();
 						cy.get('.hero__banner__text > h1').should(
 							'contain.text',
@@ -213,10 +209,8 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 					});
 			});
 			cy.get('.event-box__header > h4').then((eventDateandTimeonNextPage) => {
-			cy.log(eventDateandTimeonNextPage.text());
-			var a = eventDateandTimeonNextPage.text().split(',');
-			expect(eventDate.trim()).to.equal(a[0].trim());
-			expect(eventTime.trim()).to.equal(a[1].trim());
+			var expectedEventDateAndTime = eventDateandTimeonNextPage.text();
+            expect(eventDateAndTime.trim()).to.equal(expectedEventDateAndTime.trim());		
 		});
 	});
 
