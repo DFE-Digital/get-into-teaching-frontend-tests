@@ -193,14 +193,17 @@ Cypress.Commands.add("whichCountryDoYouLiveIn", (country) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("whereDoYouLive", (location) => {
-	if (location == "Overseas") {
-		cy.contains("Overseas").click();
-	} else {
+Cypress.Commands.add("doYouLiveInTheUk", (location)  =>{
+	if(location)
+	{
 		cy.get(".govuk-radios__label").first().click();
 	}
-	cy.clickOnContinueButton();
-});
+	else
+	{
+		cy.contains("Overseas").click();
+	}			
+	    cy.clickOnContinueButton();
+  });
 
 Cypress.Commands.add("enterUKTelephoneNumber", (number) => {
 	cy.contains("UK telephone number (optional)").type(number);
@@ -228,9 +231,8 @@ Cypress.Commands.add('doYouHaveDegree', (degree) => {
 Cypress.Commands.add("selectWhatSubjectIsYourDegree", (subject) => {
 	cy.contains("What subject is your degree?")
 		.invoke("attr", "for")
-		.then(function (val) {
-			let id = "#" + val;
-			cy.get(id).select(subject);
+		.then(function (id) {
+			cy.get(`#${id}`).select(subject);
 		});
 	cy.clickOnContinueButton();
 });
@@ -320,7 +322,7 @@ Cypress.Commands.add('selectStage', (stage) => {
 	cy.clickOnContinueButton();	
 });
 
-Cypress.Commands.add('enteroverseasTelephoneNumber', (number) => {
+Cypress.Commands.add('enterOverseasTelephoneNumber', (number) => {
 	cy.get('#teacher-training-adviser-steps-overseas-telephone-telephone-field').type(number);
 	cy.clickOnContinueButton();
 });
@@ -351,23 +353,9 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add("inWhichYearAreYouStudying", (stage) => {
-	switch (stage) {
-		case "Final year":
-			cy.contains("Final year").click();
-			break;
-		case "Second year":
-			cy.contains("Second year").click();
-			break;
-		case "First year":
-			cy.contains("First year").click();
-			break;
-		case "Other":
-			cy.contains("Other").click();
-			break;
-	}
+	cy.contains(stage).click();
 	cy.clickOnContinueButton();
 });
-
 
 Cypress.Commands.add(
 	'typeDateOfBirth',
