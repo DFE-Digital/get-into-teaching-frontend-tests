@@ -1,12 +1,12 @@
 /// <reference types='Cypress' />
-import Homepage from '../support/pageobjects/Homepage';
-import Navlinks from '../support/pageobjects/Navlinks';
+import Homepage from "../support/pageobjects/Homepage";
+import Navlinks from "../support/pageobjects/Navlinks";
 
 function terminalLog(violations) {
 	cy.task(
-		'log',
-		`${violations.length} accessibility violation${violations.length === 1 ? '' : 's'} ${
-			violations.length === 1 ? 'was' : 'were'
+		"log",
+		`${violations.length} accessibility violation${violations.length === 1 ? "" : "s"} ${
+			violations.length === 1 ? "was" : "were"
 		} detected`
 	);
 	const violationData = violations.map(({ id, impact, description, nodes }) => ({
@@ -15,7 +15,7 @@ function terminalLog(violations) {
 		description,
 		nodes: nodes.length,
 	}));
-	cy.task('table', violationData);
+	cy.task("table", violationData);
 }
 
 describe(`Home page tests : Tests execution date and time : ${new Date()}`, () => {
@@ -24,11 +24,11 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.logintoApp();
 	});
 
-	it('It shows the home page', () => {
-		homePage.getCovidMessage().should('exist');
-		homePage.getTeachingImage().should('exist');
-		homePage.getMailingStripText().should('exist');
-		homePage.getMailingStripText().siblings().should('exist');
+	it("It shows the home page", () => {
+		homePage.getCovidMessage().should("exist");
+		homePage.getTeachingImage().should("exist");
+		homePage.getMailingStripText().should("exist");
+		homePage.getMailingStripText().siblings().should("exist");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -37,11 +37,11 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		homePage.getFundingyourTrainingLink().then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr('href', Navlinks.fundingYourTraining);
+					expect(el).to.have.attr("href", Navlinks.fundingYourTraining);
 				})
 				.click();
 		});
-		cy.location('pathname').should('equal', Navlinks.fundingYourTraining);
+		cy.location("pathname").should("equal", Navlinks.fundingYourTraining);
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -50,11 +50,11 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		homePage.getStepstoBecomeTeacherLink().then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr('href', Navlinks.stepsToBecomeATeacher);
+					expect(el).to.have.attr("href", Navlinks.stepsToBecomeATeacher);
 				})
 				.click();
 		});
-		cy.location('pathname').should('equal', Navlinks.stepsToBecomeATeacher);
+		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -63,11 +63,11 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		homePage.getTeachingAsaCareerLink().then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr('href', Navlinks.lifeAsATeacher);
+					expect(el).to.have.attr("href", Navlinks.lifeAsATeacher);
 				})
 				.click();
 		});
-		cy.location('pathname').should('equal', Navlinks.lifeAsATeacher);
+		cy.location("pathname").should("equal", Navlinks.lifeAsATeacher);
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -76,11 +76,11 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		homePage.getSalariesAndBenefitsLink().then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr('href', Navlinks.salariesAndBenefits);
+					expect(el).to.have.attr("href", Navlinks.salariesAndBenefits);
 				})
 				.click();
 		});
-		cy.location('pathname').should('equal', Navlinks.salariesAndBenefits);
+		cy.location("pathname").should("equal", Navlinks.salariesAndBenefits);
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -89,80 +89,80 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		homePage.getFindanEventNearYouLink().then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr('href', Navlinks.events);
+					expect(el).to.have.attr("href", Navlinks.events);
 				})
 				.click();
 		});
-		cy.location('pathname').should('equal', Navlinks.events);
+		cy.location("pathname").should("equal", Navlinks.events);
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Please check here for updates"', () => {
-		cy.contains('Please check here for updates').then((linkText) => {
+		cy.contains("Please check here for updates").then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
-					expect(el).to.have.attr('href', Navlinks.covid19);
+					expect(el).to.have.attr("href", Navlinks.covid19);
 				})
 				.click();
 		});
-		cy.location('pathname').should('equal', Navlinks.covid19);
+		cy.location("pathname").should("equal", Navlinks.covid19);
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Sign up here"', () => {
 		homePage.getMailingStripButton().dblclick();
-		cy.location('pathname').should('equal', Navlinks.mailingListSignup);
+		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
 	});
 
 	it('Links through to "My story into teaching"', () => {
 		homePage.getMyStoryInToTeaching().click();
-		cy.location('pathname').should('equal', Navlinks.myStoryIntoTeaching);
+		cy.location("pathname").should("equal", Navlinks.myStoryIntoTeaching);
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "career-changers stories"', () => {
 		homePage.getMyStoryInToTeaching().click();
-    cy.contains('a', 'Read all stories about changing career').click();
-		cy.location('pathname').should('equal', Navlinks.careerChangers);
+		cy.contains("a", "Read all stories about changing career").click();
+		cy.location("pathname").should("equal", Navlinks.careerChangers);
 	});
 
 	it('Links through to "international-career-changers"', () => {
-    homePage.getMyStoryInToTeaching().click();
-		cy.contains('a', 'Read all stories about international returning teachers').click();
-		cy.location('pathname').should('equal', Navlinks.internationalCareerChangers);
+		homePage.getMyStoryInToTeaching().click();
+		cy.contains("a", "Read all stories about international returning teachers").click();
+		cy.location("pathname").should("equal", Navlinks.internationalCareerChangers);
 	});
 
 	it('Links through to "teacher-training-stories"', () => {
 		homePage.getMyStoryInToTeaching().click();
-		cy.contains('a', 'Read all stories about teacher training').click();
-		cy.location('pathname').should('equal', Navlinks.teacherTrainingStories);
+		cy.contains("a", "Read all stories about teacher training").click();
+		cy.location("pathname").should("equal", Navlinks.teacherTrainingStories);
 	});
 
 	it('Links through to "making-a-difference"', () => {
 		homePage.getMyStoryInToTeaching().click();
-		cy.contains('a', 'Read all stories about making a difference').click();
-		cy.location('pathname').should('equal', Navlinks.makingADifference);
+		cy.contains("a", "Read all stories about making a difference").click();
+		cy.location("pathname").should("equal", Navlinks.makingADifference);
 	});
 
 	it('Links through to "career-progression"', () => {
 		homePage.getMyStoryInToTeaching().click();
-		cy.contains('a', 'Read all stories about career progression').click();
-		cy.location('pathname').should('equal', Navlinks.careerProgression);
+		cy.contains("a", "Read all stories about career progression").click();
+		cy.location("pathname").should("equal", Navlinks.careerProgression);
 	});
 
 	it('Links through to "returning to teaching"', () => {
 		homePage.getMyStoryInToTeaching().click();
-		cy.contains('a', 'Read all stories about returning to teaching').click();
-		cy.location('pathname').should('equal', Navlinks.returners);
+		cy.contains("a", "Read all stories about returning to teaching").click();
+		cy.location("pathname").should("equal", Navlinks.returners);
 	});
 
 	it('Links through to "Find events"', () => {
 		homePage.getFindEventLink().click();
-		cy.location('pathname').should('equal', Navlinks.events);
-		homePage.getBannerText().should('exist');
+		cy.location("pathname").should("equal", Navlinks.events);
+		homePage.getBannerText().should("exist");
 		cy.shouldHavePageNavigation();
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
@@ -170,77 +170,68 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 
 	it('Links through to "Check your qualifications"', () => {
 		homePage.getCheckYourQualificationsLink().click();
-		cy.location('pathname').should('equal', Navlinks.stepsToBecomeATeacher);
-		homePage.getBannerText().should('exist');
+		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
+		homePage.getBannerText().should("exist");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Ways to train"', () => {
 		homePage.getWaystoTrainLink().siblings().click();
-		cy.location('pathname').should('equal', Navlinks.stepsToBecomeATeacher);
-		homePage.getBannerText().should('exist');
+		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
+		homePage.getBannerText().should("exist");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
 
-
-	it('It matches the event date, time and location with previous page', () => {
-		var eventDateAndTime;		
+	it("It matches the event date, time and location with previous page", () => {
+		var eventDateAndTime;
 		homePage.getFindEventLink().click();
-		cy.get('#events_search_month').as('month').children().first().then((option) => {
-			cy.get('@month').select(option.text())
-		});
-		cy.get('.request-button').click();
-		cy.get('.event-box__header')
-			.as('1steventName')
-			.should('exist')
+		cy.get("#events_search_month")
+			.as("month")
+			.children()
+			.first()
+			.then((option) => {
+				cy.get("@month").select(option.text());
+			});
+		cy.get(".request-button").click();
+		cy.get(".event-box__header")
+			.as("1steventName")
+			.should("exist")
 			.eq(0)
 			.then((eventName) => {
-				cy.log('Event Name : ' + eventName.text());
-				cy.get('@1steventName')
+				cy.log("Event Name : " + eventName.text());
+				cy.get("@1steventName")
 					.siblings()
 					.eq(0)
 					.then((eventDateandTime) => {
-						cy.log('Event date and Time : ' + eventDateandTime.text());
-						eventDateAndTime = eventDateandTime.text();						
-						cy.get('@1steventName').eq(0).click();
-						cy.get('.hero__banner__text > h1').should(
-							'contain.text',
-							eventName.text().trim()
-						);
+						cy.log("Event date and Time : " + eventDateandTime.text());
+						eventDateAndTime = eventDateandTime.text();
+						cy.get("@1steventName").eq(0).click();
+						cy.get(".hero__banner__text > h1").should("contain.text", eventName.text().trim());
 					});
 			});
-			cy.get('.event-box__header > h4').then((eventDateandTimeonNextPage) => {
+		cy.get(".event-box__header > h4").then((eventDateandTimeonNextPage) => {
 			var expectedEventDateAndTime = eventDateandTimeonNextPage.text();
-            expect(eventDateAndTime.trim()).to.equal(expectedEventDateAndTime.trim());		
+			expect(eventDateAndTime.trim()).to.equal(expectedEventDateAndTime.trim());
 		});
 	});
 
-	it('Has no detectable a11y violations on load (filtering to only include critical impact violations)', () => {
+	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
-			includedImpacts: ['critical'],
+			includedImpacts: ["critical"],
 		});
 	});
-
-	
 });
-
 
 describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
-	
-	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {	
-		
+	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
-			url: 'https://get-into-teaching-apps-test.london.cloudapps.digital/',
-			method: 'GET',
-			failOnStatusCode: false
-		  })
-		cy.verify404ErrorMessage();
-		
+			url: "https://get-into-teaching-apps-test.london.cloudapps.digital/",
+			method: "GET",
+			failOnStatusCode: false,
 		});
-		
+		cy.verify404ErrorMessage();
+	});
 });
-
-
