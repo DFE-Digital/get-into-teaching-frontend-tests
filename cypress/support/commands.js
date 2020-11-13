@@ -202,22 +202,7 @@ Cypress.Commands.add("enterUKTelephoneNumber", (number) => {
 });
 
 Cypress.Commands.add("doYouHaveDegree", (degree) => {
-	switch (degree) {
-		case "Yes":
-			cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-yes-field").click();
-			break;
-		case "No":
-			cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-no-field").click();
-			break;
-		case "I'm studying for a degree":
-			cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-studying-field").click();
-			break;
-		case "I have an equivalent qualification from another country":
-			cy.get(
-				"#teacher-training-adviser-steps-have-a-degree-degree-options-equivalent-field"
-			).click();
-			break;
-	}
+	cy.contains(degree).click();
 	cy.clickOnContinueButton();
 });
 

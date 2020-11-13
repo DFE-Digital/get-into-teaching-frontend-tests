@@ -1575,8 +1575,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
 		  Overseas user		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -1777,7 +1776,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Which stage are you interested in teaching? - primary
 		  Overseas user		 	   
 		*/
-		var stage;
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
