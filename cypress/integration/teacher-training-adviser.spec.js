@@ -144,7 +144,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -182,7 +182,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -221,8 +221,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -261,8 +261,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -302,8 +302,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(false);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -331,8 +331,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -371,8 +371,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -412,9 +412,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -454,9 +454,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -497,9 +497,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(false);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -529,7 +529,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(false);
+		cy.retakeGcseMathsAndEnglish(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -633,7 +633,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("Dance");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
@@ -673,7 +673,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("Dance");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
@@ -713,7 +713,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.wait(1000);
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(false);
+		cy.retakeGcseMathsAndEnglish(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -758,7 +758,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -798,7 +798,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -839,8 +839,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -881,8 +881,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -923,8 +923,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(false);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -954,8 +954,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -996,8 +996,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1039,9 +1039,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1083,9 +1083,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1127,9 +1127,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1171,9 +1171,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1215,9 +1215,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1259,9 +1259,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1303,9 +1303,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1347,9 +1347,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(true);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1390,9 +1390,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
-		cy.areYouPlanningToRetakeYourScienceGCSE(false);
+		cy.retakeGcseMathsAndEnglish(true);
+		cy.gcseScience(false);
+		cy.retakeGcseScience(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -1420,7 +1420,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(false);
+		cy.retakeGcseMathsAndEnglish(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -1525,7 +1525,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("Dance");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
@@ -1565,7 +1565,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("Dance");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
@@ -1604,7 +1604,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(false);
+		cy.retakeGcseMathsAndEnglish(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -1789,7 +1789,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectWhichClassIsYourDegree("First class");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
+		cy.gcseScience(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth(31, 3, 1985);
 		cy.doYouLiveInTheUk(false);
@@ -2052,7 +2052,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectWhichClassIsYourDegree("First class");
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
 		cy.enterDateOfBirth(31, 3, 1985);
@@ -2172,7 +2172,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectWhichClassIsYourDegree("First class");
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
 		cy.enterDateOfBirth(31, 3, 1985);
@@ -2206,7 +2206,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectWhichClassIsYourDegree("First class");
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
 		cy.enterDateOfBirth(31, 3, 1985);
@@ -2288,7 +2288,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Secondary");
 
 		cy.gcseMathsAndEnglish(false);
-		cy.planningToRetakeGCSEMathsAndEnglish(true);
+		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
 		teacherTrainingAdviser.getContinueButton().click();
