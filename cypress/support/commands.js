@@ -258,7 +258,7 @@ Cypress.Commands.add("whenDoYouWantToStartYourTeacherTraining", (trainingYear) =
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("planningToRetakeGCSEMathsAndEnglish", (planning) => {
+Cypress.Commands.add("retakeGcseMathsAndEnglish", (planning) => {
 	if (planning) {
 		cy.contains("Yes").click();
 	} else {
@@ -267,8 +267,8 @@ Cypress.Commands.add("planningToRetakeGCSEMathsAndEnglish", (planning) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("doYouHaveGrade4CorAboveInGCSEScienceorEquivalent", (grade) => {
-	if (grade == "Yes") {
+Cypress.Commands.add("gcseScience", (grade) => {
+	if (grade) {
 		cy.get(
 			"#teacher-training-adviser-steps-gcse-science-has-gcse-science-id-222750000-field"
 		).click();
@@ -352,8 +352,8 @@ Cypress.Commands.add("clickOnBackButton", () => {
 	cy.contains("Back").click();
 });
 
-Cypress.Commands.add("areYouPlanningToRetakeYourScienceGCSE", (planning) => {
-	if (planning == "Yes") {
+Cypress.Commands.add("retakeGcseScience", (planning) => {
+	if (planning) {
 		cy.contains("Yes").click();
 	} else {
 		cy.contains("No").click();
