@@ -268,7 +268,7 @@ Cypress.Commands.add("planningToRetakeGCSEMathsAndEnglish", (planning) => {
 });
 
 Cypress.Commands.add("doYouHaveGrade4CorAboveInGCSEScienceorEquivalent", (grade) => {
-	if (grade == "Yes") {
+	if (grade) {
 		cy.get(
 			"#teacher-training-adviser-steps-gcse-science-has-gcse-science-id-222750000-field"
 		).click();
@@ -353,7 +353,7 @@ Cypress.Commands.add("clickOnBackButton", () => {
 });
 
 Cypress.Commands.add("areYouPlanningToRetakeYourScienceGCSE", (planning) => {
-	if (planning == "Yes") {
+	if (planning) {
 		cy.contains("Yes").click();
 	} else {
 		cy.contains("No").click();

@@ -18,10 +18,7 @@ function terminalLog(violations) {
 }
 
 describe("Feature - Get an adviser : Tests execution date and time : " + new Date(), () => {
-	var returner;
-	var havePreviousTeacherReferenceNumber;
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
-	const mailingListSignUp = new MailingListSignUp();
 	beforeEach(function () {
 		//cy.viewport("samsung-s10");
 		cy.fixture("tta-signup-test-data.json").then((testData) => {
@@ -65,8 +62,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching((returner = true));
-		cy.havePreviousTeacherReferenceNumber((havePreviousTeacherReferenceNumber = true));
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Physics");
@@ -106,8 +103,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = true));
-		cy.havePreviousTeacherReferenceNumber((havePreviousTeacherReferenceNumber = true));
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Biology");
 		cy.selectSubjectLikeToTeach("Maths");
@@ -134,20 +131,20 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - Yes
 		  UK user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -172,20 +169,20 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - Yes
 		  Overseas user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -211,21 +208,21 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake your science GCSE? - Yes
 		  UK user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -251,21 +248,21 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake your science GCSE? - Yes
 		  Overseas user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -292,21 +289,21 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  //Expected page - Get the right GCSEs or equivalent qualifications
 		 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
 		cy.wait(1000);
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("No");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -321,13 +318,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - Yes
 		  UK user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -335,7 +332,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -361,13 +358,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have grade 4 (C) or above in GCSE science, or equivalent? - Yes
 		  Overseas user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -375,7 +372,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -402,13 +399,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake your science GCSE? - Yes
 		  UK user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -416,8 +413,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -444,13 +441,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake your science GCSE? - Yes
 		  Overseas user
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -458,8 +455,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -487,13 +484,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications page
 		 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -501,8 +498,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("No");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -519,13 +516,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications page
 		 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -546,13 +543,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - Yes
 		  UK user		 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -584,13 +581,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - Yes
 		  Overseas user		 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -623,13 +620,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
 		  UK user		 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -663,13 +660,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
 		  Overseas user		 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -703,13 +700,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - No
 		  Expected - Get the right GCSEs or equivalent qualifications page	 
 		*/
-		var stage;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -733,7 +730,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("No");
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "If you do not have a degree");
 	});
@@ -748,21 +745,20 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -789,21 +785,20 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas use
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -831,22 +826,21 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -874,22 +868,21 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -917,22 +910,21 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  //Expected page - Get the right GCSEs or equivalent qualifications	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
 		cy.whatDegreeClassAreYouPredictedToGet("2:2");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("No");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -949,14 +941,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -964,7 +955,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -992,14 +983,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1007,7 +997,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1036,14 +1026,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1051,8 +1040,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1081,14 +1070,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1096,8 +1084,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1126,14 +1114,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1141,8 +1128,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1171,14 +1158,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1186,8 +1172,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
@@ -1216,14 +1202,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1231,8 +1216,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1261,14 +1246,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1276,8 +1260,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1306,14 +1290,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1321,8 +1304,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1351,14 +1334,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user	  
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1366,8 +1348,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
@@ -1395,14 +1377,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake your science GCSE? - No
 		  Expected - Get the right GCSEs or equivalent qualifications page		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1410,8 +1391,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.planningToRetakeGCSEMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("No");
-		cy.areYouPlanningToRetakeYourScienceGCSE("No");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(false);
+		cy.areYouPlanningToRetakeYourScienceGCSE(false);
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "Get the right GCSEs or equivalent qualifications");
@@ -1426,14 +1407,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - No
 		  Expected - Get the right GCSEs or equivalent qualifications		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1455,14 +1435,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1494,14 +1473,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - Yes
 		  Overseas user		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1534,14 +1512,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - Yes
 		  UK user		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
+
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1581,7 +1558,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1615,14 +1592,12 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - No
 		  Expected - Get the right GCSEs or equivalent qualifications page		 	   
 		*/
-		var stage;
-		var haveEquivalentDegreeFromAnotherCountry = true;
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1643,13 +1618,12 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 	   
 		*/
 
-		var stage;
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
@@ -1691,13 +1665,12 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 
-		var stage;
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
@@ -1733,13 +1706,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Which stage are you interested in teaching? - primary
 		  UK user		 	   
 		*/
-		var stage;
+		"";
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
@@ -1782,7 +1755,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.email
 		);
 		//cy.verifyYourEmailAddress();
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
@@ -1810,13 +1783,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(true);
-		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent("Yes");
+		cy.doYouHaveGrade4CorAboveInGCSEScienceorEquivalent(true);
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth(31, 3, 1985);
 		cy.doYouLiveInTheUk(false);
@@ -2050,8 +2023,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = true));
-		cy.havePreviousTeacherReferenceNumber((havePreviousTeacherReferenceNumber = true));
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Physics");
@@ -2073,7 +2046,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type("Kumar");
 		teacherTrainingAdviser.getEmailAddress().type("sushantkumar@gamil.com");
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -2193,7 +2166,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -2204,7 +2177,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
 		cy.enterDateOfBirth(31, 3, 1985);
 		cy.doYouLiveInTheUk(true);
-		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT", (returner = true));
+		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("0834");
 		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
 		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-error")
@@ -2227,7 +2200,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -2308,7 +2281,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		cy.returningToTeaching((returner = false));
+		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -2383,14 +2356,14 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching((returner = true));
-		cy.havePreviousTeacherReferenceNumber((havePreviousTeacherReferenceNumber = true));
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Physics");
 		cy.enterDateOfBirth("25", "02", "1986");
 		cy.doYouLiveInTheUk(true);
-		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT", (returner = true));
+		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
 		cy.get(".govuk-heading-l")
 			.should("exist")
@@ -2439,7 +2412,6 @@ describe("Matchback feature", () => {
 	var returner;
 	let firstName;
 	let lastName;
-	var havePreviousTeacherReferenceNumber;
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
 	const mailingListSignUp = new MailingListSignUp();
 
@@ -2471,14 +2443,14 @@ describe("Matchback feature", () => {
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching((returner = true));
-		cy.havePreviousTeacherReferenceNumber((havePreviousTeacherReferenceNumber = true));
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Physics");
 		cy.enterDateOfBirth("25", "02", "1986");
 		cy.doYouLiveInTheUk(true);
-		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT", (returner = true));
+		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
 		cy.get(".govuk-heading-l")
 			.should("exist")
@@ -2580,8 +2552,8 @@ describe("Matchback feature", () => {
 			teacherTrainingAdviser.getContinueButton().click();
 			cy.enterEmailVerificationCodeForTeacherTrainingAdviser();
 			cy.clickOnContinueButton();
-			cy.returningToTeaching((returner = true));
-			cy.havePreviousTeacherReferenceNumber((havePreviousTeacherReferenceNumber = true));
+			cy.returningToTeaching(true);
+			cy.havePreviousTeacherReferenceNumber(true);
 			cy.enterPreviousTeacherReferenceNumber(23478463);
 			cy.selectPreviuosMainSubject("Computing");
 			cy.selectSubjectLikeToTeach("Physics");
@@ -2591,7 +2563,7 @@ describe("Matchback feature", () => {
 				"have.value",
 				"TF3 2BT"
 			);
-			cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT", (returner = true));
+			cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 			cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").should(
 				"have.value",
 				this.testInputData.phone
