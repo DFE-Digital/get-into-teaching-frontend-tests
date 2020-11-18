@@ -2406,6 +2406,36 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("exist")
 			.should("have.text", "You have already signed up to this service");
 	});
+	it('It expands if user clicks on "Can\'t see the subject you would like to teach?" link', function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Biology");
+		cy.get(".govuk-details__summary-text").click();
+		cy.get(".govuk-details__text")
+			.should("be.visible")
+			.then(function (buttonText) {
+				cy.log(buttonText.text());
+			});
+
+		cy.get(".govuk-details__text")
+			.children()
+			.as("element")
+			.should("exist")
+			.invoke("attr", "href")
+			.then(function (targetLink) {
+				expect(targetLink).to.equal("https://beta-getintoteaching.education.gov.uk/guidance#9");
+			});
+		cy.get("@element").then(function (targetLinkText) {
+			cy.log();
+			expect(targetLinkText.text()).to.equal("return to teaching guidance");
+		});
+	});
 });
 
 describe("Matchback feature", () => {
