@@ -67,8 +67,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 
 	it("It shows error message if user enters wrong email verification code", function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
-		let firstName = `Mailinglisttestuser${rnum}firstname`;
-		let lastName = `Mailinglisttestuser${rnum}lastname`;
+		let firstName = `Testuser${rnum}firstname`;
+		let lastName = `Testuser${rnum}lastname`;
 		mailingListSignUp.getFirstName().type(firstName);
 		mailingListSignUp.getLastName().type(lastName);
 		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
@@ -82,8 +82,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPhone().type(this.testInputData.phone);
-		cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field").click();
+		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
 		cy.visit("/mailinglist/signup/name", {
@@ -109,8 +108,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 
 	it("It resends the verification code to users email", function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
-		let firstName = `Mailinglisttestuser${rnum}firstname`;
-		let lastName = `Mailinglisttestuser${rnum}lastname`;
+		let firstName = `Testuser${rnum}firstname`;
+		let lastName = `Testuser${rnum}lastname`;
 		mailingListSignUp.getFirstName().type(firstName);
 		mailingListSignUp.getLastName().type(lastName);
 		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
@@ -124,8 +123,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPhone().type(this.testInputData.phone);
-		cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field").click();
+		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
 		cy.visit("/mailinglist/signup/name", {
@@ -171,16 +169,28 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPhone().type(this.testInputData.phone);
-		cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field").click();
+		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
+		cy.contains("Want to speak to us?")
+			.next()
+			.children()
+			.as("speakToUsSection")
+			.should("exist")
+			.invoke("attr", "href")
+			.then(function (targetLink) {
+				expect(targetLink).to.equal("tel:08003892501");
+			});
+		cy.get("@speakToUsSection").then(function (phoneNumber) {
+			cy.log();
+			expect(phoneNumber.text()).to.equal("0800 389 2501");
+		});
 	});
 
 	it('It shows "Youve already signed up" message to existing candidate', function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
-		let firstName = `Mailinglisttestuser${rnum}firstname`;
-		let lastName = `Mailinglisttestuser${rnum}lastname`;
+		let firstName = `Testuser${rnum}firstname`;
+		let lastName = `Testuser${rnum}lastname`;
 		mailingListSignUp.getFirstName().type(firstName);
 		mailingListSignUp.getLastName().type(lastName);
 		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
@@ -194,8 +204,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPhone().type(this.testInputData.phone);
-		cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field").click();
+		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
 		cy.visit("/mailinglist/signup/name", {
@@ -224,7 +233,6 @@ describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 			method: "GET",
 			failOnStatusCode: false,
 		});
-
 		cy.verify404ErrorMessage();
 	});
 });

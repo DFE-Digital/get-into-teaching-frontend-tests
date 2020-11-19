@@ -435,3 +435,7 @@ Cypress.Commands.add("verify404ErrorMessage", () => {
 	cy.get(".govuk-heading-xl").should("have.text", "Not Found");
 	cy.get("small").should("have.text", "unknown_route");
 });
+
+Cypress.Commands.add("acceptPrivacyPolicy", () => {
+	cy.contains("Yes").click();
+});
