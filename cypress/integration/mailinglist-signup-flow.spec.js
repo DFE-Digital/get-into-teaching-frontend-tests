@@ -22,7 +22,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 
 	it("It shows the error message if user clicks next button without entering the mandatory details", function () {
 		cy.get("#edit_mailing_list_steps_name_name").should("exist");
-		mailingListSignUp.getSubmitButton().click();
+		mailingListSignUp.getNextStep().click();
 		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
 		cy.get(".govuk-error-summary__list")
 			.children()
@@ -40,14 +40,14 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	});
 
 	it("Error message link navigates to its respective field", function () {
-		mailingListSignUp.getSubmitButton().click();
+		mailingListSignUp.getNextStep().click();
 		cy.contains("Enter your full email address")
 			.should((el) => {
 				expect(el).to.have.attr("href", "#mailing-list-steps-name-email-field-error");
 			})
 			.click()
 			.type("Test_email@gmail.com");
-		mailingListSignUp.getSubmitButton().click();
+		mailingListSignUp.getNextStep().click();
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 			.should("have.text", "Enter your first name")
 			.next()
@@ -58,7 +58,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			})
 			.click()
 			.type("Test_First_Name");
-		mailingListSignUp.getSubmitButton().click();
+		mailingListSignUp.getNextStep().click();
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should(
 			"have.text",
 			"Enter your last name"
@@ -223,6 +223,41 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.get("#edit_mailing_list_steps_already_subscribed_already_subscribed > h1")
 			.should("exist")
 			.should("have.text", "You’ve already signed up");
+	});
+
+	it("It shows Privacy policy details to the user if he clicks on link", function () {
+		mailingListSignUp.getFirstName().type(this.testInputData.firstName);
+		mailingListSignUp.getLastName().type(this.testInputData.lastName);
+		let rnum = Math.floor(Math.random() * 1000000000 + 1);
+		let email = `testuser${rnum.toString()}@mail.co.uk`;
+		mailingListSignUp.getEmailAddress().type(email);
+		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp
+			.getStage()
+			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getNextStep().click();
+		cy.contains("privacy policy").click();
+		cy.get('a[href="/privacy-policy?id=8da7ae80-82f2-ea11-a815-000d3a44afcc"]').should(
+			"have.attr",
+			"target",
+			"blank"
+		);
+		cy.visit("/privacy-policy?id=8da7ae80-82f2-ea11-a815-000d3a44afcc", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.get(".content__left > h2").should("exist").should("have.text", "Privacy Policy");
+		cy.get(":nth-child(3) > strong")
+			.should("exist")
+			.should("have.text", "Privacy Notice: Get into Teaching Information Service");
+		cy.get(".site-footer-top").should("exist").next().should("exist");
 	});
 });
 

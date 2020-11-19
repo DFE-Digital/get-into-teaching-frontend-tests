@@ -11,9 +11,6 @@ class MailinglistSignupPage {
 	getDescribeYourself() {
 		return cy.get("#mailing-list-steps-name-current-status-field");
 	}
-	getSubmitButton() {
-		return cy.get("#edit_mailing_list_steps_name_name > .call-to-action-button");
-	}
 	getDegreeStage() {
 		return cy.get("#mailing-list-steps-name-degree-status-id-field");
 	}
