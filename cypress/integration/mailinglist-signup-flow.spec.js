@@ -69,9 +69,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		mailingListSignUp.getFirstName().type(firstName);
-		mailingListSignUp.getLastName().type(lastName);
-		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
+		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -91,9 +89,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		mailingListSignUp.getFirstName().type(firstName);
-		mailingListSignUp.getLastName().type(lastName);
-		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
+		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
@@ -110,9 +106,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		mailingListSignUp.getFirstName().type(firstName);
-		mailingListSignUp.getLastName().type(lastName);
-		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
+		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -132,9 +126,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		mailingListSignUp.getFirstName().type(firstName);
-		mailingListSignUp.getLastName().type(lastName);
-		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
+		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
@@ -154,11 +146,13 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	});
 
 	it(`It shows 'You’ve signed up' message for new candidate`, function () {
-		mailingListSignUp.getFirstName().type(this.testInputData.firstName);
-		mailingListSignUp.getLastName().type(this.testInputData.lastName);
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		mailingListSignUp.getEmailAddress().type(email);
+		cy.enterFirstNameSurNameAndEmailAddress(
+			this.testInputData.firstName,
+			this.testInputData.lastName,
+			email
+		);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -191,9 +185,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		mailingListSignUp.getFirstName().type(firstName);
-		mailingListSignUp.getLastName().type(lastName);
-		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
+		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -213,9 +205,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		mailingListSignUp.getFirstName().type(firstName);
-		mailingListSignUp.getLastName().type(lastName);
-		mailingListSignUp.getEmailAddress().type(this.testInputData.emailAddress);
+		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.enterEmailVerificationCodeForMailinglist();
@@ -226,11 +216,13 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	});
 
 	it("It shows Privacy policy details to the user if he clicks on link", function () {
-		mailingListSignUp.getFirstName().type(this.testInputData.firstName);
-		mailingListSignUp.getLastName().type(this.testInputData.lastName);
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		mailingListSignUp.getEmailAddress().type(email);
+		cy.enterFirstNameSurNameAndEmailAddress(
+			this.testInputData.firstName,
+			this.testInputData.lastName,
+			email
+		);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -241,22 +233,9 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
 		mailingListSignUp.getNextStep().click();
-		cy.contains("privacy policy").click();
-		cy.get('a[href="/privacy-policy?id=8da7ae80-82f2-ea11-a815-000d3a44afcc"]').should(
-			"have.attr",
-			"target",
-			"blank"
-		);
-		cy.visit("/privacy-policy?id=8da7ae80-82f2-ea11-a815-000d3a44afcc", {
-			auth: {
-				username: Cypress.env("HTTPAUTH_USERNAME"),
-				password: Cypress.env("HTTPAUTH_PASSWORD"),
-			},
-		});
-		cy.get(".content__left > h2").should("exist").should("have.text", "Privacy Policy");
-		cy.get(":nth-child(3) > strong")
-			.should("exist")
-			.should("have.text", "Privacy Notice: Get into Teaching Information Service");
+		cy.contains("a", "privacy policy").invoke("removeAttr", "target").click();
+		cy.contains("Privacy Policy").should("exist");
+		cy.contains("Privacy Notice: Get into Teaching Information Service").should("exist");
 		cy.get(".site-footer-top").should("exist").next().should("exist");
 	});
 });

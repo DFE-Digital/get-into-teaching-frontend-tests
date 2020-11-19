@@ -1,3 +1,4 @@
+import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
 Cypress.Commands.add("logintoApp", () => {
 	cy.visit("/", {
 		auth: {
@@ -438,4 +439,11 @@ Cypress.Commands.add("verify404ErrorMessage", () => {
 
 Cypress.Commands.add("acceptPrivacyPolicy", () => {
 	cy.contains("Yes").click();
+});
+
+Cypress.Commands.add("enterFirstNameSurNameAndEmailAddress", (firstName, lastName, email) => {
+	const mailingListSignUp = new MailingListSignUp();
+	mailingListSignUp.getFirstName().type(firstName);
+	mailingListSignUp.getLastName().type(lastName);
+	mailingListSignUp.getEmailAddress().type(email);
 });
