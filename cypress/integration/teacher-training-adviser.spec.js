@@ -2428,6 +2428,40 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 				expect(targetLink).to.equal("open");
 			});
 	});
+
+	it("It opens feedback survey page if user clicks on feedback link", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching(false);
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Final year");
+		cy.selectWhatSubjectIsYourDegree("Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Secondary");
+		cy.gcseMathsAndEnglish(true);
+		cy.whichSubjectAreYouInterestedInTeaching("Computing");
+		cy.whenDoYouWantToStartYourTeacherTraining("2021");
+		cy.enterDateOfBirth("31", "03", "1985");
+		cy.doYouLiveInTheUk("UK");
+		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
+		cy.enterUKTelephoneNumber("0125234490");
+		cy.get(".govuk-heading-l")
+			.should("exist")
+			.should("have.text", "Check your answers before you continue");
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.get(".govuk-panel__title").then(function (signuptext) {
+			signuptext = signuptext.text().trim();
+			expect(signuptext).to.equal("Thank you  Sign up complete");
+		});
+		cy.contains("a", "feedback").invoke("removeAttr", "target").click();
+		cy.get(".freebirdFormviewerViewHeaderTitle")
+			.should("exist")
+			.should("have.text", "Get into Teaching: Feedback Survey");
+	});
 });
 
 describe("Matchback feature", () => {
