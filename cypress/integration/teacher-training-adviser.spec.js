@@ -2406,6 +2406,28 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("exist")
 			.should("have.text", "You have already signed up to this service");
 	});
+
+	it('It expands "What is a GCSE?" link if user clicks on it', function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching(false);
+		cy.doYouHaveDegree("I'm studying for a degree");
+		cy.inWhichYearAreYouStudying("Final year");
+		cy.selectWhatSubjectIsYourDegree("Computing");
+		cy.whatDegreeClassAreYouPredictedToGet("2:2");
+		cy.selectStage("Secondary");
+		cy.get(".govuk-details__text").as("gcsedefinition").should("exist").should("not.be.visible");
+		cy.contains("What is a GCSE?").click();
+		cy.get("@gcsedefinition").should("exist").should("be.visible");
+		cy.get(".govuk-details")
+			.invoke("attr", "open")
+			.then(function (targetLink) {
+				expect(targetLink).to.equal("open");
+			});
+	});
 });
 
 describe("Matchback feature", () => {
