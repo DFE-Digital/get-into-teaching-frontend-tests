@@ -441,7 +441,7 @@ Cypress.Commands.add("acceptPrivacyPolicy", () => {
 	cy.contains("Yes").click();
 });
 
-Cypress.Commands.add("enterFirstNameSurNameAndEmailAddress", (firstName, lastName, email) => {
+Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", (firstName, lastName, email) => {
 	const mailingListSignUp = new MailingListSignUp();
 	mailingListSignUp.getFirstName().type(firstName);
 	mailingListSignUp.getLastName().type(lastName);

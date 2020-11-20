@@ -69,7 +69,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -89,7 +89,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
@@ -106,7 +106,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -126,7 +126,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
@@ -148,7 +148,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	it(`It shows 'You’ve signed up' message for new candidate`, function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		cy.enterFirstNameSurNameAndEmailAddress(
+		cy.enterFirstNameLastNameAndEmailAddress(
 			this.testInputData.firstName,
 			this.testInputData.lastName,
 			email
@@ -185,7 +185,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
@@ -205,7 +205,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameSurNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.enterEmailVerificationCodeForMailinglist();
@@ -218,7 +218,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	it("It shows Privacy policy details to the user if he clicks on link", function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		cy.enterFirstNameSurNameAndEmailAddress(
+		cy.enterFirstNameLastNameAndEmailAddress(
 			this.testInputData.firstName,
 			this.testInputData.lastName,
 			email
