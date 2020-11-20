@@ -18,7 +18,7 @@ function terminalLog(violations) {
 	cy.task("table", violationData);
 }
 
-describe(`Home page tests : Tests execution date and time : ${new Date()}`, () => {
+xdescribe(`Home page tests : Tests execution date and time : ${new Date()}`, () => {
 	const homePage = new Homepage();
 	beforeEach(() => {
 		cy.logintoApp();
@@ -225,7 +225,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 });
 
-describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
 			url: "https://get-into-teaching-apps-test.london.cloudapps.digital/",

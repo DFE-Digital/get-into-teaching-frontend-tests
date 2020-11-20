@@ -1,7 +1,7 @@
 import Homepage from "../support/pageobjects/Homepage";
 import EventSignupPage from "../support/pageobjects/EventSignupPage";
 
-describe("Feature - Event sign up : Tests execution date and time : " + new Date(), () => {
+xdescribe("Feature - Event sign up : Tests execution date and time : " + new Date(), () => {
 	const searchForEvent = new Homepage();
 	const eventSignup = new EventSignupPage();
 	//var isEventPresent = false;
@@ -453,7 +453,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 });
 
-describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
 			url: "https://get-into-teaching-apps-test.london.cloudapps.digital/events",

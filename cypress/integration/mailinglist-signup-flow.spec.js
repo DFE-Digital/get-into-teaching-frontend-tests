@@ -1,6 +1,6 @@
 import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
 
-describe(`Feature - Mailing list sign up : Tests execution date and time : ${new Date()}`, () => {
+xdescribe(`Feature - Mailing list sign up : Tests execution date and time : ${new Date()}`, () => {
 	const mailingListSignUp = new MailingListSignUp();
 
 	beforeEach(function () {
@@ -240,7 +240,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	});
 });
 
-describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
 			url: "https://get-into-teaching-app-tests.london.cloudapps.digital//mailinglist/signup/name",
