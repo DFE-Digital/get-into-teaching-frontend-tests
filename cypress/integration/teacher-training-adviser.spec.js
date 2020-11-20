@@ -2518,7 +2518,6 @@ describe("Matchback feature", () => {
 		mailingListSignUp.getEmailAddress().type(this.testData.email);
 		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
-
 		mailingListSignUp
 			.getStage()
 			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
@@ -2527,8 +2526,7 @@ describe("Matchback feature", () => {
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPhone().type(this.testInputData.phone);
-		cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field").click();
+		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", "You've signed up");
 	});
@@ -2564,8 +2562,7 @@ describe("Matchback feature", () => {
 				"TF3 2BT"
 			);
 			cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
-			cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").should(
-				"have.value",
+			cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
 				this.testInputData.phone
 			);
 			cy.clickOnContinueButton();
