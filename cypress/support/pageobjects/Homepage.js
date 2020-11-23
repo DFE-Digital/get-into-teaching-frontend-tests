@@ -1,5 +1,4 @@
 module.exports = class HomePage {
-	
 	getCovidMessage() {
 		return cy.get(".covid");
 	}
@@ -95,5 +94,7 @@ module.exports = class HomePage {
 	getSearchforEventsHeading() {
 		return cy.get("#searchforevents");
 	}
-	
-}
+	getSocialMediaLink(index) {
+		return cy.get(".site-footer-top__social__link").eq(index);
+	}
+};
