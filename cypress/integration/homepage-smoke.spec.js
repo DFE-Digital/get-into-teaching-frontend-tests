@@ -184,6 +184,38 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.shouldHaveFooter();
 	});
 
+	it("Links through to facebook page", () => {
+		homePage.getSocialMediaLink(0).invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).equal(Navlinks.facebook);
+		});
+	});
+	it("Links through to instagram page", () => {
+		homePage.getSocialMediaLink(1).invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).equal(Navlinks.instagram);
+		});
+	});
+	it("Links through to linkedin page", () => {
+		homePage.getSocialMediaLink(2).invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).contains(Navlinks.linkedin);
+		});
+	});
+
+	it("Links through to twitter page", () => {
+		homePage.getSocialMediaLink(3).invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).equal(Navlinks.twitter);
+		});
+	});
+	it("Links through to youtube page", () => {
+		homePage.getSocialMediaLink(4).invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).equal(Navlinks.youtube);
+		});
+	});
+
 	it("It matches the event date, time and location with previous page", () => {
 		var eventDateAndTime;
 		homePage.getFindEventLink().click();
