@@ -363,7 +363,7 @@ Cypress.Commands.add("retakeGcseScience", (planning) => {
 });
 
 Cypress.Commands.add("verifyYourEmailAddress", () => {
-	cy.wait(8000);
+	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
