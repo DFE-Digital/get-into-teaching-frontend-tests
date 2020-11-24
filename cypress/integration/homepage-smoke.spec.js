@@ -162,7 +162,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	it('Links through to "Find events"', () => {
 		homePage.getFindEventLink().click();
 		cy.location("pathname").should("equal", Navlinks.events);
-		homePage.getBannerText().should("exist");
+		homePage.getBannerText().should("exist").should("have.text", "Find an event near you");
 		cy.shouldHavePageNavigation();
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
@@ -240,11 +240,12 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 						cy.log("Event date and Time : " + eventDateandTime.text());
 						eventDateAndTime = eventDateandTime.text();
 						cy.get("@1steventName").eq(0).click();
-						cy.get(".hero__banner__text > h1").should("contain.text", eventName.text().trim());
+						cy.get(".content__left > h1").should("contain.text", eventName.text().trim());
 					});
 			});
-		cy.get(".event-box__header > h4").then((eventDateandTimeonNextPage) => {
+		cy.get(".event-info__date").then((eventDateandTimeonNextPage) => {
 			var expectedEventDateAndTime = eventDateandTimeonNextPage.text();
+			expectedEventDateAndTime = expectedEventDateAndTime.replace("at", "");
 			expect(eventDateAndTime.trim()).to.equal(expectedEventDateAndTime.trim());
 		});
 	});

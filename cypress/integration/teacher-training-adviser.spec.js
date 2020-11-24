@@ -112,7 +112,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
 	});
 
-	xit('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
+	it('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -124,12 +124,25 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Other");
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
-		cy.contains("a", "send you information via email").click();
-		cy.url().then((url) => {
-			expect(url).contains(Navlinks.mailingListSignupUrl);
+		cy.contains("a", "send you information via email")
+			.invoke("attr", "href")
+			.then(function (val) {
+				cy.request({
+					url: val,
+					method: "GET",
+					auth: {
+						username: Cypress.env("HTTPAUTH_USERNAME"),
+						password: Cypress.env("HTTPAUTH_PASSWORD"),
+					},
+				});
+			})
+			.as("linkResponse");
+		cy.get("@linkResponse").then((response) => {
+			expect(response.status).to.eq(200);
 		});
 	});
-	xit('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
+
+	it('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -141,9 +154,21 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectPreviuosMainSubject("Computing");
 		cy.selectSubjectLikeToTeach("Other");
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
-		cy.contains("a", "attending a return to teaching event").click();
-		cy.url().then((url) => {
-			expect(url).contains(Navlinks.events);
+		cy.contains("a", "attending a return to teaching event")
+			.invoke("attr", "href")
+			.then(function (val) {
+				cy.request({
+					url: val,
+					method: "GET",
+					auth: {
+						username: Cypress.env("HTTPAUTH_USERNAME"),
+						password: Cypress.env("HTTPAUTH_PASSWORD"),
+					},
+				});
+			})
+			.as("linkResponse");
+		cy.get("@linkResponse").then((response) => {
+			expect(response.status).to.eq(200);
 		});
 	});
 
