@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name:   Run the Tests for BOTH
-        if:  github.event_name == 'schedule' or  github.event.inputs.application == 'BOTH' 
+        if:  github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
         run: |
              docker build . -t cypress-image --pull
              docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image --headless --browser chrome 
