@@ -2492,7 +2492,6 @@ describe("Matchback feature", () => {
 			mailingListSignUp.getFirstName().type(firstName);
 			mailingListSignUp.getLastName().type(lastName);
 			mailingListSignUp.getEmailAddress().type(this.testData.email);
-			cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 			mailingListSignUp.getNextStep().click();
 			cy.enterEmailVerificationCodeForMailinglist();
 			mailingListSignUp.getNextStep().click();
@@ -2516,7 +2515,8 @@ describe("Matchback feature", () => {
 		mailingListSignUp.getFirstName().type(firstName);
 		mailingListSignUp.getLastName().type(lastName);
 		mailingListSignUp.getEmailAddress().type(this.testData.email);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
+		mailingListSignUp.getNextStep().click();
+		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
