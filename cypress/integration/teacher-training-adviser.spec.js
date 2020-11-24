@@ -112,7 +112,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
 	});
 
-	it('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
+	xit('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -128,11 +128,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.url().then((url) => {
 			expect(url).contains(Navlinks.mailingListSignupUrl);
 		});
-		cy.get("h1")
-			.should("exist")
-			.should("have.text", "Sign up for email updates to help you get into teaching");
 	});
-	it('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
+	xit('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
@@ -148,7 +145,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.url().then((url) => {
 			expect(url).contains(Navlinks.events);
 		});
-		
 	});
 
 	it("It shows the error message if user clicks continiue button without selecting subject", function () {
