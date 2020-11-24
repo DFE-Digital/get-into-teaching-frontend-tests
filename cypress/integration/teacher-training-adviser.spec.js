@@ -132,7 +132,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("exist")
 			.should("have.text", "Sign up for email updates to help you get into teaching");
 	});
-	it('It navigates to mailinglist sign up page if user clicks on "attending a return to teaching event" link', function () {
+	xit('It navigates to mailinglist sign up page if user clicks on "attending a return to teaching event" link', function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
 			this.testData.lastName,
