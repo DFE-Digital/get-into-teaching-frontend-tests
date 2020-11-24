@@ -2382,14 +2382,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.next()
 			.contains("Physics");
 		cy.contains("Where do you live?").next().contains("UK");
-
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.get(".govuk-panel__title").then(function (signuptext) {
 			signuptext = signuptext.text().trim();
 			expect(signuptext).to.equal("Thank you  Sign up complete");
 		});
-
+		wait(5000);
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
