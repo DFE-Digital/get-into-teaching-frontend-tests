@@ -1,6 +1,5 @@
 ---
-name: Cypress Testing against Test Environment
-id: Cypress
+name: Cypress
 on:
   workflow_dispatch:
     inputs:
