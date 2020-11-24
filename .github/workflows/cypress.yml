@@ -18,31 +18,43 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name:   Run the Tests for BOTH
-        if:  github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
+           
+      - name:   Build Docker Image
         run: |
              docker build . -t cypress-image --pull
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image --headless --browser chrome 
+        
+      - name:   Run the Tests for Adviser
+        if:  github.event.inputs.application == 'TTA' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
+        run: |
+             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+                             --spec cypress/integration/teacher-training-adviser.spec.js  --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
         
-      - name:   Run the Tests for TTA
-        if:  github.event.inputs.application == 'TTA'
+      - name:   Run the Tests for Application Mailing List
+        if:  github.event.inputs.application == 'APP' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH'
         run: |
-             docker build . -t cypress-image --pull
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image --spec cypress/integration/teacher-training-adviser.spec.js  --headless --browser chrome 
+             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+                             --spec cypress/integration/mailinglist-signup-flow.spec.js --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
         
-      - name:   Run the Tests for APP
-        if:  github.event.inputs.application == 'APP'
+      - name:   Run the Tests for Application Event Sign Up
+        if:  github.event.inputs.application == 'APP' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
         run: |
-             docker build . -t cypress-image --pull
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image --spec cypress/integration/mailinglist-signup-flow.spec.js --headless --browser chrome 
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image --spec cypress/integration/event-signup-flow.spec.js --headless --browser chrome 
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image --spec cypress/integration/homepage-smoke.spec.js --headless --browser chrome 
+             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+                             --spec cypress/integration/event-signup-flow.spec.js --headless --browser chrome 
+        env:
+              CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
+              CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
+        
+      - name:   Run the Tests for Application Home Page
+        if:  github.event.inputs.application == 'APP' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH'
+        run: |
+             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+                             --spec cypress/integration/homepage-smoke.spec.js --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
@@ -70,6 +82,6 @@ jobs:
            SLACK_CHANNEL: getintoteaching_tech
            SLACK_COLOR: '#3278BD'
            SLACK_ICON: https://github.com/rtCamp.png?size=48
-           SLACK_MESSAGE: ':disappointed_relieved: Pipeline Failure :disappointed_relieved:'
-           SLACK_TITLE: 'Failure: ${{ github.workflow }}'
+           SLACK_MESSAGE: 'The Cypress tests have failed'
+           SLACK_TITLE: 'Failure: Cypress tests'
            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
