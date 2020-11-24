@@ -211,6 +211,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 	it("Links through to youtube page", () => {
 		homePage.getSocialMediaLink(4).invoke("removeAttr", "target").click();
+		cy.wait(5000);
 		cy.url().then((url) => {
 			expect(url).equal(Navlinks.youtube);
 		});
