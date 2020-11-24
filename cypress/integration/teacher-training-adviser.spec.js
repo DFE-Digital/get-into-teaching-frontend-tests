@@ -2348,7 +2348,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.verifyEmailAddressError();
 	});
 
-	it('It shows " You have already signed up to this service" message to previously signed up user', function () {
+	it.only('It shows " You have already signed up to this service" message to previously signed up user', function () {
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		let firstName = "First_" + rnum + "_name";
 		let lastName = "Last_" + rnum + "_name";
@@ -2388,7 +2388,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			signuptext = signuptext.text().trim();
 			expect(signuptext).to.equal("Thank you  Sign up complete");
 		});
-		wait(5000);
+		cy.wait(5000);
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
