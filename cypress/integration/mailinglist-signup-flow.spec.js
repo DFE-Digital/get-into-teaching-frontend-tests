@@ -70,7 +70,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
+		mailingListSignUp.getNextStep().click();
+		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
@@ -90,7 +91,6 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			},
 		});
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
@@ -107,7 +107,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
+		mailingListSignUp.getNextStep().click();
+		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
@@ -127,7 +128,6 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			},
 		});
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
@@ -153,7 +153,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			this.testInputData.lastName,
 			email
 		);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
+		mailingListSignUp.getNextStep().click();
+		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
@@ -186,7 +187,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
+		mailingListSignUp.getNextStep().click();
+		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
@@ -206,7 +208,6 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			},
 		});
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
 		mailingListSignUp.getNextStep().click();
 		cy.enterEmailVerificationCodeForMailinglist();
 		mailingListSignUp.getNextStep().click();
@@ -223,7 +224,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			this.testInputData.lastName,
 			email
 		);
-		cy.get("#mailing-list-steps-name-degree-status-id-field").select("Final year");
+		mailingListSignUp.getNextStep().click();
+		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
