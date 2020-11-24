@@ -15,7 +15,7 @@ module.exports = class HomePage {
 		return cy.get(".hero__mailing-strip__text");
 	}
 	getMailingStripButton() {
-		return cy.get(".hero__mailing-strip__button > span");
+		return cy.get(".hero__mailing-strip__cta__button > span");
 	}
 	getMyStoryInToTeaching() {
 		return cy.get(".navbar__desktop > ul > :nth-child(5) > a");
@@ -25,7 +25,7 @@ module.exports = class HomePage {
 		return cy.get(".home-hero__banner >h1");
 	}
 	getBannerText() {
-		return cy.get(".hero__banner__text > h1");
+		return cy.get(".header__title >h1");
 	}
 
 	getContentVideo() {
