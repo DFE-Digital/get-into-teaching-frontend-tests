@@ -431,3 +431,7 @@ Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", (firstName, lastNa
 	mailingListSignUp.getLastName().type(lastName);
 	mailingListSignUp.getEmailAddress().type(email);
 });
+
+Cypress.Commands.add("degreeStage", (stage) => {
+	cy.contains(stage).click();
+});
