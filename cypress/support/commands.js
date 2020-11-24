@@ -158,23 +158,7 @@ Cypress.Commands.add("selectPreviuosMainSubject", (previousSubject) => {
 });
 
 Cypress.Commands.add("selectSubjectLikeToTeach", (subject) => {
-	switch (subject) {
-		case "Maths":
-			cy.get(
-				"#teacher-training-adviser-steps-subject-like-to-teach-preferred-teaching-subject-id-a42655a1-2afa-e811-a981-000d3a276620-field"
-			).click();
-			break;
-		case "Physics":
-			cy.get(
-				"#teacher-training-adviser-steps-subject-like-to-teach-preferred-teaching-subject-id-ac2655a1-2afa-e811-a981-000d3a276620-field"
-			).click();
-			break;
-		case "Modern foreign language":
-			cy.get(
-				"#teacher-training-adviser-steps-subject-like-to-teach-preferred-teaching-subject-id-a22655a1-2afa-e811-a981-000d3a276620-field"
-			).click();
-			break;
-	}
+	cy.contains(subject).click();
 	cy.clickOnContinueButton();
 });
 

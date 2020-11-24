@@ -20,4 +20,6 @@ module.exports = class Navlinks {
 	static linkedin = "https://www.linkedin.com/";
 	static twitter = "https://twitter.com/getintoteaching";
 	static youtube = "https://www.youtube.com/user/getintoteaching";
+	static mailingListSignupUrl =
+		"https://get-into-teaching-app-test.london.cloudapps.digital/mailinglist/signup/name";
 };

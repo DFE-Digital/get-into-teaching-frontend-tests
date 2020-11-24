@@ -1,5 +1,6 @@
 import TeacherTrainingAdviser from "../support/pageobjects/TeacherTrainingAdviser";
 import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
+import Navlinks from "../support/pageobjects/Navlinks";
 /// <reference types="Cypress" />
 function terminalLog(violations) {
 	cy.task(
@@ -95,6 +96,77 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			signuptext = signuptext.text().trim();
 			expect(signuptext).to.equal("Thank you  Sign up complete");
 		});
+	});
+
+	it('It shows "Get support" message to the UK returner if he selects subject as "Other"', function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Computing");
+		cy.selectSubjectLikeToTeach("Other");
+		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
+	});
+
+	it('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Computing");
+		cy.selectSubjectLikeToTeach("Other");
+		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
+		cy.contains("a", "send you information via email").click();
+		cy.url().then((url) => {
+			expect(url).contains(Navlinks.mailingListSignupUrl);
+		});
+		cy.get("h1")
+			.should("exist")
+			.should("have.text", "Sign up for email updates to help you get into teaching");
+	});
+	it('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Computing");
+		cy.selectSubjectLikeToTeach("Other");
+		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
+		cy.contains("a", "attending a return to teaching event").click();
+		cy.url().then((url) => {
+			expect(url).contains(Navlinks.events);
+		});
+		
+	});
+
+	it("It shows the error message if user clicks continiue button without selecting subject", function () {
+		cy.enterFirstNameLastNameandEmail(
+			this.testData.firstName,
+			this.testData.lastName,
+			this.testData.email
+		);
+		cy.returningToTeaching(true);
+		cy.havePreviousTeacherReferenceNumber(true);
+		cy.enterPreviousTeacherReferenceNumber(23478463);
+		cy.selectPreviuosMainSubject("Computing");
+		cy.clickOnContinueButton();
+		cy.get("#error-summary-title")
+			.should("exist")
+			.should("have.text", "There is a problem")
+			.next()
+			.should("have.text", "Choose a subject or other");
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas returner user', function () {
