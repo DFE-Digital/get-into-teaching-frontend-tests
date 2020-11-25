@@ -425,11 +425,26 @@ Cypress.Commands.add("acceptPrivacyPolicy", () => {
 	cy.contains("Yes").click();
 });
 
-Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", (firstName, lastName, email) => {
+Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", () => {
 	const mailingListSignUp = new MailingListSignUp();
-	mailingListSignUp.getFirstName().type(firstName);
-	mailingListSignUp.getLastName().type(lastName);
-	mailingListSignUp.getEmailAddress().type(email);
+	let rnum = Math.floor(Math.random() * 1000000000 + 1);
+	let firstName = `Testuser${rnum}firstname`;
+	let lastName = `Testuser${rnum}lastname`;
+	let email = `testuser${rnum.toString()}@mail.co.uk`;
+	mailingListSignUp
+		.getFirstName()
+		.type(firstName)
+		.then(() => {});
+	mailingListSignUp
+		.getLastName()
+		.type(lastName)
+		.then(() => {});
+	mailingListSignUp
+		.getEmailAddress()
+		.type(email)
+		.then(() => {
+			return [firstName, lastName, email];
+		});
 });
 
 Cypress.Commands.add("degreeStage", (stage) => {
