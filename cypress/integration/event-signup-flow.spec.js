@@ -451,6 +451,74 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 			});
 		cy.get(".govuk-back-link").should("exist").should("have.text", "Back");
 	});
+
+	it("Links through to feedback survey page", function () {
+		let signedUpeventName;
+		searchForEvent.getEventsType().select(this.testData.eventsType);
+		searchForEvent.getEventLocation().select(this.testData.eventLocation);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getUpdateResultsButton().click();
+		eventSignup
+			.getSearchedEventName()
+			.first()
+			.then(function (eventName) {
+				eventSignup.getSearchedEventName().first().click();
+				eventSignup.getSignupForThisEventButton().click();
+				eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+				signedUpeventName = eventName.text().trim();
+
+				eventSignup.getFirstName().type(this.testData.firstName);
+				eventSignup.getLastName().type(this.testData.lastName);
+				let rnum = Math.floor(Math.random() * 1000000 + 1);
+				let email = "testuser" + rnum.toString() + "@gmail.co.uk";
+				eventSignup.getEmail().type(email);
+				eventSignup.getNextStep().click();
+				eventSignup.getBackButton().should("exist").should("have.text", "Back");
+				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+				eventSignup.getNextStep().click();
+				eventSignup.getPrivacyPolicy().click();
+				cy.wouldYouLikeToReceiveEmailUpdate("No");
+				eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+				eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+			});
+		cy.contains("a", "feedback on this website").invoke("removeAttr", "target").click();
+		cy.get(".freebirdFormviewerViewHeaderTitle")
+			.should("exist")
+			.should("have.text", "Get into Teaching: Feedback Survey");
+	});
+
+	it('It hides the feedback bar if user clicks on "Hide" link', function () {
+		let signedUpeventName;
+		searchForEvent.getEventsType().select(this.testData.eventsType);
+		searchForEvent.getEventLocation().select(this.testData.eventLocation);
+		searchForEvent.getEventsMonth().select(this.testData.eventsMonth);
+		searchForEvent.getUpdateResultsButton().click();
+		eventSignup
+			.getSearchedEventName()
+			.first()
+			.then(function (eventName) {
+				eventSignup.getSearchedEventName().first().click();
+				eventSignup.getSignupForThisEventButton().click();
+				eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+				signedUpeventName = eventName.text().trim();
+
+				eventSignup.getFirstName().type(this.testData.firstName);
+				eventSignup.getLastName().type(this.testData.lastName);
+				let rnum = Math.floor(Math.random() * 1000000 + 1);
+				let email = "testuser" + rnum.toString() + "@gmail.co.uk";
+				eventSignup.getEmail().type(email);
+				eventSignup.getNextStep().click();
+				eventSignup.getBackButton().should("exist").should("have.text", "Back");
+				eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+				eventSignup.getNextStep().click();
+				eventSignup.getPrivacyPolicy().click();
+				cy.wouldYouLikeToReceiveEmailUpdate("No");
+				eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+				eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+			});
+		cy.get("#hide-feedback-bar").click();
+		cy.contains("a", "feedback on this website").should("not.be.visible");
+	});
 });
 
 describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
