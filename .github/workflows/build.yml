@@ -30,6 +30,7 @@ jobs:
         run: |
               echo ::set-output name=short::$(echo "${{ github.sha }}" | cut -c -7)
               echo ::set-output name=image::${{ env.APP_REPOSITORY }}:sha-$(echo "${{ github.sha }}" | cut -c -7)
+              echo ::set-output name=latest::${{ env.APP_REPOSITORY }}:latest
 
       - name: Cache Docker layers
         uses: actions/cache@v2
@@ -53,5 +54,6 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           tags: |
                  ${{ steps.sha.outputs.image }}
+                 ${{ steps.sha.outputs.latest }}
           push: true
 
