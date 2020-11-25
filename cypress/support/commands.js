@@ -425,7 +425,14 @@ Cypress.Commands.add("acceptPrivacyPolicy", () => {
 	cy.contains("Yes").click();
 });
 
-Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", () => {
+Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", (firstName, lastName, email) => {
+	const mailingListSignUp = new MailingListSignUp();
+	mailingListSignUp.getFirstName().type(firstName);
+	mailingListSignUp.getLastName().type(lastName);
+	mailingListSignUp.getEmailAddress().type(email);
+});
+
+/*Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", () => {
 	const mailingListSignUp = new MailingListSignUp();
 	let rnum = Math.floor(Math.random() * 1000000000 + 1);
 	let firstName = `Testuser${rnum}firstname`;
@@ -445,7 +452,7 @@ Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", () => {
 		.then(() => {
 			return [firstName, lastName, email];
 		});
-});
+});*/
 
 Cypress.Commands.add("degreeStage", (stage) => {
 	cy.contains(stage).click();
