@@ -18,15 +18,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-           
-      - name:   Build Docker Image
-        run: |
-             docker build . -t cypress-image --pull
-        
       - name:   Run the Tests for Adviser
         if:  github.event.inputs.application == 'TTA' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
         run: |
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+          docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test  dfedigital/dfecypress:latest \
                              --spec cypress/integration/teacher-training-adviser.spec.js  --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
@@ -35,7 +30,7 @@ jobs:
       - name:   Run the Tests for Application Mailing List
         if:  github.event.inputs.application == 'APP' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH'
         run: |
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test dfedigital/dfecypress:latest \
                              --spec cypress/integration/mailinglist-signup-flow.spec.js --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
@@ -44,7 +39,7 @@ jobs:
       - name:   Run the Tests for Application Event Sign Up
         if:  github.event.inputs.application == 'APP' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
         run: |
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test dfedigital/dfecypress:latest \
                              --spec cypress/integration/event-signup-flow.spec.js --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
@@ -53,7 +48,7 @@ jobs:
       - name:   Run the Tests for Application Home Page
         if:  github.event.inputs.application == 'APP' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH'
         run: |
-             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test cypress-image \
+             docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test dfedigital/dfecypress:latest \
                              --spec cypress/integration/homepage-smoke.spec.js --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
