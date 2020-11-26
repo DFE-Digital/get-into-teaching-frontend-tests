@@ -2557,16 +2557,29 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 });
 
 describe("Hyperlink navigation check : Tests execution date and time : " + new Date(), () => {
+	it('Links through to "Scotland" page', function () {
+		cy.goToUrl("");
+		cy.contains("a", "Scotland").invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).equal(Navlinks.teachInScotland);
+		});
+	});
+	it('Links through to "Wales" page', function () {
+		cy.goToUrl("");
+		cy.contains("a", "Wales").invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).equal(Navlinks.teachInWales);
+		});
+	});
+	it('Links through to "Northern Ireland" page', function () {
+		cy.goToUrl("");
+		cy.contains("a", "Northern Ireland").invoke("removeAttr", "target").click();
+		cy.url().then((url) => {
+			expect(url).equal(Navlinks.teachInNorthernIreland);
+		});
+	});
 	it('Links through to "What did you think of this service? "', function () {
-		cy.visit(
-			"https://get-teacher-training-adviser-service-test.london.cloudapps.digital/teacher_training_adviser/sign_up/completed",
-			{
-				auth: {
-					username: Cypress.env("HTTPAUTH_USERNAME"),
-					password: Cypress.env("HTTPAUTH_PASSWORD"),
-				},
-			}
-		);
+		cy.goToUrl("teacher_training_adviser/sign_up/completed");
 		cy.contains("a", "What did you think of this service?").invoke("removeAttr", "target").click();
 		cy.get(".govuk-caption-xl")
 			.should("exist")

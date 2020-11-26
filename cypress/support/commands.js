@@ -457,3 +457,12 @@ Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", (firstName, lastNa
 Cypress.Commands.add("degreeStage", (stage) => {
 	cy.contains(stage).click();
 });
+
+Cypress.Commands.add("goToUrl", (endUrl) => {
+	cy.visit("https://get-teacher-training-adviser-service-test.london.cloudapps.digital/" + endUrl, {
+		auth: {
+			username: Cypress.env("HTTPAUTH_USERNAME"),
+			password: Cypress.env("HTTPAUTH_PASSWORD"),
+		},
+	});
+});

@@ -22,4 +22,8 @@ module.exports = class Navlinks {
 	static youtube = "https://www.youtube.com/user/getintoteaching";
 	static mailingListSignupUrl =
 		"https://get-into-teaching-app-test.london.cloudapps.digital/mailinglist/signup/name";
+	static teachInScotland = "https://teachinscotland.scot/";
+	static teachInWales = "https://www.discoverteaching.wales/routes-into-teaching/";
+	static teachInNorthernIreland =
+		"https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland";
 };
