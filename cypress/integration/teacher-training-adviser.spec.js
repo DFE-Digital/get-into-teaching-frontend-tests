@@ -2521,45 +2521,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			});
 	});
 
-	it('Links through to "What did you think of this service? "', function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
-		cy.returningToTeaching(false);
-		cy.doYouHaveDegree("I'm studying for a degree");
-		cy.inWhichYearAreYouStudying("Second year");
-		cy.selectWhatSubjectIsYourDegree("Computing");
-		cy.whatDegreeClassAreYouPredictedToGet("2:2");
-		cy.selectStage("Primary");
-		cy.gcseMathsAndEnglish(false);
-		cy.retakeGcseMathsAndEnglish(true);
-		cy.gcseScience(false);
-		cy.retakeGcseScience(true);
-		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.enterDateOfBirth("31", "03", "1985");
-		cy.doYouLiveInTheUk(false);
-		cy.whichCountryDoYouLiveIn("Chile");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
-		cy.clickOnContinueButton();
-		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
-		cy.contains("a", "What did you think of this service?").invoke("removeAttr", "target").click();
-		cy.get(".govuk-caption-xl")
-			.should("exist")
-			.should("include.text", "Service assessments and applying the Service Standard")
-			.next()
-			.should("exist")
-			.should("include.text", "Get a GOV.UK feedback page");
-	});
-
 	it("It opens feedback survey page if user clicks on feedback link", function () {
 		cy.enterFirstNameLastNameandEmail(
 			this.testData.firstName,
@@ -2592,6 +2553,27 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get(".freebirdFormviewerViewHeaderTitle")
 			.should("exist")
 			.should("have.text", "Get into Teaching: Feedback Survey");
+	});
+});
+
+describe("Hyperlink navigation check : Tests execution date and time : " + new Date(), () => {
+	it('Links through to "What did you think of this service? "', function () {
+		cy.visit(
+			"https://get-teacher-training-adviser-service-test.london.cloudapps.digital/teacher_training_adviser/sign_up/completed",
+			{
+				auth: {
+					username: Cypress.env("HTTPAUTH_USERNAME"),
+					password: Cypress.env("HTTPAUTH_PASSWORD"),
+				},
+			}
+		);
+		cy.contains("a", "What did you think of this service?").invoke("removeAttr", "target").click();
+		cy.get(".govuk-caption-xl")
+			.should("exist")
+			.should("include.text", "Service assessments and applying the Service Standard")
+			.next()
+			.should("exist")
+			.should("include.text", "Get a GOV.UK feedback page");
 	});
 });
 
