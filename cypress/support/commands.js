@@ -466,3 +466,10 @@ Cypress.Commands.add("goToUrl", (endUrl) => {
 		},
 	});
 });
+
+Cypress.Commands.add("verifySignUpCompleteMessage", () => {
+	cy.get(".govuk-panel__title").then(function (signuptext) {
+		signuptext = signuptext.text().trim();
+		expect(signuptext).to.equal("Thank you  Sign up complete");
+	});
+});

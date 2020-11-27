@@ -92,10 +92,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Get support" message to the UK returner if he selects subject as "Other"', function () {
@@ -210,10 +207,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in primary stage teaching, have grade 4 (C) or above in english, maths and science GCSE', function () {
@@ -248,10 +242,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in primary stage teaching, have grade 4 (C) or above in english, maths and science GCSE', function () {
@@ -286,10 +277,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in primary stage teaching, have grade 4 (C) or above in English and maths GCSE not in science GCSE but planning to retake science GCSE', function () {
@@ -326,10 +314,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in primary stage teaching, have grade 4 (C) or above in English and maths GCSE not in science GCSE but planning to retake science GCSE', function () {
@@ -366,10 +351,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications message" to non-returner user, interesed in primary stage teaching, have grade 4 (C) or above in English and maths and not in science GCSE  nor planning to retake', function () {
@@ -436,10 +418,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in primary stage teaching, have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have grade 4 (C) or above in GCSE science', function () {
@@ -476,10 +455,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in primary stage teaching,have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -518,10 +494,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in primary stage teaching,have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -560,10 +533,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications message" to non-returner user, interesed in primary stage teaching,have no grade 4 (C) or above in English and maths GCSEs nor planning to retake, have no grade 4 (C) or above in GCSE science nor planning to retake', function () {
@@ -660,10 +630,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in teaching secondary stage, have grade 4 (C) or above in English and maths GCSEs', function () {
@@ -698,10 +665,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
@@ -738,10 +702,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
@@ -778,10 +739,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs nor planning to retake', function () {
@@ -862,10 +820,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English, maths and science GCSEs', function () {
@@ -902,10 +857,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English and maths GCSEs, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -944,10 +896,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English and maths GCSEs, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -986,10 +935,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English and maths GCSEs, have no grade 4 (C) or above in GCSE science nor planning to retake', function () {
@@ -1059,10 +1005,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have grade 4 (C) or above in GCSE science', function () {
@@ -1101,10 +1044,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Final year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1145,10 +1085,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Second year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1189,10 +1126,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- First year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1233,10 +1167,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Other, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1277,10 +1208,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Final year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1321,10 +1249,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Second year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1365,10 +1290,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - First year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1409,10 +1331,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Other, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
@@ -1453,10 +1372,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science nor planning to retake', function () {
@@ -1552,10 +1468,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching secondary stage, have grade 4 (C) or above in English and maths GCSEs', function () {
@@ -1590,10 +1503,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
@@ -1630,10 +1540,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
@@ -1670,10 +1577,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, studying for a degree, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs nor planning to retake', function () {
@@ -1744,10 +1648,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overeas user, have an equivalent qualification from another country, interested in teaching secondary stage ', function () {
@@ -1787,10 +1688,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, have an equivalent qualification from another country interested in teaching primary stage', function () {
 		/*
@@ -1829,10 +1727,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, have an equivalent qualification from another country interested in teaching primary stage', function () {
@@ -1862,10 +1757,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it("It should retain the candidate details if he navigates back  ", function () {
@@ -1963,10 +1855,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});*/
+		cy.verifySignUpCompleteMessage();*/
 	});
 
 	it("It shows the error message if user clicks continiue button without entering the mandatory or correct details", function () {
@@ -2477,10 +2366,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Where do you live?").next().contains("UK");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 		cy.wait(5000);
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
 			auth: {
@@ -2545,10 +2431,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Check your answers before you continue");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 		cy.contains("a", "feedback").invoke("removeAttr", "target").click();
 		cy.get(".freebirdFormviewerViewHeaderTitle")
 			.should("exist")
@@ -2653,10 +2536,7 @@ describe("Matchback feature", () => {
 		cy.contains("Where do you live?").next().contains("UK");
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
-		cy.get(".govuk-panel__title").then(function (signuptext) {
-			signuptext = signuptext.text().trim();
-			expect(signuptext).to.equal("Thank you  Sign up complete");
-		});
+		cy.verifySignUpCompleteMessage();
 	});
 
 	it("It prevents mailing list sign up if user already signed up for a teacher training adviser service", function () {
