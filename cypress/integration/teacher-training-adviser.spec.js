@@ -72,9 +72,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.contains("Name")
 			.next()
 			.contains(firstName + " " + lastName);
@@ -202,9 +200,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Switzerland");
 		cy.enterOverseasTelephoneNumber("0012354758");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -237,9 +233,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -272,9 +266,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Brazil");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -309,9 +301,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -346,9 +336,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Poland");
 		cy.enterOverseasTelephoneNumber("38494102834");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -413,9 +401,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -450,9 +436,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cuba");
 		cy.enterOverseasTelephoneNumber("38484102834");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -489,9 +473,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -528,9 +510,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cuba");
 		cy.enterOverseasTelephoneNumber("839494102834");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -625,9 +605,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -660,9 +638,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber("36347485102834");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -697,9 +673,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -734,9 +708,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber("1028343784");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -815,9 +787,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -852,9 +822,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Denmark");
 		cy.enterOverseasTelephoneNumber("02637485859");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -891,9 +859,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -930,9 +896,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("India");
 		cy.enterOverseasTelephoneNumber("+91-9663717251");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1000,9 +964,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1039,9 +1001,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Estonia");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1080,9 +1040,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1121,9 +1079,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1162,9 +1118,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1203,9 +1157,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1244,9 +1196,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1285,9 +1235,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1326,9 +1274,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1367,9 +1313,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1463,9 +1407,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk("UK");
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1498,9 +1440,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber("47485102834");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1535,9 +1475,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk("UK");
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1572,9 +1510,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1643,9 +1579,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnContinueButton();*/
 		cy.clickOnContinueButton();
 
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1683,9 +1617,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		).select("");*/
 		cy.clickOnContinueButton();
 		//cy.clickOnContinueButton();
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1722,9 +1654,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnContinueButton();*/
 		cy.clickOnContinueButton();
 
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1752,9 +1682,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whichCountryDoYouLiveIn("Austria");
 		cy.contains("Contact telephone number").type("0125234490");
 		cy.clickOnContinueButton();
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -1780,9 +1708,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Denmark");
 		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 
 		cy.contains("Name")
 			.next()
@@ -2014,9 +1940,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.get(".govuk-form-group > a").click();
 		cy.get("h2").should("exist").should("have.text", "Privacy Policy");
@@ -2041,9 +1965,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber("102834");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.get(":nth-child(3) > :nth-child(1) > .govuk-summary-list__actions > .govuk-link").click();
 		teacherTrainingAdviser.getFirstName().should("have.value", "Sushant");
 		teacherTrainingAdviser.getLastName().should("have.value", "Kumar");
@@ -2347,9 +2269,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.contains("Name")
 			.next()
 			.contains(firstName + " " + lastName);
@@ -2426,9 +2346,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk("UK");
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
 		cy.enterUKTelephoneNumber("0125234490");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
@@ -2517,9 +2435,7 @@ describe("Matchback feature", () => {
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("012345678");
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Check your answers before you continue");
+		cy.verifyCheckYourAnswersMessage();
 		cy.contains("Name")
 			.next()
 			.contains(firstName + " " + lastName);
