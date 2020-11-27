@@ -473,3 +473,9 @@ Cypress.Commands.add("verifySignUpCompleteMessage", () => {
 		expect(signuptext).to.equal("Thank you  Sign up complete");
 	});
 });
+
+Cypress.Commands.add("verifyCheckYourAnswersMessage", () => {
+	cy.get(".govuk-heading-l")
+		.should("exist")
+		.should("have.text", "Check your answers before you continue");
+});
