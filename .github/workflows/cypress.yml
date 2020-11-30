@@ -18,11 +18,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Ensure latest version of image
+        run:  docker pull dfedigital/dfecypress:latest
+        
       - name:   Run the Tests for Adviser
         if:  github.event.inputs.application == 'TTA' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
         run: |
           docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test  dfedigital/dfecypress:latest \
                              --spec cypress/integration/teacher-training-adviser.spec.js  --headless --browser chrome 
+          cat ./cypress/end-2-end-test-report.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > ${PWD}/run1
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
@@ -32,6 +36,7 @@ jobs:
         run: |
              docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test dfedigital/dfecypress:latest \
                              --spec cypress/integration/mailinglist-signup-flow.spec.js --headless --browser chrome 
+             cat ./cypress/end-2-end-test-report.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > ${PWD}/run2
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
@@ -41,6 +46,7 @@ jobs:
         run: |
              docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test dfedigital/dfecypress:latest \
                              --spec cypress/integration/event-signup-flow.spec.js --headless --browser chrome 
+             cat ./cypress/end-2-end-test-report.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > ${PWD}/run3
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
@@ -50,6 +56,7 @@ jobs:
         run: |
              docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test dfedigital/dfecypress:latest \
                              --spec cypress/integration/homepage-smoke.spec.js --headless --browser chrome 
+             cat ./cypress/end-2-end-test-report.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > ${PWD}/run3
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
@@ -70,6 +77,19 @@ jobs:
           path: ./cypress/screenshots/
           if-no-files-found: ignore
 
+      - name: Count Failures
+        id:  failures
+        if: always()
+        run: |
+            errors=$( cat ${PWD}/run1 ${PWD}/run1 ${PWD}/run2 ${PWD}/run3 ${PWD}/run4 2>/dev/null )
+            if [[ $(echo "${errors}" | wc -l) -gt 0  ]]
+            then
+                 echo ::set-output name=numnber::$(echo "${errors}" | wc -l)
+                 echo ::set-output name=errors::"${errors}"
+                 exit 1
+            fi
+            exit 0
+
       - name: Slack Notification
         if: failure()
         uses: rtCamp/action-slack-notify@master
@@ -77,6 +97,9 @@ jobs:
            SLACK_CHANNEL: getintoteaching_tech
            SLACK_COLOR: '#3278BD'
            SLACK_ICON: https://github.com/rtCamp.png?size=48
-           SLACK_MESSAGE: 'The Cypress tests have failed'
+           SLACK_MESSAGE: |
+                           ${{steps.failures.outputs.number}} Cypress tests have failed
+
+                           ${{steps.failures.outputs.errors}}
            SLACK_TITLE: 'Failure: Cypress tests'
            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

@@ -5,5 +5,17 @@
 		"HTTPAUTH_USERNAME": "g*************g",
 		"HTTPAUTH_PASSWORD": "u*******s"
 	},
-	"chromeWebSecurity": false
+	"chromeWebSecurity": false,
+	"reporter": "cypress-multi-reporters",
+	"reporterOptions": {
+		"reporterEnabled": "mochawesome",
+		"mochawesomeReporterOptions": {
+			"reportDir": "cypress/reports",
+			"reportFilename": "testreport",
+			"quite": true,
+			"overwrite": false,
+			"html": false,
+			"json": true
+		}
+	}
 }
