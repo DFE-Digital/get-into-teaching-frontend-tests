@@ -1,4 +1,5 @@
 FROM cypress/included:5.5.0
-RUN npm install - D axe-core@^4
-RUN npm install - D cypress@^5
-RUN npm install - D cypress-axe
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+ENTRYPOINT npx cypress run
