@@ -57,7 +57,15 @@ jobs:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
         
-      - name: Upload artifact
+      - name: Upload reports artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Reports
+          path: ./cypress/reports/
+          if-no-files-found: ignore
+
+      - name: Upload video artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
@@ -65,7 +73,7 @@ jobs:
           path: ./cypress/videos/
           if-no-files-found: ignore 
           
-      - name: Upload artifact
+      - name: Upload screenshot artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
