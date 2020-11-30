@@ -18,6 +18,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Ensure latest version of image
+        run:  docker pull dfedigital/dfecypress:latest
+        
       - name:   Run the Tests for Adviser
         if:  github.event.inputs.application == 'TTA' || github.event_name == 'schedule' || github.event.inputs.application == 'BOTH' 
         run: |
