@@ -20,10 +20,12 @@ jobs:
             if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
                  i=0
+                 echo ::set-output name=adverb::""
                  while IFS= read -r line
                  do
                    if [[ $i -gt 10 ]]
                    then
+                      echo ::set-output name=adverb::first
                       break
                    fi
                    i=$((i+1))
@@ -45,7 +47,7 @@ jobs:
            SLACK_ICON: https://github.com/rtCamp.png?size=48
            SLACK_TITLE: 'Failure running Cypress tests'
            SLACK_MESSAGE:  |
-                           ${{steps.failures.outputs.number}} Cypress tests have failed, here are the first ${{steps.failures.outputs.display}} errors.
+                           ${{steps.failures.outputs.number}} Cypress tests have failed, here are the ${{steps.failures.outputs.adverb}} ${{steps.failures.outputs.display}} errors.
                            ${{steps.failures.outputs.message1}}
                            ${{steps.failures.outputs.message2}}
                            ${{steps.failures.outputs.message3}}
