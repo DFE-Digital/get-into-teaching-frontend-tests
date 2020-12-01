@@ -111,6 +111,14 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.shouldHaveFooter();
 	});
 
+	it('It hides the COVID-19 message if user clicks on "Hide this message" link', () => {
+		cy.contains("Hide this message").as("link").should("be.visible");
+		cy.get(".covid").as("covidMessage").should("be.visible");
+		cy.get("@link").click();
+		cy.get("@link").should("not.be.visible");
+		cy.get("@covidMessage").should("not.be.visible");
+	});
+
 	it('Links through to "Sign up here"', () => {
 		homePage.getMailingStripButton().dblclick();
 		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
