@@ -20,7 +20,7 @@ jobs:
             if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
                  echo ::set-output name=number::$(cat /tmp/$$.tmp | wc -l)
-                 echo ::set-output name=message::$( cat /tmp/$$.tmp)
+                 echo ::set-output name=message::'$( cat /tmp/$$.tmp)'
                  echo "$( cat /tmp/$$.tmp)"
                  exit 1
             fi
