@@ -1,15 +1,9 @@
 ---
 name: Cypress
 on:
-  workflow_dispatch:
-    inputs:
-      application:
-        description: 'BOTH APP or TTA'
-        required: true
-        default:  'BOTH'
-
-  schedule:
-    - cron: "0 23 * * *"
+  push:
+    branches:
+      - sfawcett123-patch-1
 jobs:
   cypress:
     name: Run Cypress Tests
