@@ -22,10 +22,15 @@ jobs:
                  i=0
                  while IFS= read -r line
                  do
+                   if [[ $i -gt 10 ]]
+                   then
+                      break
+                   fi
                    i=$((i+1))
-                   echo ::set-output name=message${i}::"${line}"
+                   echo ::set-output name=message${i}::"  - ${line}"
                  done <  /tmp/$$.tmp
 
+                 echo ::set-output name=display::${i}
                  echo ::set-output name=number::$(cat /tmp/$$.tmp | wc -l)
                  exit 1
             fi
@@ -40,7 +45,7 @@ jobs:
            SLACK_ICON: https://github.com/rtCamp.png?size=48
            SLACK_TITLE: 'Failure running Cypress tests'
            SLACK_MESSAGE:  |
-                           ${{steps.failures.outputs.number}} Cypress tests have failed
+                           ${{steps.failures.outputs.number}} Cypress tests have failed, here are the first ${{steps.failures.outputs.display}} errors.
                            ${{steps.failures.outputs.message1}}
                            ${{steps.failures.outputs.message2}}
                            ${{steps.failures.outputs.message3}}
