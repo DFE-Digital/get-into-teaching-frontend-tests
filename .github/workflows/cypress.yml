@@ -22,7 +22,7 @@ jobs:
                  var=
                  while IFS= read -r line
                  do
-                   var="${var}"'\n'"${line}"
+                   var="${var}"'\n\n'"${line}"
                  done <  /tmp/$$.tmp
 
                  echo ::set-output name=number::$(cat /tmp/$$.tmp | wc -l)
