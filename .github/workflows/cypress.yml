@@ -39,7 +39,7 @@ jobs:
            SLACK_COLOR: '#3278BD'
            SLACK_ICON: https://github.com/rtCamp.png?size=48
            SLACK_TITLE: 'Failure running Cypress tests'
-           SLACK_MESSAGE:  >
+           SLACK_MESSAGE:  |
                            ${{steps.failures.outputs.number}} Cypress tests have failed
                            ${{steps.failures.outputs.message}}
            SLACK_WEBHOOK: ${{ secrets.TESTING_SLACK_WEBHOOK }}
