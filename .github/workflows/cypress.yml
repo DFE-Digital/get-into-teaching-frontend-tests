@@ -21,7 +21,7 @@ jobs:
             then
                  message=""
                  while read line; do
-                        message=${message} '- ' ${line} '\n'
+                        message=${message}'-  '${line}'\n'
                  done < /tmp/$$.tmp
                  echo ::set-output name=number::$(cat /tmp/$$.tmp | wc -l)
                  echo ::set-output name=message::"${message}"
