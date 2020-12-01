@@ -36,6 +36,6 @@ jobs:
            SLACK_TITLE: 'Failure running Cypress tests'
            SLACK_MESSAGE: |
                            ${{steps.failures.outputs.number}} Cypress tests have failed
-                           ${{steps.failures.outputs.message}}
+                           "${{steps.failures.outputs.message}}"
            SLACK_WEBHOOK: ${{ secrets.TESTING_SLACK_WEBHOOK }}
            SLACK_FOOTER:  Steves Test
