@@ -19,8 +19,14 @@ jobs:
             cat ./cypress/reports/*.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > /tmp/$$.tmp
             if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
+                 var=
+                 while IFS= read -r line
+                 do
+                   var="${var}"'\n'"${line}"
+                 done <  /tmp/$$.tmp
+
                  echo ::set-output name=number::$(cat /tmp/$$.tmp | wc -l)
-                 echo ::set-output name=message::"$( < /tmp/$$.tmp )"
+                 echo ::set-output name=message::"${var}"
                  exit 1
             fi
             exit 0
@@ -33,7 +39,7 @@ jobs:
            SLACK_COLOR: '#3278BD'
            SLACK_ICON: https://github.com/rtCamp.png?size=48
            SLACK_TITLE: 'Failure running Cypress tests'
-           SLACK_MESSAGE: ...
+           SLACK_MESSAGE:  |
                            ${{steps.failures.outputs.number}} Cypress tests have failed
                            ${{steps.failures.outputs.message}}
            SLACK_WEBHOOK: ${{ secrets.TESTING_SLACK_WEBHOOK }}
