@@ -35,7 +35,7 @@ jobs:
                    exit 1
              fi
 
-             echo "::set-output name=tests::${tests}"
+             echo "::set-output name=test::${tests}"
 
   cypress:
     name: Run Cypress Tests
@@ -43,7 +43,7 @@ jobs:
     needs: set-matrix
     strategy:
       fail-fast: false # doesn't stop other test runs even if one fails
-      matrix: ${{ fromJson(needs.set-matrix.outputs.tests) }}
+      matrix: ${{ fromJson(needs.set-matrix.outputs.test) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -51,10 +51,10 @@ jobs:
       - name: Ensure latest version of image
         run:  docker pull dfedigital/dfecypress:latest
         
-      - name: Run ${{ matrix.tests}} Test
+      - name: Run ${{ matrix.tests }} Test
         run: |
           docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test  dfedigital/dfecypress:latest \
-                             --spec cypress/integration/${{ matrix.test}}.spec.js --headless --browser chrome 
+                             --spec cypress/integration/${{ matrix.test }}.spec.js --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
