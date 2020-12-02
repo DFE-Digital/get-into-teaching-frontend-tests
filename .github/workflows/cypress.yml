@@ -22,17 +22,16 @@ jobs:
              if  [[ ${{github.event_name}} == 'schedule'  ]]
              then
                    tests='{"tests":[ teacher-training-adviser, mailinglist-signup-flow, homepage-smoke, event-signup-flow ]}' 
-             elsif  [[ ${{github.event.inputs.application}} == 'APP' ]] 
+             elif  [[ ${{github.event.inputs.application}} == 'APP' ]] 
              then
                    tests='{"tests":[ mailinglist-signup-flow, homepage-smoke, event-signup-flow ]}' 
-             elsif  [[ ${{github.event.inputs.application}} == 'TTA'  ]]
+             elif  [[ ${{github.event.inputs.application}} == 'TTA'  ]]
              then
                    tests='{"tests":[ teacher-training-adviser ]}' 
-             elsif  [[ ${{github.event.inputs.application}} == 'BOTH' ]]
+             elif  [[ ${{github.event.inputs.application}} == 'BOTH' ]]
              then
                    tests='{"tests":[ teacher-training-adviser, mailinglist-signup-flow, homepage-smoke, event-signup-flow ]}' 
              else
-             then
                    exit 1
              fi
 
