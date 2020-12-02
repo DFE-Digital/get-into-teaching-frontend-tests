@@ -51,24 +51,22 @@ jobs:
       - name: Set Configuration
         id:   config
         run: |
-            echo "::set-output name=videos::cypress/videos/${{matrix.tests}}"
-            echo "::set-output name=screenshots::cypress/screenshots/${{matrix.tests}}"
-            echo "::set-output name=reports::cypress/reports/${{matrix.tests}}"
+            echo "::set-output name=videos::${PWD}/${{matrix.tests}}/videos"
+            echo "::set-output name=screenshots::${PWD}/${{matrix.tests}}/screenshots"
+            echo "::set-output name=reports::${PWD}/${{matrix.tests}}/reports"
 
-      - name: Ensure latest version of image
-        run:  docker pull dfedigital/dfecypress:latest
-        
       - name: Run ${{ matrix.tests }} Test
         run: |
-          docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test  dfedigital/dfecypress:latest \
-                             --spec cypress/integration/${{ matrix.tests }}.spec.js  \
-                             --config="videosFolder=${{steps.config.outputs.videos}}, screenshotsFolder=${{steps.config.outputs.videos}}"  \
-                             --reporter-options "reportDir=${{steps.config.outputs.videos}}"  \
-                             --headless  \
-                             --browser chrome 
+              docker run -i --shm-size=1g -e CYPRESS_SPEC -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME \
+                                   -v $PWD:/test -w /test  \
+                                   -v ${{steps.config.outputs.screenshots}}:/test/cypress/screenshots   \
+                                   -v ${{steps.config.outputs.videos}}:/test/cypress/videos   \
+                                   -v ${{steps.config.outputs.reports}}:/test/cypress/reports   \
+                                   dfedigital/dfecypress:latest
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
+              CYPRESS_SPEC:              "cypress/integration/${{ matrix.tests }}.spec.js"
         
       - name: Upload reports artifact
         uses: actions/upload-artifact@v2
