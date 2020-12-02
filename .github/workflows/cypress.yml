@@ -42,9 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: set-matrix
     strategy:
-      fail-fast: false # doesn't stop other specs runs even if one fails
-      matrix:
-        spec: ${{ fromJson(needs.set-matrix.outputs.tests) }}
+      fail-fast: false # doesn't stop other test runs even if one fails
+      matrix: ${{ fromJson(needs.set-matrix.outputs.tests) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -52,10 +51,10 @@ jobs:
       - name: Ensure latest version of image
         run:  docker pull dfedigital/dfecypress:latest
         
-      - name: Run ${{ matrix.spec}} Spec
+      - name: Run ${{ matrix.tests}} Test
         run: |
           docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test  dfedigital/dfecypress:latest \
-                             --spec cypress/integration/${{ matrix.spec}}.spec.js --headless --browser chrome 
+                             --spec cypress/integration/${{ matrix.test}}.spec.js --headless --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
@@ -117,7 +116,7 @@ jobs:
            SLACK_CHANNEL: getintoteaching_tech
            SLACK_COLOR: '#3278BD'
            SLACK_ICON: https://github.com/rtCamp.png?size=48
-           SLACK_TITLE: 'STEVE TEST - Failure running Cypress test ${{ matrix.spec}}'
+           SLACK_TITLE: 'STEVE TEST - Failure running Cypress test ${{ matrix.test}}'
            SLACK_MESSAGE: |
                            ${{steps.failures.outputs.number}} Cypress tests have failed,
                            here are the ${{steps.failures.outputs.adverb}} ${{steps.failures.outputs.display}} failures
