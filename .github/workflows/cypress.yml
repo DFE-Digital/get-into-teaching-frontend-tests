@@ -21,21 +21,21 @@ jobs:
         run: |
              if  [[ ${{github.event_name}} == 'schedule'  ]]
              then
-                   tests='{"tests":"[ teacher-training-adviser, mailinglist-signup-flow, homepage-smoke, event-signup-flow ]"}' 
+                   tests='{"tests":[ "teacher-training-adviser", "mailinglist-signup-flow", "homepage-smoke", "event-signup-flow" ]}' 
              elif  [[ ${{github.event.inputs.application}} == 'APP' ]] 
              then
-                   tests='{"tests":"[ mailinglist-signup-flow, homepage-smoke, event-signup-flow ]"}' 
+                   tests='{"tests":[ "mailinglist-signup-flow", "homepage-smoke", "event-signup-flow" ]}' 
              elif  [[ ${{github.event.inputs.application}} == 'TTA'  ]]
              then
-                   tests='{"tests":"[ teacher-training-adviser ]"}' 
+                   tests='{"tests":[ "teacher-training-adviser"]}' 
              elif  [[ ${{github.event.inputs.application}} == 'BOTH' ]]
              then
-                   tests='{"tests":"[ teacher-training-adviser, mailinglist-signup-flow, homepage-smoke, event-signup-flow ]"}' 
+                   tests='{"tests":[ "teacher-training-adviser", "mailinglist-signup-flow", "homepage-smoke", "event-signup-flow" ]}' 
              else
                    exit 1
              fi
 
-             echo ::set-output name=tests::${tests}
+             echo "::set-output name=tests::${tests}"
 
   cypress:
     name: Run Cypress Tests
