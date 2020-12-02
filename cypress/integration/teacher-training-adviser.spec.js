@@ -2392,7 +2392,6 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 });
 
 describe("Matchback feature", () => {
-	var returner;
 	let firstName;
 	let lastName;
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
@@ -2453,6 +2452,7 @@ describe("Matchback feature", () => {
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
+		cy.wait(6000);
 	});
 
 	it("It prevents mailing list sign up if user already signed up for a teacher training adviser service", function () {
@@ -2507,6 +2507,7 @@ describe("Matchback feature", () => {
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", "You've signed up");
+		cy.wait(6000);
 	});
 
 	it("It should allow user to sign up for teacher training adviser service if he already signed up for mailing list", function () {
