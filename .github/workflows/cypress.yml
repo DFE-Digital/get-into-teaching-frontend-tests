@@ -14,7 +14,7 @@ jobs:
   set-matrix:
     runs-on: ubuntu-latest
     outputs:
-      environments: ${{ steps.select-tests.outputs.test }}
+      tests: ${{ steps.select-tests.outputs.test }}
     steps:
       - name: Select Tests
         id: select-tests
