@@ -63,24 +63,11 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: Reports
-          path: ./cypress/reports/
-          if-no-files-found: ignore
-
-      - name: Upload video artifact
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: Videos
-          path: ./cypress/videos/
-          if-no-files-found: ignore 
-          
-      - name: Upload screenshot artifact
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: Screenshots
-          path: ./cypress/screenshots/
+          name: ${{matrix.tests}}
+          path: |
+                ./cypress/reports/
+                ./cypress/videos/
+                ./cypress/screenshots/
           if-no-files-found: ignore
 
       - name: Count Failures
@@ -116,7 +103,7 @@ jobs:
            SLACK_CHANNEL: getintoteaching_tech
            SLACK_COLOR: '#3278BD'
            SLACK_ICON: https://github.com/rtCamp.png?size=48
-           SLACK_TITLE: 'STEVE TEST - Failure running Cypress test ${{ matrix.test}}'
+           SLACK_TITLE: 'STEVE TEST - Failure running Cypress test ${{ matrix.tests}}'
            SLACK_MESSAGE: |
                            ${{steps.failures.outputs.number}} Cypress tests have failed,
                            here are the ${{steps.failures.outputs.adverb}} ${{steps.failures.outputs.display}} failures
