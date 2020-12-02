@@ -103,7 +103,7 @@ jobs:
            SLACK_CHANNEL: getintoteaching_tech
            SLACK_COLOR: '#3278BD'
            SLACK_ICON: https://github.com/rtCamp.png?size=48
-           SLACK_TITLE: 'STEVE TEST - Failure running Cypress test ${{ matrix.tests}}'
+           SLACK_TITLE: 'Failure running Cypress test ${{ matrix.tests}}'
            SLACK_MESSAGE: |
                            ${{steps.failures.outputs.number}} Cypress tests have failed,
                            here are the ${{steps.failures.outputs.adverb}} ${{steps.failures.outputs.display}} failures
