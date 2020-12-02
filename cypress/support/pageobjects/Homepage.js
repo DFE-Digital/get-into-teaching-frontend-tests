@@ -43,11 +43,11 @@ module.exports = class HomePage {
 	}
 
 	getFundingyourTrainingLink() {
-		return cy.get(".navbar__desktop > ul > :nth-child(2) > a");
+		return cy.contains("a", "Funding your training");
 	}
 
 	getStepstoBecomeTeacherLink() {
-		return cy.get(".navbar__desktop > ul > :nth-child(3) > a");
+		return cy.contains("a", "Steps to become a teacher");
 	}
 
 	getTeachingAsaCareerLink() {
