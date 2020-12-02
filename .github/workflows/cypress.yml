@@ -34,8 +34,8 @@ jobs:
              else
                    exit 1
              fi
-
-             echo "::set-output name=test::${tests}"
+             echo ${tests}
+             echo "::set-output name=tests::${tests}"
 
   cypress:
     name: Run Cypress Tests
