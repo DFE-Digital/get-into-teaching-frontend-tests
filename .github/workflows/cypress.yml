@@ -48,13 +48,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set Configuration
+        id:   config
+        run: |
+            echo "::set-output name=videos::cypress/videos/${{matrix.tests}}"
+            echo "::set-output name=screenshots::cypress/screenshots/${{matrix.tests}}"
+            echo "::set-output name=reports::cypress/reports/${{matrix.tests}}"
+
       - name: Ensure latest version of image
         run:  docker pull dfedigital/dfecypress:latest
         
       - name: Run ${{ matrix.tests }} Test
         run: |
           docker run -i --shm-size=1g   -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME  -v $PWD:/test -w /test  dfedigital/dfecypress:latest \
-                             --spec cypress/integration/${{ matrix.tests }}.spec.js --headless --browser chrome 
+                             --spec cypress/integration/${{ matrix.tests }}.spec.js  \
+                             --config="videosFolder=${{steps.config.outputs.videos}}, screenshotsFolder=${{steps.config.outputs.videos}}"  \
+                             --reporter-options "reportDir=${{steps.config.outputs.videos}}"  \
+                             --headless  \
+                             --browser chrome 
         env:
               CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
@@ -65,16 +76,16 @@ jobs:
         with:
           name: ${{matrix.tests}}
           path: |
-                ./cypress/reports/
-                ./cypress/videos/
-                ./cypress/screenshots/
+               ${{steps.config.outputs.videos}}
+               ${{steps.config.outputs.screenshots}}
+               ${{steps.config.outputs.reports}}
           if-no-files-found: ignore
 
       - name: Count Failures
         id:  failures
         if: always()
         run: |
-            cat ./cypress/reports/*.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > /tmp/$$.tmp
+            cat ${{steps.config.outputs.reports}}/*.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > /tmp/$$.tmp
             if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
                  i=0
