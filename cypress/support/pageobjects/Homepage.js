@@ -9,7 +9,7 @@ module.exports = class HomePage {
 		return cy.get(".logo__image");
 	}
 	getHomeHyperLink() {
-		return cy.get(":nth-child(1) > ul > :nth-child(3) > a");
+		return cy.contains("a", "Home");
 	}
 	getMailingStripText() {
 		return cy.get(".hero__mailing-strip__text");
@@ -18,7 +18,7 @@ module.exports = class HomePage {
 		return cy.get(".hero__mailing-strip__cta__button > span");
 	}
 	getMyStoryInToTeaching() {
-		return cy.get(".navbar__desktop > ul > :nth-child(5) > a");
+		return cy.contains("a", "My story into teaching");
 	}
 
 	getHomeBannerText() {
@@ -51,15 +51,15 @@ module.exports = class HomePage {
 	}
 
 	getTeachingAsaCareerLink() {
-		return cy.get(".navbar__desktop > ul > :nth-child(4) > a");
+		return cy.contains("a", "Teaching as a career");
 	}
 
 	getSalariesAndBenefitsLink() {
-		return cy.get(".navbar__desktop > ul > :nth-child(6) > a");
+		return cy.contains("a", "Salaries and benefits");
 	}
 
 	getFindanEventNearYouLink() {
-		return cy.get(".navbar__desktop > ul > :nth-child(7) > a");
+		return cy.contains("a", "Find an event near you");
 	}
 
 	getFindEventLink() {
@@ -67,7 +67,7 @@ module.exports = class HomePage {
 	}
 
 	getCheckYourQualificationsLink() {
-		return cy.get(":nth-child(1) > .steps__link > :nth-child(1)");
+		return cy.contains("a", "Steps to become a teacher");
 	}
 
 	getWaystoTrainLink() {
