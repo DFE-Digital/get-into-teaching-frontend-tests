@@ -13,6 +13,7 @@
 	"author": "Sushant Kumar",
 	"license": "ISC",
 	"devDependencies": {
+		"@cypress/skip-test": "^2.5.1",
 		"cypress": "^5.5.0",
 		"cypress-axe": "^0.8.1",
 		"cypress-iframe": "^1.0.1",
