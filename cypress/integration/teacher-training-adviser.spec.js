@@ -2382,12 +2382,9 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 	it('Links through to "What did you think of this service? "', function () {
 		cy.goToUrl("teacher_training_adviser/sign_up/completed");
 		cy.contains("a", "What did you think of this service?").invoke("removeAttr", "target").click();
-		cy.get(".govuk-caption-xl")
+		cy.get(".freebirdFormviewerViewHeaderTitle")
 			.should("exist")
-			.should("include.text", "Service assessments and applying the Service Standard")
-			.next()
-			.should("exist")
-			.should("include.text", "Get a GOV.UK feedback page");
+			.should("include.text", "Get into Teaching: Feedback Survey");
 	});
 });
 
