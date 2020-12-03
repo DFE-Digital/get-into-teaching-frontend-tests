@@ -14,14 +14,15 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-import 'cypress-axe'
+import "./commands";
+import "cypress-axe";
 
-Cypress.on('uncaught:exception', (err, runnable) => {
+Cypress.on("uncaught:exception", (err, runnable) => {
 	// this stops tests automtically failing for console errors
-	return false
+	return false;
 });
 
+require("@cypress/skip-test/support");
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
