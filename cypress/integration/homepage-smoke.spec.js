@@ -217,13 +217,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 			expect(url).equal(Navlinks.twitter);
 		});
 	});
-	it("Links through to youtube page", () => {
-		cy.skipOn("");
-		homePage.getSocialMediaLink(4).invoke("removeAttr", "target").click();
-		cy.url().then((url) => {
-			expect(url).equal(Navlinks.youtube);
-		});
-	});
 
 	it("It matches the event date, time and location with previous page", () => {
 		var eventDateAndTime;
