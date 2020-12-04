@@ -479,3 +479,9 @@ Cypress.Commands.add("verifyCheckYourAnswersMessage", () => {
 		.should("exist")
 		.should("have.text", "Check your answers before you continue");
 });
+
+Cypress.Commands.add("verifyGetRightGCSEMessage", () => {
+	cy.get(".govuk-heading-l")
+		.should("exist")
+		.should("have.text", "Get the right GCSEs or equivalent qualifications");
+});
