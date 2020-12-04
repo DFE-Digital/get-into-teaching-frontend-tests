@@ -41,8 +41,8 @@ jobs:
              echo ${tests}
              echo "::set-output name=tests::${tests}"
 
-  Cypress:
-    name: ${{github.event.inputs.reference}}
+  RunTests:
+    name: ${{matrix.tests}}
     runs-on: ubuntu-latest
     needs: set-matrix
     strategy:
@@ -131,3 +131,10 @@ jobs:
                            ${{steps.failures.outputs.message9}}
                            ${{steps.failures.outputs.message10}}
 
+  Cypress:
+    name: ${{github.event.inputs.reference}}
+    runs-on: ubuntu-latest
+    needs: ${{ fromJson(needs.set-matrix.outputs.tests) }}
+    steps:
+         - name:
+           run: In theory this should work
