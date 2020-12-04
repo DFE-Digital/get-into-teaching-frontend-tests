@@ -367,9 +367,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.gcseMathsAndEnglish(true);
 		cy.gcseScience(false);
 		cy.retakeGcseScience(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in primary stage teaching, have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have grade 4 (C) or above in GCSE science', function () {
@@ -543,9 +541,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.retakeGcseMathsAndEnglish(true);
 		cy.gcseScience(false);
 		cy.retakeGcseScience(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner overseas user, have a degree, interesed in primary stage teaching,have no grade 4 (C) or above in English and maths GCSEs nor planning to retake', function () {
@@ -573,9 +569,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.retakeGcseMathsAndEnglish(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in teaching secondary stage ,have grade 4 (C) or above in English and maths GCSEs', function () {
@@ -737,9 +731,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
 		cy.retakeGcseMathsAndEnglish(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "If you do not have a degree page" if non-returner user has no degree', function () {
@@ -928,9 +920,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.gcseMathsAndEnglish(true);
 		cy.gcseScience(false);
 		cy.retakeGcseScience(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have grade 4 (C) or above in GCSE science', function () {
@@ -1346,9 +1336,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.retakeGcseMathsAndEnglish(true);
 		cy.gcseScience(false);
 		cy.retakeGcseScience(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs nor planning to retake', function () {
@@ -1374,9 +1362,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Primary");
 		cy.gcseMathsAndEnglish(false);
 		cy.retakeGcseMathsAndEnglish(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching secondary stage, have grade 4 (C) or above in English and maths GCSEs', function () {
@@ -1538,9 +1524,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Secondary");
 		cy.gcseMathsAndEnglish(false);
 		cy.retakeGcseMathsAndEnglish(false);
-		cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "Get the right GCSEs or equivalent qualifications");
+		cy.verifyGetRightGCSEMessage();
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, have an equivalent qualification from another country, interested in teaching secondary stage ', function () {
