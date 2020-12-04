@@ -134,7 +134,7 @@ jobs:
   Cypress:
     name: ${{github.event.inputs.reference}}
     runs-on: ubuntu-latest
-    needs: ${{ fromJson(needs.set-matrix.outputs.tests) }}
+    needs: RunTests
     steps:
-         - name:
-           run: In theory this should work
+       - name: Check Task has Competed
+         run: echo "Test matrix has completed"
