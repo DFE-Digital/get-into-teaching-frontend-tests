@@ -49,7 +49,7 @@ Cypress.Commands.add("shouldHavePageNavigation", () => {
 });
 
 Cypress.Commands.add("enterEmailVerificationCode", () => {
-	cy.wait(5000);
+	cy.wait(8000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -75,7 +75,7 @@ Cypress.Commands.add("enterEmailVerificationCode", () => {
 });
 
 Cypress.Commands.add("enterEmailVerificationCodeForMailinglist", () => {
-	cy.wait(5000);
+	cy.wait(8000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -347,7 +347,7 @@ Cypress.Commands.add("retakeGcseScience", (planning) => {
 });
 
 Cypress.Commands.add("verifyYourEmailAddress", () => {
-	cy.wait(5000);
+	cy.wait(8000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -390,7 +390,7 @@ Cypress.Commands.add("wouldYouLikeToReceiveEmailUpdate", (personalisedInformatio
 });
 
 Cypress.Commands.add("enterEmailVerificationCodeForTeacherTrainingAdviser", () => {
-	cy.wait(5000);
+	cy.wait(8000);
 	let newURL;
 	var latestEmailID;
 	var code;
