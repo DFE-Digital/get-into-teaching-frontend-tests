@@ -25,7 +25,7 @@ module.exports = class HomePage {
 		return cy.get(".home-hero__banner >h1");
 	}
 	getBannerText() {
-		return cy.get(".header__title >h1");
+		return cy.get("h1 > span");
 	}
 
 	getContentVideo() {
