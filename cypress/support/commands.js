@@ -1,4 +1,5 @@
 import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
+import Homepage from "../support/pageobjects/Homepage";
 Cypress.Commands.add("logintoApp", () => {
 	cy.visit("/", {
 		auth: {
@@ -484,4 +485,54 @@ Cypress.Commands.add("verifyGetRightGCSEMessage", () => {
 	cy.get(".govuk-heading-l")
 		.should("exist")
 		.should("have.text", "Get the right GCSEs or equivalent qualifications");
+});
+
+Cypress.Commands.add("eventMonths", () => {
+	let noEventPresent = false;
+	cy.get("body")
+		.then((body) => {
+			if (body.find(".search-for-events-no-results").length > 0) {
+				noEventPresent = true;
+				cy.get(".search-for-events-no-results").should(
+					"include.text",
+					"Sorry your search has not found any events, try a different type, location or month."
+				);
+			}
+		})
+		.then(() => {
+			return noEventPresent;
+		});
+});
+
+Cypress.Commands.add("updateEventMonth", (eventsType, eventLocation) => {
+	const searchForEvent = new Homepage();
+	searchForEvent.getEventsType().select(eventsType);
+	searchForEvent.getEventLocation().select(eventLocation);
+	searchForEvent
+		.getEventsMonth()
+		.as("month")
+		.children()
+		.each(($option, index, $list) => {
+			cy.get("@month").select($option.text());
+			searchForEvent.getUpdateResultsButton().click();
+			cy.eventMonths().then((eventNotPresent) => {
+				if (!eventNotPresent) {
+					cy.writeFile("cypress/fixtures/event-month.txt", $option.text());
+				}
+			});
+		});
+});
+
+Cypress.Commands.add("setEventMonth", (eventsType, eventLocation) => {
+	let month;
+	const searchForEvent = new Homepage();
+	searchForEvent.getEventsType().select(eventsType);
+	searchForEvent.getEventLocation().select(eventLocation);
+	cy.readFile("cypress/fixtures/event-month.txt")
+		.then((month) => {
+			month = month;
+		})
+		.then(() => {
+			return month;
+		});
 });
