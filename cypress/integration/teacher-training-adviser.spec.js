@@ -2271,7 +2271,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
-		cy.wait(5000);
+		cy.wait(8000);
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
