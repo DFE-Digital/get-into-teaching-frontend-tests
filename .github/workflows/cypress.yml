@@ -133,8 +133,20 @@ jobs:
 
   Cypress:
     name: ${{github.event.inputs.reference}}
+    if: success()
     runs-on: ubuntu-latest
     needs: RunTests
     steps:
        - name: Check Task has Competed
          run: echo "Test matrix has completed"
+   
+  Failed:
+    name: ${{github.event.inputs.reference}}
+    if:    failure()
+    runs-on: ubuntu-latest
+    needs: RunTests
+    steps:
+       - name: Check Task has Failed
+         run: |
+               echo "Test matrix has failed"
+               exit 1
