@@ -84,7 +84,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
-		cy.wait(6000);
+		cy.wait(8000);
 		cy.visit("/mailinglist/signup/name", {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
@@ -122,7 +122,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
-		cy.wait(6000);
+		cy.wait(8000);
 		cy.visit("/mailinglist/signup/name", {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
