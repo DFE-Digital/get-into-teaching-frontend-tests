@@ -536,3 +536,7 @@ Cypress.Commands.add("setEventMonth", (eventsType, eventLocation) => {
 			return month;
 		});
 });
+
+Cypress.Commands.add("hideFeedbackBar", () => {
+	cy.get("#hide-feedback-bar").click();
+});
