@@ -209,7 +209,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.enterEmailVerificationCode();
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						cy.hideFeedbackBar();
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
@@ -296,7 +295,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.enterEmailVerificationCode();
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						cy.hideFeedbackBar();
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
