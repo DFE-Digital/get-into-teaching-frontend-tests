@@ -210,9 +210,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						cy.hideFeedbackBar();
-						eventSignup.getPhoneNumber().click();
-						eventSignup.getPhoneNumber().clear();
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
@@ -223,7 +220,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		});
 	});
 
-	it('It sends the another email evrification code if user clicks on "resend verification" link', function () {
+	it('It sends the another email verification code if user clicks on "resend verification" link', function () {
 		let signedUpeventName;
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
 		let firstName = "User_" + rnum + "_firstname";
@@ -300,9 +297,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						cy.hideFeedbackBar();
-						cy.contains("Phone number (optional)").next().click();
-						eventSignup.getPhoneNumber().clear();
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
@@ -570,7 +564,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 			} else {
 				searchForEvent.getEventsMonth().select(month);
 				searchForEvent.getUpdateResultsButton().click();
-
 				eventSignup
 					.getSearchedEventName()
 					.first()
