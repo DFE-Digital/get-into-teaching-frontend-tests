@@ -164,7 +164,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getLastName().type(lastName);
 						eventSignup.getEmail().type(this.testData.email);
 						eventSignup.getNextStep().click();
-						("");
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 						eventSignup.getNextStep().click();
@@ -251,7 +250,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getLastName().type(lastName);
 						eventSignup.getEmail().type(this.testData.email);
 						eventSignup.getNextStep().click();
-						cy.hideFeedbackBar();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 						eventSignup.getNextStep().click();
@@ -301,6 +299,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.enterEmailVerificationCode();
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
+						cy.hideFeedbackBar();
 						eventSignup.getPhoneNumber().click();
 						eventSignup.getPhoneNumber().clear();
 						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
