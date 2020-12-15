@@ -50,7 +50,7 @@ Cypress.Commands.add("shouldHavePageNavigation", () => {
 });
 
 Cypress.Commands.add("enterEmailVerificationCode", () => {
-	cy.wait(8000);
+	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -70,13 +70,13 @@ Cypress.Commands.add("enterEmailVerificationCode", () => {
 			code = response.body.toString().substr(startpos + 2, 7);
 			cy.get("#events-steps-authenticate-timed-one-time-password-field")
 				.as("getOTPField")
-				.type(code);
+				.type(code.trim());
 		});
 	});
 });
 
 Cypress.Commands.add("enterEmailVerificationCodeForMailinglist", () => {
-	cy.wait(8000);
+	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -96,7 +96,7 @@ Cypress.Commands.add("enterEmailVerificationCodeForMailinglist", () => {
 			code = response.body.toString().substr(startpos + 2, 7);
 			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field")
 				.as("getOTPField")
-				.type(code);
+				.type(code.trim());
 		});
 	});
 });
@@ -348,7 +348,7 @@ Cypress.Commands.add("retakeGcseScience", (planning) => {
 });
 
 Cypress.Commands.add("verifyYourEmailAddress", () => {
-	cy.wait(8000);
+	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -368,7 +368,7 @@ Cypress.Commands.add("verifyYourEmailAddress", () => {
 			code = response.body.toString().substr(startpos + 2, 7);
 			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field")
 				.as("getOTPField")
-				.type(code);
+				.type(code.trim());
 			cy.clickOnContinueButton();
 		});
 	});
@@ -391,7 +391,7 @@ Cypress.Commands.add("wouldYouLikeToReceiveEmailUpdate", (personalisedInformatio
 });
 
 Cypress.Commands.add("enterEmailVerificationCodeForTeacherTrainingAdviser", () => {
-	cy.wait(8000);
+	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
@@ -411,7 +411,7 @@ Cypress.Commands.add("enterEmailVerificationCodeForTeacherTrainingAdviser", () =
 			code = response.body.toString().substr(startpos + 2, 7);
 			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field")
 				.as("getOTPField")
-				.type(code);
+				.type(code.trim());
 		});
 	});
 });
