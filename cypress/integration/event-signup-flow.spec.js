@@ -206,7 +206,9 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getLastName().type(lastName);
 						eventSignup.getEmail().type(this.testData.email);
 						eventSignup.getNextStep().click();
-						cy.enterEmailVerificationCode();
+						cy.enterEmailVerificationCode().then((otp) => {
+							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
+						});
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getNextStep().click();
@@ -292,7 +294,9 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
 						eventSignup.getResendVerificationLink().click();
-						cy.enterEmailVerificationCode();
+						cy.enterEmailVerificationCode().then((otp) => {
+							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
+						});
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getNextStep().click();

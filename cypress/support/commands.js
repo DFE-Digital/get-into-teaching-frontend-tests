@@ -57,48 +57,23 @@ Cypress.Commands.add("enterEmailVerificationCode", () => {
 	cy.request(
 		"https://mailsac.com/api/addresses/testuser@mailsac.com/messages?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
 	).as("topMostEmail");
-	cy.get("@topMostEmail").then((response) => {
-		latestEmailID = response.body[0]._id;
-		cy.log("latestEmailID = " + latestEmailID);
-		newURL =
-			"https://mailsac.com/api/text/testuser@mailsac.com/" +
-			latestEmailID +
-			"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
-		cy.request(newURL).as("verificationCode");
-		cy.get("@verificationCode").then((response) => {
-			var startpos = response.body.search("is");
-			code = response.body.toString().substr(startpos + 2, 7);
-			cy.get("#events-steps-authenticate-timed-one-time-password-field")
-				.as("getOTPField")
-				.type(code.trim());
+	cy.get("@topMostEmail")
+		.then((response) => {
+			latestEmailID = response.body[0]._id;
+			cy.log("latestEmailID = " + latestEmailID);
+			newURL =
+				"https://mailsac.com/api/text/testuser@mailsac.com/" +
+				latestEmailID +
+				"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
+			cy.request(newURL).as("verificationCode");
+			cy.get("@verificationCode").then((response) => {
+				var startpos = response.body.search("is");
+				code = response.body.toString().substr(startpos + 2, 7);
+			});
+		})
+		.then(() => {
+			return code;
 		});
-	});
-});
-
-Cypress.Commands.add("enterEmailVerificationCodeForMailinglist", () => {
-	cy.wait(5000);
-	let newURL;
-	var latestEmailID;
-	var code;
-	cy.request(
-		"https://mailsac.com/api/addresses/testuser@mailsac.com/messages?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
-	).as("topMostEmail");
-	cy.get("@topMostEmail").then((response) => {
-		latestEmailID = response.body[0]._id;
-		cy.log("latestEmailID = " + latestEmailID);
-		newURL =
-			"https://mailsac.com/api/text/testuser@mailsac.com/" +
-			latestEmailID +
-			"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
-		cy.request(newURL).as("verificationCode");
-		cy.get("@verificationCode").then((response) => {
-			var startpos = response.body.search("is");
-			code = response.body.toString().substr(startpos + 2, 7);
-			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field")
-				.as("getOTPField")
-				.type(code.trim());
-		});
-	});
 });
 
 Cypress.Commands.add("acceptCookie", () => {
@@ -347,32 +322,6 @@ Cypress.Commands.add("retakeGcseScience", (planning) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("verifyYourEmailAddress", () => {
-	cy.wait(5000);
-	let newURL;
-	var latestEmailID;
-	var code;
-	cy.request(
-		"https://mailsac.com/api/addresses/testuser@mailsac.com/messages?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
-	).as("topMostEmail");
-	cy.get("@topMostEmail").then((response) => {
-		latestEmailID = response.body[0]._id;
-		cy.log("latestEmailID = " + latestEmailID);
-		newURL =
-			"https://mailsac.com/api/text/testuser@mailsac.com/" +
-			latestEmailID +
-			"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
-		cy.request(newURL).as("verificationCode");
-		cy.get("@verificationCode").then((response) => {
-			var startpos = response.body.search("is");
-			code = response.body.toString().substr(startpos + 2, 7);
-			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field")
-				.as("getOTPField")
-				.type(code.trim());
-			cy.clickOnContinueButton();
-		});
-	});
-});
 Cypress.Commands.add("clickOnStartNowButton", () => {
 	cy.contains("Start now").click();
 });
@@ -388,32 +337,6 @@ Cypress.Commands.add("wouldYouLikeToReceiveEmailUpdate", (personalisedInformatio
 		cy.get("#events-steps-further-details-subscribe-to-mailing-list-field").click();
 		cy.contains("Complete sign up").click();
 	}
-});
-
-Cypress.Commands.add("enterEmailVerificationCodeForTeacherTrainingAdviser", () => {
-	cy.wait(5000);
-	let newURL;
-	var latestEmailID;
-	var code;
-	cy.request(
-		"https://mailsac.com/api/addresses/testuser@mailsac.com/messages?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
-	).as("topMostEmail");
-	cy.get("@topMostEmail").then((response) => {
-		latestEmailID = response.body[0]._id;
-		cy.log("latestEmailID = " + latestEmailID);
-		newURL =
-			"https://mailsac.com/api/text/testuser@mailsac.com/" +
-			latestEmailID +
-			"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
-		cy.request(newURL).as("verificationCode");
-		cy.get("@verificationCode").then((response) => {
-			var startpos = response.body.search("is");
-			code = response.body.toString().substr(startpos + 2, 7);
-			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field")
-				.as("getOTPField")
-				.type(code.trim());
-		});
-	});
 });
 
 Cypress.Commands.add("verify404ErrorMessage", () => {

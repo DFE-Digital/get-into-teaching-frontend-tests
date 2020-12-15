@@ -1656,7 +1656,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			this.testData.lastName,
 			this.testData.email
 		);
-		//cy.verifyYourEmailAddress();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
@@ -2283,7 +2282,12 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.verifyYourEmailAddress();
+		cy.enterEmailVerificationCode().then((otp) => {
+			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
+				otp
+			);
+		});
+		teacherTrainingAdviser.getContinueButton().click();
 		cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "You have already signed up to this service");
@@ -2452,7 +2456,9 @@ describe("Matchback feature", () => {
 			mailingListSignUp.getLastName().type(lastName);
 			mailingListSignUp.getEmailAddress().type(this.testData.email);
 			mailingListSignUp.getNextStep().click();
-			cy.enterEmailVerificationCodeForMailinglist();
+			cy.enterEmailVerificationCode().then((otp) => {
+				cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
+			});
 			mailingListSignUp.getNextStep().click();
 			cy.get("h1").should("exist").should("have.text", "You have already signed up to an adviser");
 		});
@@ -2508,7 +2514,11 @@ describe("Matchback feature", () => {
 			teacherTrainingAdviser.getLastName().type(lastName);
 			teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 			teacherTrainingAdviser.getContinueButton().click();
-			cy.enterEmailVerificationCodeForTeacherTrainingAdviser();
+			cy.enterEmailVerificationCode().then((otp) => {
+				cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
+					otp
+				);
+			});
 			cy.clickOnContinueButton();
 			cy.returningToTeaching(true);
 			cy.havePreviousTeacherReferenceNumber(true);
