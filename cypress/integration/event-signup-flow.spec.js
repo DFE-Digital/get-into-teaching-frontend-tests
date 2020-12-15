@@ -301,7 +301,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.enterEmailVerificationCode();
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						cy.hideFeedbackBar();
 						eventSignup.getPhoneNumber().click();
 						eventSignup.getPhoneNumber().clear();
 						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
