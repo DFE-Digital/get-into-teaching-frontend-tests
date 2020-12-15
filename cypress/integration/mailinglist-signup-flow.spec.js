@@ -140,7 +140,9 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				"Error: Please enter the latest verification code sent to your email address"
 			);
 		cy.contains("resend verification").click();
-		cy.enterEmailVerificationCodeForMailinglist();
+		cy.enterEmailVerificationCode().then((otp) => {
+			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
+		});
 		mailingListSignUp.getNextStep().click();
 		cy.get("#edit_mailing_list_steps_already_subscribed_already_subscribed > h1")
 			.should("exist")
@@ -212,8 +214,9 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		});
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		mailingListSignUp.getNextStep().click();
-		cy.hideFeedbackBar();
-		cy.enterEmailVerificationCodeForMailinglist();
+		cy.enterEmailVerificationCode().then((otp) => {
+			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
+		});
 		mailingListSignUp.getNextStep().click();
 		cy.get("#edit_mailing_list_steps_already_subscribed_already_subscribed > h1")
 			.should("exist")
