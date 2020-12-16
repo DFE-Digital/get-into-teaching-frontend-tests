@@ -49,22 +49,20 @@ Cypress.Commands.add("shouldHavePageNavigation", () => {
 	});
 });
 
-Cypress.Commands.add("enterEmailVerificationCode", () => {
+Cypress.Commands.add("enterEmailVerificationCode", (email, key) => {
 	cy.wait(5000);
 	let newURL;
 	var latestEmailID;
 	var code;
-	cy.request(
-		"https://mailsac.com/api/addresses/testuser@mailsac.com/messages?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
-	).as("topMostEmail");
+	cy.request("https://mailsac.com/api/addresses/" + email + "/messages?_mailsacKey=" + key).as(
+		"topMostEmail"
+	);
 	cy.get("@topMostEmail")
 		.then((response) => {
 			latestEmailID = response.body[0]._id;
 			cy.log("latestEmailID = " + latestEmailID);
 			newURL =
-				"https://mailsac.com/api/text/testuser@mailsac.com/" +
-				latestEmailID +
-				"?_mailsacKey=WGZ5k8QtC3Iys8o7LzvXzTO6oQ";
+				"https://mailsac.com/api/text/" + email + "/" + latestEmailID + "?_mailsacKey=" + key;
 			cy.request(newURL).as("verificationCode");
 			cy.get("@verificationCode").then((response) => {
 				var startpos = response.body.search("is");
