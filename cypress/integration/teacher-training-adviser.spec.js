@@ -2282,7 +2282,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.enterEmailVerificationCode().then((otp) => {
+		cy.enterEmailVerificationCode(this.testData.email, this.testData.testUserKey).then((otp) => {
 			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
 				otp
 			);
@@ -2456,7 +2456,7 @@ describe("Matchback feature", () => {
 			mailingListSignUp.getLastName().type(lastName);
 			mailingListSignUp.getEmailAddress().type(this.testData.email);
 			mailingListSignUp.getNextStep().click();
-			cy.enterEmailVerificationCode().then((otp) => {
+			cy.enterEmailVerificationCode(this.testData.email, this.testData.testUserKey).then((otp) => {
 				cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
 			});
 			mailingListSignUp.getNextStep().click();
@@ -2514,7 +2514,7 @@ describe("Matchback feature", () => {
 			teacherTrainingAdviser.getLastName().type(lastName);
 			teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
 			teacherTrainingAdviser.getContinueButton().click();
-			cy.enterEmailVerificationCode().then((otp) => {
+			cy.enterEmailVerificationCode(this.testData.email, this.testData.testUserKey).then((otp) => {
 				cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
 					otp
 				);
