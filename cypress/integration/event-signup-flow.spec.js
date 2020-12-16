@@ -6,8 +6,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	const eventSignup = new EventSignupPage();
 
 	beforeEach(function () {
-		cy.fixture("event-signup-test-data").then((testData) => {
-			this.testData = testData;
+		cy.fixture("event-signup-test-data").then((eventSignupTestData) => {
+			this.eventSignupTestData = eventSignupTestData;
 		});
 		cy.visit("/events", {
 			auth: {
@@ -26,8 +26,14 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 
 	it("It shows the Sign up for this event page", function () {
-		cy.updateEventMonth(this.testData.eventsType, this.testData.eventLocation);
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.updateEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		);
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -51,7 +57,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 
 	it("It shows the Sign up complete message - for new candidate who doesn't like to receive email updates", function () {
 		let signedUpeventName;
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -69,14 +78,14 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
 						signedUpeventName = eventName.text().trim();
-						eventSignup.getFirstName().type(this.testData.firstName);
-						eventSignup.getLastName().type(this.testData.lastName);
+						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
+						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
 						let rnum = Math.floor(Math.random() * 1000000 + 1);
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
@@ -90,7 +99,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	it("It shows the Sign up complete message - for new candidate who like to receive email updates", function () {
 		// Scenario - candidate who like to receive email updateslike to receive email updates
 		let signedUpeventName;
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -108,14 +120,14 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
 						signedUpeventName = eventName.text().trim();
-						eventSignup.getFirstName().type(this.testData.firstName);
-						eventSignup.getLastName().type(this.testData.lastName);
+						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
+						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
 						let rnum = Math.floor(Math.random() * 1000000 + 1);
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("Yes");
@@ -142,7 +154,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
 		let firstName = "User_" + rnum + "_firstname";
 		let lastName = "User_" + rnum + "_lastname";
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -162,10 +177,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.eventUserEmail);
+						eventSignup.getEmail().type(this.eventSignupTestData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("Yes");
@@ -190,8 +205,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					});
 				cy.wait(5000);
 				cy.contains("Find an event near you").click();
-				searchForEvent.getEventsType().select(this.testData.eventsType);
-				searchForEvent.getEventLocation().select(this.testData.eventLocation);
+				searchForEvent.getEventsType().select(this.eventSignupTestData.eventsType);
+				searchForEvent.getEventLocation().select(this.eventSignupTestData.eventLocation);
 				searchForEvent.getEventsMonth().select(month);
 				searchForEvent.getUpdateResultsButton().click();
 				eventSignup
@@ -204,17 +219,17 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.eventUserEmail);
+						eventSignup.getEmail().type(this.eventSignupTestData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						cy.enterEmailVerificationCode(
-							this.testData.eventUserEmail,
-							this.testData.eventUserKey
+							this.eventSignupTestData.eventUserEmail,
+							this.eventSignupTestData.eventUserKey
 						).then((otp) => {
 							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
 						});
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						cy.verifyMobileFieldAndDisplayedValue(this.testData.phoneNumber);
+						cy.verifyMobileFieldAndDisplayedValue(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
@@ -230,7 +245,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
 		let firstName = "User_" + rnum + "_firstname";
 		let lastName = "User_" + rnum + "_lastname";
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -250,10 +268,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.eventUserEmail);
+						eventSignup.getEmail().type(this.eventSignupTestData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("Yes");
@@ -278,8 +296,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					});
 				cy.wait(5000);
 				cy.contains("Find an event near you").click();
-				searchForEvent.getEventsType().select(this.testData.eventsType);
-				searchForEvent.getEventLocation().select(this.testData.eventLocation);
+				searchForEvent.getEventsType().select(this.eventSignupTestData.eventsType);
+				searchForEvent.getEventLocation().select(this.eventSignupTestData.eventLocation);
 				searchForEvent.getEventsMonth().select(month);
 				searchForEvent.getUpdateResultsButton().click();
 				eventSignup
@@ -292,21 +310,21 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.eventUserEmail);
+						eventSignup.getEmail().type(this.eventSignupTestData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						cy.enterVerificationCode("123456");
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
 						eventSignup.getResendVerificationLink().click();
 						cy.enterEmailVerificationCode(
-							this.testData.eventUserEmail,
-							this.testData.eventUserKey
+							this.eventSignupTestData.eventUserEmail,
+							this.eventSignupTestData.eventUserKey
 						).then((otp) => {
 							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
 						});
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						cy.verifyMobileFieldAndDisplayedValue(this.testData.phoneNumber);
+						cy.verifyMobileFieldAndDisplayedValue(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
@@ -322,7 +340,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
 		let firstName = "User_" + rnum + "_firstname";
 		let lastName = "User_" + rnum + "_lastname";
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -342,10 +363,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.eventUserEmail);
+						eventSignup.getEmail().type(this.eventSignupTestData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("Yes");
@@ -370,8 +391,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					});
 
 				cy.contains("Find an event near you").click();
-				searchForEvent.getEventsType().select(this.testData.eventsType);
-				searchForEvent.getEventLocation().select(this.testData.eventLocation);
+				searchForEvent.getEventsType().select(this.eventSignupTestData.eventsType);
+				searchForEvent.getEventLocation().select(this.eventSignupTestData.eventLocation);
 				searchForEvent.getEventsMonth().select(month);
 				searchForEvent.getUpdateResultsButton().click();
 				eventSignup
@@ -384,7 +405,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.eventUserEmail);
+						eventSignup.getEmail().type(this.eventSignupTestData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						cy.enterVerificationCode("12345", false);
 						eventSignup.getNextStep().click();
@@ -421,7 +442,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 
 	it("It shows the error message if user clicks next button without entering the mandatory details", function () {
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -459,7 +483,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 
 	it("Error message link navigates to its respective field", function () {
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -522,7 +549,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 
 	it("Links through to feedback survey page", function () {
 		let signedUpeventName;
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -540,14 +570,14 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
 						signedUpeventName = eventName.text().trim();
-						eventSignup.getFirstName().type(this.testData.firstName);
-						eventSignup.getLastName().type(this.testData.lastName);
+						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
+						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
 						let rnum = Math.floor(Math.random() * 1000000 + 1);
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
@@ -564,7 +594,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 
 	it('It hides the feedback bar if user clicks on "Hide" link', function () {
 		let signedUpeventName;
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(
+			this.eventSignupTestData.eventsType,
+			this.eventSignupTestData.eventLocation
+		).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -582,14 +615,14 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
 						signedUpeventName = eventName.text().trim();
-						eventSignup.getFirstName().type(this.testData.firstName);
-						eventSignup.getLastName().type(this.testData.lastName);
+						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
+						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
 						let rnum = Math.floor(Math.random() * 1000000 + 1);
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");

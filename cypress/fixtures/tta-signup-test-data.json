@@ -1,8 +1,7 @@
 {
 	"firstName": "User_first_name",
 	"lastName": "User_last_name",
-	"email": "testuser@mailsac.com",
-	"invalidEmail": "abcxyz",
+	"email": "ttauser@mailsac.com",
 	"phoneNumber": "01234567890",
 	"previousSubject": "Computing",
 	"day": "25",
@@ -14,5 +13,5 @@
 	"postcode": "DL1 5JR",
 	"new_phoneNumber": "+503546475",
 	"country": "Austria",
-	"testUserKey": "WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
+	"emailKey": "k_VStMYKs5dyjP8gRdwvbyD3a5OX4jJJE76"
 }

@@ -22,11 +22,11 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
 	beforeEach(function () {
 		//cy.viewport("samsung-s10");
-		cy.fixture("tta-signup-test-data.json").then((testData) => {
-			this.testData = testData;
+		cy.fixture("tta-signup-test-data.json").then((ttaTestData) => {
+			this.ttaTestData = ttaTestData;
 		});
-		cy.fixture("mailinglist-signup-test-data.json").then((testInputData) => {
-			this.testInputData = testInputData;
+		cy.fixture("mailinglist-signup-test-data.json").then((mailingListTestData) => {
+			this.mailingListTestData = mailingListTestData;
 		});
 
 		cy.visit(Cypress.env("baseurl_tta_flow"), {
@@ -61,7 +61,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		let lastName = "Last_" + rnum + "_name";
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
-		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
@@ -78,7 +78,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.contains(firstName + " " + lastName);
 		cy.contains("Date of birth").next().contains("25 02 1986");
 		cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
-		cy.contains("Email").next().contains(this.testData.email);
+		cy.contains("Email").next().contains(this.ttaTestData.email);
 		cy.contains("Telephone").next().contains("012345678");
 		cy.contains("Are you returning to teaching?").next().contains("Yes");
 		cy.contains("What is your previous teacher reference number?").next().contains("23478463");
@@ -94,11 +94,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Get support" message to the UK returner if he selects subject as "Other"', function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -108,11 +104,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -138,11 +130,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -168,11 +156,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it("It shows the error message if user clicks continiue button without selecting subject", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -186,11 +170,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas returner user', function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -215,11 +195,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -248,11 +224,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -265,7 +237,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Brazil");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -282,11 +254,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -317,11 +285,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -353,11 +317,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -380,11 +340,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -415,11 +371,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -451,11 +403,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -488,11 +436,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -526,11 +470,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -556,11 +496,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -581,11 +517,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -614,11 +546,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -648,11 +576,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -683,11 +607,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -718,11 +638,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications page	 
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -740,11 +656,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have a degree? - No
 		  Expected - 	If you do not have a degree page	   
 		*/
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("No");
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "If you do not have a degree");
@@ -761,11 +673,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -796,11 +704,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -832,11 +736,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -869,11 +769,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -906,11 +802,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -935,11 +827,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -972,11 +860,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -990,7 +874,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Estonia");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1010,11 +894,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1049,11 +929,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
@@ -1088,11 +964,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
@@ -1127,11 +999,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
@@ -1166,11 +1034,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1185,7 +1049,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1205,11 +1069,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
@@ -1224,7 +1084,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1244,11 +1104,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
@@ -1263,7 +1119,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1283,11 +1139,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
@@ -1302,7 +1154,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Chile");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1321,11 +1173,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications page		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1349,11 +1197,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1375,11 +1219,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1408,11 +1248,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1442,11 +1278,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1477,11 +1309,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1495,7 +1323,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1511,11 +1339,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - No
 		  Expected - Get the right GCSEs or equivalent qualifications page		 	   
 		*/
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1535,11 +1359,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
@@ -1577,11 +1397,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
@@ -1614,11 +1430,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 	   
 		*/
 		"";
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
@@ -1651,11 +1463,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Which stage are you interested in teaching? - primary
 		  Overseas user		 	   
 		*/
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
@@ -1677,7 +1485,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		let lastName = "Last_" + rnum + "_name";
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
-		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
@@ -1690,14 +1498,14 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth(31, 3, 1985);
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Denmark");
-		cy.enterOverseasTelephoneNumber(this.testData.phoneNumber);
+		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
 
 		cy.contains("Name")
 			.next()
 			.contains(firstName + " " + lastName);
 		cy.contains("Date of birth").next().contains("31 03 1985");
-		cy.contains("Email").next().contains(this.testData.email);
+		cy.contains("Email").next().contains(this.ttaTestData.email);
 		cy.contains("Telephone").next().contains("01234567890");
 		cy.contains("Are you returning to teaching?").next().contains("No");
 		cy.contains("Do you have a degree?").next().contains("Yes");
@@ -1792,7 +1600,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		let lastName = "Last_" + rnum + "_name";
 		cy.get("#teacher-training-adviser-steps-identity-first-name-field-error").type(firstName);
 		cy.get("#teacher-training-adviser-steps-identity-last-name-field-error").type(lastName);
-		cy.get("#teacher-training-adviser-steps-identity-email-field-error").type(this.testData.email);
+		cy.get("#teacher-training-adviser-steps-identity-email-field-error").type(
+			this.ttaTestData.email
+		);
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
@@ -1880,17 +1690,17 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.next()
 			.should("have.text", "Enter a real postcode");
 		cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field-error").type(
-			this.testData.address_Line1
+			this.ttaTestData.address_Line1
 		);
 		cy.get("#teacher-training-adviser-steps-uk-address-address-city-field-error").type(
-			this.testData.city
+			this.ttaTestData.city
 		);
 		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field-error").type(
-			this.testData.postcode
+			this.ttaTestData.postcode
 		);
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
-			this.testData.phoneNumber
+			this.ttaTestData.phoneNumber
 		);
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
@@ -1909,11 +1719,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.acceptPolicy();
 	});
 	it("It shows Privacy policy details to the user if he clicks on link", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -2048,11 +1854,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Which country do you live in?").next().contains("Cyprus");
 	});
 	it("It shows error message to user if he enters invalid telephone number - UK user", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
@@ -2082,11 +1884,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it("It shows error message to user if he enters invalid telephone number - overseas user", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
@@ -2163,11 +1961,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Are you returning to teaching?");
 	});
 	it("It shows the error message to user if he enters invalid date of birth", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
@@ -2221,11 +2015,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		);
 	});
 	it("It shows the error message to user if he enters invalid email address format", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.invalidEmail
-		);
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
+		let firstName = "First_" + rnum + "_name";
+		let lastName = "Last_" + rnum + "_name";
+		teacherTrainingAdviser.getFirstName().type(firstName);
+		teacherTrainingAdviser.getLastName().type(lastName);
+		teacherTrainingAdviser.getEmailAddress().type("abcxyz");
+		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyEmailAddressError();
 		cy.enterEmail("$%^&@");
 		cy.verifyEmailAddressError();
@@ -2241,7 +2037,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		let lastName = "Last_" + rnum + "_name";
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
-		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
@@ -2258,7 +2054,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.contains(firstName + " " + lastName);
 		cy.contains("Date of birth").next().contains("25 02 1986");
 		cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
-		cy.contains("Email").next().contains(this.testData.email);
+		cy.contains("Email").next().contains(this.ttaTestData.email);
 		cy.contains("Telephone").next().contains("012345678");
 		cy.contains("Are you returning to teaching?").next().contains("Yes");
 		cy.contains("What is your previous teacher reference number?").next().contains("23478463");
@@ -2280,9 +2076,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnStartNowButton();
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
-		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.enterEmailVerificationCode(this.testData.email, this.testData.testUserKey).then((otp) => {
+		cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then((otp) => {
 			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
 				otp
 			);
@@ -2294,11 +2090,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It expands "What is a GCSE?" link if user clicks on it', function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -2316,11 +2108,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it("It opens feedback survey page if user clicks on feedback link", function () {
-		cy.enterFirstNameLastNameandEmail(
-			this.testData.firstName,
-			this.testData.lastName,
-			this.testData.email
-		);
+		cy.enterFirstNameLastNameandEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -2384,11 +2172,11 @@ describe("Matchback feature", () => {
 
 	beforeEach(function () {
 		//cy.viewport("samsung-s10");
-		cy.fixture("tta-signup-test-data.json").then((testData) => {
-			this.testData = testData;
+		cy.fixture("tta-signup-test-data.json").then((ttaTestData) => {
+			this.ttaTestData = ttaTestData;
 		});
-		cy.fixture("mailinglist-signup-test-data.json").then((testInputData) => {
-			this.testInputData = testInputData;
+		cy.fixture("mailinglist-signup-test-data.json").then((mailingListTestData) => {
+			this.mailingListTestData = mailingListTestData;
 		});
 	});
 
@@ -2408,7 +2196,7 @@ describe("Matchback feature", () => {
 		cy.clickOnStartNowButton();
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
-		teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
@@ -2425,7 +2213,7 @@ describe("Matchback feature", () => {
 			.contains(firstName + " " + lastName);
 		cy.contains("Date of birth").next().contains("25 02 1986");
 		cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
-		cy.contains("Email").next().contains(this.testData.email);
+		cy.contains("Email").next().contains(this.ttaTestData.email);
 		cy.contains("Telephone").next().contains("012345678");
 		cy.contains("Are you returning to teaching?").next().contains("Yes");
 		cy.contains("What is your previous teacher reference number?").next().contains("23478463");
@@ -2454,11 +2242,13 @@ describe("Matchback feature", () => {
 			cy.acceptCookie();
 			mailingListSignUp.getFirstName().type(firstName);
 			mailingListSignUp.getLastName().type(lastName);
-			mailingListSignUp.getEmailAddress().type(this.testData.email);
+			mailingListSignUp.getEmailAddress().type(this.ttaTestData.email);
 			mailingListSignUp.getNextStep().click();
-			cy.enterEmailVerificationCode(this.testData.email, this.testData.testUserKey).then((otp) => {
-				cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
-			});
+			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then(
+				(otp) => {
+					cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
+				}
+			);
 			mailingListSignUp.getNextStep().click();
 			cy.get("h1").should("exist").should("have.text", "You have already signed up to an adviser");
 		});
@@ -2479,17 +2269,19 @@ describe("Matchback feature", () => {
 		cy.acceptCookie();
 		mailingListSignUp.getFirstName().type(firstName);
 		mailingListSignUp.getLastName().type(lastName);
-		mailingListSignUp.getEmailAddress().type(this.testData.email);
+		mailingListSignUp.getEmailAddress().type(this.ttaTestData.email);
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
@@ -2512,13 +2304,15 @@ describe("Matchback feature", () => {
 			cy.clickOnStartNowButton();
 			teacherTrainingAdviser.getFirstName().type(firstName);
 			teacherTrainingAdviser.getLastName().type(lastName);
-			teacherTrainingAdviser.getEmailAddress().type(this.testData.email);
+			teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 			teacherTrainingAdviser.getContinueButton().click();
-			cy.enterEmailVerificationCode(this.testData.email, this.testData.testUserKey).then((otp) => {
-				cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
-					otp
-				);
-			});
+			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then(
+				(otp) => {
+					cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
+						otp
+					);
+				}
+			);
 			cy.clickOnContinueButton();
 			cy.returningToTeaching(true);
 			cy.havePreviousTeacherReferenceNumber(true);
@@ -2533,7 +2327,7 @@ describe("Matchback feature", () => {
 			);
 			cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 			cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
-				this.testInputData.phone
+				this.mailingListTestData.phone
 			);
 			cy.clickOnContinueButton();
 			cy.get(".govuk-heading-l")
@@ -2544,8 +2338,8 @@ describe("Matchback feature", () => {
 				.contains(firstName + " " + lastName);
 			cy.contains("Date of birth").next().contains("25 02 1986");
 			cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
-			cy.contains("Email").next().contains(this.testData.email);
-			cy.contains("Telephone").next().contains(this.testInputData.phone);
+			cy.contains("Email").next().contains(this.ttaTestData.email);
+			cy.contains("Telephone").next().contains(this.mailingListTestData.phone);
 			cy.contains("Are you returning to teaching?").next().contains("Yes");
 			cy.contains("What is your previous teacher reference number?").next().contains("23478463");
 			cy.contains("Which main subject did you previously teach?").next().contains("Computing");
