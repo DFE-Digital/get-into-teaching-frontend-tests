@@ -162,7 +162,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.email);
+						eventSignup.getEmail().type(this.testData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
@@ -188,7 +188,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							.next()
 							.should("have.text", "You've also signed up for email updates");
 					});
-
+				cy.wait(5000);
 				cy.contains("Find an event near you").click();
 				searchForEvent.getEventsType().select(this.testData.eventsType);
 				searchForEvent.getEventLocation().select(this.testData.eventLocation);
@@ -204,9 +204,9 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.email);
+						eventSignup.getEmail().type(this.testData.eventUserEmail);
 						eventSignup.getNextStep().click();
-						cy.enterEmailVerificationCode().then((otp) => {
+						cy.enterEmailVerificationCodeForEventUser().then((otp) => {
 							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
 						});
 						eventSignup.getNextStep().click();
@@ -247,7 +247,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.email);
+						eventSignup.getEmail().type(this.testData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
@@ -273,7 +273,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							.next()
 							.should("have.text", "You've also signed up for email updates");
 					});
-
+				cy.wait(5000);
 				cy.contains("Find an event near you").click();
 				searchForEvent.getEventsType().select(this.testData.eventsType);
 				searchForEvent.getEventLocation().select(this.testData.eventLocation);
@@ -289,13 +289,13 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
-						eventSignup.getEmail().type(this.testData.email);
+						eventSignup.getEmail().type(this.testData.eventUserEmail);
 						eventSignup.getNextStep().click();
 						cy.enterVerificationCode("123456");
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
 						eventSignup.getResendVerificationLink().click();
-						cy.enterEmailVerificationCode().then((otp) => {
+						cy.enterEmailVerificationCodeForEventUser().then((otp) => {
 							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
 						});
 						eventSignup.getNextStep().click();
