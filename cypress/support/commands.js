@@ -463,3 +463,20 @@ Cypress.Commands.add("setEventMonth", (eventsType, eventLocation) => {
 Cypress.Commands.add("hideFeedbackBar", () => {
 	cy.get("#hide-feedback-bar").click();
 });
+
+Cypress.Commands.add("verifyMobileFieldAndDisplayedValue", (mobileNumber) => {
+	cy.contains("Phone number (optional)")
+		.should("exist")
+		.next()
+		.should("exist")
+		.should(
+			"contain.text",
+			"This helps us contact you with updates to this event and other\nimportant information."
+		)
+		.next()
+		.should("exist")
+		.invoke("attr", "value")
+		.then(function (displayedValue) {
+			expect(displayedValue).to.equal(mobileNumber);
+		});
+});
