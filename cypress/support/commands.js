@@ -464,7 +464,7 @@ Cypress.Commands.add("hideFeedbackBar", () => {
 	cy.get("#hide-feedback-bar").click();
 });
 
-Cypress.Commands.add("verifyMobileFieldandDisplayedValue", (mobileNumber) => {
+Cypress.Commands.add("verifyMobileFieldAndDisplayedValue", (mobileNumber) => {
 	cy.contains("Phone number (optional)")
 		.should("exist")
 		.next()
