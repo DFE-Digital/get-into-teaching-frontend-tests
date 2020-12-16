@@ -140,7 +140,10 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				"Error: Please enter the latest verification code sent to your email address"
 			);
 		cy.contains("resend verification").click();
-		cy.enterEmailVerificationCode().then((otp) => {
+		cy.enterEmailVerificationCode(
+			this.testInputData.emailAddress,
+			this.testInputData.testUserKey
+		).then((otp) => {
 			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
 		});
 		mailingListSignUp.getNextStep().click();
@@ -214,7 +217,10 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		});
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
 		mailingListSignUp.getNextStep().click();
-		cy.enterEmailVerificationCode().then((otp) => {
+		cy.enterEmailVerificationCode(
+			this.testInputData.emailAddress,
+			this.testInputData.testUserKey
+		).then((otp) => {
 			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
 		});
 		mailingListSignUp.getNextStep().click();
