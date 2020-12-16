@@ -211,6 +211,20 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						});
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
+						cy.contains("Phone number (optional)")
+							.should("exist")
+							.next()
+							.should("exist")
+							.should(
+								"contain.text",
+								"This helps us contact you with updates to this event and other\nimportant information."
+							)
+							.next()
+							.should("exist")
+							.invoke("attr", "value")
+							.then(function (mobileNumber) {
+								expect(mobileNumber).to.equal(this.testData.phoneNumber);
+							});
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
@@ -299,6 +313,20 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						});
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
+						cy.contains("Phone number (optional)")
+							.should("exist")
+							.next()
+							.should("exist")
+							.should(
+								"contain.text",
+								"This helps us contact you with updates to this event and other\nimportant information."
+							)
+							.next()
+							.should("exist")
+							.invoke("attr", "value")
+							.then(function (mobileNumber) {
+								expect(mobileNumber).to.equal(this.testData.phoneNumber);
+							});
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
