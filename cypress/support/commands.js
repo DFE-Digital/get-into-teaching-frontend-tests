@@ -478,30 +478,3 @@ Cypress.Commands.add("verifyMobileFieldAndDisplayedValue", (mobileNumber) => {
 			expect(displayedValue).to.equal(mobileNumber);
 		});
 });
-
-Cypress.Commands.add("enterEmailVerificationCodeForEventUser", () => {
-	cy.wait(5000);
-	let newURL;
-	var latestEmailID;
-	var code;
-	cy.request(
-		"https://mailsac.com/api/addresses/eventsignupuser@mailsac.com/messages?_mailsacKey=k_O5uC2J5VrpS6HgLhuUYZhY92Qv1158L5FQg121b"
-	).as("topMostEmail");
-	cy.get("@topMostEmail")
-		.then((response) => {
-			latestEmailID = response.body[0]._id;
-			cy.log("latestEmailID = " + latestEmailID);
-			newURL =
-				"https://mailsac.com/api/text/eventsignupuser@mailsac.com/" +
-				latestEmailID +
-				"?_mailsacKey=k_O5uC2J5VrpS6HgLhuUYZhY92Qv1158L5FQg121b";
-			cy.request(newURL).as("verificationCode");
-			cy.get("@verificationCode").then((response) => {
-				var startpos = response.body.search("is");
-				code = response.body.toString().substr(startpos + 2, 7);
-			});
-		})
-		.then(() => {
-			return code;
-		});
-});
