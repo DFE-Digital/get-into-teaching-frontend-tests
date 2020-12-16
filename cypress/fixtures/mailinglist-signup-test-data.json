@@ -1,7 +1,7 @@
 {
 	"firstName": "Test_firstName",
 	"lastName": "Test_lastName",
-	"emailAddress": "testuser@mailsac.com",
+	"email": "mailinglistuser@mailsac.com",
 	"describeYourself": "Student",
 	"degreeStage": "Final year",
 	"howCloseAreYoutoApplyingForTeacherTraining": "I’m fairly sure and exploring my options",
@@ -9,5 +9,5 @@
 	"postCode": "TF3 2BT",
 	"phone": "07442747474",
 	"moreDetail": "I want to know about teaching carrier in more details",
-	"testUserKey": "WGZ5k8QtC3Iys8o7LzvXzTO6oQ"
+	"emailKey": "k_6B42YjS2RAoqQpU9287UAvzW4YHWUsHM4a"
 }

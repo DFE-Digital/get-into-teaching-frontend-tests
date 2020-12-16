@@ -78,10 +78,11 @@ Cypress.Commands.add("acceptCookie", () => {
 	cy.get("#cookies-agree").click();
 });
 
-Cypress.Commands.add("enterFirstNameLastNameandEmail", (firstName, lastName, email) => {
+Cypress.Commands.add("enterFirstNameLastNameandEmail", () => {
 	let rnum = Math.floor(Math.random() * 10000000 + 1);
-	firstName = "First_" + rnum + "_name";
-	lastName = "Last_" + rnum + "_name";
+	let firstName = "First_" + rnum + "_name";
+	let lastName = "Last_" + rnum + "_name";
+	let email = "testemail@gmail.com";
 	cy.get("#teacher-training-adviser-steps-identity-first-name-field").type(firstName);
 	cy.get("#teacher-training-adviser-steps-identity-last-name-field").type(lastName);
 	cy.get("#teacher-training-adviser-steps-identity-email-field").type(email);

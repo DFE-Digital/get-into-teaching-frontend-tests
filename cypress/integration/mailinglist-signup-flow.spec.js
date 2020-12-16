@@ -4,8 +4,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	const mailingListSignUp = new MailingListSignUp();
 
 	beforeEach(function () {
-		cy.fixture("mailinglist-signup-test-data.json").then((testInputData) => {
-			this.testInputData = testInputData;
+		cy.fixture("mailinglist-signup-test-data.json").then((mailingListTestData) => {
+			this.mailingListTestData = mailingListTestData;
 		});
 		cy.visit("/mailinglist/signup/name", {
 			auth: {
@@ -69,17 +69,19 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
@@ -91,7 +93,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
@@ -107,17 +109,19 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
@@ -129,7 +133,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
 		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
@@ -141,8 +145,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			);
 		cy.contains("resend verification").click();
 		cy.enterEmailVerificationCode(
-			this.testInputData.emailAddress,
-			this.testInputData.testUserKey
+			this.mailingListTestData.email,
+			this.mailingListTestData.emailKey
 		).then((otp) => {
 			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
 		});
@@ -156,8 +160,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
 		cy.enterFirstNameLastNameAndEmailAddress(
-			this.testInputData.firstName,
-			this.testInputData.lastName,
+			this.mailingListTestData.firstName,
+			this.mailingListTestData.lastName,
 			email
 		);
 		mailingListSignUp.getNextStep().click();
@@ -165,11 +169,13 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
@@ -193,17 +199,19 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
@@ -215,11 +223,11 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.testInputData.emailAddress);
+		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
 		cy.enterEmailVerificationCode(
-			this.testInputData.emailAddress,
-			this.testInputData.testUserKey
+			this.mailingListTestData.email,
+			this.mailingListTestData.emailKey
 		).then((otp) => {
 			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
 		});
@@ -233,8 +241,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
 		cy.enterFirstNameLastNameAndEmailAddress(
-			this.testInputData.firstName,
-			this.testInputData.lastName,
+			this.mailingListTestData.firstName,
+			this.mailingListTestData.lastName,
 			email
 		);
 		mailingListSignUp.getNextStep().click();
@@ -242,11 +250,13 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.contains("a", "privacy policy").invoke("removeAttr", "target").click();
 		cy.contains("Privacy Policy").should("exist");
@@ -258,8 +268,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
 		cy.enterFirstNameLastNameAndEmailAddress(
-			this.testInputData.firstName,
-			this.testInputData.lastName,
+			this.mailingListTestData.firstName,
+			this.mailingListTestData.lastName,
 			email
 		);
 		mailingListSignUp.getNextStep().click();
@@ -267,11 +277,13 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
@@ -299,8 +311,8 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
 		cy.enterFirstNameLastNameAndEmailAddress(
-			this.testInputData.firstName,
-			this.testInputData.lastName,
+			this.mailingListTestData.firstName,
+			this.mailingListTestData.lastName,
 			email
 		);
 		mailingListSignUp.getNextStep().click();
@@ -308,11 +320,13 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getStage()
-			.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp
+			.getSubjectToTeach()
+			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
@@ -340,11 +354,11 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			mailingListSignUp.getNextStep().click();
 			mailingListSignUp
 				.getStage()
-				.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+				.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 			mailingListSignUp.getNextStep().click();
-			mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+			mailingListSignUp.getSubjectToTeach().select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 			mailingListSignUp.getNextStep().click();
-			mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+			mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 			mailingListSignUp.getNextStep().click();
 			cy.acceptPrivacyPolicy();
 			mailingListSignUp.getCompleteSignUpButton().click();
@@ -376,11 +390,11 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			mailingListSignUp.getNextStep().click();
 			mailingListSignUp
 				.getStage()
-				.select(this.testInputData.howCloseAreYoutoApplyingForTeacherTraining);
+				.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
 			mailingListSignUp.getNextStep().click();
-			mailingListSignUp.getSubjectToTeach().select(this.testInputData.whichSubjectdoYouWantToTeach);
+			mailingListSignUp.getSubjectToTeach().select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 			mailingListSignUp.getNextStep().click();
-			mailingListSignUp.getPostcode().type(this.testInputData.postCode);
+			mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 			mailingListSignUp.getNextStep().click();
 			cy.acceptPrivacyPolicy();
 			mailingListSignUp.getCompleteSignUpButton().click();
