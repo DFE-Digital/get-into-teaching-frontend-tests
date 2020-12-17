@@ -78,7 +78,7 @@ Cypress.Commands.add("acceptCookie", () => {
 	cy.get("#cookies-agree").click();
 });
 
-Cypress.Commands.add("enterFirstNameLastNameandEmail", () => {
+Cypress.Commands.add("enterFirstNameLastNameAndEmail", () => {
 	let rnum = Math.floor(Math.random() * 10000000 + 1);
 	let firstName = "First_" + rnum + "_name";
 	let lastName = "Last_" + rnum + "_name";

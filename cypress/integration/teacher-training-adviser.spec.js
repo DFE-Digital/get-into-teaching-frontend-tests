@@ -94,7 +94,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Get support" message to the UK returner if he selects subject as "Other"', function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -104,7 +104,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -130,7 +130,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -156,7 +156,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it("It shows the error message if user clicks continiue button without selecting subject", function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -170,7 +170,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas returner user', function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -195,7 +195,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -224,7 +224,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -254,7 +254,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -285,7 +285,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -317,7 +317,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -340,7 +340,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -371,7 +371,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -403,7 +403,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -436,7 +436,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -470,7 +470,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -496,7 +496,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -517,7 +517,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -546,7 +546,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -576,7 +576,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -607,7 +607,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -638,7 +638,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications page	 
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
@@ -656,7 +656,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Do you have a degree? - No
 		  Expected - 	If you do not have a degree page	   
 		*/
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("No");
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "If you do not have a degree");
@@ -673,7 +673,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -704,7 +704,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -736,7 +736,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -769,7 +769,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -802,7 +802,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -827,7 +827,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -860,7 +860,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -894,7 +894,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -929,7 +929,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
@@ -964,7 +964,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
@@ -999,7 +999,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
@@ -1034,7 +1034,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1069,7 +1069,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
@@ -1104,7 +1104,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
@@ -1139,7 +1139,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
@@ -1173,7 +1173,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications page		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1197,7 +1197,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1219,7 +1219,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1248,7 +1248,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1278,7 +1278,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1309,7 +1309,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1339,7 +1339,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Are you planning to retake either English or maths (or both) GCSEs, or equivalent? - No
 		  Expected - Get the right GCSEs or equivalent qualifications page		 	   
 		*/
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -1359,7 +1359,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
@@ -1397,7 +1397,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
@@ -1430,7 +1430,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  UK user		 	   
 		*/
 		"";
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
@@ -1463,7 +1463,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Which stage are you interested in teaching? - primary
 		  Overseas user		 	   
 		*/
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
@@ -1719,7 +1719,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.acceptPolicy();
 	});
 	it("It shows Privacy policy details to the user if he clicks on link", function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(true);
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
@@ -1854,7 +1854,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Which country do you live in?").next().contains("Cyprus");
 	});
 	it("It shows error message to user if he enters invalid telephone number - UK user", function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
@@ -1884,7 +1884,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it("It shows error message to user if he enters invalid telephone number - overseas user", function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
@@ -1961,7 +1961,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Are you returning to teaching?");
 	});
 	it("It shows the error message to user if he enters invalid date of birth", function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
@@ -2090,7 +2090,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It expands "What is a GCSE?" link if user clicks on it', function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
@@ -2108,7 +2108,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it("It opens feedback survey page if user clicks on feedback link", function () {
-		cy.enterFirstNameLastNameandEmail();
+		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(false);
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
