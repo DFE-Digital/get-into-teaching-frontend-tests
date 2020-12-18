@@ -224,7 +224,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.get("#events_search_month")
 			.as("month")
 			.children()
-			.first()
+			.eq(2)
 			.then((option) => {
 				cy.get("@month").select(option.text());
 			});
