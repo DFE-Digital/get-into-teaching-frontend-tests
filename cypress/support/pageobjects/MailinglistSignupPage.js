@@ -17,9 +17,6 @@ class MailinglistSignupPage {
 	getNextStep() {
 		return cy.contains("Next Step");
 	}
-	getStage() {
-		return cy.get("#mailing-list-steps-teacher-training-consideration-journey-stage-id-field");
-	}
 	getSubjectToTeach() {
 		return cy.get("#mailing-list-steps-subject-preferred-teaching-subject-id-field");
 	}
