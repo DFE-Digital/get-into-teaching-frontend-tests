@@ -404,7 +404,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	});*/
 });
 
-xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
 			url: "https://get-into-teaching-app-tests.london.cloudapps.digital//mailinglist/signup/name",
