@@ -2273,9 +2273,7 @@ describe("Matchback feature", () => {
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("I’m fairly sure and exploring my options");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()

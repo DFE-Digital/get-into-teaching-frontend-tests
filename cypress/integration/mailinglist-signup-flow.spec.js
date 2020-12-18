@@ -73,9 +73,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("I’m fairly sure and exploring my options");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()
@@ -113,9 +111,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("It’s just an idea");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()
@@ -167,9 +163,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("I’m not sure and finding out more");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()
@@ -203,9 +197,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("I’m very sure and think I’ll apply");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()
@@ -248,9 +240,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("I’m fairly sure and exploring my options");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()
@@ -275,9 +265,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("I’m fairly sure and exploring my options");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()
@@ -318,9 +306,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		mailingListSignUp.getNextStep().click();
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getStage()
-			.select(this.mailingListTestData.howCloseAreYoutoApplyingForTeacherTraining);
+		cy.howCloseAreYou("I’m fairly sure and exploring my options");
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp
 			.getSubjectToTeach()
@@ -418,7 +404,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	});*/
 });
 
-describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
 			url: "https://get-into-teaching-app-tests.london.cloudapps.digital//mailinglist/signup/name",

@@ -479,3 +479,7 @@ Cypress.Commands.add("verifyMobileFieldAndDisplayedValue", (mobileNumber) => {
 			expect(displayedValue).to.equal(mobileNumber);
 		});
 });
+
+Cypress.Commands.add("howCloseAreYou", (stage) => {
+	cy.contains(stage).click();
+});
