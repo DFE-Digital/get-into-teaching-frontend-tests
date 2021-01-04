@@ -14,11 +14,11 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@cypress/skip-test": "^2.5.1",
-		"cypress": "^5.5.0",
+		"cypress": "^6.2.0",
 		"cypress-axe": "^0.8.1",
 		"cypress-iframe": "^1.0.1",
 		"cypress-multi-reporters": "^1.4.0",
-		"mailslurp-client": "^8.7.8",
+		"mailslurp-client": "^10.2.1",
 		"mocha": "^8.2.1",
 		"mochawesome": "^6.2.1",
 		"mochawesome-merge": "^4.2.0",
