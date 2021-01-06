@@ -691,4 +691,30 @@ describe("Verify page load " + new Date(), () => {
 			.should("exist")
 			.should("have.text", "Search for School and University Events");
 	});
+
+	it("It shows the selected month events only", function () {
+		cy.visit("/events/category//school-and-university-events", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		cy.verifyPageHeading("School and University Events");
+		searchForEvent
+			.getSearchforEventsHeading()
+			.should("exist")
+			.should("have.text", "Search for School and University Events");
+		cy.get("#events_search_month")
+			.as("month")
+			.children()
+			.first()
+			.next()
+			.then((option) => {
+				cy.get("@month").select(option.text());
+				cy.get(".event-box__datetime").each((displayedOption, index, $list) => {
+					expect(displayedOption.text().trim()).contains(option.text());
+				});
+			});
+	});
 });
