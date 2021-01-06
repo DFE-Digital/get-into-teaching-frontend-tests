@@ -646,3 +646,49 @@ describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 		cy.verify404ErrorMessage();
 	});
 });
+
+describe("Verify page load " + new Date(), () => {
+	const searchForEvent = new Homepage();
+	it('It shows the "Train to Teach Events" page', function () {
+		cy.visit("/events/category/train-to-teach-events", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		cy.verifyPageHeading("Train to Teach Events");
+		searchForEvent
+			.getSearchforEventsHeading()
+			.should("exist")
+			.should("have.text", "Search for Train to Teach Events");
+	});
+	it('It shows the "Online Events" page', function () {
+		cy.visit("/events/category/online-events", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		cy.verifyPageHeading("Online Events");
+		searchForEvent
+			.getSearchforEventsHeading()
+			.should("exist")
+			.should("have.text", "Search for Online Events");
+	});
+	it('It shows the "School and University Events" page', function () {
+		cy.visit("/events/category//school-and-university-events", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		cy.verifyPageHeading("School and University Events");
+		searchForEvent
+			.getSearchforEventsHeading()
+			.should("exist")
+			.should("have.text", "Search for School and University Events");
+	});
+});

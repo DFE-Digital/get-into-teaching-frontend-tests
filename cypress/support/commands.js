@@ -461,3 +461,7 @@ Cypress.Commands.add("verifyMobileFieldAndDisplayedValue", (mobileNumber) => {
 Cypress.Commands.add("howCloseAreYou", (stage) => {
 	cy.contains(stage).click();
 });
+
+Cypress.Commands.add("verifyPageHeading", (pageHeader) => {
+	cy.get("h1 > span").should("exist").should("have.text", pageHeader);
+});
