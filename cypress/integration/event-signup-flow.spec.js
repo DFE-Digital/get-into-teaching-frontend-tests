@@ -678,7 +678,7 @@ describe("Verify page load " + new Date(), () => {
 			.should("have.text", "Search for Online Events");
 	});
 	it('It shows the "School and University Events" page', function () {
-		cy.visit("/events/category//school-and-university-events", {
+		cy.visit("/events/category/school-and-university-events", {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
@@ -693,7 +693,7 @@ describe("Verify page load " + new Date(), () => {
 	});
 
 	it("It shows the selected month events only", function () {
-		cy.visit("/events/category//school-and-university-events", {
+		cy.visit("/events/category/school-and-university-events", {
 			auth: {
 				username: Cypress.env("HTTPAUTH_USERNAME"),
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
