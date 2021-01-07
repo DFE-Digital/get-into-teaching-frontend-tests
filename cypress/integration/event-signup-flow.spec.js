@@ -717,4 +717,94 @@ describe("Verify page load " + new Date(), () => {
 				});
 			});
 	});
+	it('It nativates to selected "Online Events" page', function () {
+		cy.visit("/events/category/online-events", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		cy.get(".events-featured__list__item")
+			.as("firstEvent")
+			.first()
+			.find(".event-box__header")
+			.then((eventHeader) => {
+				cy.log(eventHeader.text());
+				cy.get("@firstEvent")
+					.first()
+					.find(".event-box__datetime")
+					.then((eventDate) => {
+						cy.log(eventDate.text());
+						cy.get("@firstEvent").first().click();
+						cy.get(".content__left >h1").then((eventName) => {
+							expect(eventHeader.text().trim()).to.equal(eventName.text().trim());
+						});
+						cy.get(".event-info__date").then((eventDateOnNextPage) => {
+							eventDateOnNextPage = eventDateOnNextPage.text().replace("at", "");
+							expect(eventDate.text().trim()).to.equal(eventDateOnNextPage.trim());
+						});
+					});
+			});
+	});
+	it('It nativates to selected "Train to Teach Events" page', function () {
+		cy.visit("/events/category/train-to-teach-events", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		cy.get(".events-featured__list__item")
+			.as("firstEvent")
+			.first()
+			.find(".event-box__header")
+			.then((eventHeader) => {
+				cy.log(eventHeader.text());
+				cy.get("@firstEvent")
+					.first()
+					.find(".event-box__datetime")
+					.then((eventDate) => {
+						cy.log(eventDate.text());
+						cy.get("@firstEvent").first().click();
+						cy.get(".content__left >h1").then((eventName) => {
+							expect(eventHeader.text().trim()).to.equal(eventName.text().trim());
+						});
+						cy.get(".event-info__date").then((eventDateOnNextPage) => {
+							eventDateOnNextPage = eventDateOnNextPage.text().replace("at", "");
+							expect(eventDate.text().trim()).to.equal(eventDateOnNextPage.trim());
+						});
+					});
+			});
+	});
+	it('It nativates to selected "School and University Events" page', function () {
+		cy.visit("/events/category/school-and-university-events", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		cy.get(".events-featured__list__item")
+			.as("firstEvent")
+			.first()
+			.find(".event-box__header")
+			.then((eventHeader) => {
+				cy.log(eventHeader.text());
+				cy.get("@firstEvent")
+					.first()
+					.find(".event-box__datetime")
+					.then((eventDate) => {
+						cy.log(eventDate.text());
+						cy.get("@firstEvent").first().click();
+						cy.get(".content__left >h1").then((eventName) => {
+							expect(eventHeader.text().trim()).to.equal(eventName.text().trim());
+						});
+						cy.get(".event-info__date").then((eventDateOnNextPage) => {
+							eventDateOnNextPage = eventDateOnNextPage.text().replace("at", "");
+							expect(eventDate.text().trim()).to.equal(eventDateOnNextPage.trim());
+						});
+					});
+			});
+	});
 });
