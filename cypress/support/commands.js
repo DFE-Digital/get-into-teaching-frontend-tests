@@ -465,3 +465,27 @@ Cypress.Commands.add("howCloseAreYou", (stage) => {
 Cypress.Commands.add("verifyPageHeading", (pageHeader) => {
 	cy.get("h1 > span").should("exist").should("have.text", pageHeader);
 });
+
+Cypress.Commands.add("navigateToPage", (path) => {
+	cy.visit(path, {
+		auth: {
+			username: Cypress.env("HTTPAUTH_USERNAME"),
+			password: Cypress.env("HTTPAUTH_PASSWORD"),
+		},
+	});
+	cy.acceptCookie();
+});
+
+Cypress.Commands.add("getFirstEvent", () => {
+	cy.get(".events-featured__list__item").first().find(".event-box__header");
+});
+Cypress.Commands.add("getFirstEventDateAndTime", () => {
+	cy.get(".events-featured__list__item").first().find(".event-box__datetime");
+});
+
+Cypress.Commands.add("getEventHeader", () => {
+	cy.get(".content__left >h1");
+});
+Cypress.Commands.add("getDateAndTime", () => {
+	cy.get(".event-info__date");
+});
