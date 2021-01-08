@@ -9,13 +9,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		cy.fixture("event-signup-test-data").then((eventSignupTestData) => {
 			this.eventSignupTestData = eventSignupTestData;
 		});
-		cy.visit("/events", {
-			auth: {
-				username: Cypress.env("HTTPAUTH_USERNAME"),
-				password: Cypress.env("HTTPAUTH_PASSWORD"),
-			},
-		});
-		cy.acceptCookie();
+		cy.navigateToPage("/events");
 	});
 
 	it("It shows the Search for events page", function () {
@@ -650,13 +644,7 @@ describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 describe("Verify page load " + new Date(), () => {
 	const searchForEvent = new Homepage();
 	it('It shows the "Train to Teach Events" page', function () {
-		cy.visit("/events/category/train-to-teach-events", {
-			auth: {
-				username: Cypress.env("HTTPAUTH_USERNAME"),
-				password: Cypress.env("HTTPAUTH_PASSWORD"),
-			},
-		});
-		cy.acceptCookie();
+		cy.navigateToPage("/events/category/train-to-teach-events");
 		cy.verifyPageHeading("Train to Teach Events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -664,13 +652,7 @@ describe("Verify page load " + new Date(), () => {
 			.should("have.text", "Search for Train to Teach Events");
 	});
 	it('It shows the "Online Events" page', function () {
-		cy.visit("/events/category/online-events", {
-			auth: {
-				username: Cypress.env("HTTPAUTH_USERNAME"),
-				password: Cypress.env("HTTPAUTH_PASSWORD"),
-			},
-		});
-		cy.acceptCookie();
+		cy.navigateToPage("/events/category/online-events");
 		cy.verifyPageHeading("Online Events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -678,13 +660,7 @@ describe("Verify page load " + new Date(), () => {
 			.should("have.text", "Search for Online Events");
 	});
 	it('It shows the "School and University Events" page', function () {
-		cy.visit("/events/category/school-and-university-events", {
-			auth: {
-				username: Cypress.env("HTTPAUTH_USERNAME"),
-				password: Cypress.env("HTTPAUTH_PASSWORD"),
-			},
-		});
-		cy.acceptCookie();
+		cy.navigateToPage("/events/category/school-and-university-events");
 		cy.verifyPageHeading("School and University Events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -693,13 +669,7 @@ describe("Verify page load " + new Date(), () => {
 	});
 
 	it("It shows the selected month events only", function () {
-		cy.visit("/events/category/school-and-university-events", {
-			auth: {
-				username: Cypress.env("HTTPAUTH_USERNAME"),
-				password: Cypress.env("HTTPAUTH_PASSWORD"),
-			},
-		});
-		cy.acceptCookie();
+		cy.navigateToPage("/events/category/school-and-university-events");
 		cy.verifyPageHeading("School and University Events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -716,5 +686,65 @@ describe("Verify page load " + new Date(), () => {
 					expect(displayedOption.text().trim()).contains(option.text());
 				});
 			});
+	});
+	it('It nativates to selected "Online Events" page', function () {
+		cy.navigateToPage("/events/category/online-events");
+		cy.getFirstEvent().then((eventName) => {
+			eventName = eventName.text().trim();
+			cy.getFirstEvent().click();
+			cy.getEventHeader().then((eventHeader) => {
+				eventHeader = eventHeader.text().trim();
+				expect(eventName).to.equal(eventHeader);
+			});
+		});
+		cy.go("back");
+		cy.getFirstEventDateAndTime().then((eventDateAndTime) => {
+			eventDateAndTime = eventDateAndTime.text().trim();
+			cy.getFirstEvent().click();
+			cy.getDateAndTime().then((eventInfo) => {
+				eventInfo = eventInfo.text().trim().replace("at", "");
+				expect(eventInfo).to.equal(eventDateAndTime);
+			});
+		});
+	});
+	it('It nativates to selected "Train to Teach Events" page', function () {
+		cy.navigateToPage("/events/category/train-to-teach-events");
+		cy.getFirstEvent().then((eventName) => {
+			eventName = eventName.text().trim();
+			cy.getFirstEvent().click();
+			cy.getEventHeader().then((eventHeader) => {
+				eventHeader = eventHeader.text().trim();
+				expect(eventName).to.equal(eventHeader);
+			});
+		});
+		cy.go("back");
+		cy.getFirstEventDateAndTime().then((eventDateAndTime) => {
+			eventDateAndTime = eventDateAndTime.text().trim();
+			cy.getFirstEvent().click();
+			cy.getDateAndTime().then((eventInfo) => {
+				eventInfo = eventInfo.text().trim().replace("at", "");
+				expect(eventInfo).to.equal(eventDateAndTime);
+			});
+		});
+	});
+	it('It nativates to selected "School and University Events" page', function () {
+		cy.navigateToPage("/events/category/school-and-university-events");
+		cy.getFirstEvent().then((eventName) => {
+			eventName = eventName.text().trim();
+			cy.getFirstEvent().click();
+			cy.getEventHeader().then((eventHeader) => {
+				eventHeader = eventHeader.text().trim();
+				expect(eventName).to.equal(eventHeader);
+			});
+		});
+		cy.go("back");
+		cy.getFirstEventDateAndTime().then((eventDateAndTime) => {
+			eventDateAndTime = eventDateAndTime.text().trim();
+			cy.getFirstEvent().click();
+			cy.getDateAndTime().then((eventInfo) => {
+				eventInfo = eventInfo.text().trim().replace("at", "");
+				expect(eventInfo).to.equal(eventDateAndTime);
+			});
+		});
 	});
 });
