@@ -489,3 +489,33 @@ Cypress.Commands.add("getEventHeader", () => {
 Cypress.Commands.add("getDateAndTime", () => {
 	cy.get(".event-info__date");
 });
+Cypress.Commands.add("getPastEventDateAndTime", () => {
+	cy.get("#events_search_month")
+		.as("month")
+		.children()
+		.first()
+		.then((option) => {
+			cy.get("@month").select(option.text());
+			var eventDateAndTime = cy.get(".event-box__datetime");
+			return eventDateAndTime;
+		});
+});
+
+Cypress.Commands.add("compareEventDate", (eventYear, eventMonth, eventDate) => {
+	var currentDate = new Date().getDate();
+	var currentMonth = new Date().getMonth();
+	var currentYear = new Date().getFullYear();
+	if (eventYear == currentYear && eventMonth == currentMonth) {
+		expect(eventDate).to.be.lessThan(currentDate);
+	} else {
+		if (eventYear == currentYear) {
+			expect(eventMonth).to.be.lessThan(currentMonth);
+		} else {
+			if (eventYear > currentYear) {
+				expect(true).to.be.false;
+			} else {
+				expect(eventMonth).to.be.greaterThan(currentMonth);
+			}
+		}
+	}
+});

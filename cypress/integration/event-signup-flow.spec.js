@@ -747,4 +747,23 @@ describe("Verify page load " + new Date(), () => {
 			});
 		});
 	});
+	it('It shows the "Past Online Events" page', function () {
+		cy.navigateToPage("/events/category/online-events/archive");
+		cy.verifyPageHeading("Past Online Events");
+		searchForEvent
+			.getSearchforEventsHeading()
+			.should("exist")
+			.should("have.text", "Search for Past Online Events");
+	});
+	it("It shows past events only", function () {
+		cy.navigateToPage("/events/category/online-events/archive");
+		cy.getPastEventDateAndTime().each((eventDateAndTime, index, $list) => {
+			eventDateAndTime = eventDateAndTime.text().split(":")[0];
+			eventDateAndTime = eventDateAndTime.substring(0, eventDateAndTime.lastIndexOf(" "));
+			var eventYear = new Date(eventDateAndTime).getFullYear();
+			var eventMonth = new Date(eventDateAndTime).getMonth();
+			var eventDate = new Date(eventDateAndTime).getDate();
+			cy.compareEventDate(eventYear, eventMonth, eventDate);
+		});
+	});
 });
