@@ -500,22 +500,3 @@ Cypress.Commands.add("getPastEventDateAndTime", () => {
 			return eventDateAndTime;
 		});
 });
-
-Cypress.Commands.add("compareEventDate", (eventYear, eventMonth, eventDate) => {
-	var currentDate = new Date().getDate();
-	var currentMonth = new Date().getMonth();
-	var currentYear = new Date().getFullYear();
-	if (eventYear == currentYear && eventMonth == currentMonth) {
-		expect(eventDate).to.be.lessThan(currentDate);
-	} else {
-		if (eventYear == currentYear) {
-			expect(eventMonth).to.be.lessThan(currentMonth);
-		} else {
-			if (eventYear > currentYear) {
-				expect(true).to.be.false;
-			} else {
-				expect(eventMonth).to.be.greaterThan(currentMonth);
-			}
-		}
-	}
-});

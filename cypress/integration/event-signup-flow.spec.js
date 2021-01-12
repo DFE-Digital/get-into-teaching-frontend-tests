@@ -757,13 +757,16 @@ describe("Verify page load " + new Date(), () => {
 	});
 	it("It shows past events only", function () {
 		cy.navigateToPage("/events/category/online-events/archive");
+		var today = new Date();
+		var currentDate = today.getDate() + " " + today.getMonth() + " " + today.getFullYear();
 		cy.getPastEventDateAndTime().each((eventDateAndTime, index, $list) => {
 			eventDateAndTime = eventDateAndTime.text().split(":")[0];
-			eventDateAndTime = eventDateAndTime.substring(0, eventDateAndTime.lastIndexOf(" "));
-			var eventYear = new Date(eventDateAndTime).getFullYear();
-			var eventMonth = new Date(eventDateAndTime).getMonth();
-			var eventDate = new Date(eventDateAndTime).getDate();
-			cy.compareEventDate(eventYear, eventMonth, eventDate);
+			var eventDate = eventDateAndTime.substring(0, eventDateAndTime.lastIndexOf(" "));
+			if (eventDate < currentDate) {
+				expect(true).to.be.true;
+			} else {
+				expect(true).to.be.false;
+			}
 		});
 	});
 });
