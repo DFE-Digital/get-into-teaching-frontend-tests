@@ -762,4 +762,44 @@ describe("Verify page load " + new Date(), () => {
 			expect(eventDateAndTime).to.be.lessThan(new Date());
 		});
 	});
+	it("It shows only four months option for the past online events search", function () {
+		/* System should show only 4 months ( one current month and past 3 months ) as an option for the Month dropdown field*/
+
+		cy.fixture("event-signup-test-data").then((data) => {
+			this.data = data;
+		});
+		cy.navigateToPage("/events/category/online-events/archive");
+		cy.get("#events_search_month")
+			.as("month")
+			.find("option")
+			.next()
+			.each((option, index, $list) => {
+				var x = new Date();
+				var y = x.setMonth(x.getMonth() - index);
+				var monthWithYear =
+					this.data.months[new Date(y).getMonth()] + " " + new Date(y).getFullYear();
+				expect(monthWithYear).to.be.equal(option.text());
+			});
+		cy.get("@month").find("option").next().should("have.length", 4);
+	});
+
+	it("It shows six months option for the events search", function () {
+		/* System should show 6 months as an option for the Month dropdown field*/
+
+		cy.fixture("event-signup-test-data").then((data) => {
+			this.data = data;
+		});
+		cy.navigateToPage("/events");
+		cy.get("#events_search_month")
+			.as("month")
+			.find("option")
+			.each((option, index, $list) => {
+				var x = new Date();
+				var y = x.setMonth(x.getMonth() + index);
+				var monthWithYear =
+					this.data.months[new Date(y).getMonth()] + " " + new Date(y).getFullYear();
+				expect(monthWithYear).to.be.equal(option.text());
+			});
+		cy.get("@month").find("option").should("have.length", 6);
+	});
 });

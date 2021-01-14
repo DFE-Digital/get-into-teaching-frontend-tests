@@ -6,5 +6,19 @@
 	"phoneNumber": "07442565656",
 	"postcode": "TF3 2BT",
 	"eventUserEmail": "eventsignupuser@mailsac.com",
-	"eventUserKey": "k_O5uC2J5VrpS6HgLhuUYZhY92Qv1158L5FQg121b"
+	"eventUserKey": "k_O5uC2J5VrpS6HgLhuUYZhY92Qv1158L5FQg121b",
+	"months": [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	]
 }
