@@ -1,8 +1,6 @@
 {
-	"eventsType": "Train to Teach Event",
+	"eventsType": "Train to Teach event",
 	"eventLocation": "Nationwide",
-	"eventsMonth": "November 2020",
-	"eventsNextMonth": "December 2020",
 	"firstName": "Test_user1_first_name",
 	"lastName": "Test_user1_last_name",
 	"phoneNumber": "07442565656",

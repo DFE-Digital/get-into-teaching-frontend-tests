@@ -645,36 +645,36 @@ describe("Verify page load " + new Date(), () => {
 	const searchForEvent = new Homepage();
 	it('It shows the "Train to Teach Events" page', function () {
 		cy.navigateToPage("/events/category/train-to-teach-events");
-		cy.verifyPageHeading("Train to Teach Events");
+		cy.verifyPageHeading("Train to Teach events");
 		searchForEvent
 			.getSearchforEventsHeading()
 			.should("exist")
-			.should("have.text", "Search for Train to Teach Events");
+			.should("have.text", "Search for Train to Teach events");
 	});
 	it('It shows the "Online Events" page', function () {
 		cy.navigateToPage("/events/category/online-events");
-		cy.verifyPageHeading("Online Events");
+		cy.verifyPageHeading("Online events");
 		searchForEvent
 			.getSearchforEventsHeading()
 			.should("exist")
-			.should("have.text", "Search for Online Events");
+			.should("have.text", "Search for Online events");
 	});
 	it('It shows the "School and University Events" page', function () {
 		cy.navigateToPage("/events/category/school-and-university-events");
-		cy.verifyPageHeading("School and University Events");
+		cy.verifyPageHeading("School and University events");
 		searchForEvent
 			.getSearchforEventsHeading()
 			.should("exist")
-			.should("have.text", "Search for School and University Events");
+			.should("have.text", "Search for School and University events");
 	});
 
 	it("It shows the selected month events only", function () {
 		cy.navigateToPage("/events/category/school-and-university-events");
-		cy.verifyPageHeading("School and University Events");
+		cy.verifyPageHeading("School and University events");
 		searchForEvent
 			.getSearchforEventsHeading()
 			.should("exist")
-			.should("have.text", "Search for School and University Events");
+			.should("have.text", "Search for School and University events");
 		cy.get("#events_search_month")
 			.as("month")
 			.children()
@@ -749,11 +749,11 @@ describe("Verify page load " + new Date(), () => {
 	});
 	it('It shows the "Past Online Events" page', function () {
 		cy.navigateToPage("/events/category/online-events/archive");
-		cy.verifyPageHeading("Past Online Events");
+		cy.verifyPageHeading("Past online events");
 		searchForEvent
 			.getSearchforEventsHeading()
 			.should("exist")
-			.should("have.text", "Search for Past Online Events");
+			.should("have.text", "Search for Past online events");
 	});
 	it("It shows past events only", function () {
 		cy.navigateToPage("/events/category/online-events/archive");
