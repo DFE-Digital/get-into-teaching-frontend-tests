@@ -644,7 +644,7 @@ describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 describe("Verify page load " + new Date(), () => {
 	const searchForEvent = new Homepage();
 	it('It shows the "Train to Teach Events" page', function () {
-		cy.navigateToPage("/events/category/train-to-teach-events");
+		cy.navigateToPage("/event_categories/train-to-teach-events");
 		cy.verifyPageHeading("Train to Teach events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -652,7 +652,7 @@ describe("Verify page load " + new Date(), () => {
 			.should("have.text", "Search for Train to Teach events");
 	});
 	it('It shows the "Online Events" page', function () {
-		cy.navigateToPage("/events/category/online-events");
+		cy.navigateToPage("/event_categories/online-events");
 		cy.verifyPageHeading("Online events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -660,7 +660,7 @@ describe("Verify page load " + new Date(), () => {
 			.should("have.text", "Search for Online events");
 	});
 	it('It shows the "School and University Events" page', function () {
-		cy.navigateToPage("/events/category/school-and-university-events");
+		cy.navigateToPage("/event_categories/school-and-university-events");
 		cy.verifyPageHeading("School and University events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -669,7 +669,7 @@ describe("Verify page load " + new Date(), () => {
 	});
 
 	it("It shows the selected month events only", function () {
-		cy.navigateToPage("/events/category/school-and-university-events");
+		cy.navigateToPage("/event_categories/school-and-university-events");
 		cy.verifyPageHeading("School and University events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -688,7 +688,7 @@ describe("Verify page load " + new Date(), () => {
 			});
 	});
 	it('It nativates to selected "Online Events" page', function () {
-		cy.navigateToPage("/events/category/online-events");
+		cy.navigateToPage("/event_categories/online-events");
 		cy.getFirstEvent().then((eventName) => {
 			eventName = eventName.text().trim();
 			cy.getFirstEvent().click();
@@ -708,7 +708,7 @@ describe("Verify page load " + new Date(), () => {
 		});
 	});
 	it('It nativates to selected "Train to Teach Events" page', function () {
-		cy.navigateToPage("/events/category/train-to-teach-events");
+		cy.navigateToPage("/event_categories/train-to-teach-events");
 		cy.getFirstEvent().then((eventName) => {
 			eventName = eventName.text().trim();
 			cy.getFirstEvent().click();
@@ -728,7 +728,7 @@ describe("Verify page load " + new Date(), () => {
 		});
 	});
 	it('It nativates to selected "School and University Events" page', function () {
-		cy.navigateToPage("/events/category/school-and-university-events");
+		cy.navigateToPage("/event_categories/school-and-university-events");
 		cy.getFirstEvent().then((eventName) => {
 			eventName = eventName.text().trim();
 			cy.getFirstEvent().click();
@@ -748,7 +748,7 @@ describe("Verify page load " + new Date(), () => {
 		});
 	});
 	it('It shows the "Past Online Events" page', function () {
-		cy.navigateToPage("/events/category/online-events/archive");
+		cy.navigateToPage("/event_categories/online-events/archive");
 		cy.verifyPageHeading("Past online events");
 		searchForEvent
 			.getSearchforEventsHeading()
@@ -756,7 +756,7 @@ describe("Verify page load " + new Date(), () => {
 			.should("have.text", "Search for Past online events");
 	});
 	it("It shows past events only", function () {
-		cy.navigateToPage("/events/category/online-events/archive");
+		cy.navigateToPage("/event_categories/online-events/archive");
 		cy.getPastEventDateAndTime().each((eventDateAndTime, index, $list) => {
 			eventDateAndTime = new Date(eventDateAndTime.text().split("-")[0]);
 			expect(eventDateAndTime).to.be.lessThan(new Date());
