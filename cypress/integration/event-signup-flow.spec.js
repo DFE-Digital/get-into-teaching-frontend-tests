@@ -197,7 +197,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							.next()
 							.should("have.text", "You've also signed up for email updates");
 					});
-				cy.wait(5000);
+				cy.wait(8000);
 				cy.contains("Find an event near you").click();
 				searchForEvent.getEventsType().select(this.eventSignupTestData.eventsType);
 				searchForEvent.getEventLocation().select(this.eventSignupTestData.eventLocation);
