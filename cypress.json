@@ -7,7 +7,7 @@
 	},
 	"chromeWebSecurity": false,
 	"defaultCommandTimeout": 8000,
-	"pageLoadTimeout": 80000,
+	"pageLoadTimeout": 10000,
 	"reporter": "cypress-multi-reporters",
 	"reporterOptions": {
 		"reporterEnabled": "mochawesome",
