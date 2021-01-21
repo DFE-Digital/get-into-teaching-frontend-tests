@@ -687,7 +687,7 @@ describe("Verify page load " + new Date(), () => {
 				});
 			});
 	});
-	it('It nativates to selected "Online Events" page', function () {
+	it('It navigates to selected "Online Events" page', function () {
 		cy.navigateToPage("/event_categories/online-events");
 		cy.getFirstEvent().then((eventName) => {
 			eventName = eventName.text().trim();
@@ -707,7 +707,7 @@ describe("Verify page load " + new Date(), () => {
 			});
 		});
 	});
-	it('It nativates to selected "Train to Teach Events" page', function () {
+	it('It navigates to selected "Train to Teach Events" page', function () {
 		cy.navigateToPage("/event_categories/train-to-teach-events");
 		cy.getFirstEvent().then((eventName) => {
 			eventName = eventName.text().trim();
@@ -727,7 +727,7 @@ describe("Verify page load " + new Date(), () => {
 			});
 		});
 	});
-	it('It nativates to selected "School and University Events" page', function () {
+	it('It navigates to selected "School and University Events" page', function () {
 		cy.navigateToPage("/event_categories/school-and-university-events");
 		cy.getFirstEvent().then((eventName) => {
 			eventName = eventName.text().trim();
