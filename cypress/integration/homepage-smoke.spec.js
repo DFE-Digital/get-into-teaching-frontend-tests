@@ -218,40 +218,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		});
 	});
 
-	it("It matches the event date, time and location with previous page", () => {
-		var eventDateAndTime;
-		homePage.getFindEventLink().click();
-		cy.get("#events_search_month")
-			.as("month")
-			.children()
-			.eq(2)
-			.then((option) => {
-				cy.get("@month").select(option.text());
-			});
-		cy.get(".request-button").click();
-		cy.get(".event-box__header")
-			.as("1steventName")
-			.should("exist")
-			.eq(0)
-			.then((eventName) => {
-				cy.log("Event Name : " + eventName.text());
-				cy.get("@1steventName")
-					.siblings()
-					.eq(0)
-					.then((eventDateandTime) => {
-						cy.log("Event date and Time : " + eventDateandTime.text());
-						eventDateAndTime = eventDateandTime.text();
-						cy.get("@1steventName").eq(0).click();
-						cy.get(".content__left > h1").should("contain.text", eventName.text().trim());
-					});
-			});
-		cy.get(".event-info__date").then((eventDateandTimeonNextPage) => {
-			var expectedEventDateAndTime = eventDateandTimeonNextPage.text();
-			expectedEventDateAndTime = expectedEventDateAndTime.replace("at", "");
-			expect(eventDateAndTime.trim()).to.equal(expectedEventDateAndTime.trim());
-		});
-	});
-
 	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
