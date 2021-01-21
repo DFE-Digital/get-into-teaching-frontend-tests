@@ -217,13 +217,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 			expect(url).equal(Navlinks.twitter);
 		});
 	});
-	it("Links through to youtube page", () => {
-		homePage.getSocialMediaLink(4).invoke("removeAttr", "target").click();
-		cy.url().then((url) => {
-			expect(url).equal(Navlinks.youtube);
-		});
-	});
-
+	
 	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
