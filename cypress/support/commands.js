@@ -484,7 +484,7 @@ Cypress.Commands.add("getFirstEventDateAndTime", () => {
 });
 
 Cypress.Commands.add("getEventHeader", () => {
-	cy.get(".content__left >h1");
+	cy.get("h1");
 });
 Cypress.Commands.add("getDateAndTime", () => {
 	cy.get(".event-info__date");
