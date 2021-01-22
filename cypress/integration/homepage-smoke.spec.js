@@ -193,9 +193,8 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 
 	it("Links through to facebook page", () => {
-		homePage.getSocialMediaLink(0).invoke("removeAttr", "target").click();
-		cy.url().then((url) => {
-			expect(url).equal(Navlinks.facebook);
+		homePage.getSocialMediaLink(0).should((el) => {
+			expect(el).to.have.attr("href", Navlinks.facebook);
 		});
 	});
 	it("Links through to instagram page", () => {
