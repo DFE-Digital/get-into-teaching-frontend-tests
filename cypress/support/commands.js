@@ -500,3 +500,9 @@ Cypress.Commands.add("getPastEventDateAndTime", () => {
 			return eventDateAndTime;
 		});
 });
+Cypress.Commands.add("verifyErrorSummaryTitle", () => {
+	cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
+});
+Cypress.Commands.add("verifyErrorMessage", (errorMessage) => {
+	cy.get("li > a").should("exist").should("have.text", errorMessage);
+});
