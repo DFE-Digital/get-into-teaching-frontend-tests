@@ -162,11 +162,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
 		cy.clickOnContinueButton();
-		cy.get("#error-summary-title")
-			.should("exist")
-			.should("have.text", "There is a problem")
-			.next()
-			.should("have.text", "Choose a subject or other");
+		cy.verifyErrorSummaryTitle().next().should("have.text", "Choose a subject or other");
 	});
 
 	it('It shows "Thank you  Sign up complete" message to overseas returner user', function () {
@@ -1580,7 +1576,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName();
 		teacherTrainingAdviser.getEmailAddress();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
+		cy.verifyErrorSummaryTitle();
 		cy.get(".govuk-error-summary__list")
 			.children()
 			.should("exist")
@@ -1605,10 +1601,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		);
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "Select yes if you are returning to teaching");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("Select yes if you are returning to teaching");
 		cy.get("#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-error").should(
 			"have.text",
 			"Error: Select yes if you are returning to teaching"
@@ -1616,8 +1610,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-field").click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a").should("exist").should("have.text", "Select an option from the list");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("Select an option from the list");
 		cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-error").should(
 			"have.text",
 			"Error: Select an option from the list"
@@ -1628,10 +1622,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectWhichClassIsYourDegree("First class");
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "You must select either primary or secondary");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("You must select either primary or secondary");
 		cy.get(
 			"#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-error"
 		).should("have.text", "Error: You must select either primary or secondary");
@@ -1640,13 +1632,10 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		).click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should(
-				"have.text",
-				"Select yes if you have grade 4(C) or above in English and Maths GCSE or equivalent"
-			);
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage(
+			"Select yes if you have grade 4(C) or above in English and Maths GCSE or equivalent"
+		);
 		cy.get(
 			"#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-error"
 		).should(
@@ -1664,10 +1653,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type("1985");
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "Select if you live in the UK or overseas");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("Select if you live in the UK or overseas");
 		cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-error").should(
 			"have.text",
 			"Error: Select if you live in the UK or overseas"
@@ -1675,7 +1662,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-field-error").click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
+		cy.verifyErrorSummaryTitle();
 		cy.get(".govuk-error-summary__list")
 			.children()
 			.should("exist")
@@ -1705,13 +1692,10 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.clickOnCompleteButton();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should(
-				"have.text",
-				"You must accept the privacy policy in order to talk to a teacher training adviser"
-			);
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage(
+			"You must accept the privacy policy in order to talk to a teacher training adviser"
+		);
 		cy.get("#teacher-training-adviser-steps-accept-privacy-policy-accepted-policy-id-error").should(
 			"have.text",
 			"Error: You must accept the privacy policy in order to talk to a teacher training adviser"
@@ -1868,7 +1852,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("0834");
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
+		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
@@ -1877,7 +1861,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			"0123456789011223344566"
 		);
 		cy.clickOnContinueButton();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
+		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too long (maximum is 20 characters)");
@@ -1898,7 +1882,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber("0495");
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
+		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
@@ -1907,7 +1891,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			"0123456789011223344566"
 		);
 		cy.clickOnContinueButton();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
+		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too long (maximum is 20 characters)");
@@ -1967,14 +1951,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
 		cy.selectStage("Secondary");
-
 		cy.gcseMathsAndEnglish(false);
 		cy.retakeGcseMathsAndEnglish(true);
 		cy.whichSubjectAreYouInterestedInTeaching("English");
 		cy.whenDoYouWantToStartYourTeacherTraining("2022");
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a").should("exist").should("have.text", "You need to enter your date of birth");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("You need to enter your date of birth");
 		cy.get("#teacher-training-adviser-steps-date-of-birth-date-of-birth-error").should(
 			"have.text",
 			"Error: You need to enter your date of birth"
@@ -1983,8 +1966,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type("3");
 		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type("1885");
 		cy.clickOnContinueButton();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a").should("exist").should("have.text", "You must be less than 70 years old");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("You must be less than 70 years old");
 		cy.get("#teacher-training-adviser-steps-date-of-birth-date-of-birth-error").should(
 			"have.text",
 			"Error: You must be less than 70 years old"
@@ -1993,10 +1976,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").clear();
 		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type("2004");
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "You must be 18 years or older to use this service");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("You must be 18 years or older to use this service");
 		cy.get("#teacher-training-adviser-steps-date-of-birth-date-of-birth-error").should(
 			"have.text",
 			"Error: You must be 18 years or older to use this service"
@@ -2005,10 +1986,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").clear();
 		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type("2030");
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get("li > a")
-			.should("exist")
-			.should("have.text", "You must be 18 years or older to use this service");
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("You must be 18 years or older to use this service");
 		cy.get("#teacher-training-adviser-steps-date-of-birth-date-of-birth-error").should(
 			"have.text",
 			"Error: You must be 18 years or older to use this service"
