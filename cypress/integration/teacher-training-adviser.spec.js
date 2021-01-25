@@ -103,58 +103,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
 	});
 
-	it('It navigates to mailinglist sign up page if user clicks on "send you information via email " link', function () {
-		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(true);
-		cy.havePreviousTeacherReferenceNumber(true);
-		cy.enterPreviousTeacherReferenceNumber(23478463);
-		cy.selectPreviuosMainSubject("Computing");
-		cy.selectSubjectLikeToTeach("Other");
-		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
-		cy.contains("a", "send you information via email")
-			.invoke("attr", "href")
-			.then(function (val) {
-				cy.request({
-					url: val,
-					method: "GET",
-					auth: {
-						username: Cypress.env("HTTPAUTH_USERNAME"),
-						password: Cypress.env("HTTPAUTH_PASSWORD"),
-					},
-				});
-			})
-			.as("linkResponse");
-		cy.get("@linkResponse").then((response) => {
-			expect(response.status).to.eq(200);
-		});
-	});
-
-	it('It navigates to "Find an event near you" page if user clicks on "attending a return to teaching event" link', function () {
-		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(true);
-		cy.havePreviousTeacherReferenceNumber(true);
-		cy.enterPreviousTeacherReferenceNumber(23478463);
-		cy.selectPreviuosMainSubject("Computing");
-		cy.selectSubjectLikeToTeach("Other");
-		cy.get(".govuk-heading-l").should("exist").should("have.text", "Get support");
-		cy.contains("a", "attending a return to teaching event")
-			.invoke("attr", "href")
-			.then(function (val) {
-				cy.request({
-					url: val,
-					method: "GET",
-					auth: {
-						username: Cypress.env("HTTPAUTH_USERNAME"),
-						password: Cypress.env("HTTPAUTH_PASSWORD"),
-					},
-				});
-			})
-			.as("linkResponse");
-		cy.get("@linkResponse").then((response) => {
-			expect(response.status).to.eq(200);
-		});
-	});
-
 	it("It shows the error message if user clicks continiue button without selecting subject", function () {
 		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching(true);
@@ -2140,6 +2088,43 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 		cy.get(".freebirdFormviewerViewHeaderTitle")
 			.should("exist")
 			.should("include.text", "Get into Teaching: Feedback Survey");
+	});
+	it('Links through to "search for a teaching role in England"', function () {
+		// If UK returner selects subject as "Other" system is navigating to "Get support" page
+		cy.goToUrl("teacher_training_adviser/sign_up/subject_not_found");
+		cy.contains("a", "search for a teaching role in England")
+			.invoke("attr", "href")
+			.then(function (val) {
+				cy.request({
+					url: val,
+					method: "GET",
+				});
+			})
+			.as("linkResponse");
+		cy.get("@linkResponse").then((response) => {
+			expect(response.status).to.eq(200);
+		});
+	});
+
+	it('Links through to "attending an online return to teaching event"', function () {
+		// If UK returner selects subject as "Other" system is navigating to "Get support" page
+		cy.goToUrl("teacher_training_adviser/sign_up/subject_not_found");
+		cy.contains("a", "attending an online return to teaching event")
+			.invoke("attr", "href")
+			.then(function (val) {
+				cy.request({
+					url: val,
+					method: "GET",
+					auth: {
+						username: Cypress.env("HTTPAUTH_USERNAME"),
+						password: Cypress.env("HTTPAUTH_PASSWORD"),
+					},
+				});
+			})
+			.as("linkResponse");
+		cy.get("@linkResponse").then((response) => {
+			expect(response.status).to.eq(200);
+		});
 	});
 });
 
