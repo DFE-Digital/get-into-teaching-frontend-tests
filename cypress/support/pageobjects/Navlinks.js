@@ -14,10 +14,11 @@ module.exports = class Navlinks {
 	static mailingListSignup = "/mailinglist/signup";
 	static covid19 = "/covid-19";
 	static facebook = "https://www.facebook.com/getintoteaching";
-	static instagram = "https://www.instagram.com/";
-	static linkedin = "https://www.linkedin.com/";
+	static instagram = "https://www.instagram.com/get_into_teaching/";
+	static linkedin =
+		"https://www.linkedin.com/company/9258520?trk=tyah&trkInfo=idx%3A1-1-1%2CtarId%3A1424345327269%2Ctas%3Aget+into+teaching";
 	static twitter = "https://twitter.com/getintoteaching";
-	static youtube = "https://www.youtube.com/user/getintoteaching";
+	static youtube = "http://www.youtube.com/user/getintoteaching";
 	static mailingListSignupUrl =
 		"https://get-into-teaching-app-test.london.cloudapps.digital/mailinglist/signup/name";
 	static teachInScotland = "https://teachinscotland.scot/";
