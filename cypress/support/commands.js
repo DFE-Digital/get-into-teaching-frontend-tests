@@ -506,3 +506,18 @@ Cypress.Commands.add("verifyErrorSummaryTitle", () => {
 Cypress.Commands.add("verifyErrorMessage", (errorMessage) => {
 	cy.get("li > a").should("exist").should("have.text", errorMessage);
 });
+
+Cypress.Commands.add("verifyExternalLinkResponse", (externalLinkText) => {
+	cy.contains("a", externalLinkText)
+		.invoke("attr", "href")
+		.then(function (val) {
+			cy.request({
+				url: val,
+				method: "GET",
+			});
+		})
+		.as("linkResponse");
+	cy.get("@linkResponse").then((response) => {
+		expect(response.status).to.eq(200);
+	});
+});

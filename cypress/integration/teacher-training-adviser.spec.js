@@ -2063,24 +2063,15 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 describe("Hyperlink navigation check : Tests execution date and time : " + new Date(), () => {
 	it('Links through to "Scotland" page', function () {
 		cy.goToUrl("");
-		cy.contains("a", "Scotland").invoke("removeAttr", "target").click();
-		cy.url().then((url) => {
-			expect(url).equal(Navlinks.teachInScotland);
-		});
+		cy.verifyExternalLinkResponse("Scotland");
 	});
 	it('Links through to "Wales" page', function () {
 		cy.goToUrl("");
-		cy.contains("a", "Wales").invoke("removeAttr", "target").click();
-		cy.url().then((url) => {
-			expect(url).equal(Navlinks.teachInWales);
-		});
+		cy.verifyExternalLinkResponse("Wales");
 	});
 	it('Links through to "Northern Ireland" page', function () {
 		cy.goToUrl("");
-		cy.contains("a", "Northern Ireland").invoke("removeAttr", "target").click();
-		cy.url().then((url) => {
-			expect(url).equal(Navlinks.teachInNorthernIreland);
-		});
+		cy.verifyExternalLinkResponse("Northern Ireland");
 	});
 	it('Links through to "What did you think of this service? "', function () {
 		cy.goToUrl("teacher_training_adviser/sign_up/completed");
@@ -2092,18 +2083,7 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 	it('Links through to "search for a teaching role in England"', function () {
 		// If UK returner selects subject as "Other" system is navigating to "Get support" page
 		cy.goToUrl("teacher_training_adviser/sign_up/subject_not_found");
-		cy.contains("a", "search for a teaching role in England")
-			.invoke("attr", "href")
-			.then(function (val) {
-				cy.request({
-					url: val,
-					method: "GET",
-				});
-			})
-			.as("linkResponse");
-		cy.get("@linkResponse").then((response) => {
-			expect(response.status).to.eq(200);
-		});
+		cy.verifyExternalLinkResponse("search for a teaching role in England");
 	});
 
 	it('Links through to "attending an online return to teaching event"', function () {
