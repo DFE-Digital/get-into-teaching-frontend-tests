@@ -3,7 +3,7 @@ class EventSignupPage {
 		return cy.get(":nth-child(4) > .call-to-action-button");
 	}
 	getEventNameHeader() {
-		return cy.get(".content__left > h2");
+		return cy.get(".event-reg-main > h2");
 	}
 	getFirstName() {
 		return cy.get("#events-steps-personal-details-first-name-field");
@@ -53,10 +53,10 @@ class EventSignupPage {
 		return cy.contains("Complete sign up");
 	}
 	getSignupCompleteMessage() {
-		return cy.get(".content__left > .strapline");
+		return cy.get("#main-content > .strapline");
 	}
 	getSignupEventName() {
-		return cy.get(".content__left > b");
+		return cy.get("#main-content > b");
 	}
 	getResendVerificationLink() {
 		return cy.get("#events-steps-authenticate-timed-one-time-password-hint > a");

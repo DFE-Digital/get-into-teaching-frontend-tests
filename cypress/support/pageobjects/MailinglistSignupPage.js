@@ -30,7 +30,7 @@ class MailinglistSignupPage {
 		return cy.get("#mailing-list-steps-contact-accept-privacy-policy-1-field");
 	}
 	getContent() {
-		return cy.get(".content__left > .strapline");
+		return cy.get(".mailing-reg-main > .strapline");
 	}
 	getCompleteSignUpButton() {
 		return cy.contains("Complete sign up");
