@@ -2061,17 +2061,23 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 });
 
 describe("Hyperlink navigation check : Tests execution date and time : " + new Date(), () => {
-	it('Links through to "Scotland" page', function () {
+	it('Verify "Scotland" link', function () {
 		cy.goToUrl("");
-		cy.verifyExternalLinkResponse("Scotland");
+		cy.contains("a", "Scotland").should((link) => {
+			expect(link).to.have.attr("href", Navlinks.teachInScotland);
+		});
 	});
-	it('Links through to "Wales" page', function () {
+	it('Verify "Wales" link', function () {
 		cy.goToUrl("");
-		cy.verifyExternalLinkResponse("Wales");
+		cy.contains("a", "Wales").should((link) => {
+			expect(link).to.have.attr("href", Navlinks.teachInWales);
+		});
 	});
-	it('Links through to "Northern Ireland" page', function () {
+	it('Verify "Northern Ireland" link', function () {
 		cy.goToUrl("");
-		cy.verifyExternalLinkResponse("Northern Ireland");
+		cy.contains("a", "Northern Ireland").should((link) => {
+			expect(link).to.have.attr("href", Navlinks.teachInNorthernIreland);
+		});
 	});
 	it('Links through to "What did you think of this service? "', function () {
 		cy.goToUrl("teacher_training_adviser/sign_up/completed");
@@ -2080,10 +2086,12 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 			.should("exist")
 			.should("include.text", "Get into Teaching: Feedback Survey");
 	});
-	it('Links through to "search for a teaching role in England"', function () {
+	it('Verify "search for a teaching role in England" link', function () {
 		// If UK returner selects subject as "Other" system is navigating to "Get support" page
 		cy.goToUrl("teacher_training_adviser/sign_up/subject_not_found");
-		cy.verifyExternalLinkResponse("search for a teaching role in England");
+		cy.contains("a", "search for a teaching role in England").should((link) => {
+			expect(link).to.have.attr("href", Navlinks.teachingRoleInEngland);
+		});
 	});
 
 	it('Links through to "attending an online return to teaching event"', function () {
