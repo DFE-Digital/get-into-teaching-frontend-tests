@@ -506,3 +506,17 @@ Cypress.Commands.add("verifyErrorSummaryTitle", () => {
 Cypress.Commands.add("verifyErrorMessage", (errorMessage) => {
 	cy.get("li > a").should("exist").should("have.text", errorMessage);
 });
+
+Cypress.Commands.add("verifySocialMediaLink", (index, link) => {
+	cy.get(".site-footer-top__social__link")
+		.eq(index)
+		.should((el) => {
+			expect(el).to.have.attr("href", link);
+		});
+});
+
+Cypress.Commands.add("verifyUKLink", (linkText, url) => {
+	cy.contains("a", linkText).should((link) => {
+		expect(link).to.have.attr("href", url);
+	});
+});
