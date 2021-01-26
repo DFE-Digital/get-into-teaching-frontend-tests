@@ -192,32 +192,12 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.shouldHaveFooter();
 	});
 
-	it("Links through to facebook page", () => {
-		homePage.getSocialMediaLink(0).should((el) => {
-			expect(el).to.have.attr("href", Navlinks.facebook);
-		});
-	});
-	it("Links through to instagram page", () => {
-		homePage.getSocialMediaLink(1).should((el) => {
-			expect(el).to.have.attr("href", Navlinks.instagram);
-		});
-	});
-	it("Links through to linkedin page", () => {
-		homePage.getSocialMediaLink(2).should((el) => {
-			expect(el).to.have.attr("href", Navlinks.linkedin);
-		});
-	});
-
-	it("Links through to twitter page", () => {
-		homePage.getSocialMediaLink(3).should((el) => {
-			expect(el).to.have.attr("href", Navlinks.twitter);
-		});
-	});
-
-	it("Links through to youtube page", () => {
-		homePage.getSocialMediaLink(4).should((el) => {
-			expect(el).to.have.attr("href", Navlinks.youtube);
-		});
+	it("Verify social media links", () => {
+		cy.verifySocialMediaLink(0, Navlinks.facebook);
+		cy.verifySocialMediaLink(1, Navlinks.instagram);
+		cy.verifySocialMediaLink(2, Navlinks.linkedin);
+		cy.verifySocialMediaLink(3, Navlinks.twitter);
+		cy.verifySocialMediaLink(4, Navlinks.youtube);
 	});
 
 	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {

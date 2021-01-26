@@ -2061,23 +2061,11 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 });
 
 describe("Hyperlink navigation check : Tests execution date and time : " + new Date(), () => {
-	it('Verify "Scotland" link', function () {
-		cy.goToUrl("");
-		cy.contains("a", "Scotland").should((link) => {
-			expect(link).to.have.attr("href", Navlinks.teachInScotland);
-		});
-	});
-	it('Verify "Wales" link', function () {
-		cy.goToUrl("");
-		cy.contains("a", "Wales").should((link) => {
-			expect(link).to.have.attr("href", Navlinks.teachInWales);
-		});
-	});
-	it('Verify "Northern Ireland" link', function () {
-		cy.goToUrl("");
-		cy.contains("a", "Northern Ireland").should((link) => {
-			expect(link).to.have.attr("href", Navlinks.teachInNorthernIreland);
-		});
+	it("verify UK links", () => {
+		cy.goToUrl("/");
+		cy.verifyUKLink("Scotland", Navlinks.teachInScotland);
+		cy.verifyUKLink("Wales", Navlinks.teachInWales);
+		cy.verifyUKLink("Northern Ireland", Navlinks.teachInNorthernIreland);
 	});
 	it('Links through to "What did you think of this service? "', function () {
 		cy.goToUrl("teacher_training_adviser/sign_up/completed");
