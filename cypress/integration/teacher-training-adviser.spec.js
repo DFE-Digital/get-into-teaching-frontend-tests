@@ -1535,7 +1535,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 			.should("have.text", "You need to enter your first name")
 			.next()
-			.should("have.text", "You need to enter your surname")
+			.should("have.text", "You need to enter your last name")
 			.next()
 			.should("have.text", "You need to enter your email address");
 
@@ -1850,7 +1850,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 			.should("have.text", "You need to enter your first name")
 			.next()
-			.should("have.text", "You need to enter your surname")
+			.should("have.text", "You need to enter your last name")
 			.next()
 			.should("have.text", "You need to enter your email address");
 
@@ -1866,9 +1866,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnContinueButton();
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should(
 			"have.text",
-			"You need to enter your surname"
+			"You need to enter your last name"
 		);
-		cy.contains("You need to enter your surname")
+		cy.contains("You need to enter your last name")
 			.should((el) => {
 				expect(el).to.have.attr(
 					"href",
