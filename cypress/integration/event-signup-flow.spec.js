@@ -83,7 +83,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 					});
 			}
@@ -136,7 +136,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							"English"
 						);
 						eventSignup.getCompleteSignup().click();
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 					});
 			}
@@ -189,7 +189,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							"English"
 						);
 						eventSignup.getCompleteSignup().click();
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 						eventSignup
 							.getSignupEventName()
@@ -227,7 +227,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 					});
 			}
@@ -280,7 +280,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							"English"
 						);
 						eventSignup.getCompleteSignup().click();
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 						eventSignup
 							.getSignupEventName()
@@ -322,7 +322,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 					});
 			}
@@ -375,7 +375,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							"English"
 						);
 						eventSignup.getCompleteSignup().click();
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 						eventSignup
 							.getSignupEventName()
@@ -575,7 +575,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 					});
 				cy.contains("a", "feedback on this website").invoke("removeAttr", "target").click();
@@ -620,7 +620,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
-						eventSignup.getSignupCompleteMessage().should("have.text", "Sign up complete");
+						cy.VerifySignupCompleteMessage();
 						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
 					});
 				cy.get("#hide-feedback-bar").click();

@@ -52,9 +52,6 @@ class EventSignupPage {
 	getCompleteSignup() {
 		return cy.contains("Complete sign up");
 	}
-	getSignupCompleteMessage() {
-		return cy.get("#main-content > .strapline");
-	}
 	getSignupEventName() {
 		return cy.get("#main-content > b");
 	}
