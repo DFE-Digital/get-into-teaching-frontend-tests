@@ -520,3 +520,7 @@ Cypress.Commands.add("verifyUKLink", (linkText, url) => {
 		expect(link).to.have.attr("href", url);
 	});
 });
+
+Cypress.Commands.add("VerifySignupCompleteMessage", () => {
+	cy.contains("Sign up complete").should("exist");
+});
