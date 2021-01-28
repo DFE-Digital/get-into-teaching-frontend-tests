@@ -44,13 +44,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.checkA11y();
 	});
 
-	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", function () {
-		// Test on initial load, only report and assert for critical impact items
-		cy.checkA11y(null, {
-			includedImpacts: ["critical"],
-		});
-	});
-
 	it("Logs violations to the terminal", function () {
 		cy.checkA11y(null, null, terminalLog);
 	});

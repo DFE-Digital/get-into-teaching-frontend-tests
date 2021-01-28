@@ -2,22 +2,6 @@
 import Homepage from "../support/pageobjects/Homepage";
 import Navlinks from "../support/pageobjects/Navlinks";
 
-function terminalLog(violations) {
-	cy.task(
-		"log",
-		`${violations.length} accessibility violation${violations.length === 1 ? "" : "s"} ${
-			violations.length === 1 ? "was" : "were"
-		} detected`
-	);
-	const violationData = violations.map(({ id, impact, description, nodes }) => ({
-		id,
-		impact,
-		description,
-		nodes: nodes.length,
-	}));
-	cy.task("table", violationData);
-}
-
 describe(`Home page tests : Tests execution date and time : ${new Date()}`, () => {
 	const homePage = new Homepage();
 	beforeEach(() => {
@@ -42,8 +26,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 				.click();
 		});
 		cy.location("pathname").should("equal", Navlinks.fundingYourTraining);
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Steps to become a teacher"', () => {
@@ -55,8 +37,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 				.click();
 		});
 		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Teaching as a career"', () => {
@@ -68,8 +48,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 				.click();
 		});
 		cy.location("pathname").should("equal", Navlinks.lifeAsATeacher);
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Salaries and benefits"', () => {
@@ -81,8 +59,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 				.click();
 		});
 		cy.location("pathname").should("equal", Navlinks.salariesAndBenefits);
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Find an event near you"', () => {
@@ -94,8 +70,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 				.click();
 		});
 		cy.location("pathname").should("equal", Navlinks.events);
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Please check here for updates"', () => {
@@ -107,19 +81,9 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 				.click();
 		});
 		cy.location("pathname").should("equal", Navlinks.covid19);
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
-	it('It hides the COVID-19 message if user clicks on "Hide this message" link', () => {
-		cy.contains("Hide this message").as("link").should("be.visible");
-		cy.get(".covid").as("covidMessage").should("be.visible");
-		cy.get("@link").click();
-		cy.get("@link").should("not.be.visible");
-		cy.get("@covidMessage").should("not.be.visible");
-	});
-
-	it('Links through to "Sign up here"', () => {
+	it.only('Links through to "Sign up here"', () => {
 		homePage.getMailingStripButton().dblclick();
 		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
 	});
@@ -127,8 +91,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	it('Links through to "My story into teaching"', () => {
 		homePage.getMyStoryInToTeaching().click();
 		cy.location("pathname").should("equal", Navlinks.myStoryIntoTeaching);
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "career-changers stories"', () => {
@@ -171,50 +133,17 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		homePage.getFindEventLink().click();
 		cy.location("pathname").should("equal", Navlinks.events);
 		homePage.getBannerText().should("exist").should("have.text", "Find an event near you");
-		cy.shouldHavePageNavigation();
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Check your qualifications"', () => {
 		homePage.getCheckYourQualificationsLink().click();
 		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
 		homePage.getBannerText().should("exist");
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
 	});
 
 	it('Links through to "Ways to train"', () => {
 		homePage.getWaystoTrainLink().siblings().click();
 		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
 		homePage.getBannerText().should("exist");
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
-	});
-
-	it("Verify social media links", () => {
-		cy.verifySocialMediaLink(0, Navlinks.facebook);
-		cy.verifySocialMediaLink(1, Navlinks.instagram);
-		cy.verifySocialMediaLink(2, Navlinks.linkedin);
-		cy.verifySocialMediaLink(3, Navlinks.twitter);
-		cy.verifySocialMediaLink(4, Navlinks.youtube);
-	});
-
-	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
-		// Test on initial load, only report and assert for critical impact items
-		cy.checkA11y(null, {
-			includedImpacts: ["critical"],
-		});
-	});
-});
-
-describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
-	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
-		cy.visit({
-			url: "https://get-into-teaching-apps-test.london.cloudapps.digital/",
-			method: "GET",
-			failOnStatusCode: false,
-		});
-		cy.verify404ErrorMessage();
 	});
 });

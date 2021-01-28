@@ -524,3 +524,7 @@ Cypress.Commands.add("verifyUKLink", (linkText, url) => {
 Cypress.Commands.add("VerifySignupCompleteMessage", () => {
 	cy.contains("Sign up complete").should("exist");
 });
+
+Cypress.Commands.add("VerifyYouHaveSignedupMessage", () => {
+	cy.contains("You've signed up").should("exist");
+});
