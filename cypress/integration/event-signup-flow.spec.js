@@ -682,6 +682,7 @@ describe("Verify page load " + new Date(), () => {
 			.next()
 			.then((option) => {
 				cy.get("@month").select(option.text());
+				cy.get(".request-button").click();
 				cy.get(".event-box__datetime").each((displayedOption, index, $list) => {
 					expect(displayedOption.text().trim()).contains(option.text());
 				});
