@@ -12,18 +12,25 @@ Cypress.Commands.add("logintoApp", () => {
 });
 
 Cypress.Commands.add("shouldHaveTalkToUsSection", () => {
-	cy.get(".talk-to-us__inner > .strapline")
+	cy.get(".purple")
 		.should("exist")
 		.then(function (sectionText) {
 			cy.log(sectionText.text());
 		});
 
-	cy.get("div.talk-to-us__inner__table__column:nth-child(1) > a.call-to-action-button:nth-child(2)")
+	cy.get(".visible > .talk-to-us__inner__table__column__heading")
 		.should("exist")
 		.then(function (buttonText) {
 			cy.log(buttonText.text());
 		});
-	cy.get(".talk-to-us__inner__table > :nth-child(2) > .call-to-action-button")
+
+	cy.get(".call-to-action-button")
+		.should("exist")
+		.then(function (buttonText) {
+			cy.log(buttonText.text());
+		});
+
+	cy.get(".talk-to-us__inner__table__column__heading")
 		.should("exist")
 		.then(function (buttonText) {
 			cy.log(buttonText.text());
@@ -308,7 +315,6 @@ Cypress.Commands.add("verifyEmailAddressError", () => {
 });
 
 Cypress.Commands.add("clickOnBackButton", () => {
-	//cy.get(".govuk-back-link").click();
 	cy.contains("Back").click();
 });
 
@@ -527,4 +533,15 @@ Cypress.Commands.add("VerifySignupCompleteMessage", () => {
 
 Cypress.Commands.add("VerifyYouHaveSignedupMessage", () => {
 	cy.contains("You've signed up").should("exist");
+});
+
+Cypress.Commands.add("signupForEvent", (firstName, lastName, email) => {
+	cy.get("#events-steps-personal-details-first-name-field").type(firstName);
+	cy.get("#events-steps-personal-details-last-name-field").type(lastName);
+	cy.get("#events-steps-personal-details-email-field").type(email);
+	cy.clickOnNextStepButton();
+});
+
+Cypress.Commands.add("clickOnNextStepButton", () => {
+	cy.contains("Next Step").click();
 });

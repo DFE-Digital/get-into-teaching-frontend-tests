@@ -9,7 +9,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 
 	it("It shows the home page", () => {
-		homePage.getCovidMessage().should("exist");
 		homePage.getTeachingImage().should("exist");
 		homePage.getMailingStripText().should("exist");
 		homePage.getMailingStripText().siblings().should("exist");
@@ -83,7 +82,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.location("pathname").should("equal", Navlinks.covid19);
 	});
 
-	it.only('Links through to "Sign up here"', () => {
+	it('Links through to "Sign up here"', () => {
 		homePage.getMailingStripButton().dblclick();
 		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
 	});

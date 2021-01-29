@@ -16,7 +16,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.acceptCookie();
 	});
 
-	it.only(`It shows 'You’ve signed up' message for new candidate`, function () {
+	it(`It shows 'You’ve signed up' message for new candidate`, function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
 		cy.enterFirstNameLastNameAndEmailAddress(
