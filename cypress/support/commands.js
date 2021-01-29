@@ -545,3 +545,15 @@ Cypress.Commands.add("signupForEvent", (firstName, lastName, email) => {
 Cypress.Commands.add("clickOnNextStepButton", () => {
 	cy.contains("Next Step").click();
 });
+
+Cypress.Commands.add("verifyPageResponse", (endPoint) => {
+	cy.request({
+		url: endPoint,
+		auth: {
+			username: Cypress.env("HTTPAUTH_USERNAME"),
+			password: Cypress.env("HTTPAUTH_PASSWORD"),
+		},
+	}).then((resp) => {
+		expect(resp.status).to.eq(200);
+	});
+});

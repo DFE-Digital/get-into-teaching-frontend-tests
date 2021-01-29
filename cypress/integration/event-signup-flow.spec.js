@@ -12,6 +12,13 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		cy.navigateToPage("/events");
 	});
 
+	it("Verify pages response", function () {
+		cy.verifyPageResponse("/event_categories/train-to-teach-events");
+		cy.verifyPageResponse("/event_categories/online-events");
+		cy.verifyPageResponse("/event_categories/school-and-university-events");
+		cy.verifyPageResponse("/event_categories/online-events/archive");
+	});
+
 	it("It shows the Sign up complete message - for new candidate", function () {
 		let signedUpeventName;
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
@@ -51,8 +58,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	it("It shows the Sign up complete message - for existing candidate", function () {
 		let signedUpeventName;
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
-		let firstName = "User_" + rnum + "_firstname";
-		let lastName = "User_" + rnum + "_lastname";
+		let firstName = "Testuser_" + rnum + "_firstname";
+		let lastName = "Testuser_" + rnum + "_lastname";
 		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
@@ -111,6 +118,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
 						signedUpeventName = eventName.text().trim();
 						cy.signupForEvent(firstName, lastName, this.testData.email);
+						cy.contains(eventName.text()).should("exist");
 						cy.enterEmailVerificationCode(this.testData.email, this.testData.userKey).then(
 							(otp) => {
 								cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
@@ -127,42 +135,5 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					});
 			}
 		});
-	});
-});
-
-describe("Verify page load " + new Date(), () => {
-	const searchForEvent = new Homepage();
-	it('It shows the "Train to Teach Events" page', function () {
-		cy.navigateToPage("/event_categories/train-to-teach-events");
-		cy.verifyPageHeading("Train to Teach events");
-		searchForEvent
-			.getSearchforEventsHeading()
-			.should("exist")
-			.should("have.text", "Search for Train to Teach events");
-	});
-	it('It shows the "Online Events" page', function () {
-		cy.navigateToPage("/event_categories/online-events");
-		cy.verifyPageHeading("Online events");
-		searchForEvent
-			.getSearchforEventsHeading()
-			.should("exist")
-			.should("have.text", "Search for Online events");
-	});
-	it('It shows the "School and University Events" page', function () {
-		cy.navigateToPage("/event_categories/school-and-university-events");
-		cy.verifyPageHeading("School and University events");
-		searchForEvent
-			.getSearchforEventsHeading()
-			.should("exist")
-			.should("have.text", "Search for School and University events");
-	});
-
-	it('It shows the "Past Online Events" page', function () {
-		cy.navigateToPage("/event_categories/online-events/archive");
-		cy.verifyPageHeading("Past online events");
-		searchForEvent
-			.getSearchforEventsHeading()
-			.should("exist")
-			.should("have.text", "Search for Past online events");
 	});
 });
