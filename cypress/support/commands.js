@@ -12,13 +12,13 @@ Cypress.Commands.add("logintoApp", () => {
 });
 
 Cypress.Commands.add("shouldHaveTalkToUsSection", () => {
-	cy.get(".talk-to-us__inner > .strapline")
+	cy.get(".purple")
 		.should("exist")
 		.then(function (sectionText) {
 			cy.log(sectionText.text());
 		});
 
-	cy.get("div.talk-to-us__inner__table__column:nth-child(1) > a.call-to-action-button:nth-child(2)")
+	cy.get(".visible > .talk-to-us__inner__table__column__heading")
 		.should("exist")
 		.then(function (buttonText) {
 			cy.log(buttonText.text());
