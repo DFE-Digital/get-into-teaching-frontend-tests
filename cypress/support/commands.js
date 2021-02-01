@@ -354,13 +354,6 @@ Cypress.Commands.add("acceptPrivacyPolicy", () => {
 	cy.contains("Yes").click();
 });
 
-Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", (firstName, lastName, email) => {
-	const mailingListSignUp = new MailingListSignUp();
-	mailingListSignUp.getFirstName().type(firstName);
-	mailingListSignUp.getLastName().type(lastName);
-	mailingListSignUp.getEmailAddress().type(email);
-});
-
 Cypress.Commands.add("degreeStage", (stage) => {
 	cy.contains(stage).click();
 });
@@ -410,7 +403,7 @@ Cypress.Commands.add("eventMonths", () => {
 		});
 });
 
-Cypress.Commands.add("updateEventMonth", (eventsType, eventLocation) => {
+Cypress.Commands.add("setEventMonth", (eventsType, eventLocation) => {
 	const searchForEvent = new Homepage();
 	searchForEvent.getEventsType().select(eventsType);
 	searchForEvent.getEventLocation().select(eventLocation);
@@ -421,15 +414,17 @@ Cypress.Commands.add("updateEventMonth", (eventsType, eventLocation) => {
 		.each(($option, index, $list) => {
 			cy.get("@month").select($option.text());
 			searchForEvent.getUpdateResultsButton().click();
-			cy.eventMonths().then((eventNotPresent) => {
-				if (!eventNotPresent) {
+			cy.get("body").then((body) => {
+				if (body.find(".no-results").length > 0) {
+				} else {
 					cy.writeFile("cypress/fixtures/event-month.txt", $option.text());
+					return false;
 				}
 			});
 		});
 });
 
-Cypress.Commands.add("setEventMonth", (eventsType, eventLocation) => {
+Cypress.Commands.add("getEventMonth", (eventsType, eventLocation) => {
 	let month;
 	const searchForEvent = new Homepage();
 	searchForEvent.getEventsType().select(eventsType);
@@ -539,6 +534,13 @@ Cypress.Commands.add("signupForEvent", (firstName, lastName, email) => {
 	cy.get("#events-steps-personal-details-first-name-field").type(firstName);
 	cy.get("#events-steps-personal-details-last-name-field").type(lastName);
 	cy.get("#events-steps-personal-details-email-field").type(email);
+	cy.clickOnNextStepButton();
+});
+
+Cypress.Commands.add("signupForMailingList", (firstName, lastName, email) => {
+	cy.get("#mailing-list-steps-name-first-name-field").type(firstName);
+	cy.get("#mailing-list-steps-name-last-name-field").type(lastName);
+	cy.get("#mailing-list-steps-name-email-field").type(email);
 	cy.clickOnNextStepButton();
 });
 

@@ -131,18 +131,15 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	it('Links through to "Find events"', () => {
 		homePage.getFindEventLink().click();
 		cy.location("pathname").should("equal", Navlinks.events);
-		homePage.getBannerText().should("exist").should("have.text", "Find an event near you");
 	});
 
 	it('Links through to "Check your qualifications"', () => {
 		homePage.getCheckYourQualificationsLink().click();
 		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
-		homePage.getBannerText().should("exist");
 	});
 
 	it('Links through to "Ways to train"', () => {
 		homePage.getWaystoTrainLink().siblings().click();
 		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
-		homePage.getBannerText().should("exist");
 	});
 });

@@ -3,7 +3,7 @@ import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
 import Navlinks from "../support/pageobjects/Navlinks";
 /// <reference types="Cypress" />
 
-describe("Feature - Get an adviser : Tests execution date and time : " + new Date(), () => {
+xdescribe("Feature - Get an adviser : Tests execution date and time : " + new Date(), () => {
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
 	beforeEach(function () {
 		//cy.viewport("samsung-s10");

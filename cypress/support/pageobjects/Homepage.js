@@ -1,10 +1,4 @@
 module.exports = class HomePage {
-	getCovidMessage() {
-		return cy.get(".covid");
-	}
-	getCovidLink() {
-		return cy.get(".covid > a");
-	}
 	getTeachingImage() {
 		return cy.get(".logo__image");
 	}
@@ -24,24 +18,6 @@ module.exports = class HomePage {
 	getHomeBannerText() {
 		return cy.get(".home-hero__banner >h1");
 	}
-	getBannerText() {
-		return cy.get("h1 > span");
-	}
-
-	getContentVideo() {
-		return cy.get(
-			'[href="https://www.youtube.com/watch?v=MLdrZJpK5rU"] > .content-video > .content-video__play > .icon-play'
-		);
-	}
-
-	getVideoContainer() {
-		return cy.get(".video-overlay__video-container");
-	}
-
-	getVideoCloseIcon() {
-		return cy.get(".icon-video-close");
-	}
-
 	getFundingyourTrainingLink() {
 		return cy.contains("a", "Funding your training");
 	}
