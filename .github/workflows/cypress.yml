@@ -25,16 +25,16 @@ jobs:
         run: |
              if  [[ "${{github.event_name}}" == "schedule"  ]]
              then
-                   tests='{"tests":[ "teacher-training-adviser", "mailinglist-signup-flow", "homepage-smoke", "event-signup-flow" ]}' 
+                   tests='{"tests":[ "teacher-training-adviser", "non-regression-tests-suit/mailinglist-signup-flow", "non-regression-tests-suit/homepage-smoke", "non-regression-tests-suit/event-signup-flow" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "APP" ]] 
              then
-                   tests='{"tests":[ "mailinglist-signup-flow", "homepage-smoke", "event-signup-flow" ]}' 
+                   tests='{"tests":[ "regression-tests-suit/mailinglist-signup-flow", "regression-tests-suit/homepage-smoke", "regression-tests-suit/event-signup-flow" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "TTA"  ]]
              then
-                   tests='{"tests":[ "teacher-training-adviser"]}' 
+                   tests='{"tests":[ "regression-tests-suit/teacher-training-adviser"]}' 
              elif  [[ "${{github.event.inputs.application}}" == "BOTH" ]]
              then
-                   tests='{"tests":[ "teacher-training-adviser", "mailinglist-signup-flow", "homepage-smoke", "event-signup-flow" ]}' 
+                   tests='{"tests":[ "teacher-training-adviser", "regression-tests-suit/mailinglist-signup-flow", "regression-tests-suit/homepage-smoke", "regression-tests-suit/event-signup-flow" ]}' 
              else
                    exit 1
              fi
