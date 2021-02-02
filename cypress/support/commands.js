@@ -524,3 +524,36 @@ Cypress.Commands.add("verifyUKLink", (linkText, url) => {
 Cypress.Commands.add("VerifySignupCompleteMessage", () => {
 	cy.contains("Sign up complete").should("exist");
 });
+Cypress.Commands.add("signupForEvent", (firstName, lastName, email) => {
+	cy.get("#events-steps-personal-details-first-name-field").type(firstName);
+	cy.get("#events-steps-personal-details-last-name-field").type(lastName);
+	cy.get("#events-steps-personal-details-email-field").type(email);
+	cy.clickOnNextStepButton();
+});
+
+Cypress.Commands.add("signupForMailingList", (firstName, lastName, email) => {
+	cy.get("#mailing-list-steps-name-first-name-field").type(firstName);
+	cy.get("#mailing-list-steps-name-last-name-field").type(lastName);
+	cy.get("#mailing-list-steps-name-email-field").type(email);
+	cy.clickOnNextStepButton();
+});
+
+Cypress.Commands.add("clickOnNextStepButton", () => {
+	cy.contains("Next Step").click();
+});
+
+Cypress.Commands.add("verifyPageResponse", (endPoint) => {
+	cy.request({
+		url: endPoint,
+		auth: {
+			username: Cypress.env("HTTPAUTH_USERNAME"),
+			password: Cypress.env("HTTPAUTH_PASSWORD"),
+		},
+	}).then((resp) => {
+		expect(resp.status).to.eq(200);
+	});
+});
+
+Cypress.Commands.add("VerifyYouHaveSignedupMessage", () => {
+	cy.contains("You've signed up").should("exist");
+});

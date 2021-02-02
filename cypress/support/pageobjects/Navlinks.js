@@ -28,4 +28,6 @@ module.exports = class Navlinks {
 	static teachingRoleInEngland = "https://teaching-vacancies.service.gov.uk/";
 	static feedback =
 		"https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
+	static feedback =
+		"https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
 };
