@@ -26,4 +26,6 @@ module.exports = class Navlinks {
 	static teachInNorthernIreland =
 		"https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland";
 	static teachingRoleInEngland = "https://teaching-vacancies.service.gov.uk/";
+	static feedback =
+		"https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
 };
