@@ -2053,10 +2053,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
-		cy.contains("a", "feedback").invoke("removeAttr", "target").click();
-		cy.get(".freebirdFormviewerViewHeaderTitle")
-			.should("exist")
-			.should("have.text", "Get into Teaching: Feedback Survey");
+		cy.contains("a", "feedback").should((link) => {
+			expect(link).to.have.attr("href", Navlinks.feedback);
+		});
 	});
 });
 
