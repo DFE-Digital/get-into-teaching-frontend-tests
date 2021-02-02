@@ -1,6 +1,6 @@
-import TeacherTrainingAdviser from "../../support/pageobjects/TeacherTrainingAdviser";
-import MailingListSignUp from "../../support/pageobjects/MailinglistSignupPage";
-import Navlinks from "../../support/pageobjects/Navlinks";
+import TeacherTrainingAdviser from "../support/pageobjects/TeacherTrainingAdviser";
+import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
+import Navlinks from "../support/pageobjects/Navlinks";
 /// <reference types="Cypress" />
 function terminalLog(violations) {
 	cy.task(
@@ -17,8 +17,8 @@ function terminalLog(violations) {
 	}));
 	cy.task("table", violationData);
 }
-//wip
-xdescribe("Feature - Get an adviser : Tests execution date and time : " + new Date(), () => {
+
+describe("Feature - Get an adviser : Tests execution date and time : " + new Date(), () => {
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
 	beforeEach(function () {
 		//cy.viewport("samsung-s10");
@@ -2059,7 +2059,7 @@ xdescribe("Feature - Get an adviser : Tests execution date and time : " + new Da
 	});
 });
 
-xdescribe("Hyperlink navigation check : Tests execution date and time : " + new Date(), () => {
+describe("Hyperlink navigation check : Tests execution date and time : " + new Date(), () => {
 	it("verify UK links", () => {
 		cy.goToUrl("/");
 		cy.verifyUKLink("Scotland", Navlinks.teachInScotland);
@@ -2103,7 +2103,7 @@ xdescribe("Hyperlink navigation check : Tests execution date and time : " + new 
 	});
 });
 
-xdescribe("Matchback feature", () => {
+describe("Matchback feature", () => {
 	let firstName;
 	let lastName;
 	const teacherTrainingAdviser = new TeacherTrainingAdviser();
@@ -2294,7 +2294,7 @@ xdescribe("Matchback feature", () => {
 	});
 });
 
-xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
 			url: "https://get-teacher-training-adviser-services-test.london.cloudapps.digital/",
