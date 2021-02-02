@@ -553,3 +553,7 @@ Cypress.Commands.add("verifyPageResponse", (endPoint) => {
 		expect(resp.status).to.eq(200);
 	});
 });
+
+Cypress.Commands.add("VerifyYouHaveSignedupMessage", () => {
+	cy.contains("You've signed up").should("exist");
+});
