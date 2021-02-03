@@ -1,6 +1,5 @@
-import TeacherTrainingAdviser from "../support/pageobjects/TeacherTrainingAdviser";
-import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
-import Navlinks from "../support/pageobjects/Navlinks";
+import TeacherTrainingAdviser from "../../support/pageobjects/TeacherTrainingAdviser";
+import Navlinks from "../../support/pageobjects/Navlinks";
 /// <reference types="Cypress" />
 function terminalLog(violations) {
 	cy.task(
