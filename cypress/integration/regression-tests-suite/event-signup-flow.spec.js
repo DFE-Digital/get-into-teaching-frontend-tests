@@ -26,8 +26,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		firstName = "Testuser_" + rnum + "_firstname";
 		lastName = "Testuser_" + rnum + "_lastname";
-		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation);
-		cy.getEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.updateEventMonth(this.testData.eventsType, this.testData.eventLocation);
+		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent
 					.getEventsMonth()
@@ -53,7 +53,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
 						signedUpeventName = eventName.text().trim();
-						cy.signupForEvent(firstName, lastName, this.testData.email);
+						cy.signupForEvent(firstName, lastName, this.testData.eventUserEmail);
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPhoneNumber().type(this.testData.phoneNumber);
 						cy.clickOnNextStepButton();
@@ -68,7 +68,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 
 	it("It shows the Sign up complete message - for existing candidate", function () {
 		let signedUpeventName;
-		cy.getEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
+		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent
 					.getEventsMonth()
@@ -94,13 +94,14 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
 						signedUpeventName = eventName.text().trim();
-						cy.signupForEvent(firstName, lastName, this.testData.email);
+						cy.signupForEvent(firstName, lastName, this.testData.eventUserEmail);
 						cy.contains(eventName.text()).should("exist");
-						cy.enterEmailVerificationCode(this.testData.email, this.testData.userKey).then(
-							(otp) => {
-								cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
-							}
-						);
+						cy.enterEmailVerificationCode(
+							this.testData.eventUserEmail,
+							this.testData.eventUserKey
+						).then((otp) => {
+							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
+						});
 						cy.clickOnNextStepButton();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						cy.verifyMobileFieldAndDisplayedValue(this.testData.phoneNumber);
