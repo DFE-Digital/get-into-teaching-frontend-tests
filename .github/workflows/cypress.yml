@@ -72,11 +72,16 @@ jobs:
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
               CYPRESS_SPEC:              "cypress/integration/${{ matrix.tests }}.spec.js"
         
+      - name: Basename of Test
+        id: basename
+        run: |
+              echo ::set-output name=name::$(basename ${{matrix.tests}} )
+                
       - name: Upload reports artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: ${{matrix.tests}}
+          name: ${{steps.basename.outputs.name }}
           path: |
                ${{steps.config.outputs.videos}}
                ${{steps.config.outputs.screenshots}}
