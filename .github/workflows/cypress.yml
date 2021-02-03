@@ -20,6 +20,7 @@ jobs:
     outputs:
       tests: ${{ steps.select-tests.outputs.tests }}
     steps:
+            
       - name: Select Tests
         id: select-tests
         run: |
@@ -55,6 +56,7 @@ jobs:
       - name: Set Configuration
         id:   config
         run: |
+            echo "::set-output name=basename::$(basename ${{matrix.tests}} )"
             echo "::set-output name=videos::${PWD}/${{matrix.tests}}/videos"
             echo "::set-output name=screenshots::${PWD}/${{matrix.tests}}/screenshots"
             echo "::set-output name=reports::${PWD}/${{matrix.tests}}/reports"
@@ -72,16 +74,13 @@ jobs:
               CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
               CYPRESS_SPEC:              "cypress/integration/${{ matrix.tests }}.spec.js"
         
-      - name: Basename of Test
-        id: basename
-        run: |
-              echo ::set-output name=name::$(basename ${{matrix.tests}} )
+
                 
       - name: Upload reports artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: ${{steps.basename.outputs.name }}
+          name: ${{steps.config.outputs.basename }}
           path: |
                ${{steps.config.outputs.videos}}
                ${{steps.config.outputs.screenshots}}
