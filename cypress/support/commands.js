@@ -557,3 +557,7 @@ Cypress.Commands.add("verifyPageResponse", (endPoint) => {
 Cypress.Commands.add("VerifyYouHaveSignedupMessage", () => {
 	cy.contains("You've signed up").should("exist");
 });
+
+Cypress.Commands.add("VerifyEventName", (eventName) => {
+	cy.contains(eventName).should("exist");
+});

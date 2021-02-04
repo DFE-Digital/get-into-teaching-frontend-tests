@@ -36,7 +36,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						cy.contains(eventName.text().trim()).click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 					});
 			}
 		});
@@ -63,7 +63,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().first().click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
 						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
@@ -77,7 +77,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifyEventName(signedUpeventName);
 					});
 			}
 		});
@@ -105,7 +105,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().eq(0).click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
 						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
@@ -130,7 +130,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						);
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifyEventName(signedUpeventName);
 					});
 			}
 		});
@@ -160,7 +160,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().first().click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
@@ -183,7 +183,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						);
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifySignupEventName(signedUpeventName);
 						eventSignup
 							.getSignupEventName()
 							.next()
@@ -202,7 +202,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						cy.contains(eventName.text().trim()).click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
@@ -225,7 +225,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifyEventName(signedUpeventName);
 					});
 			}
 		});
@@ -255,7 +255,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().first().click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
@@ -278,7 +278,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						);
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifySignupEventName(signedUpeventName);
 						eventSignup
 							.getSignupEventName()
 							.next()
@@ -297,7 +297,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						cy.contains(eventName.text().trim()).click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(firstName);
 						eventSignup.getLastName().type(lastName);
@@ -357,7 +357,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						cy.contains(eventName.text().trim()).click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
 						cy.get(".govuk-error-summary__list")
@@ -398,7 +398,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						cy.contains(eventName.text().trim()).click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						eventSignup.getNextStep().click();
 						cy.contains("Enter your full email address")
 							.should((el) => {
@@ -464,7 +464,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().first().click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
 						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
@@ -478,7 +478,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifySignupEventName(signedUpeventName);
 					});
 				cy.contains("a", "feedback on this website").invoke("removeAttr", "target").click();
 				cy.get(".freebirdFormviewerViewHeaderTitle")
@@ -509,7 +509,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().first().click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
 						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
@@ -523,7 +523,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifySignupEventName(signedUpeventName);
 					});
 				cy.get("#hide-feedback-bar").click();
 				cy.contains("a", "feedback on this website").should("not.be.visible");
