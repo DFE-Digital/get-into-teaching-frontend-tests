@@ -45,6 +45,7 @@ jobs:
   RunTests:
     name: ${{matrix.tests}}
     runs-on: ubuntu-latest
+    environment: Test
     needs: set-matrix
     strategy:
       fail-fast: false # doesn't stop other test runs even if one fails
