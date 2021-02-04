@@ -532,7 +532,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 });
 
-xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
+describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	it('It should show "404	Not Found unknown_route" if the user enters a bad URL', () => {
 		cy.visit({
 			url: "https://get-into-teaching-apps-test.london.cloudapps.digital/events",
@@ -543,7 +543,7 @@ xdescribe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
 	});
 });
 
-xdescribe("Verify page load " + new Date(), () => {
+describe("Verify page load " + new Date(), () => {
 	const searchForEvent = new Homepage();
 
 	it("It shows the selected month events only", function () {
