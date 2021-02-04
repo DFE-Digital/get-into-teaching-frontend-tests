@@ -183,9 +183,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						);
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
-						cy.VerifySignupEventName(signedUpeventName);
-						eventSignup
-							.getSignupEventName()
+						cy.VerifyEventName(signedUpeventName);
+						cy.VerifyEventName(signedUpeventName)
 							.next()
 							.next()
 							.should("have.text", "You've also signed up for email updates");
@@ -278,9 +277,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						);
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
-						cy.VerifySignupEventName(signedUpeventName);
-						eventSignup
-							.getSignupEventName()
+						cy.VerifyEventName(signedUpeventName);
+						cy.VerifyEventName(signedUpeventName)
 							.next()
 							.next()
 							.should("have.text", "You've also signed up for email updates");
@@ -478,7 +476,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
 						cy.VerifySignupCompleteMessage();
-						cy.VerifySignupEventName(signedUpeventName);
+						cy.VerifyEventName(signedUpeventName);
 					});
 				cy.contains("a", "feedback on this website").invoke("removeAttr", "target").click();
 				cy.get(".freebirdFormviewerViewHeaderTitle")
@@ -523,7 +521,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
 						cy.VerifySignupCompleteMessage();
-						cy.VerifySignupEventName(signedUpeventName);
+						cy.VerifyEventName(signedUpeventName);
 					});
 				cy.get("#hide-feedback-bar").click();
 				cy.contains("a", "feedback on this website").should("not.be.visible");
