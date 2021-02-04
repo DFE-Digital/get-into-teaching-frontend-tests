@@ -45,6 +45,7 @@ jobs:
   RunTests:
     name: ${{matrix.tests}}
     runs-on: ubuntu-latest
+    environment: Test
     needs: set-matrix
     strategy:
       fail-fast: false # doesn't stop other test runs even if one fails
@@ -52,6 +53,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: set-up-environment
+        uses: DFE-Digital/github-actions/set-up-environment@master
+
+      - uses: Azure/login@v1
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: Azure/get-keyvault-secrets@v1
+        id:   azSecret
+        with:
+           keyvault: ${{ secrets.KEY_VAULT}}
+           secrets: 'SLACK-WEBHOOK, HTTP-USERNAME, HTTP-PASSWORD'
 
       - name: Set Configuration
         id:   config
@@ -68,10 +82,10 @@ jobs:
                                    -v ${{steps.config.outputs.screenshots}}:/test/cypress/screenshots   \
                                    -v ${{steps.config.outputs.videos}}:/test/cypress/videos   \
                                    -v ${{steps.config.outputs.reports}}:/test/cypress/reports   \
-                                   dfedigital/dfecypress:latest
+                                   ${{ env.DOCKERHUB_REPOSITORY}}/dfecypress:latest
         env:
-              CYPRESS_HTTPAUTH_PASSWORD: "${{ secrets.HTTPAUTH_PASSWORD }}"
-              CYPRESS_HTTPAUTH_USERNAME: "${{ secrets.HTTPAUTH_USERNAME }}"
+              CYPRESS_HTTPAUTH_PASSWORD: "${{ steps.azSecret.outputs.HTTP-PASSWORD }}"
+              CYPRESS_HTTPAUTH_USERNAME: "${{ steps.azSecret.outputs.HTTP-USERNAME }}"
               CYPRESS_SPEC:              "cypress/integration/${{ matrix.tests }}.spec.js"
         
 
@@ -116,10 +130,8 @@ jobs:
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
-           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-           SLACK_CHANNEL: getintoteaching_tech
-           SLACK_COLOR: '#3278BD'
-           SLACK_ICON: https://github.com/rtCamp.png?size=48
+           SLACK_WEBHOOK: ${{ steps.azSecret.outputs.SLACK-WEBHOOK }}
+           SLACK_COLOR:   ${{env.SLACK_ERROR}}
            SLACK_TITLE: 'Failure running Cypress test ${{ matrix.tests}}'
            SLACK_MESSAGE: |
                            ${{steps.failures.outputs.number}} Cypress tests have failed,
