@@ -51,7 +51,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().first().click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						cy.signupForEvent(firstName, lastName, this.testData.eventUserEmail);
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
@@ -60,7 +60,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("No");
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifyEventName(signedUpeventName);
 					});
 			}
 		});
@@ -92,7 +92,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 					.then(function (eventName) {
 						eventSignup.getSearchedEventName().first().click();
 						eventSignup.getSignupForThisEventButton().click();
-						eventSignup.getEventNameHeader().should("have.text", eventName.text().trim());
+						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
 						cy.signupForEvent(firstName, lastName, this.testData.eventUserEmail);
 						cy.contains(eventName.text()).should("exist");
@@ -109,7 +109,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
-						eventSignup.getSignupEventName().should("have.text", signedUpeventName);
+						cy.VerifyEventName(signedUpeventName);
 					});
 			}
 		});
