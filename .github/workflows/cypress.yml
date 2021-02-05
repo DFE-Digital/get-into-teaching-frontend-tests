@@ -106,9 +106,9 @@ jobs:
         if: always()
         run: |
             cat ${{steps.config.outputs.reports}}/*.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > /tmp/$$.tmp
-            if [[ $(cat /tmp/$$.tmp ) | wc -l) -gt 0  ]]
+            if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
-                 echo ::set-output name=message::$( cat /tmp/$$.tmp )
+                 echo ::set-output name=message::"$( cat /tmp/$$.tmp )"
                  exit 1
             fi
             exit 0
