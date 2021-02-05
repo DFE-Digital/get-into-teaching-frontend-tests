@@ -70,6 +70,7 @@ jobs:
       - name: Set Configuration
         id:   config
         run: |
+            sudo apt-get install jo
             echo "::set-output name=basename::$(basename ${{matrix.tests}} )"
             echo "::set-output name=videos::${PWD}/${{matrix.tests}}/videos"
             echo "::set-output name=screenshots::${PWD}/${{matrix.tests}}/screenshots"
@@ -108,20 +109,17 @@ jobs:
             cat ${{steps.config.outputs.reports}}/*.json | jq  -r ".results[].suites[].tests[] | {title , pass} | select(.pass=="true" ) | .title" > /tmp/$$.tmp
             if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
-                 echo ::set-output name=message::"$( cat /tmp/$$.tmp )"
+                 echo ::set-output name=message::"$( jo body="${BODY}" > tempfile)"
                  exit 1
             fi
             exit 0
-
-      - name: Slack Notification
+            
+      - name: Notify release to Slack
         if: failure()
-        uses: rtCamp/action-slack-notify@master
-        env:
-           SLACK_WEBHOOK: ${{ steps.azSecret.outputs.SLACK-WEBHOOK }}
-           SLACK_COLOR:   ${{env.SLACK_ERROR}}
-           SLACK_TITLE: 'Failure running Cypress test ${{ matrix.tests}}'
-           SLACK_MESSAGE: >-
-                          ${{steps.failures.outputs.message}}
+        uses: lizefield/notify-release-to-slack@v1.0
+        with:
+             slackWebhookUrl: ${{ steps.azSecret.outputs.SLACK-WEBHOOK }}
+             releaseMessage: ${{steps.failures.outputs.message}}
 
   Cypress:
     name: ${{github.event.inputs.reference}}
