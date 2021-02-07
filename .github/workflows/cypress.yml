@@ -118,7 +118,7 @@ jobs:
                       break
                    fi
                    i=$((i+1))
-                   echo ::set-output name=message${i}::"  - ${line}"
+                   echo ::set-output name=message${i}::"FAILED  - ${line}"
                  done <  /tmp/$$.tmp
                  echo ::set-output name=display::${i}
                  echo ::set-output name=number::$(cat /tmp/$$.tmp | wc -l)
