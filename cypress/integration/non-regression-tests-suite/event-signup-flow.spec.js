@@ -565,63 +565,72 @@ describe("Verify page load " + new Date(), () => {
 			});
 	});
 	it('It navigates to selected "Online Events" page', function () {
+		let event_Name;
+		let event_Date;
 		cy.navigateToPage("/event_categories/online-events");
 		cy.getFirstEvent().then((eventName) => {
-			eventName = eventName.text().trim();
-			cy.getFirstEvent().click();
-			cy.getEventHeader().then((eventHeader) => {
-				eventHeader = eventHeader.text().trim();
-				expect(eventName).to.equal(eventHeader);
-			});
+			event_Name = eventName.text().trim();
 		});
-		cy.go("back");
-		cy.getFirstEventDateAndTime().then((eventDateAndTime) => {
-			eventDateAndTime = eventDateAndTime.text().trim();
-			cy.getFirstEvent().click();
-			cy.getDateAndTime().then((eventInfo) => {
-				eventInfo = eventInfo.text().trim().replace("at", "");
-				expect(eventInfo).to.equal(eventDateAndTime);
+		cy.getFirstEvent()
+			.next()
+			.then((eventDate) => {
+				event_Date = eventDate.text().trim();
 			});
+		cy.getFirstEvent().click();
+		cy.wait(100);
+		cy.getEventHeader().then((eventHeader) => {
+			eventHeader = eventHeader.text().trim();
+			expect(event_Name).to.equal(eventHeader);
+		});
+		cy.getDateAndTime().then((eventInfo) => {
+			eventInfo = eventInfo.text().trim().replace("at", "");
+			expect(eventInfo).to.equal(event_Date);
 		});
 	});
 	it('It navigates to selected "Train to Teach Events" page', function () {
+		let event_Name;
+		let event_Date;
 		cy.navigateToPage("/event_categories/train-to-teach-events");
 		cy.getFirstEvent().then((eventName) => {
-			eventName = eventName.text().trim();
-			cy.getFirstEvent().click();
-			cy.getEventHeader().then((eventHeader) => {
-				eventHeader = eventHeader.text().trim();
-				expect(eventName).to.equal(eventHeader);
-			});
+			event_Name = eventName.text().trim();
 		});
-		cy.go("back");
-		cy.getFirstEventDateAndTime().then((eventDateAndTime) => {
-			eventDateAndTime = eventDateAndTime.text().trim();
-			cy.getFirstEvent().click();
-			cy.getDateAndTime().then((eventInfo) => {
-				eventInfo = eventInfo.text().trim().replace("at", "");
-				expect(eventInfo).to.equal(eventDateAndTime);
+		cy.getFirstEvent()
+			.next()
+			.then((eventDate) => {
+				event_Date = eventDate.text().trim();
 			});
+		cy.getFirstEvent().click();
+		cy.wait(100);
+		cy.getEventHeader().then((eventHeader) => {
+			eventHeader = eventHeader.text().trim();
+			expect(event_Name).to.equal(eventHeader);
+		});
+		cy.getDateAndTime().then((eventInfo) => {
+			eventInfo = eventInfo.text().trim().replace("at", "");
+			expect(eventInfo).to.equal(event_Date);
 		});
 	});
 	it('It navigates to selected "School and University Events" page', function () {
+		let event_Name;
+		let event_Date;
 		cy.navigateToPage("/event_categories/school-and-university-events");
 		cy.getFirstEvent().then((eventName) => {
-			eventName = eventName.text().trim();
-			cy.getFirstEvent().click();
-			cy.getEventHeader().then((eventHeader) => {
-				eventHeader = eventHeader.text().trim();
-				expect(eventName).to.equal(eventHeader);
-			});
+			event_Name = eventName.text().trim();
 		});
-		cy.go("back");
-		cy.getFirstEventDateAndTime().then((eventDateAndTime) => {
-			eventDateAndTime = eventDateAndTime.text().trim();
-			cy.getFirstEvent().click();
-			cy.getDateAndTime().then((eventInfo) => {
-				eventInfo = eventInfo.text().trim().replace("at", "");
-				expect(eventInfo).to.equal(eventDateAndTime);
+		cy.getFirstEvent()
+			.next()
+			.then((eventDate) => {
+				event_Date = eventDate.text().trim();
 			});
+		cy.getFirstEvent().click();
+		cy.wait(100);
+		cy.getEventHeader().then((eventHeader) => {
+			eventHeader = eventHeader.text().trim();
+			expect(event_Name).to.equal(eventHeader);
+		});
+		cy.getDateAndTime().then((eventInfo) => {
+			eventInfo = eventInfo.text().trim().replace("at", "");
+			expect(eventInfo).to.equal(event_Date);
 		});
 	});
 	it('It shows the "Past Online Events" page', function () {
