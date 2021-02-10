@@ -12,10 +12,10 @@ module.exports = class HomePage {
 		return cy.contains("a", "Home");
 	}
 	getMailingStripText() {
-		return cy.get(".hero__mailing-strip__text");
+		return cy.get(".hero__subtitle__button > span");
 	}
 	getMailingStripButton() {
-		return cy.get(".hero__mailing-strip__cta__button > span");
+		return cy.get(".footer-signup__inner > .call-to-action-button");
 	}
 	getMyStoryInToTeaching() {
 		return cy.contains("a", "My story into teaching");
@@ -63,7 +63,7 @@ module.exports = class HomePage {
 	}
 
 	getFindEventLink() {
-		return cy.contains("Find Events");
+		return cy.get(":nth-child(1) > .call-to-action__action > a");
 	}
 
 	getCheckYourQualificationsLink() {
@@ -71,7 +71,7 @@ module.exports = class HomePage {
 	}
 
 	getWaystoTrainLink() {
-		return cy.get(":nth-child(3) > .steps__number");
+		return cy.contains("a", "Ways to train");
 	}
 
 	getEventLocation() {
