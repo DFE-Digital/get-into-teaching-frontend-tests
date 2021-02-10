@@ -63,7 +63,7 @@ module.exports = class HomePage {
 	}
 
 	getFindEventLink() {
-		return cy.get(":nth-child(1) > .call-to-action__action > a");
+		return cy.contains("Find events");
 	}
 
 	getCheckYourQualificationsLink() {
