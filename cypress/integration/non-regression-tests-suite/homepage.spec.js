@@ -49,12 +49,12 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.verifySocialMediaLink(4, Navlinks.youtube);
 	});
 
-	/*it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
+	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
 		// Test on initial load, only report and assert for critical impact items
 		cy.checkA11y(null, {
 			includedImpacts: ["critical"],
 		});
-	});*/
+	});
 });
 
 describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
