@@ -11,7 +11,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	it("It shows the home page", () => {
 		homePage.getTeachingImage().should("exist");
 		homePage.getMailingStripText().should("exist");
-		homePage.getMailingStripText().siblings().should("exist");
 		cy.shouldHaveTalkToUsSection();
 		cy.shouldHaveFooter();
 	});
@@ -139,7 +138,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 
 	it('Links through to "Ways to train"', () => {
-		homePage.getWaystoTrainLink().siblings().click();
-		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
+		homePage.getWaystoTrainLink().click();
+		cy.location("pathname").should("equal", Navlinks.waysToTrain);
 	});
 });
