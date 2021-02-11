@@ -24,15 +24,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.logintoApp();
 	});
 
-	it("It shows the home page", () => {
-		homePage.getCovidMessage().should("exist");
-		homePage.getTeachingImage().should("exist");
-		homePage.getMailingStripText().should("exist");
-		homePage.getMailingStripText().siblings().should("exist");
-		cy.shouldHaveTalkToUsSection();
-		cy.shouldHaveFooter();
-	});
-
 	it('It hides the COVID-19 message if user clicks on "Hide this message" link', () => {
 		cy.contains("Hide this message").as("link").should("be.visible");
 		cy.get(".covid").as("covidMessage").should("be.visible");
