@@ -42,6 +42,13 @@ module.exports = class HomePage {
 		return cy.get(".icon-video-close");
 	}
 
+	getSignUpForUpdateButton() {
+		return cy.get(".hero__subtitle__button");
+	}
+	getGetAnAdviserLink() {
+		return cy.contains("Get an adviser");
+	}
+
 	getFundingyourTrainingLink() {
 		return cy.contains("a", "Funding your training");
 	}

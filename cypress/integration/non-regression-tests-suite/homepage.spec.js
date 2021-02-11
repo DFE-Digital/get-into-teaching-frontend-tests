@@ -46,6 +46,105 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 			includedImpacts: ["critical"],
 		});
 	});
+	it('Links through to "Sign up for updates"', () => {
+		homePage
+			.getSignUpForUpdateButton()
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.mailingListSignup);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
+	});
+
+	it('Links through to "Get an adviser"', () => {
+		homePage
+			.getGetAnAdviserLink()
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.getAnAdviser);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.getAnAdviser);
+	});
+
+	it('Links through to "Read teachers stories"', () => {
+		cy.contains("Read teachers' stories")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.myStoryIntoTeaching);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.myStoryIntoTeaching);
+	});
+
+	it('Links through to "Teachers salaries"', () => {
+		cy.contains("Teachers' salaries")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.salariesAndBenefits);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.salariesAndBenefits);
+	});
+
+	it('Links through to "How to become a teacher"', () => {
+		cy.contains("How to become a teacher")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.stepsToBecomeATeacher);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
+	});
+
+	it('Links through to "Explore ways to train"', () => {
+		cy.contains("Explore ways to train")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.waysToTrain);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.waysToTrain);
+	});
+
+	it('Links through to "Find your funding options"', () => {
+		cy.contains("Find your funding options")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.fundingYourTraining);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.fundingYourTraining);
+	});
+	it('Links through to "Returning to teaching"', () => {
+		cy.contains("Returning to teaching")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.returningToTeaching);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.returningToTeaching);
+	});
+	it('Links through to "Go to an event"', () => {
+		cy.contains("Go to an event")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.events);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.events);
+	});
+
+	it('Links through to "Sign up for personalised updates"', () => {
+		cy.contains("Sign up for personalised updates")
+			.should((el) => {
+				expect(el).to.have.attr("href", Navlinks.mailingListSignup);
+			})
+			.click();
+
+		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
+	});
 });
 
 describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {

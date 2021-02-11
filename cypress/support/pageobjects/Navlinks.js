@@ -1,7 +1,9 @@
 module.exports = class Navlinks {
 	static fundingYourTraining = "/funding-your-training";
+	static getAnAdviser = "/tta-service";
 	static stepsToBecomeATeacher = "/steps-to-become-a-teacher";
 	static waysToTrain = "/ways-to-train";
+	static returningToTeaching = "/returning-to-teaching";
 	static lifeAsATeacher = "/teaching-as-a-career";
 	static salariesAndBenefits = "/salaries-and-benefits";
 	static myStoryIntoTeaching = "/my-story-into-teaching";
