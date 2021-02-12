@@ -93,9 +93,9 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		});
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
-		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
+		cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
-		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-error")
+		cy.get("#wizard-steps-authenticate-timed-one-time-password-error")
 			.should("exist")
 			.should(
 				"have.text",
@@ -131,9 +131,9 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		});
 		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
 		mailingListSignUp.getNextStep().click();
-		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type("123456");
+		cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
-		cy.get("#mailing-list-steps-authenticate-timed-one-time-password-error")
+		cy.get("#wizard-steps-authenticate-timed-one-time-password-error")
 			.should("exist")
 			.should(
 				"have.text",
@@ -144,7 +144,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			this.mailingListTestData.email,
 			this.mailingListTestData.emailKey
 		).then((otp) => {
-			cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
+			cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
 		});
 		mailingListSignUp.getNextStep().click();
 		cy.get("#edit_mailing_list_steps_already_subscribed_already_subscribed > h1")

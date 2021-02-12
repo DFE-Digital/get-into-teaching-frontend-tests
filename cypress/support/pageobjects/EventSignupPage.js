@@ -56,7 +56,7 @@ class EventSignupPage {
 		return cy.get("#main-content > b");
 	}
 	getResendVerificationLink() {
-		return cy.get("#events-steps-authenticate-timed-one-time-password-hint > a");
+		return cy.get("#wizard-steps-authenticate-timed-one-time-password-hint > a");
 	}
 
 	getErrorTitle() {
