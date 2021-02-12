@@ -236,7 +236,7 @@ describe("Matchback feature", () => {
 			mailingListSignUp.getNextStep().click();
 			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then(
 				(otp) => {
-					cy.get("#mailing-list-steps-authenticate-timed-one-time-password-field").type(otp);
+					cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
 				}
 			);
 			mailingListSignUp.getNextStep().click();
