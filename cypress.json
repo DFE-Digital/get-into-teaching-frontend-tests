@@ -6,8 +6,8 @@
 		"HTTPAUTH_PASSWORD": "u*******s"
 	},
 	"chromeWebSecurity": false,
-	"defaultCommandTimeout": 8000,
-	"pageLoadTimeout": 10000,
+	"defaultCommandTimeout": 15000,
+	"pageLoadTimeout": 15000,
 	"reporter": "cypress-multi-reporters",
 	"reporterOptions": {
 		"reporterEnabled": "mochawesome",
