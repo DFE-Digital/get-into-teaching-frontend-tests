@@ -23,7 +23,7 @@ Cypress.Commands.add("shouldHaveTalkToUsSection", () => {
 		.then(function (buttonText) {
 			cy.log(buttonText.text());
 		});
-	cy.get(".talk-to-us__inner__table > :nth-child(2) > .call-to-action-button")
+	cy.get('[data-talk-to-us-target="tta"] > .button')
 		.should("exist")
 		.then(function (buttonText) {
 			cy.log(buttonText.text());
