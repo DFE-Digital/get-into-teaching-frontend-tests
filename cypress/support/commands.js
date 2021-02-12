@@ -286,10 +286,10 @@ Cypress.Commands.add("typeDateOfBirth", (day, month, year) => {
 
 Cypress.Commands.add("enterVerificationCode", (verificationCode, error) => {
 	if (error) {
-		cy.get("#events-steps-authenticate-timed-one-time-password-field-error").clear();
-		cy.get("#events-steps-authenticate-timed-one-time-password-field-error").type(verificationCode);
+		cy.get("#wizard-steps-authenticate-timed-one-time-password-field-error").clear();
+		cy.get("#wizard-steps-authenticate-timed-one-time-password-field-error").type(verificationCode);
 	} else {
-		cy.get("#events-steps-authenticate-timed-one-time-password-field").type(verificationCode);
+		cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(verificationCode);
 	}
 });
 Cypress.Commands.add("selectCountry", (location) => {

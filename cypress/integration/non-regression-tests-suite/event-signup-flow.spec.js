@@ -215,7 +215,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							this.eventSignupTestData.eventUserEmail,
 							this.eventSignupTestData.eventUserKey
 						).then((otp) => {
-							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
+							cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
 						});
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
@@ -323,8 +323,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 								"have.text",
 								"Please enter the latest verification code sent to your email address"
 							);
-
-						cy.get("#events-steps-authenticate-timed-one-time-password-error")
+						cy.get("#wizard-steps-authenticate-timed-one-time-password-error")
 							.should("exist")
 							.should(
 								"have.text",
