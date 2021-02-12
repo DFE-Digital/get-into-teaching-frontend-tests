@@ -100,7 +100,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 							this.testData.eventUserEmail,
 							this.testData.eventUserKey
 						).then((otp) => {
-							cy.get("#events-steps-authenticate-timed-one-time-password-field").type(otp);
+							cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
 						});
 						cy.clickOnNextStepButton();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
