@@ -67,6 +67,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 
 	it("It shows the Sign up complete message - for existing candidate", function () {
+		cy.wait(5000);
 		let signedUpeventName;
 		cy.setEventMonth(this.testData.eventsType, this.testData.eventLocation).then((month) => {
 			if (month == "") {
