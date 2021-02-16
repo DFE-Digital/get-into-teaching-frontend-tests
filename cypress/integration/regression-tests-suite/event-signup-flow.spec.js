@@ -105,8 +105,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						});
 						cy.clickOnNextStepButton();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						cy.verifyMobileFieldAndDisplayedValue(this.testData.phoneNumber);
-						cy.clickOnNextStepButton();
 						eventSignup.getPrivacyPolicy().click();
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
