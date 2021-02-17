@@ -143,9 +143,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.enterEmailVerificationCode(
 			this.mailingListTestData.email,
 			this.mailingListTestData.emailKey
-		).then((otp) => {
-			cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
-		});
+		);
 		mailingListSignUp.getNextStep().click();
 		cy.get("#edit_mailing_list_steps_already_subscribed_already_subscribed > h1")
 			.should("exist")

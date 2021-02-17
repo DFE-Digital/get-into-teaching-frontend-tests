@@ -57,21 +57,17 @@ Cypress.Commands.add("enterEmailVerificationCode", (email, key) => {
 	cy.request("https://mailsac.com/api/addresses/" + email + "/messages?_mailsacKey=" + key).as(
 		"topMostEmail"
 	);
-	cy.get("@topMostEmail")
-		.then((response) => {
-			latestEmailID = response.body[0]._id;
-			cy.log("latestEmailID = " + latestEmailID);
-			newURL =
-				"https://mailsac.com/api/text/" + email + "/" + latestEmailID + "?_mailsacKey=" + key;
-			cy.request(newURL).as("verificationCode");
-			cy.get("@verificationCode").then((response) => {
-				var startpos = response.body.search("is");
-				code = response.body.toString().substr(startpos + 2, 7);
-			});
-		})
-		.then(() => {
-			return code;
+	cy.get("@topMostEmail").then((response) => {
+		latestEmailID = response.body[0]._id;
+		cy.log("latestEmailID = " + latestEmailID);
+		newURL = "https://mailsac.com/api/text/" + email + "/" + latestEmailID + "?_mailsacKey=" + key;
+		cy.request(newURL).as("verificationCode");
+		cy.get("@verificationCode").then((response) => {
+			var startpos = response.body.search("is");
+			code = response.body.toString().substr(startpos + 2, 7);
+			cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(code);
 		});
+	});
 });
 
 Cypress.Commands.add("acceptCookie", () => {

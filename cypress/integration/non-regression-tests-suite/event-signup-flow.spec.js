@@ -214,9 +214,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.enterEmailVerificationCode(
 							this.eventSignupTestData.eventUserEmail,
 							this.eventSignupTestData.eventUserKey
-						).then((otp) => {
-							cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
-						});
+						);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPrivacyPolicy().click();

@@ -1505,7 +1505,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get(":nth-child(3) > strong").should("exist").should("have.text", "Legal information");
 		cy.get(".govuk-footer__meta").should("exist");
 	});
-	it("It allows user to change his details on answers page is he wishes - Email change", function () {
+	it("It allows user to change his details ( say - date of birth ) on answers page and also system should preserve previously entered data", function () {
 		teacherTrainingAdviser.getFirstName().type("Sushant");
 		teacherTrainingAdviser.getLastName().type("Kumar");
 		teacherTrainingAdviser.getEmailAddress().type("sushantkumar@gamil.com");
@@ -1524,59 +1524,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber("102834");
 		cy.verifyCheckYourAnswersMessage();
-		cy.get(":nth-child(3) > :nth-child(1) > .govuk-summary-list__actions > .govuk-link").click();
-		teacherTrainingAdviser.getFirstName().should("have.value", "Sushant");
-		teacherTrainingAdviser.getLastName().should("have.value", "Kumar");
-		teacherTrainingAdviser.getEmailAddress().should("have.value", "sushantkumar@gamil.com");
-		teacherTrainingAdviser.getEmailAddress().clear();
-		teacherTrainingAdviser.getEmailAddress().type("kumarsushant@yahoomail.com");
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.contains("No")
-			.invoke("attr", "for")
-			.then(function (val) {
-				let id = "#" + val;
-				cy.get(id).should("be.checked");
-			});
-
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.contains("Yes")
-			.invoke("attr", "for")
-			.then(function (val) {
-				let id = "#" + val;
-				cy.get(id).should("be.checked");
-			});
-		teacherTrainingAdviser.getContinueButton().click();
-
-		cy.get("#teacher-training-adviser-steps-what-subject-degree-degree-subject-field").should(
-			"have.value",
-			"Biology"
-		);
-		teacherTrainingAdviser.getContinueButton().click();
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.contains("Secondary")
-			.invoke("attr", "for")
-			.then(function (val) {
-				let id = "#" + val;
-				cy.get(id).should("be.checked");
-			});
-
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.contains("No")
-			.invoke("attr", "for")
-			.then(function (val) {
-				let id = "#" + val;
-				cy.get(id).should("be.checked");
-			});
-		teacherTrainingAdviser.getContinueButton().click();
-		cy.contains("Yes")
-			.invoke("attr", "for")
-			.then(function (val) {
-				let id = "#" + val;
-				cy.get(id).should("be.checked");
-			});
-		teacherTrainingAdviser.getContinueButton().click();
-		teacherTrainingAdviser.getContinueButton().click();
-		teacherTrainingAdviser.getContinueButton().click();
+		cy.contains("Date of birth").next().next().click();
 		cy.contains("Day")
 			.invoke("attr", "for")
 			.then(function (val) {
@@ -1595,6 +1543,8 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 				let id = "#" + val;
 				cy.get(id).should("have.value", "1985");
 			});
+		cy.contains("Year").next().clear();
+		cy.contains("Year").next().type("1987");
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.contains("Overseas")
 			.invoke("attr", "for")
@@ -1606,8 +1556,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.contains("Name").next().contains("Sushant Kumar");
-		cy.contains("Date of birth").next().contains("31 03 1985");
-		cy.contains("Email").next().contains("kumarsushant@yahoomail.com");
+		cy.contains("Date of birth").next().contains("31 03 1987");
 		cy.contains("Telephone").next().contains("102834");
 		cy.contains("Are you returning to teaching?").next().contains("No");
 		cy.contains("Do you have a degree?").next().contains("Yes");

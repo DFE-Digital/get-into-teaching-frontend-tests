@@ -193,9 +193,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then((otp) => {
-			cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
-		});
+		cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey);
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get(".govuk-heading-l")
 			.should("exist")
@@ -232,11 +230,7 @@ describe("Matchback feature", () => {
 			mailingListSignUp.getLastName().type(lastName);
 			mailingListSignUp.getEmailAddress().type(this.ttaTestData.email);
 			mailingListSignUp.getNextStep().click();
-			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then(
-				(otp) => {
-					cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
-				}
-			);
+			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey);
 			mailingListSignUp.getNextStep().click();
 			cy.get("h1").should("exist").should("have.text", "You have already signed up to an adviser");
 		});
@@ -292,11 +286,7 @@ describe("Matchback feature", () => {
 			teacherTrainingAdviser.getLastName().type(lastName);
 			teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 			teacherTrainingAdviser.getContinueButton().click();
-			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then(
-				(otp) => {
-					cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
-				}
-			);
+			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey);
 			cy.clickOnContinueButton();
 			cy.returningToTeaching(true);
 			cy.havePreviousTeacherReferenceNumber(true);
