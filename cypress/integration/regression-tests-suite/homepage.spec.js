@@ -38,7 +38,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 
 	it('Links through to "A day in the life of a teacher"', () => {
-		homePage.getLifeofaTeacherLink().then((linkText) => {
+		homePage.getLifeOfATeacherLink().then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
 					expect(el).to.have.attr("href", Navlinks.lifeAsATeacher);

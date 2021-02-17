@@ -57,7 +57,7 @@ module.exports = class HomePage {
 		return cy.contains("a", "Steps to become a teacher");
 	}
 
-	getLifeofaTeacherLink() {
+	getLifeOfATeacherLink() {
 		return cy.contains("a", "A day in the life of a teacher");
 	}
 
