@@ -194,9 +194,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then((otp) => {
-			cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
-				otp
-			);
+			cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
 		});
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get(".govuk-heading-l")
@@ -296,9 +294,7 @@ describe("Matchback feature", () => {
 			teacherTrainingAdviser.getContinueButton().click();
 			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.emailKey).then(
 				(otp) => {
-					cy.get("#teacher-training-adviser-steps-authenticate-timed-one-time-password-field").type(
-						otp
-					);
+					cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
 				}
 			);
 			cy.clickOnContinueButton();
