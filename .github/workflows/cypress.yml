@@ -78,6 +78,7 @@ jobs:
       - name: Run ${{ matrix.tests }} Test
         run: |
               docker run -i --shm-size=1g -e CYPRESS_SPEC -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME \
+                                          -e CYPRESS_EVENT_USER_EMAIL_API_KEY -e CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY -e CYPRESS_TTA_USER_EMAIL_API_KEY \
                                    -v $PWD:/test -w /test  \
                                    -v ${{steps.config.outputs.screenshots}}:/test/cypress/screenshots   \
                                    -v ${{steps.config.outputs.videos}}:/test/cypress/videos   \
