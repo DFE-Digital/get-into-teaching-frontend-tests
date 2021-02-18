@@ -97,12 +97,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						cy.signupForEvent(firstName, lastName, this.testData.eventUserEmail);
 						cy.contains(eventName.text()).should("exist");
-						cy.enterEmailVerificationCode(
-							this.testData.eventUserEmail,
-							this.testData.eventUserKey
-						).then((otp) => {
-							cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type(otp);
-						});
+						cy.enterEmailVerificationCode(this.testData.eventUserEmail, this.testData.eventUserKey);
 						cy.clickOnNextStepButton();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPrivacyPolicy().click();
