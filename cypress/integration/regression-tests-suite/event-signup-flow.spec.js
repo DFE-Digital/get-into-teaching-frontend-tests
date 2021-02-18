@@ -99,7 +99,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.contains(eventName.text()).should("exist");
 						cy.enterEmailVerificationCode(
 							this.testData.eventUserEmail,
-							this.testData.eventUserEmailKey
+							Cypress.env("EVENT_USER_EMAIL_API_KEY")
 						);
 						cy.clickOnNextStepButton();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");

@@ -193,7 +193,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.ttaUserEmailKey);
+		cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get(".govuk-heading-l")
 			.should("exist")
@@ -230,7 +230,7 @@ describe("Matchback feature", () => {
 			mailingListSignUp.getLastName().type(lastName);
 			mailingListSignUp.getEmailAddress().type(this.ttaTestData.email);
 			mailingListSignUp.getNextStep().click();
-			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.ttaUserEmailKey);
+			cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
 			mailingListSignUp.getNextStep().click();
 			cy.get("h1").should("exist").should("have.text", "You have already signed up to an adviser");
 		});
@@ -286,7 +286,7 @@ describe("Matchback feature", () => {
 			teacherTrainingAdviser.getLastName().type(lastName);
 			teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 			teacherTrainingAdviser.getContinueButton().click();
-			cy.enterEmailVerificationCode(this.ttaTestData.email, this.ttaTestData.ttaUserEmailKey);
+			cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
 			cy.clickOnContinueButton();
 			cy.returningToTeaching(true);
 			cy.havePreviousTeacherReferenceNumber(true);
