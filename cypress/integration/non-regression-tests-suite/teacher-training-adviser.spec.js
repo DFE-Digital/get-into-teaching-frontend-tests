@@ -1794,6 +1794,14 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 		cy.verifyUKLink("Wales", Navlinks.teachInWales);
 		cy.verifyUKLink("Northern Ireland", Navlinks.teachInNorthernIreland);
 	});
+	it('Links through to "online chat", "ways to train", "funding" and "Search for events"', function () {
+		cy.goToUrl("teacher_training_adviser/sign_up/completed");
+		cy.verifyLinkResponse("online chat");
+		cy.verifyLinkResponse("ways to train");
+		cy.verifyLinkResponse("funding");
+		cy.verifyLinkResponse("Search for events");
+	});
+
 	it('Links through to "What did you think of this service? "', function () {
 		cy.goToUrl("teacher_training_adviser/sign_up/completed");
 		cy.contains("a", "What did you think of this service?").invoke("removeAttr", "target").click();
