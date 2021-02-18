@@ -2,8 +2,8 @@
 	"baseUrl": "https://get-into-teaching-app-test.london.cloudapps.digital",
 	"env": {
 		"baseurl_tta_flow": "https://get-teacher-training-adviser-service-test.london.cloudapps.digital/",
-		"HTTPAUTH_USERNAME": "getintoteaching",
-		"HTTPAUTH_PASSWORD": "userneeds",
+		"HTTPAUTH_USERNAME": "g*************g",
+		"HTTPAUTH_PASSWORD": "u*******s",
 		"EVENT_USER_EMAIL_API_KEY": "k_O5uC2J5VrpS6HgLhuUYZhY92Qv1158L5FQg121b",
 		"MAILING_LIST_USER_EMAIL_API_KEY": "k_6B42YjS2RAoqQpU9287UAvzW4YHWUsHM4a",
 		"TTA_USER_EMAIL_API_KEY": "k_VStMYKs5dyjP8gRdwvbyD3a5OX4jJJE76"
