@@ -540,3 +540,22 @@ Cypress.Commands.add("VerifyYouHaveSignedupMessage", () => {
 Cypress.Commands.add("VerifyEventName", (eventName) => {
 	cy.contains(eventName).should("exist");
 });
+
+Cypress.Commands.add("verifyLinkResponse", (link) => {
+	cy.contains(link)
+		.invoke("attr", "href")
+		.then(function (val) {
+			cy.request({
+				url: val,
+				method: "GET",
+				auth: {
+					username: Cypress.env("HTTPAUTH_USERNAME"),
+					password: Cypress.env("HTTPAUTH_PASSWORD"),
+				},
+			});
+		})
+		.as("linkResponse");
+	cy.get("@linkResponse").then((response) => {
+		expect(response.status).to.eq(200);
+	});
+});
