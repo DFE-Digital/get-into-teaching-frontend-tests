@@ -213,7 +213,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getResendVerificationLink().click();
 						cy.enterEmailVerificationCode(
 							this.eventSignupTestData.eventUserEmail,
-							this.eventSignupTestData.eventUserKey
+							this.eventSignupTestData.eventUserEmailKey
 						);
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
