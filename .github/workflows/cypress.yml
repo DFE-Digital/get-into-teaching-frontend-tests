@@ -65,7 +65,7 @@ jobs:
         id:   azSecret
         with:
            keyvault: ${{ secrets.KEY_VAULT}}
-           secrets: 'SLACK-WEBHOOK, HTTP-USERNAME, HTTP-PASSWORD'
+           secrets: 'SLACK-WEBHOOK, HTTP-USERNAME, HTTP-PASSWORD, EVENT-USER-EMAIL-API-KEY , MAILING-LIST-USER-EMAIL-API-KEY, TTA-USER-EMAIL-API-KEY'
 
       - name: Set Configuration
         id:   config
@@ -84,11 +84,13 @@ jobs:
                                    -v ${{steps.config.outputs.reports}}:/test/cypress/reports   \
                                    ${{ env.DOCKERHUB_REPOSITORY}}:latest
         env:
-              CYPRESS_HTTPAUTH_PASSWORD: "${{ steps.azSecret.outputs.HTTP-PASSWORD }}"
-              CYPRESS_HTTPAUTH_USERNAME: "${{ steps.azSecret.outputs.HTTP-USERNAME }}"
-              CYPRESS_SPEC:              "cypress/integration/${{ matrix.tests }}.spec.js"
+              CYPRESS_HTTPAUTH_PASSWORD:                "${{ steps.azSecret.outputs.HTTP-PASSWORD }}"
+              CYPRESS_HTTPAUTH_USERNAME:                "${{ steps.azSecret.outputs.HTTP-USERNAME }}"
+              CYPRESS_SPEC:                             "cypress/integration/${{ matrix.tests }}.spec.js"
+              CYPRESS_EVENT_USER_EMAIL_API_KEY:         "${{ steps.azSecret.outputs.EVENT-USER-EMAIL-API-KEY }}"
+              CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY:  "${{ steps.azSecret.outputs.MAILING-LIST-USER-EMAIL-API-KEY }}"
+              CYPRESS_TTA_USER_EMAIL_API_KEY:           "${{ steps.azSecret.outputs.TTA-USER-EMAIL-API-KEY }}"
         
-
                 
       - name: Upload reports artifact
         uses: actions/upload-artifact@v2
