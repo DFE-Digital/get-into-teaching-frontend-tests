@@ -39,7 +39,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	it('It shows "Youve already signed up" message to existing candidate', function () {
 		cy.wait(5000);
 		cy.signupForMailingList(firstName, lastName, this.testData.email);
-		cy.enterEmailVerificationCode(this.testData.email, this.testData.emailKey);
+		cy.enterEmailVerificationCode(this.testData.email, this.testData.mailingListUserEmailKey);
 		cy.clickOnNextStepButton();
 		cy.get("#edit_mailing_list_steps_already_subscribed_already_subscribed > h1")
 			.should("exist")

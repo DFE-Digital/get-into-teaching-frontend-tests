@@ -97,7 +97,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						signedUpeventName = eventName.text().trim();
 						cy.signupForEvent(firstName, lastName, this.testData.eventUserEmail);
 						cy.contains(eventName.text()).should("exist");
-						cy.enterEmailVerificationCode(this.testData.eventUserEmail, this.testData.eventUserKey);
+						cy.enterEmailVerificationCode(
+							this.testData.eventUserEmail,
+							this.testData.eventUserEmailKey
+						);
 						cy.clickOnNextStepButton();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPrivacyPolicy().click();
