@@ -197,7 +197,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
-		cy.contains("Want to speak to us?")
+		cy.contains("Speak to us")
 			.next()
 			.children()
 			.as("speakToUsSection")
@@ -238,7 +238,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.acceptPrivacyPolicy();
 		mailingListSignUp.getCompleteSignUpButton().click();
 		mailingListSignUp.getContent().should("have.text", `You've signed up`);
-		cy.contains("Want to speak to us?")
+		cy.contains("Speak to us")
 			.next()
 			.children()
 			.as("speakToUsSection")
