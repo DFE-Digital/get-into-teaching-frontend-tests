@@ -1193,11 +1193,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher-training-adviser-steps-overseas-country-country-id-field").select("Austria");
 		cy.clickOnContinueButton();
 		cy.contains("Contact telephone number").type("0125234490");
-		/*cy.get(
-			"#teacher_training_adviser_steps_overseas_timezone_time_zone"
-		).select("");*/
 		cy.clickOnContinueButton();
-		//cy.clickOnContinueButton();
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1216,7 +1212,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.typeDateOfBirth("22", "08", "2000");
+		cy.enterDateOfBirth("22", "08", "2000");
 		cy.doYouLiveInTheUk(true);
 		cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field").type("25");
 		cy.get("#teacher-training-adviser-steps-uk-address-address-line2-field").type("Delbury Court");
@@ -1224,13 +1220,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field").type("TF3 2BP");
 		cy.clickOnContinueButton();
 		cy.get("#teacher-training-adviser-steps-uk-callback-telephone-field").type("0123454748");
-
-		/*cy.get(".govuk-heading-l")
-			.should("exist")
-			.should("have.text", "You told us you live in the United Kingdom");
-		cy.clickOnContinueButton();*/
 		cy.clickOnContinueButton();
-
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1249,7 +1239,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.typeDateOfBirth("22", "08", "2000");
+		cy.enterDateOfBirth("22", "08", "2000");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Austria");
 		cy.contains("Contact telephone number").type("0125234490");
@@ -1335,25 +1325,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 				let id = "#" + val;
 				cy.get(id).should("have.value", "1985");
 			});
-
-		/*cy.clickOnBackButton();
-			cy.get(
-			"#teacher-training-adviser-steps-start-teacher-training-initial-teacher-training-year-id-field"
-		).should("be.selected");
-
-		
-		cy.contains("Which country do you live in?")
-				.invoke("attr", "for")
-				.then(function (val) {
-					let id = "#" + val;
-					cy.get(id).select(country);
-				});
-			cy.clickOnContinueButton();	
-		
-		
-		cy.clickOnContinueButton();
-		cy.acceptPolicy();
-		cy.verifySignUpCompleteMessage();*/
 	});
 
 	it("It shows the error message if user clicks continiue button without entering the mandatory or correct details", function () {

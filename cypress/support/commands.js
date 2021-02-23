@@ -273,13 +273,6 @@ Cypress.Commands.add("inWhichYearAreYouStudying", (stage) => {
 	cy.clickOnContinueButton();
 });
 
-Cypress.Commands.add("typeDateOfBirth", (day, month, year) => {
-	cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type(day);
-	cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type(month);
-	cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type(year);
-	cy.clickOnContinueButton();
-});
-
 Cypress.Commands.add("enterVerificationCode", (verificationCode, error) => {
 	if (error) {
 		cy.get("#wizard-steps-authenticate-timed-one-time-password-field-error").clear();
