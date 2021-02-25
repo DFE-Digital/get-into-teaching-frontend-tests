@@ -35,7 +35,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching(true);
+		cy.returningToTeaching("Yes");
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
@@ -67,7 +67,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Get support" message to the UK returner if he selects subject as "Other"', function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(true);
+		cy.returningToTeaching("Yes");
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
@@ -77,7 +77,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" message to overseas returner user', function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(true);
+		cy.returningToTeaching("Yes");
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Biology");
@@ -102,7 +102,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -132,7 +132,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -165,7 +165,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -183,7 +183,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - 	If you do not have a degree page	   
 		*/
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("No");
 		cy.get(".govuk-heading-l").should("exist").should("have.text", "If you do not have a degree");
 	});
@@ -288,7 +288,7 @@ describe("Matchback feature", () => {
 			teacherTrainingAdviser.getContinueButton().click();
 			cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
 			cy.clickOnContinueButton();
-			cy.returningToTeaching(true);
+			cy.returningToTeaching("Yes");
 			cy.havePreviousTeacherReferenceNumber(true);
 			cy.enterPreviousTeacherReferenceNumber(23478463);
 			cy.selectPreviuosMainSubject("Computing");

@@ -94,13 +94,7 @@ Cypress.Commands.add("clickOnCompleteButton", () => {
 });
 
 Cypress.Commands.add("returningToTeaching", (returner) => {
-	if (returner) {
-		cy.get(
-			"#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-true-field"
-		).click();
-	} else {
-		cy.get("#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-field").click();
-	}
+	cy.contains(returner).click();
 	cy.clickOnContinueButton();
 });
 
