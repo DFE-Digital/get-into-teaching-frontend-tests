@@ -56,7 +56,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it("It shows the error message if user clicks continiue button without selecting subject", function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(true);
+		cy.returningToTeaching("Yes");
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
@@ -73,7 +73,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -103,7 +103,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -135,7 +135,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -158,7 +158,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -189,7 +189,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -221,7 +221,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -254,7 +254,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -288,7 +288,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -311,7 +311,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -340,7 +340,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -370,7 +370,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -401,7 +401,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -432,7 +432,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Dance");
 		cy.selectWhichClassIsYourDegree("2:2");
@@ -455,7 +455,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -486,7 +486,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -518,7 +518,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -551,7 +551,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -584,7 +584,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -609,7 +609,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -642,7 +642,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -676,7 +676,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -711,7 +711,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -746,7 +746,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -781,7 +781,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -816,7 +816,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -851,7 +851,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Second year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -886,7 +886,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("First year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -921,7 +921,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Other");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -955,7 +955,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -979,7 +979,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1001,7 +1001,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1030,7 +1030,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1060,7 +1060,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1091,7 +1091,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1121,7 +1121,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Expected - Get the right GCSEs or equivalent qualifications page		 	   
 		*/
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1141,7 +1141,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
@@ -1179,7 +1179,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
@@ -1208,7 +1208,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		*/
 		"";
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
@@ -1235,7 +1235,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Overseas user		 	   
 		*/
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
@@ -1258,7 +1258,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -1460,7 +1460,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 	it("It shows Privacy policy details to the user if he clicks on link", function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(true);
+		cy.returningToTeaching("Yes");
 		cy.havePreviousTeacherReferenceNumber(true);
 		cy.enterPreviousTeacherReferenceNumber(23478463);
 		cy.selectPreviuosMainSubject("Computing");
@@ -1481,7 +1481,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getLastName().type("Kumar");
 		teacherTrainingAdviser.getEmailAddress().type("sushantkumar@gamil.com");
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -1544,7 +1544,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 	it("It shows error message to user if he enters invalid telephone number - UK user", function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -1574,7 +1574,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it("It shows error message to user if he enters invalid telephone number - overseas user", function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -1651,7 +1651,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 	it("It shows the error message to user if he enters invalid date of birth", function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("Yes");
 		cy.selectWhatSubjectIsYourDegree("Biology");
 		cy.selectWhichClassIsYourDegree("First class");
@@ -1717,7 +1717,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It expands "What is a GCSE?" link if user clicks on it', function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
@@ -1735,7 +1735,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it("It opens feedback survey page if user clicks on feedback link", function () {
 		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching(false);
+		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I'm studying for a degree");
 		cy.inWhichYearAreYouStudying("Final year");
 		cy.selectWhatSubjectIsYourDegree("Computing");
