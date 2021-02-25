@@ -630,11 +630,11 @@ describe("Verify page load " + new Date(), () => {
 	});
 	it('It shows the "Past Online Events" page', function () {
 		cy.navigateToPage("/event_categories/online-events/archive");
-		cy.verifyPageHeading("Past online events");
+		cy.verifyPageHeading("Past online Q&As");
 		searchForEvent
 			.getSearchforEventsHeading()
 			.should("exist")
-			.should("have.text", "Search for Past online events");
+			.should("have.text", "Search for Past online Q&As");
 	});
 	it("It shows past events only", function () {
 		cy.navigateToPage("/event_categories/online-events/archive");
