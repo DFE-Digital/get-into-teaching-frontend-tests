@@ -1359,11 +1359,12 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
 		cy.verifyErrorMessage("Select yes if you are returning to teaching");
-		cy.get("#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-error").should(
+		cy.get("#teacher-training-adviser-steps-returning-teacher-type-id-error").should(
 			"have.text",
 			"Error: Select yes if you are returning to teaching"
 		);
-		cy.get("#teacher-training-adviser-steps-returning-teacher-returning-to-teaching-field").click();
+		cy.get("#teacher-training-adviser-steps-returning-teacher-type-id-222750000-field").click();
+
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
