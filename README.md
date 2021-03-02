@@ -13,10 +13,10 @@ Front End automation collection using [Cypress](https://www.cypress.io/). This w
 "env": {
 	"baseurl_tta_flow": "https://get-teacher-training-adviser-service-test.london.cloudapps.digital/",
 	"HTTPAUTH_USERNAME": "g*************g",
-    "HTTPAUTH_PASSWORD": "u*******s",
-    "EVENT_USER_EMAIL_API_KEY": "**************",
-		"MAILING_LIST_USER_EMAIL_API_KEY": "******************",
-		"TTA_USER_EMAIL_API_KEY": "*****************"
+        "HTTPAUTH_PASSWORD": "u*************s",
+        "EVENT_USER_EMAIL_API_KEY": "***************",
+	"MAILING_LIST_USER_EMAIL_API_KEY": "***************",
+	"TTA_USER_EMAIL_API_KEY": "***************"
 }
 ```
 
