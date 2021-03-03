@@ -214,7 +214,7 @@ describe("Matchback feature", () => {
 		});
 	});
 
-	it("It prevents mailing list sign up if user already signed up for a teacher training adviser service", function () {
+	it("It allows mailing list sign up if user already signed up for a teacher training adviser service", function () {
 		cy.readFile("cypress/fixtures/user.txt").then((value) => {
 			let name = value;
 			firstName = name.split(":")[0];
@@ -232,7 +232,17 @@ describe("Matchback feature", () => {
 			mailingListSignUp.getNextStep().click();
 			cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
 			mailingListSignUp.getNextStep().click();
-			cy.get("h1").should("exist").should("have.text", "You have already signed up to an adviser");
+			cy.degreeStage("Yes, I already have a degree");
+			cy.clickOnNextStepButton();
+			cy.howCloseAreYou("I’m not sure and finding out more");
+			cy.clickOnNextStepButton();
+			mailingListSignUp.getSubjectToTeach().select("English");
+			cy.clickOnNextStepButton();
+			mailingListSignUp.getPostcode().type("TT3 2BB");
+			cy.clickOnNextStepButton();
+			cy.acceptPrivacyPolicy();
+			mailingListSignUp.getCompleteSignUpButton().click();
+			cy.VerifyYouHaveSignedupMessage();
 		});
 	});
 
