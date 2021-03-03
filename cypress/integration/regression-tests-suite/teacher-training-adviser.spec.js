@@ -214,7 +214,7 @@ describe("Matchback feature", () => {
 		});
 	});
 
-	it("It allows mailing list sign up if user already signed up for a teacher training adviser service", function () {
+	it.skip("It allows mailing list sign up if user already signed up for a teacher training adviser service", function () {
 		cy.readFile("cypress/fixtures/user.txt").then((value) => {
 			let name = value;
 			firstName = name.split(":")[0];
