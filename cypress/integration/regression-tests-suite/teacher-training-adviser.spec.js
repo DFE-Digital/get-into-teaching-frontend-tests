@@ -214,7 +214,7 @@ describe("Matchback feature", () => {
 		});
 	});
 
-	/*it.skip("It allows mailing list sign up if user already signed up for a teacher training adviser service", function () {
+	it("It allows mailing list sign up if user already signed up for a teacher training adviser service", function () {
 		cy.readFile("cypress/fixtures/user.txt").then((value) => {
 			let name = value;
 			firstName = name.split(":")[0];
@@ -238,13 +238,11 @@ describe("Matchback feature", () => {
 			cy.clickOnNextStepButton();
 			mailingListSignUp.getSubjectToTeach().select("English");
 			cy.clickOnNextStepButton();
-			mailingListSignUp.getPostcode().type("TT3 2BB");
-			cy.clickOnNextStepButton();
 			cy.acceptPrivacyPolicy();
 			mailingListSignUp.getCompleteSignUpButton().click();
 			cy.VerifyYouHaveSignedupMessage();
 		});
-	});*/
+	});
 
 	it('It shows "You’ve signed up" ', function () {
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
