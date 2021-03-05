@@ -1146,17 +1146,10 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type("27");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type("07");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type("1983");
-		cy.clickOnContinueButton();
+		cy.enterDateOfBirth("27", "07", "1983");
 		cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field").click();
 		cy.clickOnContinueButton();
-		cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field").type("25");
-		cy.get("#teacher-training-adviser-steps-uk-address-address-line2-field").type("Delbury Court");
-		cy.get("#teacher-training-adviser-steps-uk-address-address-city-field").type("Telford");
-		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field").type("TF3 2BP");
-		cy.clickOnContinueButton();
+		cy.enterUKCandidateAddress("25", "Delbury Court", "Telford", "TF3 2BP");
 		cy.get("#teacher-training-adviser-steps-uk-callback-telephone-field").type("0123454748");
 		/*cy.get(".govuk-heading-l")
 			.should("exist")
@@ -1184,9 +1177,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type("27");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type("07");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type("1983");
+		cy.enterDateOfBirth("27", "07", "1983");
 		cy.clickOnContinueButton();
 		cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-overseas-field").click();
 		cy.clickOnContinueButton();
@@ -1214,11 +1205,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("22", "08", "2000");
 		cy.doYouLiveInTheUk(true);
-		cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field").type("25");
-		cy.get("#teacher-training-adviser-steps-uk-address-address-line2-field").type("Delbury Court");
-		cy.get("#teacher-training-adviser-steps-uk-address-address-city-field").type("Telford");
-		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field").type("TF3 2BP");
-		cy.clickOnContinueButton();
+		cy.enterUKCandidateAddress("25", "Delbury Court", "Telford", "TF3 2BT");
 		cy.get("#teacher-training-adviser-steps-uk-callback-telephone-field").type("0123454748");
 		cy.clickOnContinueButton();
 		cy.verifyCheckYourAnswersMessage();
@@ -1405,9 +1392,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_3i").type("31");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_2i").type("3");
-		cy.get("#teacher_training_adviser_steps_date_of_birth_date_of_birth_1i").type("1985");
+		cy.enterDateOfBirth("31", "03", "1985");
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
