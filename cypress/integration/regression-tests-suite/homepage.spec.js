@@ -37,17 +37,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.location("pathname").should("equal", Navlinks.stepsToBecomeATeacher);
 	});
 
-	it('Links through to "A day in the life of a teacher"', () => {
-		homePage.getLifeOfATeacherLink().then((linkText) => {
-			cy.contains(linkText.text())
-				.should((el) => {
-					expect(el).to.have.attr("href", Navlinks.lifeAsATeacher);
-				})
-				.click();
-		});
-		cy.location("pathname").should("equal", Navlinks.lifeAsATeacher);
-	});
-
 	it('Links through to "Salaries and benefits"', () => {
 		homePage.getSalariesAndBenefitsLink().then((linkText) => {
 			cy.contains(linkText.text())
