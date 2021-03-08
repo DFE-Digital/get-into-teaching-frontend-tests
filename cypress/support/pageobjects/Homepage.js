@@ -15,7 +15,7 @@ module.exports = class HomePage {
 		return cy.get(".hero__subtitle__button > span");
 	}
 	getMailingStripButton() {
-		return cy.get(".footer-signup__inner > .call-to-action-button");
+		return cy.get(".hero__subtitle__button");
 	}
 	getMyStoryInToTeaching() {
 		return cy.contains("a", "My story into teaching");

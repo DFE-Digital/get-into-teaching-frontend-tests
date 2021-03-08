@@ -70,8 +70,8 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.location("pathname").should("equal", Navlinks.covid19);
 	});
 
-	it('Links through to "Sign up here"', () => {
-		homePage.getMailingStripButton().dblclick();
+	it('Links through to "Sign up for updates"', () => {
+		homePage.getMailingStripButton().click();
 		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
 	});
 
