@@ -546,11 +546,3 @@ Cypress.Commands.add("verifyLinkResponse", (link) => {
 		expect(response.status).to.eq(200);
 	});
 });
-
-Cypress.Commands.add("mailingListSignUpBar", () => {
-	cy.contains("Sign up here");
-});
-
-Cypress.Commands.add("mailingListSignUpBarClose", () => {
-	cy.contains("Not now");
-});

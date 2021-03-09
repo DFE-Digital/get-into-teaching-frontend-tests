@@ -1,6 +1,5 @@
 import Homepage from "../../support/pageobjects/Homepage";
 import EventSignupPage from "../../support/pageobjects/EventSignupPage";
-import Navlinks from "../../support/pageobjects/Navlinks";
 
 describe("Feature - Event sign up : Tests execution date and time : " + new Date(), () => {
 	const searchForEvent = new Homepage();
@@ -433,91 +432,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 					});
 				cy.get(".govuk-back-link").should("exist").should("have.text", "Back");
-			}
-		});
-	});
-
-	it('Links through to "Sign up here"', function () {
-		let signedUpeventName;
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
-			if (month == "") {
-				searchForEvent.getUpdateResultsButton().click();
-				cy.get(".search-for-events-no-results").should(
-					"include.text",
-					"Sorry your search has not found any events, try a different type, location or month."
-				);
-			} else {
-				searchForEvent.getEventsMonth().select(month);
-				searchForEvent.getUpdateResultsButton().click();
-				eventSignup
-					.getSearchedEventName()
-					.first()
-					.then(function (eventName) {
-						eventSignup.getSearchedEventName().first().click();
-						eventSignup.getSignupForThisEventButton().click();
-						cy.VerifyEventName(eventName.text());
-						signedUpeventName = eventName.text().trim();
-						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
-						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
-						let rnum = Math.floor(Math.random() * 1000000 + 1);
-						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
-						eventSignup.getEmail().type(email);
-						eventSignup.getNextStep().click();
-						cy.mailingListSignUpBar().click();
-						cy.location("pathname").should("equal", Navlinks.mailingListSignup);
-					});
-			}
-		});
-	});
-
-	it('It hides the mailing list bar if user clicks on "Not now" link', function () {
-		let signedUpeventName;
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
-			if (month == "") {
-				searchForEvent.getUpdateResultsButton().click();
-				cy.get(".search-for-events-no-results").should(
-					"include.text",
-					"Sorry your search has not found any events, try a different type, location or month."
-				);
-			} else {
-				searchForEvent.getEventsMonth().select(month);
-				searchForEvent.getUpdateResultsButton().click();
-				eventSignup
-					.getSearchedEventName()
-					.first()
-					.then(function (eventName) {
-						eventSignup.getSearchedEventName().first().click();
-						eventSignup.getSignupForThisEventButton().click();
-						cy.VerifyEventName(eventName.text());
-						signedUpeventName = eventName.text().trim();
-						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
-						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
-						let rnum = Math.floor(Math.random() * 1000000 + 1);
-						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
-						eventSignup.getEmail().type(email);
-						eventSignup.getNextStep().click();
-						cy.mailingListSignUpBarClose().should("be.visible");
-						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
-						eventSignup.getNextStep().click();
-						cy.mailingListSignUpBarClose().should("be.visible");
-						cy.mailingListSignUpBarClose().click();
-						cy.mailingListSignUpBarClose().should("not.be.visible");
-						eventSignup.getPrivacyPolicy().click();
-						cy.wouldYouLikeToReceiveEmailUpdate("No");
-						cy.mailingListSignUpBarClose().should("not.be.visible");
-						cy.VerifySignupCompleteMessage();
-						cy.VerifyEventName(signedUpeventName);
-						cy.mailingListSignUpBarClose().should("not.be.visible");
-					});
-
-				cy.mailingListSignUpBarClose().should("not.be.visible");
 			}
 		});
 	});

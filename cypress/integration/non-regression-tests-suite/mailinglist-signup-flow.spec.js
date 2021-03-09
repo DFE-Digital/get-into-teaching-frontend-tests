@@ -175,34 +175,6 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.contains("Privacy Notice: Get into Teaching Information Service").should("exist");
 		cy.get(".site-footer-top").should("exist").next().should("exist");
 	});
-
-	it('It hides the mailing list bar if user clicks on "Not now" link', function () {
-		let rnum = Math.floor(Math.random() * 1000000000 + 1);
-		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		cy.enterFirstNameLastNameAndEmailAddress(
-			this.mailingListTestData.firstName,
-			this.mailingListTestData.lastName,
-			email
-		);
-		mailingListSignUp.getNextStep().click();
-		cy.degreeStage("Yes, I already have a degree");
-		mailingListSignUp.getNextStep().click();
-		cy.howCloseAreYou("I’m fairly sure and exploring my options");
-		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getSubjectToTeach()
-			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
-		mailingListSignUp.getNextStep().click();
-		cy.mailingListSignUpBarClose().should("be.visible");
-		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
-		mailingListSignUp.getNextStep().click();
-		cy.mailingListSignUpBarClose().click();
-		cy.mailingListSignUpBarClose().should("not.be.visible");
-		cy.acceptPrivacyPolicy();
-		mailingListSignUp.getCompleteSignUpButton().click();
-		mailingListSignUp.getContent().should("have.text", `You've signed up`);
-		cy.mailingListSignUpBarClose().should("not.be.visible");
-	});
 });
 
 describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
