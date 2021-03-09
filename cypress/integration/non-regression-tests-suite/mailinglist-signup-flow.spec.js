@@ -1,4 +1,5 @@
 import MailingListSignUp from "../../support/pageobjects/MailinglistSignupPage";
+import Navlinks from "../../support/pageobjects/Navlinks";
 
 describe(`Feature - Mailing list sign up : Tests execution date and time : ${new Date()}`, () => {
 	const mailingListSignUp = new MailingListSignUp();
@@ -173,86 +174,6 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.contains("Privacy Policy").should("exist");
 		cy.contains("Privacy Notice: Get into Teaching Information Service").should("exist");
 		cy.get(".site-footer-top").should("exist").next().should("exist");
-	});
-
-	it("Links through to feedback survey page", function () {
-		let rnum = Math.floor(Math.random() * 1000000000 + 1);
-		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		cy.enterFirstNameLastNameAndEmailAddress(
-			this.mailingListTestData.firstName,
-			this.mailingListTestData.lastName,
-			email
-		);
-		mailingListSignUp.getNextStep().click();
-		cy.degreeStage("Yes, I already have a degree");
-		mailingListSignUp.getNextStep().click();
-		cy.howCloseAreYou("I’m fairly sure and exploring my options");
-		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getSubjectToTeach()
-			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
-		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
-		mailingListSignUp.getNextStep().click();
-		cy.acceptPrivacyPolicy();
-		mailingListSignUp.getCompleteSignUpButton().click();
-		mailingListSignUp.getContent().should("have.text", `You've signed up`);
-		cy.contains("Speak to us")
-			.next()
-			.children()
-			.as("speakToUsSection")
-			.should("exist")
-			.invoke("attr", "href")
-			.then(function (targetLink) {
-				expect(targetLink).to.equal("tel:08003892501");
-			});
-		cy.get("@speakToUsSection").then(function (phoneNumber) {
-			cy.log();
-			expect(phoneNumber.text()).to.equal("0800 389 2501");
-		});
-		cy.contains("a", "feedback on this website").invoke("removeAttr", "target").click();
-		cy.get(".freebirdFormviewerViewHeaderTitle")
-			.should("exist")
-			.should("have.text", "Get into Teaching: Feedback Survey");
-	});
-
-	it('It hides the feedback bar if user clicks on "Hide" link', function () {
-		let rnum = Math.floor(Math.random() * 1000000000 + 1);
-		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		cy.enterFirstNameLastNameAndEmailAddress(
-			this.mailingListTestData.firstName,
-			this.mailingListTestData.lastName,
-			email
-		);
-		mailingListSignUp.getNextStep().click();
-		cy.degreeStage("Yes, I already have a degree");
-		mailingListSignUp.getNextStep().click();
-		cy.howCloseAreYou("I’m fairly sure and exploring my options");
-		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getSubjectToTeach()
-			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
-		mailingListSignUp.getNextStep().click();
-		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
-		mailingListSignUp.getNextStep().click();
-		cy.acceptPrivacyPolicy();
-		mailingListSignUp.getCompleteSignUpButton().click();
-		mailingListSignUp.getContent().should("have.text", `You've signed up`);
-		cy.contains("Speak to us")
-			.next()
-			.children()
-			.as("speakToUsSection")
-			.should("exist")
-			.invoke("attr", "href")
-			.then(function (targetLink) {
-				expect(targetLink).to.equal("tel:08003892501");
-			});
-		cy.get("@speakToUsSection").then(function (phoneNumber) {
-			cy.log();
-			expect(phoneNumber.text()).to.equal("0800 389 2501");
-		});
-		cy.get("#hide-feedback-bar").click();
-		cy.contains("a", "feedback on this website").should("not.be.visible");
 	});
 });
 
