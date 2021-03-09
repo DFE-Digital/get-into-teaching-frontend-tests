@@ -502,8 +502,21 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
 						eventSignup.getNextStep().click();
+						cy.mailingListSignUpBarClose().should("be.visible");
+						eventSignup.getBackButton().should("exist").should("have.text", "Back");
+						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
+						eventSignup.getNextStep().click();
+						cy.mailingListSignUpBarClose().should("be.visible");
+						cy.mailingListSignUpBarClose().click();
+						cy.mailingListSignUpBarClose().should("not.be.visible");
+						eventSignup.getPrivacyPolicy().click();
+						cy.wouldYouLikeToReceiveEmailUpdate("No");
+						cy.mailingListSignUpBarClose().should("not.be.visible");
+						cy.VerifySignupCompleteMessage();
+						cy.VerifyEventName(signedUpeventName);
+						cy.mailingListSignUpBarClose().should("not.be.visible");
 					});
-				cy.mailingListSignUpBarClose().click();
+
 				cy.mailingListSignUpBarClose().should("not.be.visible");
 			}
 		});
