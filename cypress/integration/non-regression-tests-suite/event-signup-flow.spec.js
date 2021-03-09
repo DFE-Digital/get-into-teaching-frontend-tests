@@ -1,5 +1,6 @@
 import Homepage from "../../support/pageobjects/Homepage";
 import EventSignupPage from "../../support/pageobjects/EventSignupPage";
+import Navlinks from "../../support/pageobjects/Navlinks";
 
 describe("Feature - Event sign up : Tests execution date and time : " + new Date(), () => {
 	const searchForEvent = new Homepage();
@@ -436,7 +437,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		});
 	});
 
-	it("Links through to feedback survey page", function () {
+	it('Links through to "Sign up here"', function () {
 		let signedUpeventName;
 		cy.setEventMonth(
 			this.eventSignupTestData.eventsType,
@@ -465,23 +466,14 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
 						eventSignup.getNextStep().click();
-						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
-						eventSignup.getNextStep().click();
-						eventSignup.getPrivacyPolicy().click();
-						cy.wouldYouLikeToReceiveEmailUpdate("No");
-						cy.VerifySignupCompleteMessage();
-						cy.VerifyEventName(signedUpeventName);
+						cy.mailingListSignUpBar().click();
+						cy.location("pathname").should("equal", Navlinks.mailingListSignup);
 					});
-				cy.contains("a", "feedback on this website").invoke("removeAttr", "target").click();
-				cy.get(".freebirdFormviewerViewHeaderTitle")
-					.should("exist")
-					.should("have.text", "Get into Teaching: Feedback Survey");
 			}
 		});
 	});
 
-	it('It hides the feedback bar if user clicks on "Hide" link', function () {
+	it('It hides the mailing list bar if user clicks on "Not now" link', function () {
 		let signedUpeventName;
 		cy.setEventMonth(
 			this.eventSignupTestData.eventsType,
@@ -510,16 +502,9 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
 						eventSignup.getNextStep().click();
-						eventSignup.getBackButton().should("exist").should("have.text", "Back");
-						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
-						eventSignup.getNextStep().click();
-						eventSignup.getPrivacyPolicy().click();
-						cy.wouldYouLikeToReceiveEmailUpdate("No");
-						cy.VerifySignupCompleteMessage();
-						cy.VerifyEventName(signedUpeventName);
 					});
-				cy.get("#hide-feedback-bar").click();
-				cy.contains("a", "feedback on this website").should("not.be.visible");
+				cy.mailingListSignUpBarClose().click();
+				cy.mailingListSignUpBarClose().should("not.be.visible");
 			}
 		});
 	});
