@@ -1,5 +1,4 @@
 import TeacherTrainingAdviser from "../../support/pageobjects/TeacherTrainingAdviser";
-import MailingListSignUp from "../../support/pageobjects/MailinglistSignupPage";
 /// <reference types="Cypress" />
 let firstName;
 let lastName;
@@ -29,8 +28,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		firstName = "First_" + rnum + "_name";
 		lastName = "Last_" + rnum + "_name";
-		let name = firstName + ":" + lastName;
-		cy.writeFile("cypress/fixtures/user.txt", name);
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
@@ -57,7 +54,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Which main subject did you previously teach?").next().contains("Computing");
 		cy.contains("Which subject would you like to teach if you return to teaching?").next().contains("Physics");
 		cy.contains("Where do you live?").next().contains("UK");
-
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();

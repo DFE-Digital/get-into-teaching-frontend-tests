@@ -4,6 +4,8 @@ import EventSignupPage from "../../support/pageobjects/EventSignupPage";
 describe("Feature - Event sign up : Tests execution date and time : " + new Date(), () => {
 	const searchForEvent = new Homepage();
 	const eventSignup = new EventSignupPage();
+	let firstName;
+	let lastName;
 
 	beforeEach(function () {
 		cy.fixture("event-signup-test-data").then((eventSignupTestData) => {
@@ -13,14 +15,8 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 
 	it("It shows the Sign up for this event page", function () {
-		cy.updateEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		);
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
+		cy.updateEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation);
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -44,10 +40,10 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 
 	it("It shows the Sign up complete message - for new candidate who doesn't like to receive email updates", function () {
 		let signedUpeventName;
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
+		firstName = "Testuser_" + rnum + "_firstname";
+		lastName = "Testuser_" + rnum + "_lastname";
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -65,12 +61,13 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
-						eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
+						/*eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
 						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
 						let rnum = Math.floor(Math.random() * 1000000 + 1);
 						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
 						eventSignup.getEmail().type(email);
-						eventSignup.getNextStep().click();
+						eventSignup.getNextStep().click();*/
+						cy.signupForEvent(firstName, lastName, this.eventSignupTestData.eventUserEmail);
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
 						eventSignup.getNextStep().click();
@@ -82,14 +79,53 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 			}
 		});
 	});
+	it("It shows the Sign up complete message - for existing candidate", function () {
+		cy.wait(5000);
+		let signedUpeventName;
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
+			if (month == "") {
+				searchForEvent
+					.getEventsMonth()
+					.as("selectMonth")
+					.children()
+					.first()
+					.then((month) => {
+						cy.get("@selectMonth").select(month.text());
+					});
+				searchForEvent.getUpdateResultsButton().click();
+				cy.get(".no-results").should(
+					"include.text",
+					"Sorry your search has not found any events, try a different type, location or month."
+				);
+			} else {
+				searchForEvent.getEventsMonth().select(month);
+				searchForEvent.getUpdateResultsButton().click();
+				eventSignup
+					.getSearchedEventName()
+					.first()
+					.then(function (eventName) {
+						eventSignup.getSearchedEventName().first().click();
+						eventSignup.getSignupForThisEventButton().click();
+						cy.VerifyEventName(eventName.text());
+						signedUpeventName = eventName.text().trim();
+						cy.signupForEvent(firstName, lastName, this.eventSignupTestData.eventUserEmail);
+						cy.contains(eventName.text()).should("exist");
+						cy.enterEmailVerificationCode(this.eventSignupTestData.eventUserEmail, Cypress.env("EVENT_USER_EMAIL_API_KEY"));
+						cy.clickOnNextStepButton();
+						eventSignup.getBackButton().should("exist").should("have.text", "Back");
+						eventSignup.getPrivacyPolicy().click();
+						eventSignup.getCompleteSignup().click();
+						cy.VerifySignupCompleteMessage();
+						cy.VerifyEventName(signedUpeventName);
+					});
+			}
+		});
+	});
 
 	it("It shows the Sign up complete message - for new candidate who like to receive email updates", function () {
 		// Scenario - candidate who like to receive email updateslike to receive email updates
 		let signedUpeventName;
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -119,15 +155,11 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("Yes");
 						eventSignup.getNextStep().click();
-						cy.get("#events-steps-personalised-updates-degree-status-id-field").select(
-							"Final year"
+						cy.get("#events-steps-personalised-updates-degree-status-id-field").select("Final year");
+						cy.get("#events-steps-personalised-updates-consideration-journey-stage-id-field").select(
+							"I’m fairly sure and exploring my options"
 						);
-						cy.get(
-							"#events-steps-personalised-updates-consideration-journey-stage-id-field"
-						).select("I’m fairly sure and exploring my options");
-						cy.get("#events-steps-personalised-updates-preferred-teaching-subject-id-field").select(
-							"English"
-						);
+						cy.get("#events-steps-personalised-updates-preferred-teaching-subject-id-field").select("English");
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
 						cy.VerifyEventName(signedUpeventName);
@@ -141,10 +173,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
 		let firstName = "User_" + rnum + "_firstname";
 		let lastName = "User_" + rnum + "_lastname";
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -172,15 +201,11 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("Yes");
 						eventSignup.getNextStep().click();
-						cy.get("#events-steps-personalised-updates-degree-status-id-field").select(
-							"Final year"
+						cy.get("#events-steps-personalised-updates-degree-status-id-field").select("Final year");
+						cy.get("#events-steps-personalised-updates-consideration-journey-stage-id-field").select(
+							"I’m fairly sure and exploring my options"
 						);
-						cy.get(
-							"#events-steps-personalised-updates-consideration-journey-stage-id-field"
-						).select("I’m fairly sure and exploring my options");
-						cy.get("#events-steps-personalised-updates-preferred-teaching-subject-id-field").select(
-							"English"
-						);
+						cy.get("#events-steps-personalised-updates-preferred-teaching-subject-id-field").select("English");
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
 						cy.VerifyEventName(signedUpeventName);
@@ -211,10 +236,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
 						eventSignup.getResendVerificationLink().click();
-						cy.enterEmailVerificationCode(
-							this.eventSignupTestData.eventUserEmail,
-							Cypress.env("EVENT_USER_EMAIL_API_KEY")
-						);
+						cy.enterEmailVerificationCode(this.eventSignupTestData.eventUserEmail, Cypress.env("EVENT_USER_EMAIL_API_KEY"));
 						eventSignup.getNextStep().click();
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPrivacyPolicy().click();
@@ -231,10 +253,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
 		let firstName = "User_" + rnum + "_firstname";
 		let lastName = "User_" + rnum + "_lastname";
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -262,15 +281,11 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getPrivacyPolicy().click();
 						cy.wouldYouLikeToReceiveEmailUpdate("Yes");
 						eventSignup.getNextStep().click();
-						cy.get("#events-steps-personalised-updates-degree-status-id-field").select(
-							"Final year"
+						cy.get("#events-steps-personalised-updates-degree-status-id-field").select("Final year");
+						cy.get("#events-steps-personalised-updates-consideration-journey-stage-id-field").select(
+							"I’m fairly sure and exploring my options"
 						);
-						cy.get(
-							"#events-steps-personalised-updates-consideration-journey-stage-id-field"
-						).select("I’m fairly sure and exploring my options");
-						cy.get("#events-steps-personalised-updates-preferred-teaching-subject-id-field").select(
-							"English"
-						);
+						cy.get("#events-steps-personalised-updates-preferred-teaching-subject-id-field").select("English");
 						eventSignup.getCompleteSignup().click();
 						cy.VerifySignupCompleteMessage();
 						cy.VerifyEventName(signedUpeventName);
@@ -300,41 +315,28 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.enterVerificationCode("12345", false);
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
-						cy.get(".govuk-list > li > a")
-							.should("exist")
-							.should("have.text", "The verification code should be 6 digits");
+						cy.get(".govuk-list > li > a").should("exist").should("have.text", "The verification code should be 6 digits");
 						cy.enterVerificationCode("1234567", true);
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
-						cy.get(".govuk-list > li > a")
-							.should("exist")
-							.should("have.text", "The verification code should be 6 digits");
+						cy.get(".govuk-list > li > a").should("exist").should("have.text", "The verification code should be 6 digits");
 
 						cy.enterVerificationCode("123456", true);
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
 						cy.get(".govuk-list > li > a")
 							.should("exist")
-							.should(
-								"have.text",
-								"Please enter the latest verification code sent to your email address"
-							);
+							.should("have.text", "Please enter the latest verification code sent to your email address");
 						cy.get("#wizard-steps-authenticate-timed-one-time-password-error")
 							.should("exist")
-							.should(
-								"have.text",
-								"Error: Please enter the latest verification code sent to your email address"
-							);
+							.should("have.text", "Error: Please enter the latest verification code sent to your email address");
 					});
 			}
 		});
 	});
 
 	it("It shows the error message if user clicks next button without entering the mandatory details", function () {
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -353,13 +355,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						cy.VerifyEventName(eventName.text());
 						eventSignup.getNextStep().click();
 						eventSignup.getErrorTitle().should("exist").should("have.text", "There is a problem");
-						cy.get(".govuk-error-summary__list")
-							.children()
-							.should("exist")
-							.next()
-							.should("exist")
-							.next()
-							.should("exist");
+						cy.get(".govuk-error-summary__list").children().should("exist").next().should("exist").next().should("exist");
 						cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 							.should("have.text", "Enter your full email address")
 							.next()
@@ -372,10 +368,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 	});
 
 	it("Error message link navigates to its respective field", function () {
-		cy.setEventMonth(
-			this.eventSignupTestData.eventsType,
-			this.eventSignupTestData.eventLocation
-		).then((month) => {
+		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
 				searchForEvent.getUpdateResultsButton().click();
 				cy.get(".search-for-events-no-results").should(
@@ -407,25 +400,16 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 
 						cy.contains("Enter your first name")
 							.should((el) => {
-								expect(el).to.have.attr(
-									"href",
-									"#events-steps-personal-details-first-name-field-error"
-								);
+								expect(el).to.have.attr("href", "#events-steps-personal-details-first-name-field-error");
 							})
 							.click()
 							.type("Test_First_Name");
 						eventSignup.getNextStep().click();
-						cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should(
-							"have.text",
-							"Enter your last name"
-						);
+						cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should("have.text", "Enter your last name");
 
 						cy.contains("Enter your last name")
 							.should((el) => {
-								expect(el).to.have.attr(
-									"href",
-									"#events-steps-personal-details-last-name-field-error"
-								);
+								expect(el).to.have.attr("href", "#events-steps-personal-details-last-name-field-error");
 							})
 							.click()
 							.type("Test_Last_Name");
@@ -543,10 +527,7 @@ describe("Verify page load " + new Date(), () => {
 	it('It shows the "Past Online Events" page', function () {
 		cy.navigateToPage("/event_categories/online-events/archive");
 		cy.verifyPageHeading("Past online Q&As");
-		searchForEvent
-			.getSearchforEventsHeading()
-			.should("exist")
-			.should("have.text", "Search for Past online Q&As");
+		searchForEvent.getSearchforEventsHeading().should("exist").should("have.text", "Search for Past online Q&As");
 	});
 	it("It shows past events only", function () {
 		cy.navigateToPage("/event_categories/online-events/archive");
