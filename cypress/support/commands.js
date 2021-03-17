@@ -519,3 +519,7 @@ Cypress.Commands.add("verifyLinkResponse", (link) => {
 		expect(response.status).to.eq(200);
 	});
 });
+
+Cypress.Commands.add("waitForRegistrationToComplete", (waitTime) => {
+	cy.wait(waitTime);
+});

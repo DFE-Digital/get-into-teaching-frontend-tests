@@ -61,12 +61,6 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 						eventSignup.getSignupForThisEventButton().click();
 						cy.VerifyEventName(eventName.text());
 						signedUpeventName = eventName.text().trim();
-						/*eventSignup.getFirstName().type(this.eventSignupTestData.firstName);
-						eventSignup.getLastName().type(this.eventSignupTestData.lastName);
-						let rnum = Math.floor(Math.random() * 1000000 + 1);
-						let email = "testuser" + rnum.toString() + "@gmail.co.uk";
-						eventSignup.getEmail().type(email);
-						eventSignup.getNextStep().click();*/
 						cy.signupForEvent(firstName, lastName, this.eventSignupTestData.eventUserEmail);
 						eventSignup.getBackButton().should("exist").should("have.text", "Back");
 						eventSignup.getPhoneNumber().type(this.eventSignupTestData.phoneNumber);
@@ -80,7 +74,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		});
 	});
 	it("It shows the Sign up complete message - for existing candidate", function () {
-		cy.wait(5000);
+		cy.waitForRegistrationToComplete(5000);
 		let signedUpeventName;
 		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
 			if (month == "") {
