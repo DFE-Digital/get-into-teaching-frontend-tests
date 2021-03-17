@@ -149,7 +149,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	it("Validate search icon functionality", () => {
 		cy.get(".navbar__desktop__search").click();
 		cy.get(".searchbox__close").should("be.visible");
-		cy.get("#searchbox__input").should("exist").type("Salaries");
+		cy.get("#searchbox__input").should("exist").type("Salaries and benefits");
 		cy.get(".search-result")
 			.find("h3")
 			.eq(0)
