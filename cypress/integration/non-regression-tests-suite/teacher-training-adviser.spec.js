@@ -1,6 +1,9 @@
 import TeacherTrainingAdviser from "../../support/pageobjects/TeacherTrainingAdviser";
 import Navlinks from "../../support/pageobjects/Navlinks";
+import MailingListSignUp from "../../support/pageobjects/MailinglistSignupPage";
 /// <reference types="Cypress" />
+let firstName;
+let lastName;
 function terminalLog(violations) {
 	cy.task(
 		"log",
@@ -1197,7 +1200,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		  Which stage are you interested in teaching? - primary
 		  UK user		 	   
 		*/
-		"";
+
 		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching("No");
 		cy.doYouHaveDegree("I have an equivalent qualification from another country");
@@ -1239,8 +1242,10 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it("It should retain the candidate details if he navigates back  ", function () {
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
-		let firstName = "First_" + rnum + "_name";
-		let lastName = "Last_" + rnum + "_name";
+		firstName = "First_" + rnum + "_name";
+		lastName = "Last_" + rnum + "_name";
+		let name = firstName + ":" + lastName;
+		cy.writeFile("cypress/fixtures/user.txt", name);
 		teacherTrainingAdviser.getFirstName().type(firstName);
 		teacherTrainingAdviser.getLastName().type(lastName);
 		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
@@ -1258,7 +1263,6 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whichCountryDoYouLiveIn("Denmark");
 		cy.enterOverseasTelephoneNumber(this.ttaTestData.phoneNumber);
 		cy.verifyCheckYourAnswersMessage();
-
 		cy.contains("Name")
 			.next()
 			.contains(firstName + " " + lastName);
@@ -1270,18 +1274,13 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Which subject is your degree?").next().contains("Biology");
 		cy.contains("Which class is your degree?").next().contains("First class");
 		cy.contains("Which stage are you interested in teaching?").next().contains("Primary");
-		cy.contains("Do you have grade 4 (C) or above in maths and English GCSE, or equivalent?")
-			.next()
-			.contains("Yes");
+		cy.contains("Do you have grade 4 (C) or above in maths and English GCSE, or equivalent?").next().contains("Yes");
 		cy.contains("Do you have science GCSE Grade 4 or above?").next().contains("Yes");
 		cy.contains("When do you want to start teacher training?").next().contains("2021");
 		cy.contains("Where do you live?").next().contains("Overseas");
 		cy.contains("Which country do you live in?").next().contains("Denmark");
 		cy.clickOnBackButton();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field").should(
-			"have.value",
-			"01234567890"
-		);
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field").should("have.value", "01234567890");
 		cy.wait(100);
 		cy.clickOnBackButton();
 		cy.wait(300);
@@ -1312,6 +1311,22 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 				let id = "#" + val;
 				cy.get(id).should("have.value", "1985");
 			});
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.acceptPolicy();
+		cy.verifySignUpCompleteMessage();
+	});
+	it('It shows " You have already signed up to this service" message to previously signed up user', function () {
+		teacherTrainingAdviser.getFirstName().type(firstName);
+		teacherTrainingAdviser.getLastName().type(lastName);
+		teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
+		teacherTrainingAdviser.getContinueButton().click();
+		cy.get(".govuk-heading-l").should("exist").should("have.text", "You have already signed up to this service");
 	});
 
 	it("It shows the error message if user clicks continiue button without entering the mandatory or correct details", function () {
@@ -1320,13 +1335,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getEmailAddress();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
-		cy.get(".govuk-error-summary__list")
-			.children()
-			.should("exist")
-			.next()
-			.should("exist")
-			.next()
-			.should("exist");
+		cy.get(".govuk-error-summary__list").children().should("exist").next().should("exist").next().should("exist");
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 			.should("have.text", "You need to enter your first name")
 			.next()
@@ -1339,9 +1348,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		let lastName = "Last_" + rnum + "_name";
 		cy.get("#teacher-training-adviser-steps-identity-first-name-field-error").type(firstName);
 		cy.get("#teacher-training-adviser-steps-identity-last-name-field-error").type(lastName);
-		cy.get("#teacher-training-adviser-steps-identity-email-field-error").type(
-			this.ttaTestData.email
-		);
+		cy.get("#teacher-training-adviser-steps-identity-email-field-error").type(this.ttaTestData.email);
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
@@ -1368,27 +1375,20 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
 		cy.verifyErrorMessage("You must select either primary or secondary");
-		cy.get(
-			"#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-error"
-		).should("have.text", "Error: You must select either primary or secondary");
-		cy.get(
-			"#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750001-field"
-		).click();
+		cy.get("#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-error").should(
+			"have.text",
+			"Error: You must select either primary or secondary"
+		);
+		cy.get("#teacher-training-adviser-steps-stage-interested-teaching-preferred-education-phase-id-222750001-field").click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
-		cy.verifyErrorMessage(
-			"Select yes if you have grade 4(C) or above in English and Maths GCSE or equivalent"
-		);
-		cy.get(
-			"#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-error"
-		).should(
+		cy.verifyErrorMessage("Select yes if you have grade 4(C) or above in English and Maths GCSE or equivalent");
+		cy.get("#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-error").should(
 			"have.text",
 			"Error: Select yes if you have grade 4(C) or above in English and Maths GCSE or equivalent"
 		);
-		cy.get(
-			"#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-field-error"
-		).click();
+		cy.get("#teacher-training-adviser-steps-gcse-maths-english-has-gcse-maths-and-english-id-field-error").click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
@@ -1405,39 +1405,23 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.verifyErrorSummaryTitle();
-		cy.get(".govuk-error-summary__list")
-			.children()
-			.should("exist")
-			.next()
-			.should("exist")
-			.next()
-			.should("exist");
+		cy.get(".govuk-error-summary__list").children().should("exist").next().should("exist").next().should("exist");
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 			.should("have.text", "Enter the first line of your address")
 			.next()
 			.should("have.text", "Enter your town or city")
 			.next()
 			.should("have.text", "Enter a real postcode");
-		cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field-error").type(
-			this.ttaTestData.address_Line1
-		);
-		cy.get("#teacher-training-adviser-steps-uk-address-address-city-field-error").type(
-			this.ttaTestData.city
-		);
-		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field-error").type(
-			this.ttaTestData.postcode
-		);
+		cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field-error").type(this.ttaTestData.address_Line1);
+		cy.get("#teacher-training-adviser-steps-uk-address-address-city-field-error").type(this.ttaTestData.city);
+		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field-error").type(this.ttaTestData.postcode);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(
-			this.ttaTestData.phoneNumber
-		);
+		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(this.ttaTestData.phoneNumber);
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.clickOnCompleteButton();
 		cy.verifyErrorSummaryTitle();
-		cy.verifyErrorMessage(
-			"You must accept the privacy policy in order to talk to a teacher training adviser"
-		);
+		cy.verifyErrorMessage("You must accept the privacy policy in order to talk to a teacher training adviser");
 		cy.get("#teacher-training-adviser-steps-accept-privacy-policy-accepted-policy-id-error").should(
 			"have.text",
 			"Error: You must accept the privacy policy in order to talk to a teacher training adviser"
@@ -1520,9 +1504,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Which subject is your degree?").next().contains("Biology");
 		cy.contains("Which class is your degree?").next().contains("First class");
 		cy.contains("Which stage are you interested in teaching?").next().contains("Secondary");
-		cy.contains("Do you have grade 4 (C) or above in maths and English GCSE, or equivalent?")
-			.next()
-			.contains("No");
+		cy.contains("Do you have grade 4 (C) or above in maths and English GCSE, or equivalent?").next().contains("No");
 		cy.contains("Are you planning to retake your English or maths GCSEs?").next().contains("Yes");
 		cy.contains("When do you want to start teacher training?").next().contains("2022");
 		cy.contains("Where do you live?").next().contains("Overseas");
@@ -1548,9 +1530,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
 		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field-error").clear();
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field-error").type(
-			"0123456789011223344566"
-		);
+		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field-error").type("0123456789011223344566");
 		cy.clickOnContinueButton();
 		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-error")
@@ -1578,9 +1558,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field-error").clear();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field-error").type(
-			"0123456789011223344566"
-		);
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field-error").type("0123456789011223344566");
 		cy.clickOnContinueButton();
 		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-error")
@@ -1599,10 +1577,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 		cy.contains("You need to enter your first name")
 			.should((el) => {
-				expect(el).to.have.attr(
-					"href",
-					"#teacher-training-adviser-steps-identity-first-name-field-error"
-				);
+				expect(el).to.have.attr("href", "#teacher-training-adviser-steps-identity-first-name-field-error");
 			})
 			.click()
 			.type("Test_First_Name");
@@ -1613,27 +1588,19 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		);
 		cy.contains("You need to enter your last name")
 			.should((el) => {
-				expect(el).to.have.attr(
-					"href",
-					"#teacher-training-adviser-steps-identity-last-name-field-error"
-				);
+				expect(el).to.have.attr("href", "#teacher-training-adviser-steps-identity-last-name-field-error");
 			})
 			.click()
 			.type("Test_Last_Name");
 
 		cy.contains("You need to enter your email address")
 			.should((el) => {
-				expect(el).to.have.attr(
-					"href",
-					"#teacher-training-adviser-steps-identity-email-field-error"
-				);
+				expect(el).to.have.attr("href", "#teacher-training-adviser-steps-identity-email-field-error");
 			})
 			.click()
 			.type("Test_email@gmail.com");
 		cy.clickOnContinueButton();
-		cy.get(".govuk-fieldset__heading")
-			.should("exist")
-			.should("have.text", "Are you returning to teaching?");
+		cy.get(".govuk-fieldset__heading").should("exist").should("have.text", "Are you returning to teaching?");
 	});
 	it("It shows the error message to user if he enters invalid date of birth", function () {
 		cy.enterFirstNameLastNameAndEmail();
@@ -1740,6 +1707,135 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.verifySignUpCompleteMessage();
 		cy.contains("a", "feedback").should((link) => {
 			expect(link).to.have.attr("href", Navlinks.feedback);
+		});
+	});
+});
+
+describe("Matchback feature", () => {
+	const teacherTrainingAdviser = new TeacherTrainingAdviser();
+	const mailingListSignUp = new MailingListSignUp();
+
+	beforeEach(function () {
+		cy.fixture("tta-signup-test-data.json").then((ttaTestData) => {
+			this.ttaTestData = ttaTestData;
+		});
+		cy.fixture("mailinglist-signup-test-data.json").then((mailingListTestData) => {
+			this.mailingListTestData = mailingListTestData;
+		});
+	});
+
+	it("It allows mailing list sign up if user already signed up for a teacher training adviser service", function () {
+		cy.readFile("cypress/fixtures/user.txt").then((value) => {
+			let name = value;
+			firstName = name.split(":")[0];
+			lastName = name.split(":")[1];
+			cy.visit("/mailinglist/signup/name", {
+				auth: {
+					username: Cypress.env("HTTPAUTH_USERNAME"),
+					password: Cypress.env("HTTPAUTH_PASSWORD"),
+				},
+			});
+			cy.acceptCookie();
+			mailingListSignUp.getFirstName().type(firstName);
+			mailingListSignUp.getLastName().type(lastName);
+			mailingListSignUp.getEmailAddress().type(this.ttaTestData.email);
+			mailingListSignUp.getNextStep().click();
+			cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
+			mailingListSignUp.getNextStep().click();
+			cy.degreeStage("Yes, I already have a degree");
+			cy.clickOnNextStepButton();
+			cy.howCloseAreYou("I’m not sure and finding out more");
+			cy.clickOnNextStepButton();
+			mailingListSignUp.getSubjectToTeach().select("English");
+			cy.clickOnNextStepButton();
+			mailingListSignUp.getPostcode().type("TF3 2BP");
+			cy.clickOnNextStepButton();
+			cy.acceptPrivacyPolicy();
+			mailingListSignUp.getCompleteSignUpButton().click();
+			cy.VerifyYouHaveSignedupMessage();
+		});
+	});
+
+	it('It shows "You’ve signed up" ', function () {
+		let rnum = Math.floor(Math.random() * 10000000 + 1);
+		let firstName = "First_" + rnum + "_name";
+		let lastName = "Last_" + rnum + "_name";
+		let name = firstName + ":" + lastName;
+		cy.writeFile("cypress/fixtures/user.txt", name);
+		cy.visit("/mailinglist/signup/name", {
+			auth: {
+				username: Cypress.env("HTTPAUTH_USERNAME"),
+				password: Cypress.env("HTTPAUTH_PASSWORD"),
+			},
+		});
+		cy.acceptCookie();
+		mailingListSignUp.getFirstName().type(firstName);
+		mailingListSignUp.getLastName().type(lastName);
+		mailingListSignUp.getEmailAddress().type(this.ttaTestData.email);
+		mailingListSignUp.getNextStep().click();
+		cy.degreeStage("Yes, I already have a degree");
+		mailingListSignUp.getNextStep().click();
+		cy.howCloseAreYou("I’m fairly sure and exploring my options");
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getSubjectToTeach().select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp.getNextStep().click();
+		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
+		mailingListSignUp.getNextStep().click();
+		cy.acceptPrivacyPolicy();
+		mailingListSignUp.getCompleteSignUpButton().click();
+		mailingListSignUp.getContent().should("have.text", "You've signed up");
+		cy.wait(6000);
+	});
+
+	it("It should allow user to sign up for teacher training adviser service if he already signed up for mailing list", function () {
+		cy.readFile("cypress/fixtures/user.txt").then((value) => {
+			let name = value;
+			firstName = name.split(":")[0];
+			lastName = name.split(":")[1];
+			cy.visit(Cypress.env("baseurl_tta_flow"), {
+				auth: {
+					username: Cypress.env("HTTPAUTH_USERNAME"),
+					password: Cypress.env("HTTPAUTH_PASSWORD"),
+				},
+			});
+			cy.acceptAllCookies();
+			cy.clickOnStartNowButton();
+			teacherTrainingAdviser.getFirstName().type(firstName);
+			teacherTrainingAdviser.getLastName().type(lastName);
+			teacherTrainingAdviser.getEmailAddress().type(this.ttaTestData.email);
+			teacherTrainingAdviser.getContinueButton().click();
+			cy.enterEmailVerificationCode(this.ttaTestData.email, Cypress.env("TTA_USER_EMAIL_API_KEY"));
+			cy.clickOnContinueButton();
+			cy.returningToTeaching("Yes");
+			cy.havePreviousTeacherReferenceNumber(true);
+			cy.enterPreviousTeacherReferenceNumber(23478463);
+			cy.selectPreviuosMainSubject("Computing");
+			cy.selectSubjectLikeToTeach("Physics");
+			cy.enterDateOfBirth("25", "02", "1986");
+			cy.doYouLiveInTheUk(true);
+			cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field").should("have.value", "TF3 2BT");
+			cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
+			cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(this.mailingListTestData.phone);
+			cy.clickOnContinueButton();
+			cy.get(".govuk-heading-l").should("exist").should("have.text", "Check your answers before you continue");
+			cy.contains("Name")
+				.next()
+				.contains(firstName + " " + lastName);
+			cy.contains("Date of birth").next().contains("25 02 1986");
+			cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
+			cy.contains("Email").next().contains(this.ttaTestData.email);
+			cy.contains("Telephone").next().contains(this.mailingListTestData.phone);
+			cy.contains("Are you returning to teaching?").next().contains("Yes");
+			cy.contains("What is your previous teacher reference number?").next().contains("23478463");
+			cy.contains("Which main subject did you previously teach?").next().contains("Computing");
+			cy.contains("Which subject would you like to teach if you return to teaching?").next().contains("Physics");
+			cy.contains("Where do you live?").next().contains("UK");
+			cy.clickOnContinueButton();
+			cy.acceptPolicy();
+			cy.get(".govuk-panel__title").then(function (signuptext) {
+				signuptext = signuptext.text().trim();
+				expect(signuptext).to.equal("Thank you  Sign up complete");
+			});
 		});
 	});
 });

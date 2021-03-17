@@ -25,13 +25,7 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 		cy.get("#edit_mailing_list_steps_name_name").should("exist");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#error-summary-title").should("exist").should("have.text", "There is a problem");
-		cy.get(".govuk-error-summary__list")
-			.children()
-			.should("exist")
-			.next()
-			.should("exist")
-			.next()
-			.should("exist");
+		cy.get(".govuk-error-summary__list").children().should("exist").next().should("exist").next().should("exist");
 		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)")
 			.should("have.text", "Enter your full email address")
 			.next()
@@ -60,25 +54,19 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 			.click()
 			.type("Test_First_Name");
 		mailingListSignUp.getNextStep().click();
-		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should(
-			"have.text",
-			"Enter your last name"
-		);
+		cy.get(".govuk-list.govuk-error-summary__list > li:nth-child(1)").should("have.text", "Enter your last name");
 	});
 
 	it("It shows error message if user enters wrong email verification code", function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
-		mailingListSignUp.getNextStep().click();
+		cy.signupForMailingList(firstName, lastName, this.mailingListTestData.email);
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		cy.howCloseAreYou("I’m fairly sure and exploring my options");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getSubjectToTeach()
-			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp.getSubjectToTeach().select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
@@ -92,31 +80,24 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
-		mailingListSignUp.getNextStep().click();
+		cy.signupForMailingList(firstName, lastName, this.mailingListTestData.email);
 		cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#wizard-steps-authenticate-timed-one-time-password-error")
 			.should("exist")
-			.should(
-				"have.text",
-				"Error: Please enter the latest verification code sent to your email address"
-			);
+			.should("have.text", "Error: Please enter the latest verification code sent to your email address");
 	});
 
 	it("It resends the verification code to users email", function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let firstName = `Testuser${rnum}firstname`;
 		let lastName = `Testuser${rnum}lastname`;
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
-		mailingListSignUp.getNextStep().click();
+		cy.signupForMailingList(firstName, lastName, this.mailingListTestData.email);
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		cy.howCloseAreYou("It’s just an idea");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getSubjectToTeach()
-			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp.getSubjectToTeach().select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();
@@ -130,21 +111,14 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 				password: Cypress.env("HTTPAUTH_PASSWORD"),
 			},
 		});
-		cy.enterFirstNameLastNameAndEmailAddress(firstName, lastName, this.mailingListTestData.email);
-		mailingListSignUp.getNextStep().click();
+		cy.signupForMailingList(firstName, lastName, this.mailingListTestData.email);
 		cy.get("#wizard-steps-authenticate-timed-one-time-password-field").type("123456");
 		mailingListSignUp.getNextStep().click();
 		cy.get("#wizard-steps-authenticate-timed-one-time-password-error")
 			.should("exist")
-			.should(
-				"have.text",
-				"Error: Please enter the latest verification code sent to your email address"
-			);
+			.should("have.text", "Error: Please enter the latest verification code sent to your email address");
 		cy.contains("resend verification").click();
-		cy.enterEmailVerificationCode(
-			this.mailingListTestData.email,
-			Cypress.env("MAILING_LIST_USER_EMAIL_API_KEY")
-		);
+		cy.enterEmailVerificationCode(this.mailingListTestData.email, Cypress.env("MAILING_LIST_USER_EMAIL_API_KEY"));
 		mailingListSignUp.getNextStep().click();
 		cy.get("#edit_mailing_list_steps_already_subscribed_already_subscribed > h1")
 			.should("exist")
@@ -154,19 +128,12 @@ describe(`Feature - Mailing list sign up : Tests execution date and time : ${new
 	it("It shows Privacy policy details to the user if he clicks on link", function () {
 		let rnum = Math.floor(Math.random() * 1000000000 + 1);
 		let email = `testuser${rnum.toString()}@mail.co.uk`;
-		cy.enterFirstNameLastNameAndEmailAddress(
-			this.mailingListTestData.firstName,
-			this.mailingListTestData.lastName,
-			email
-		);
-		mailingListSignUp.getNextStep().click();
+		cy.signupForMailingList(this.mailingListTestData.firstName, this.mailingListTestData.lastName, email);
 		cy.degreeStage("Yes, I already have a degree");
 		mailingListSignUp.getNextStep().click();
 		cy.howCloseAreYou("I’m fairly sure and exploring my options");
 		mailingListSignUp.getNextStep().click();
-		mailingListSignUp
-			.getSubjectToTeach()
-			.select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
+		mailingListSignUp.getSubjectToTeach().select(this.mailingListTestData.whichSubjectdoYouWantToTeach);
 		mailingListSignUp.getNextStep().click();
 		mailingListSignUp.getPostcode().type(this.mailingListTestData.postCode);
 		mailingListSignUp.getNextStep().click();

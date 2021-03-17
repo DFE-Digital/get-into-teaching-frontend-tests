@@ -54,9 +54,7 @@ Cypress.Commands.add("enterEmailVerificationCode", (email, key) => {
 	let newURL;
 	var latestEmailID;
 	var code;
-	cy.request("https://mailsac.com/api/addresses/" + email + "/messages?_mailsacKey=" + key).as(
-		"topMostEmail"
-	);
+	cy.request("https://mailsac.com/api/addresses/" + email + "/messages?_mailsacKey=" + key).as("topMostEmail");
 	cy.get("@topMostEmail").then((response) => {
 		latestEmailID = response.body[0]._id;
 		cy.log("latestEmailID = " + latestEmailID);
@@ -109,16 +107,12 @@ Cypress.Commands.add("havePreviousTeacherReferenceNumber", (havePreviousTeacherR
 });
 
 Cypress.Commands.add("enterPreviousTeacherReferenceNumber", (teacherReferenceNumber) => {
-	cy.get("#teacher-training-adviser-steps-previous-teacher-id-teacher-id-field").type(
-		teacherReferenceNumber
-	);
+	cy.get("#teacher-training-adviser-steps-previous-teacher-id-teacher-id-field").type(teacherReferenceNumber);
 	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add("selectPreviuosMainSubject", (previousSubject) => {
-	cy.get("#teacher-training-adviser-steps-subject-taught-subject-taught-id-field").select(
-		previousSubject
-	);
+	cy.get("#teacher-training-adviser-steps-subject-taught-subject-taught-id-field").select(previousSubject);
 	cy.clickOnContinueButton();
 });
 
@@ -166,16 +160,12 @@ Cypress.Commands.add("selectWhatSubjectIsYourDegree", (subject) => {
 });
 
 Cypress.Commands.add("selectWhichClassIsYourDegree", (degreeClass) => {
-	cy.get("#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field").select(
-		degreeClass
-	);
+	cy.get("#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field").select(degreeClass);
 	cy.clickOnContinueButton();
 });
 
 Cypress.Commands.add("whatDegreeClassAreYouPredictedToGet", (degreeClass) => {
-	cy.get("#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field").select(
-		degreeClass
-	);
+	cy.get("#teacher-training-adviser-steps-what-degree-class-uk-degree-grade-id-field").select(degreeClass);
 	cy.clickOnContinueButton();
 });
 
@@ -219,13 +209,9 @@ Cypress.Commands.add("retakeGcseMathsAndEnglish", (planning) => {
 
 Cypress.Commands.add("gcseScience", (grade) => {
 	if (grade) {
-		cy.get(
-			"#teacher-training-adviser-steps-gcse-science-has-gcse-science-id-222750000-field"
-		).click();
+		cy.get("#teacher-training-adviser-steps-gcse-science-has-gcse-science-id-222750000-field").click();
 	} else {
-		cy.get(
-			"#teacher-training-adviser-steps-gcse-science-has-gcse-science-id-222750001-field"
-		).click();
+		cy.get("#teacher-training-adviser-steps-gcse-science-has-gcse-science-id-222750001-field").click();
 	}
 	cy.clickOnContinueButton();
 });
@@ -256,9 +242,7 @@ Cypress.Commands.add("enterUKCandidateAddress", (addressline1, addressline2, cit
 	cy.get("#teacher-training-adviser-steps-uk-address-address-line1-field").type(addressline1);
 	cy.get("#teacher-training-adviser-steps-uk-address-address-line2-field").type(addressline2);
 	cy.get("#teacher-training-adviser-steps-uk-address-address-city-field").type(city);
-	cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field")
-		.clear()
-		.type(postcode);
+	cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field").clear().type(postcode);
 	cy.clickOnContinueButton();
 });
 
@@ -331,13 +315,6 @@ Cypress.Commands.add("acceptPrivacyPolicy", () => {
 	cy.contains("Yes").click();
 });
 
-Cypress.Commands.add("enterFirstNameLastNameAndEmailAddress", (firstName, lastName, email) => {
-	const mailingListSignUp = new MailingListSignUp();
-	mailingListSignUp.getFirstName().type(firstName);
-	mailingListSignUp.getLastName().type(lastName);
-	mailingListSignUp.getEmailAddress().type(email);
-});
-
 Cypress.Commands.add("degreeStage", (stage) => {
 	cy.contains(stage).click();
 });
@@ -359,15 +336,11 @@ Cypress.Commands.add("verifySignUpCompleteMessage", () => {
 });
 
 Cypress.Commands.add("verifyCheckYourAnswersMessage", () => {
-	cy.get(".govuk-heading-l")
-		.should("exist")
-		.should("have.text", "Check your answers before you continue");
+	cy.get(".govuk-heading-l").should("exist").should("have.text", "Check your answers before you continue");
 });
 
 Cypress.Commands.add("verifyGetRightGCSEMessage", () => {
-	cy.get(".govuk-heading-l")
-		.should("exist")
-		.should("have.text", "Get the right GCSEs or equivalent qualifications");
+	cy.get(".govuk-heading-l").should("exist").should("have.text", "Get the right GCSEs or equivalent qualifications");
 });
 
 Cypress.Commands.add("eventMonths", () => {
@@ -545,4 +518,8 @@ Cypress.Commands.add("verifyLinkResponse", (link) => {
 	cy.get("@linkResponse").then((response) => {
 		expect(response.status).to.eq(200);
 	});
+});
+
+Cypress.Commands.add("waitForRegistrationToComplete", (waitTime) => {
+	cy.wait(waitTime);
 });
