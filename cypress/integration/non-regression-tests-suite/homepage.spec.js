@@ -145,6 +145,20 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 
 		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
 	});
+
+	it("Validate search icon functionality", () => {
+		cy.get(".navbar__desktop__search").click();
+		cy.get(".searchbox__close").should("be.visible");
+		cy.get("#searchbox__input").should("exist").type("Salaries");
+		cy.get(".search-result")
+			.find("h3")
+			.eq(0)
+			.then(function (searchResult) {
+				cy.contains(searchResult.text()).click();
+			});
+		cy.get(".searchbox__close").should("not.be.visible");
+		cy.location("pathname").should("equal", Navlinks.salariesAndBenefits);
+	});
 });
 
 describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
