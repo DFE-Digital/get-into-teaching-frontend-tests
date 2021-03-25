@@ -435,8 +435,14 @@ Cypress.Commands.add("getPastEventDateAndTime", () => {
 		.first()
 		.then((option) => {
 			cy.get("@month").select(option.text());
-			var eventDateAndTime = cy.get(".event-box__datetime");
-			return eventDateAndTime;
+			cy.get("body").then((body) => {
+				if (body.find(".no-results").length > 0) {
+					cy.get(".no-results").should("include.text", "Sorry your search has not found any events");
+				} else {
+					var eventDateAndTime = cy.get(".event-box__datetime");
+					return eventDateAndTime;
+				}
+			});
 		});
 });
 Cypress.Commands.add("verifyErrorSummaryTitle", () => {

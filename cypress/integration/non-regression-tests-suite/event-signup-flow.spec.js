@@ -526,8 +526,12 @@ describe("Verify page load " + new Date(), () => {
 	it("It shows past events only", function () {
 		cy.navigateToPage("/event_categories/online-events/archive");
 		cy.getPastEventDateAndTime().each((eventDateAndTime, index, $list) => {
-			eventDateAndTime = new Date(eventDateAndTime.text().split("-")[0]);
-			expect(eventDateAndTime).to.be.lessThan(new Date());
+			if (eventDateAndTime.text().search("Sorry your search has not found any events") != -1) {
+				cy.log(eventDateAndTime.text());
+			} else {
+				eventDateAndTime = new Date(eventDateAndTime.text().split("-")[0]);
+				expect(eventDateAndTime).to.be.lessThan(new Date());
+			}
 		});
 	});
 });
