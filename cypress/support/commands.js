@@ -1,5 +1,6 @@
 import MailingListSignUp from "../support/pageobjects/MailinglistSignupPage";
 import Homepage from "../support/pageobjects/Homepage";
+import "@percy/cypress";
 Cypress.Commands.add("logintoApp", () => {
 	cy.visit("/", {
 		auth: {

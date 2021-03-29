@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+let percyHealthCheck = require("@percy/cypress/task");
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -15,17 +16,19 @@
 /**
  * @type {Cypress.PluginConfig}
  */
+
 module.exports = (on, config) => {
-  on('task', {
-    log(message) {
-      console.log(message)
+	on("task", percyHealthCheck);
+	on("task", {
+		log(message) {
+			console.log(message);
 
-      return null
-    },
-    table(message) {
-      console.table(message)
+			return null;
+		},
+		table(message) {
+			console.table(message);
 
-      return null
-    }
-  })
-}
+			return null;
+		},
+	});
+};
