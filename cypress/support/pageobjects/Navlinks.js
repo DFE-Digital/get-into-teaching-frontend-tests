@@ -22,15 +22,18 @@ module.exports = class Navlinks {
 		"https://www.linkedin.com/company/9258520?trk=tyah&trkInfo=idx%3A1-1-1%2CtarId%3A1424345327269%2Ctas%3Aget+into+teaching";
 	static twitter = "https://twitter.com/getintoteaching";
 	static youtube = "http://www.youtube.com/user/getintoteaching";
-	static mailingListSignupUrl =
-		"https://get-into-teaching-app-test.london.cloudapps.digital/mailinglist/signup/name";
+	static mailingListSignupUrl = "https://get-into-teaching-app-test.london.cloudapps.digital/mailinglist/signup/name";
 	static teachInScotland = "https://teachinscotland.scot";
 	static teachInWales = "https://www.discoverteaching.wales/routes-into-teaching/";
 	static teachInNorthernIreland =
 		"https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland";
 	static teachingRoleInEngland = "https://teaching-vacancies.service.gov.uk/";
-	static feedback =
-		"https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
-	static feedback =
-		"https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
+	static feedback = "https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
+	static feedback = "https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
+	static internationalCandidates = "/international-candidates";
+	static exploreOnlineQAs = "/event-categories/online-q-as";
+	static exploreSchoolAndUniversity = "/event-categories/school-and-university-events";
+	static assessmentOnlyProviders = "/assessment-only-providers";
+	static becomeATeacherInEngland = "/guidance/become-a-teacher-in-england";
+	static trainToTeachEvents = "/event-categories/train-to-teach-events";
 };

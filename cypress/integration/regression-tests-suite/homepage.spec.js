@@ -130,4 +130,36 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		homePage.getWaystoTrainLink().click();
 		cy.location("pathname").should("equal", Navlinks.waysToTrain);
 	});
+
+	it('Links through to "International candidates" page', () => {
+		homePage.getFundingyourTrainingLink().click();
+		cy.get("a.button[href='" + Navlinks.internationalCandidates + "']").click();
+		cy.location("pathname").should("equal", Navlinks.internationalCandidates);
+	});
+
+	it('Links through to "Assessment only providers"', () => {
+		homePage.getWaystoTrainLink().click();
+		cy.contains("a", "See Assessment Only ").click();
+		cy.location("pathname").should("equal", Navlinks.assessmentOnlyProviders);
+	});
+	it('Links through to "Become a teacher in england"', () => {
+		homePage.getWaystoTrainLink().click();
+		cy.contains("a", "Find out about other ways to ").click();
+		cy.location("pathname").should("equal", Navlinks.becomeATeacherInEngland);
+	});
+	it('Links through to "Train to teach events"', () => {
+		homePage.getFindanEventNearYouLink().click();
+		cy.contains("a", "Explore Train to Teach").click();
+		cy.location("pathname").should("equal", Navlinks.trainToTeachEvents);
+	});
+	it('Links through to "Online Q&As"', () => {
+		homePage.getFindanEventNearYouLink().click();
+		cy.get("a.button[href='" + Navlinks.exploreOnlineQAs + "']").click();
+		cy.location("pathname").should("equal", Navlinks.exploreOnlineQAs);
+	});
+	it('Links through to "School and university events"', () => {
+		homePage.getFindanEventNearYouLink().click();
+		cy.get("a.button[href='" + Navlinks.exploreSchoolAndUniversity + "']").click();
+		cy.location("pathname").should("equal", Navlinks.exploreSchoolAndUniversity);
+	});
 });
