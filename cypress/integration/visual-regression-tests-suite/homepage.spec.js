@@ -48,11 +48,11 @@ describe(`Home page visual tests : Tests execution date and time : ${new Date()}
 		cy.percySnapshot();
 	});
 
-	it('Verify "Financial support for teacher training" page visuals', () => {
+	/*it('Verify "Financial support for teacher training" page visuals', () => {
 		homePage.getFundingyourTrainingLink().click();
 		cy.contains("Financial support for teacher").click();
 		cy.percySnapshot();
-	});
+	});*/
 	it('Verify "International candidates" page visuals', () => {
 		homePage.getFundingyourTrainingLink().click();
 		cy.get("a.button[href='" + Navlinks.internationalCandidates + "']").click();
