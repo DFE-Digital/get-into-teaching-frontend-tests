@@ -46,16 +46,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 			includedImpacts: ["critical"],
 		});
 	});
-	it('Links through to "Sign up for updates"', () => {
-		homePage
-			.getSignUpForUpdateButton()
-			.should((el) => {
-				expect(el).to.have.attr("href", Navlinks.mailingListSignup);
-			})
-			.click();
-
-		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
-	});
 
 	it('Links through to "Get an adviser"', () => {
 		homePage
@@ -146,7 +136,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
 	});
 
-	it("Validate search icon functionality", () => {
+	/*it("Validate search icon functionality", () => {
 		cy.get(".navbar__desktop__search").click();
 		cy.get(".searchbox__close").should("be.visible");
 		cy.get("#searchbox__input").should("exist").type("Salaries and benefits");
@@ -158,7 +148,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 			});
 		cy.get(".searchbox__close").should("not.be.visible");
 		cy.location("pathname").should("equal", Navlinks.salariesAndBenefits);
-	});
+	});*/
 });
 
 describe(`Feature - 404 Not Found unknown_route : ${new Date()}`, () => {
