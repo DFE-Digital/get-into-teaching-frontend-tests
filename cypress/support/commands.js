@@ -530,3 +530,8 @@ Cypress.Commands.add("verifyLinkResponse", (link) => {
 Cypress.Commands.add("waitForRegistrationToComplete", (waitTime) => {
 	cy.wait(waitTime);
 });
+
+Cypress.Commands.add("takeScreenshot", (pageName) => {
+	cy.wait(1000);
+	cy.percySnapshot("a-day-in-the-life-of-a-teacher");
+});
