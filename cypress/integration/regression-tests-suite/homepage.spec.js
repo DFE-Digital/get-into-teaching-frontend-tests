@@ -139,12 +139,12 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 
 	it('Links through to "Assessment only providers"', () => {
 		homePage.getWaystoTrainLink().click();
-		cy.contains("a", "See Assessment Only ").click();
+		cy.contains("a", "See assessment only").click();
 		cy.location("pathname").should("equal", Navlinks.assessmentOnlyProviders);
 	});
 	it('Links through to "Become a teacher in england"', () => {
 		homePage.getWaystoTrainLink().click();
-		cy.contains("a", "Find out about other ways to ").click();
+		cy.contains("a", "Find out more about ways to train").click();
 		cy.location("pathname").should("equal", Navlinks.becomeATeacherInEngland);
 	});
 	it('Links through to "Train to teach events"', () => {
