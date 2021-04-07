@@ -533,5 +533,5 @@ Cypress.Commands.add("waitForRegistrationToComplete", (waitTime) => {
 
 Cypress.Commands.add("takeScreenshot", (pageName) => {
 	cy.wait(1000);
-	cy.percySnapshot("a-day-in-the-life-of-a-teacher");
+	cy.percySnapshot(pageName);
 });
