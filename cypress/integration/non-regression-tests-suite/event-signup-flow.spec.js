@@ -462,7 +462,7 @@ describe("Verify page load " + new Date(), () => {
 				eventDate = $eventDate.text().trim();
 			});
 		cy.getFirstEvent().click();
-		cy.wait(100);
+		cy.waitForPageLoadToComplete(1000);
 		cy.getEventHeader().then((eventHeader) => {
 			eventHeader = eventHeader.text().trim();
 			expect(eventName).to.equal(eventHeader);
@@ -485,7 +485,7 @@ describe("Verify page load " + new Date(), () => {
 				eventDate = $eventDate.text().trim();
 			});
 		cy.getFirstEvent().click();
-		cy.wait(100);
+		cy.waitForPageLoadToComplete(1000);
 		cy.getEventHeader().then((eventHeader) => {
 			eventHeader = eventHeader.text().trim();
 			expect(eventName).to.equal(eventHeader);
@@ -508,7 +508,7 @@ describe("Verify page load " + new Date(), () => {
 				eventDate = $eventDate.text().trim();
 			});
 		cy.getFirstEvent().click();
-		cy.wait(100);
+		cy.waitForPageLoadToComplete(1000);
 		cy.getEventHeader().then((eventHeader) => {
 			eventHeader = eventHeader.text().trim();
 			expect(eventName).to.equal(eventHeader);

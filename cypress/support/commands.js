@@ -535,3 +535,7 @@ Cypress.Commands.add("takeScreenshot", (pageName) => {
 	cy.wait(1000);
 	cy.percySnapshot(pageName);
 });
+
+Cypress.Commands.add("waitForPageLoadToComplete", (waitTime) => {
+	cy.wait(waitTime);
+});
