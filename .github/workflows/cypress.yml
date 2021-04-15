@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       application:
-        description: 'BOTH, APP, TTA or NON-REGRESSION'
+        description: 'BOTH, APP, TTA or  VISUAL'
         required: true
         default:  'BOTH'
       reference:
@@ -36,9 +36,9 @@ jobs:
              elif  [[ "${{github.event.inputs.application}}" == "BOTH" ]]
              then
                    tests='{"tests":[ "regression-tests-suite/teacher-training-adviser", "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
-             elif  [[ "${{github.event.inputs.application}}" == "NON-REGRESSION"  ]]
+             elif  [[ "${{github.event.inputs.application}}" == "VISUAL"  ]]
              then
-                   tests='{"tests":[ "integration/visual-regression-tests-suite", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow" ]}' 
+                   tests='{"tests":[ "visual-regression-tests-suite/homepage" ]}' 
              else
                    exit 1
              fi
