@@ -26,7 +26,7 @@ jobs:
         run: |
              if  [[ "${{github.event_name}}" == "schedule"  ]]
              then
-                   tests='{"tests":[ "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow" ]}' 
+                   tests='{"tests":[ "integration/visual-regression-tests-suite", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "APP" ]] 
              then
                    tests='{"tests":[ "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
@@ -65,7 +65,7 @@ jobs:
         id:   azSecret
         with:
            keyvault: ${{ secrets.KEY_VAULT}}
-           secrets: 'SLACK-WEBHOOK, HTTP-USERNAME, HTTP-PASSWORD, EVENT-USER-EMAIL-API-KEY , MAILING-LIST-USER-EMAIL-API-KEY, TTA-USER-EMAIL-API-KEY'
+           secrets: 'SLACK-WEBHOOK, HTTP-USERNAME, HTTP-PASSWORD, EVENT-USER-EMAIL-API-KEY , MAILING-LIST-USER-EMAIL-API-KEY, TTA-USER-EMAIL-API-KEY, PERCY-TOKEN'
 
       - name: Set Configuration
         id:   config
@@ -77,7 +77,7 @@ jobs:
 
       - name: Run ${{ matrix.tests }} Test
         run: |
-              docker run -i --shm-size=1g -e CYPRESS_SPEC -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME \
+              docker run -i --shm-size=1g -e CYPRESS_SPEC -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME -e PERCY_TOKEN \
                                           -e CYPRESS_EVENT_USER_EMAIL_API_KEY -e CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY -e CYPRESS_TTA_USER_EMAIL_API_KEY \
                                    -v $PWD:/test -w /test  \
                                    -v ${{steps.config.outputs.screenshots}}:/test/cypress/screenshots   \
@@ -91,6 +91,7 @@ jobs:
               CYPRESS_EVENT_USER_EMAIL_API_KEY:         "${{ steps.azSecret.outputs.EVENT-USER-EMAIL-API-KEY }}"
               CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY:  "${{ steps.azSecret.outputs.MAILING-LIST-USER-EMAIL-API-KEY }}"
               CYPRESS_TTA_USER_EMAIL_API_KEY:           "${{ steps.azSecret.outputs.TTA-USER-EMAIL-API-KEY }}"
+              PERCY_TOKEN:                              "${{ steps.azSecret.outputs.PERCY-TOKEN }}"
         
                 
       - name: Upload reports artifact
