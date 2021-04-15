@@ -26,7 +26,7 @@ jobs:
         run: |
              if  [[ "${{github.event_name}}" == "schedule"  ]]
              then
-                   tests='{"tests":[ "integration/visual-regression-tests-suite", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow" ]}' 
+                   tests='{"tests":[ "visual-regression-tests-suite/homepage", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "APP" ]] 
              then
                    tests='{"tests":[ "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
