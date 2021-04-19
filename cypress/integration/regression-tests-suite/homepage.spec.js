@@ -144,7 +144,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 	});
 	it('Links through to "Become a teacher in england"', () => {
 		homePage.getWaystoTrainLink().click();
-		cy.contains("a", "Find out more about ways to train").click();
+		cy.contains("a", "get support to improve your subject knowledge").click();
 		cy.location("pathname").should("equal", Navlinks.becomeATeacherInEngland);
 	});
 	it('Links through to "Train to teach events"', () => {
