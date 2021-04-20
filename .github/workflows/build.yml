@@ -27,16 +27,6 @@ jobs:
       - name: set-up-environment
         uses: DFE-Digital/github-actions/set-up-environment@master
 
-      - uses: Azure/login@v1
-        with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - uses: Azure/get-keyvault-secrets@v1.2
-        id:   azSecret
-        with:
-           keyvault: ${{ secrets.KEY_VAULT}}
-           secrets: 'DOCKER-USERNAME, DOCKER-PASSWORD'
-
       - name: Get Settings
         id: sha
         run: |
@@ -51,16 +41,14 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
              ${{ runner.os }}-buildx-
-             
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ steps.azSecret.outputs.DOCKER-USERNAME }}
-          password: ${{ steps.azSecret.outputs.DOCKER-PASSWORD }}
         
       - name: Build master and push to Docker Hub
         uses: docker/build-push-action@v2
         with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: ${{ steps.sha.outputs.image }}
           builder: ${{ steps.buildx.outputs.name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
