@@ -33,13 +33,17 @@ jobs:
               echo ::set-output name=short::$(echo "${{ github.sha }}" | cut -c -7)
               echo ::set-output name=image::${{ env.DOCKERHUB_REPOSITORY }}:sha-$(echo "${{ github.sha }}" | cut -c -7)
               echo ::set-output name=latest::${{ env.DOCKERHUB_REPOSITORY }}:latest
-        
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Build master and push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
           build-args: BUILDKIT_INLINE_CACHE=1
           cache-from: |
              ${{ env.DOCKER_REPOSITORY }}:latest
