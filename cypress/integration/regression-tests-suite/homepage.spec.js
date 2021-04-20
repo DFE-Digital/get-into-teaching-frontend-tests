@@ -162,4 +162,53 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.get("a.button[href='" + Navlinks.exploreSchoolAndUniversity + "']").click();
 		cy.location("pathname").should("equal", Navlinks.exploreSchoolAndUniversity);
 	});
+
+	it('Links through to "early years"', () => {
+		homePage.getStepstoBecomeTeacherLink().click();
+		cy.contains("a", "early years").click();
+		cy.location("pathname").should("equal", Navlinks.earlyYears);
+	});
+
+	it('Links through to "further education"', () => {
+		homePage.getStepstoBecomeTeacherLink().click();
+		cy.contains("a", "further education").click();
+		cy.location("pathname").should("equal", Navlinks.furtherEducation);
+	});
+
+	it('Links through to "What to do if you’ve already qualified to teach and want to come back to teaching"', () => {
+		homePage.getStepstoBecomeTeacherLink().click();
+		cy.contains("a", "What to do if you’ve already qualified to teach and want to come back to teaching.").click();
+		cy.location("pathname").should("equal", Navlinks.returningToTeaching);
+	});
+	it('Links through to "Find out what to do if you do not have a degree"', () => {
+		homePage.getStepstoBecomeTeacherLink().click();
+		cy.contains("a", "Find out what to do if you do not have a degree").click();
+		cy.location("pathname").should("equal", Navlinks.becomeATeacherInEngland);
+	});
+
+	it('Links through to "funding options"', () => {
+		homePage.getWaystoTrainLink().click();
+		cy.waitForPageLoadToComplete(100);
+		cy.contains("a", "funding options").click();
+		cy.location("pathname").should("equal", Navlinks.fundingYourTraining);
+	});
+
+	it('Links through to "get funding"', () => {
+		homePage.getWaystoTrainLink().click();
+		cy.waitForPageLoadToComplete(100);
+		cy.contains("a", "get funding").click();
+		cy.location("pathname").should("equal", Navlinks.fundingYourTraining);
+	});
+	it('Links through to "get support to improve your subject knowledge"', () => {
+		homePage.getWaystoTrainLink().click();
+		cy.waitForPageLoadToComplete(100);
+		cy.contains("a", "get support to improve your subject knowledge").click();
+		cy.location("pathname").should("equal", Navlinks.becomeATeacherInEngland);
+	});
+	it('Links through to "guidance on financial help for international applicants"', () => {
+		homePage.getFundingyourTrainingLink().click();
+		cy.waitForPageLoadToComplete(100);
+		cy.contains("a", "guidance on financial help for international applicants").click();
+		cy.location("pathname").should("equal", Navlinks.financialSupportForInternationalApplicants);
+	});
 });
