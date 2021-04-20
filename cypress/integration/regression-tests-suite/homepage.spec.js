@@ -59,8 +59,8 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.location("pathname").should("equal", Navlinks.events);
 	});
 
-	it('Links through to "check here for updates"', () => {
-		cy.contains("check here for updates").then((linkText) => {
+	it('Links through to "Find out how coronavirus is affecting teacher training"', () => {
+		cy.contains("Find out how coronavirus is affecting teacher training").then((linkText) => {
 			cy.contains(linkText.text())
 				.should((el) => {
 					expect(el).to.have.attr("href", Navlinks.covid19);
