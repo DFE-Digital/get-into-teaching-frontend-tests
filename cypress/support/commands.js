@@ -539,3 +539,7 @@ Cypress.Commands.add("takeScreenshot", (pageName) => {
 Cypress.Commands.add("waitForPageLoadToComplete", (waitTime) => {
 	cy.wait(waitTime);
 });
+
+Cypress.Commands.add("submitFeedback", () => {
+	cy.contains("Submit feedback").click();
+});
