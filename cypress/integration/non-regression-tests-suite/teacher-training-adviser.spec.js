@@ -1686,28 +1686,36 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			});
 	});
 
-	it("It opens feedback survey page if user clicks on feedback link", function () {
-		cy.enterFirstNameLastNameAndEmail();
-		cy.returningToTeaching("No");
-		cy.doYouHaveDegree("I'm studying for a degree");
-		cy.inWhichYearAreYouStudying("Final year");
-		cy.selectWhatSubjectIsYourDegree("Computing");
-		cy.whatDegreeClassAreYouPredictedToGet("2:2");
-		cy.selectStage("Secondary");
-		cy.gcseMathsAndEnglish(true);
-		cy.whichSubjectAreYouInterestedInTeaching("Computing");
-		cy.whenDoYouWantToStartYourTeacherTraining("2021");
-		cy.enterDateOfBirth("31", "03", "1985");
-		cy.doYouLiveInTheUk("UK");
-		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
-		cy.enterUKTelephoneNumber("0125234490");
-		cy.verifyCheckYourAnswersMessage();
-		cy.clickOnContinueButton();
-		cy.acceptPolicy();
-		cy.verifySignUpCompleteMessage();
-		cy.contains("a", "feedback").should((link) => {
-			expect(link).to.have.attr("href", Navlinks.feedback);
-		});
+	it("It allows user to submit the feedback", function () {
+		cy.goToUrl("teacher_training_adviser/sign_up/completed");
+		cy.contains("a", "feedback").invoke("removeAttr", "target").click();
+		cy.get(".govuk-heading-l").should("exist").should("include.text", "Give feedback on this service");
+		cy.contains("Yes").click();
+		cy.contains("Very satisfied").click();
+		cy.submitFeedback();
+		cy.get(".govuk-panel__title").should("exist").should("include.text", "Thank you for your feedback.");
+	});
+
+	it("Verify link responses on thank you page", function () {
+		cy.goToUrl("teacher_training_adviser/feedbacks/thank_you");
+		cy.verifyLinkResponse("Get your questions answered at an event");
+		cy.verifyLinkResponse("ways into teaching");
+	});
+	it("It shows the error message to user if he submits the feedback form without entering the details", function () {
+		cy.goToUrl("teacher_training_adviser/sign_up/completed");
+		cy.contains("a", "feedback").invoke("removeAttr", "target").click();
+		cy.get(".govuk-heading-l").should("exist").should("include.text", "Give feedback on this service");
+		cy.submitFeedback();
+		cy.verifyErrorSummaryTitle();
+		cy.get("#teacher-training-adviser-feedback-successful-visit-error").should("exist");
+		cy.get("#teacher-training-adviser-feedback-rating-error").should("exist");
+		cy.contains("Yes").click();
+		cy.submitFeedback();
+		cy.get("#teacher-training-adviser-feedback-successful-visit-error").should("not.exist");
+		cy.get("#teacher-training-adviser-feedback-rating-error").should("exist");
+		cy.contains("Very satisfied").click();
+		cy.submitFeedback();
+		cy.get("#teacher-training-adviser-feedback-rating-error").should("not.exist");
 	});
 });
 
@@ -1858,9 +1866,7 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 	it('Links through to "What did you think of this service? "', function () {
 		cy.goToUrl("teacher_training_adviser/sign_up/completed");
 		cy.contains("a", "What did you think of this service?").invoke("removeAttr", "target").click();
-		cy.get(".freebirdFormviewerViewHeaderTitle")
-			.should("exist")
-			.should("include.text", "Get into Teaching: Feedback Survey");
+		cy.get(".govuk-heading-l").should("exist").should("include.text", "Give feedback on this service");
 	});
 	it('Verify "search for a teaching role in England" link', function () {
 		// If UK returner selects subject as "Other" system is navigating to "Get support" page
