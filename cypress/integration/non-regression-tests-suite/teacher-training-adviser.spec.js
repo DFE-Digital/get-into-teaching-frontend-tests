@@ -1318,6 +1318,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
 		cy.verifySignUpCompleteMessage();
+		cy.waitForRegistrationToComplete(5000);
 	});
 	it('It shows " You have already signed up to this service" message to previously signed up user', function () {
 		teacherTrainingAdviser.getFirstName().type(firstName);
