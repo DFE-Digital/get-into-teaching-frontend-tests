@@ -24,7 +24,7 @@ class EventSignupPage {
 		return cy.contains("Back");
 	}
 	getPhoneNumber() {
-		return cy.get("#events-steps-contact-details-telephone-field");
+		return cy.get("#events-steps-contact-details-address-telephone-field");
 	}
 	getPrivacyPolicy() {
 		return cy.get("#events-steps-further-details-privacy-policy-true-field");

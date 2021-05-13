@@ -1153,7 +1153,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher-training-adviser-steps-uk-or-overseas-uk-or-overseas-uk-field").click();
 		cy.clickOnContinueButton();
 		cy.enterUKCandidateAddress("25", "Delbury Court", "Telford", "TF3 2BP");
-		cy.get("#teacher-training-adviser-steps-uk-callback-telephone-field").type("0123454748");
+		cy.get("#teacher-training-adviser-steps-uk-callback-address-telephone-field").type("0123454748");
 		/*cy.get(".govuk-heading-l")
 			.should("exist")
 			.should("have.text", "You told us you live in the United Kingdom");
@@ -1209,7 +1209,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("22", "08", "2000");
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("25", "Delbury Court", "Telford", "TF3 2BT");
-		cy.get("#teacher-training-adviser-steps-uk-callback-telephone-field").type("0123454748");
+		cy.get("#teacher-training-adviser-steps-uk-callback-address-telephone-field").type("0123454748");
 		cy.clickOnContinueButton();
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
@@ -1280,7 +1280,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Where do you live?").next().contains("Overseas");
 		cy.contains("Which country do you live in?").next().contains("Denmark");
 		cy.clickOnBackButton();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field").should("have.value", "01234567890");
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field").should("have.value", "01234567890");
 		cy.wait(100);
 		cy.clickOnBackButton();
 		cy.wait(300);
@@ -1417,7 +1417,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher-training-adviser-steps-uk-address-address-city-field-error").type(this.ttaTestData.city);
 		cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field-error").type(this.ttaTestData.postcode);
 		teacherTrainingAdviser.getContinueButton().click();
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(this.ttaTestData.phoneNumber);
+		cy.get("#teacher-training-adviser-steps-uk-telephone-address-telephone-field").type(this.ttaTestData.phoneNumber);
 		teacherTrainingAdviser.getContinueButton().click();
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.clickOnCompleteButton();
@@ -1527,14 +1527,14 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
 		cy.enterUKTelephoneNumber("0834");
 		cy.verifyErrorSummaryTitle();
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-error")
+		cy.get("#teacher-training-adviser-steps-uk-telephone-address-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field-error").clear();
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field-error").type("0123456789011223344566");
+		cy.get("#teacher-training-adviser-steps-uk-telephone-address-telephone-field-error").clear();
+		cy.get("#teacher-training-adviser-steps-uk-telephone-address-telephone-field-error").type("0123456789011223344566");
 		cy.clickOnContinueButton();
 		cy.verifyErrorSummaryTitle();
-		cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-error")
+		cy.get("#teacher-training-adviser-steps-uk-telephone-address-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too long (maximum is 20 characters)");
 	});
@@ -1555,14 +1555,14 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.whichCountryDoYouLiveIn("Cyprus");
 		cy.enterOverseasTelephoneNumber("0495");
 		cy.verifyErrorSummaryTitle();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-error")
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field-error").clear();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field-error").type("0123456789011223344566");
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field-error").clear();
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field-error").type("0123456789011223344566");
 		cy.clickOnContinueButton();
 		cy.verifyErrorSummaryTitle();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-error")
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-error")
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too long (maximum is 20 characters)");
 	});
@@ -1824,7 +1824,7 @@ describe("Matchback feature", () => {
 			cy.doYouLiveInTheUk(true);
 			cy.get("#teacher-training-adviser-steps-uk-address-address-postcode-field").should("have.value", "TF3 2BT");
 			cy.enterUKCandidateAddress("55", "Hollinswood", "Telford", "TF3 2BT");
-			cy.get("#teacher-training-adviser-steps-uk-telephone-telephone-field").type(this.mailingListTestData.phone);
+			cy.get("#teacher-training-adviser-steps-uk-telephone-address-telephone-field").type(this.mailingListTestData.phone);
 			cy.clickOnContinueButton();
 			cy.get(".govuk-heading-l").should("exist").should("have.text", "Check your answers before you continue");
 			cy.contains("Name")

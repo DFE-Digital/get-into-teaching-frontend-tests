@@ -223,7 +223,7 @@ Cypress.Commands.add("selectStage", (stage) => {
 });
 
 Cypress.Commands.add("enterOverseasTelephoneNumber", (number) => {
-	cy.get("#teacher-training-adviser-steps-overseas-telephone-telephone-field").type(number);
+	cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field").type(number);
 	cy.clickOnContinueButton();
 });
 
