@@ -35,4 +35,5 @@ module.exports = class Navlinks {
 	static assessmentOnlyProviders = "/assessment-only-providers";
 	static becomeATeacherInEngland = "/guidance/become-a-teacher-in-england";
 	static trainToTeachEvents = "/event-categories/train-to-teach-events";
+	static improveYourSubjectKnowledge = "/improve-your-subject-knowledge";
 };
