@@ -543,3 +543,8 @@ Cypress.Commands.add("waitForPageLoadToComplete", (waitTime) => {
 Cypress.Commands.add("submitFeedback", () => {
 	cy.contains("Submit feedback").click();
 });
+
+Cypress.Commands.add("selectTimeZone", (timeZone) => {
+	cy.contains("Select your time zone").next().select(timeZone);
+	cy.clickOnContinueButton();
+});

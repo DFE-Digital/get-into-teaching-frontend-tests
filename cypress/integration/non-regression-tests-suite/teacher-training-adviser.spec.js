@@ -1187,6 +1187,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.get("#teacher-training-adviser-steps-overseas-country-country-id-field").select("Austria");
 		cy.clickOnContinueButton();
 		cy.contains("Contact telephone number").type("0125234490");
+		cy.selectTimeZone("(GMT+00:00) Edinburgh");
 		cy.clickOnContinueButton();
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
@@ -1233,6 +1234,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Austria");
 		cy.contains("Contact telephone number").type("0125234490");
+		cy.selectTimeZone("(GMT+00:00) Edinburgh");
 		cy.clickOnContinueButton();
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
@@ -1559,7 +1561,9 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("exist")
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field-error").clear();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field-error").type("0123456789011223344566");
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field-error").type(
+			"0123456789011223344566"
+		);
 		cy.clickOnContinueButton();
 		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-error")
@@ -1861,7 +1865,7 @@ describe("Hyperlink navigation check : Tests execution date and time : " + new D
 		cy.verifyLinkResponse("online chat");
 		cy.verifyLinkResponse("ways to train");
 		cy.verifyLinkResponse("funding");
-		cy.verifyLinkResponse("Search for events");
+		cy.verifyLinkResponse("search for events");
 	});
 
 	it('Links through to "What did you think of this service? "', function () {
