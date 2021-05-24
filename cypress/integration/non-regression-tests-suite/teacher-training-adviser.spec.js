@@ -1370,8 +1370,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			"have.text",
 			"Error: Select an option from the list"
 		);
-		cy.get("#teacher-training-adviser-steps-have-a-degree-degree-options-field-error").click();
-		teacherTrainingAdviser.getContinueButton().click();
+		cy.doYouHaveDegree("Yes");
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.selectWhichClassIsYourDegree("First class");
 		teacherTrainingAdviser.getContinueButton().click();
@@ -1421,7 +1420,32 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		teacherTrainingAdviser.getContinueButton().click();
 		cy.get("#teacher-training-adviser-steps-uk-telephone-address-telephone-field").type(this.ttaTestData.phoneNumber);
 		teacherTrainingAdviser.getContinueButton().click();
-		teacherTrainingAdviser.getContinueButton().click();
+		cy.contains("Do you have a degree?")
+			.next()
+			.next()
+			.contains("Change")
+			.should((el) => {
+				expect(el).to.have.attr("href", "/teacher_training_adviser/sign_up/have_a_degree");
+			})
+			.click();
+		cy.doYouHaveDegree("I have an equivalent qualification from another country");
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.doYouLiveInTheUk(false);
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.verifyErrorSummaryTitle();
+		cy.verifyErrorMessage("Select a time zone");
+		cy.get("#teacher-training-adviser-steps-overseas-time-zone-time-zone-error").should(
+			"have.text",
+			"Error: Select a time zone"
+		);
+		cy.get("#teacher-training-adviser-steps-overseas-time-zone-time-zone-field-error").select("(GMT+10:00) Melbourne");
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
+		cy.clickOnContinueButton();
 		cy.clickOnCompleteButton();
 		cy.verifyErrorSummaryTitle();
 		cy.verifyErrorMessage("You must accept the privacy policy in order to talk to a teacher training adviser");
