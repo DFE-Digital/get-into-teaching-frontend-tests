@@ -1468,7 +1468,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterUKTelephoneNumber("012345678");
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
-		cy.get(".govuk-form-group > a").click();
+		cy.contains("a", "privacy policy").invoke("removeAttr", "target").click();
 		cy.get("h2").should("exist").should("have.text", "Privacy Policy");
 		cy.get(":nth-child(3) > strong").should("exist").should("have.text", "Legal information");
 		cy.get(".govuk-footer__meta").should("exist");
