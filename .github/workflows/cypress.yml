@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       application:
-        description: 'BOTH, APP, TTA or  VISUAL'
+        description: 'BOTH, APP, TTA or  VISUAL or ACCESSIBILITY'
         required: true
         default:  'BOTH'
       reference:
@@ -26,7 +26,7 @@ jobs:
         run: |
              if  [[ "${{github.event_name}}" == "schedule"  ]]
              then
-                   tests='{"tests":[ "visual-regression-tests-suite/homepage", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow" ]}' 
+                   tests='{"tests":[ "visual-regression-tests-suite/homepage", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow", "accessibility-tests-suite/accessibility" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "APP" ]] 
              then
                    tests='{"tests":[ "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
@@ -38,7 +38,10 @@ jobs:
                    tests='{"tests":[ "regression-tests-suite/teacher-training-adviser", "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "VISUAL"  ]]
              then
-                   tests='{"tests":[ "visual-regression-tests-suite/homepage" ]}' 
+                   tests='{"tests":[ "visual-regression-tests-suite/homepage" ]}'
+             elif  [[ "${{github.event.inputs.application}}" == "ACCESSIBILITY"  ]]
+             then
+                   tests='{"tests":[ "accessibility-tests-suite/accessibility" ]}'
              else
                    exit 1
              fi
