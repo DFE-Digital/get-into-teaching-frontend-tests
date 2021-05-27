@@ -2,22 +2,6 @@
 import Homepage from "../../support/pageobjects/Homepage";
 import Navlinks from "../../support/pageobjects/Navlinks";
 
-function terminalLog(violations) {
-	cy.task(
-		"log",
-		`${violations.length} accessibility violation${violations.length === 1 ? "" : "s"} ${
-			violations.length === 1 ? "was" : "were"
-		} detected`
-	);
-	const violationData = violations.map(({ id, impact, description, nodes }) => ({
-		id,
-		impact,
-		description,
-		nodes: nodes.length,
-	}));
-	cy.task("table", violationData);
-}
-
 describe(`Home page tests : Tests execution date and time : ${new Date()}`, () => {
 	const homePage = new Homepage();
 	beforeEach(() => {
@@ -38,13 +22,6 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.verifySocialMediaLink(2, Navlinks.linkedin);
 		cy.verifySocialMediaLink(3, Navlinks.twitter);
 		cy.verifySocialMediaLink(4, Navlinks.youtube);
-	});
-
-	it("Has no detectable a11y violations on load (filtering to only include critical impact violations)", () => {
-		// Test on initial load, only report and assert for critical impact items
-		cy.checkA11y(null, {
-			includedImpacts: ["critical"],
-		});
 	});
 
 	it('Links through to "Get an adviser"', () => {
