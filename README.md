@@ -42,24 +42,18 @@ npm run test --  --browser chrome --spec './cypress/integration/homepage-smoke.s
 ```
 
 Steps to configure Percy and run visual tests
+
 ```bash
-$ npm install --save-dev @percy/cli @percy/cypress
-
+npm install --save-dev @percy/cli @percy/cypress
 ```
-
 ```bash
 import '@percy/cypress' into your cypress/support/index.js file
-
 ```
-
 ```bash
-$ set PERCY_TOKEN=XXXX
-
+set PERCY_TOKEN=XXXX
 ```
-
 ```bash
 percy exec -- cypress run
-
 ```
 
 
