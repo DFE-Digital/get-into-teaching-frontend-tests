@@ -41,6 +41,12 @@ To target your test run at a specific browser, use the --browser variable instea
 npm run test --  --browser chrome --spec './cypress/integration/homepage-smoke.spec.js'
 ```
 
+Steps to configure Percy and run visual tests
+```bash
+$ npm install --save-dev @percy/cli @percy/cypress
+
+```
+
 ## Automated Test Schedule
 We have 2 environments which we want to execute the tests on, Development and QA. Using GitHub actions we have set up the following scheduled test runs:
 
