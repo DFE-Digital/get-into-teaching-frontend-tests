@@ -47,6 +47,23 @@ $ npm install --save-dev @percy/cli @percy/cypress
 
 ```
 
+```bash
+import '@percy/cypress' into your cypress/support/index.js file
+
+```
+
+```bash
+$ set PERCY_TOKEN=XXXX
+
+```
+
+```bash
+percy exec -- cypress run
+
+```
+
+
+
 ## Automated Test Schedule
 We have 2 environments which we want to execute the tests on, Development and QA. Using GitHub actions we have set up the following scheduled test runs:
 
