@@ -175,7 +175,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cuba");
-		cy.enterOverseasTelephoneNumber("38484102834");
+		cy.enterOverseasTelephoneNumber("4438484102834");
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -241,7 +241,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cuba");
-		cy.enterOverseasTelephoneNumber("839494102834");
+		cy.enterOverseasTelephoneNumber("44839494102834");
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -471,7 +471,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Denmark");
-		cy.enterOverseasTelephoneNumber("02637485859");
+		cy.enterOverseasTelephoneNumber("442637485859");
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -1156,7 +1156,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.clickOnContinueButton();
 		cy.get("#teacher-training-adviser-steps-overseas-country-country-id-field").select("Austria");
 		cy.clickOnContinueButton();
-		cy.contains("Contact telephone number").type("0125234490");
+		cy.contains("Contact telephone number").type("44125234490");
 		cy.selectTimeZone("(GMT+00:00) Edinburgh");
 		cy.clickOnContinueButton();
 		cy.verifyCheckYourAnswersMessage();
@@ -1203,7 +1203,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("22", "08", "2000");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Austria");
-		cy.contains("Contact telephone number").type("0125234490");
+		cy.contains("Contact telephone number").type("44125234490");
 		cy.selectTimeZone("(GMT+00:00) Edinburgh");
 		cy.clickOnContinueButton();
 		cy.verifyCheckYourAnswersMessage();
@@ -1240,7 +1240,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.contains(firstName + " " + lastName);
 		cy.contains("Date of birth").next().contains("31 03 1985");
 		cy.contains("Email").next().contains(this.ttaTestData.email);
-		cy.contains("Telephone").next().contains("01234567890");
+		cy.contains("Telephone").next().contains("441234567890");
 		cy.contains("Are you returning to teaching?").next().contains("No");
 		cy.contains("Do you have a degree?").next().contains("Yes");
 		cy.contains("Which subject is your degree?").next().contains("Biology");
@@ -1252,7 +1252,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Where do you live?").next().contains("Overseas");
 		cy.contains("Which country do you live in?").next().contains("Denmark");
 		cy.clickOnBackButton();
-		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field").should("have.value", "01234567890");
+		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field").should("have.value", "441234567890");
 		cy.wait(100);
 		cy.clickOnBackButton();
 		cy.wait(300);
@@ -1549,7 +1549,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth(31, 3, 1985);
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Cyprus");
-		cy.enterOverseasTelephoneNumber("0495");
+		cy.enterOverseasTelephoneNumber("4495");
 		cy.verifyErrorSummaryTitle();
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-error")
 			.should("exist")
