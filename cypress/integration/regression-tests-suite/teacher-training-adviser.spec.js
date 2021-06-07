@@ -108,7 +108,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(true);
 		cy.enterUKCandidateAddress("21", "Victoria Embankment", "Darlington", "DL1 5JR");
-		cy.enterUKTelephoneNumber("0125234490");
+		cy.enterUKTelephoneNumber("44125234490");
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();

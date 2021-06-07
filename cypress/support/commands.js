@@ -223,7 +223,8 @@ Cypress.Commands.add("selectStage", (stage) => {
 });
 
 Cypress.Commands.add("enterOverseasTelephoneNumber", (number) => {
-	cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field").type(number);
+	// Clear to remove pre-populated country dial-in code
+	cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field").clear().type(number)
 	cy.clickOnContinueButton();
 });
 
