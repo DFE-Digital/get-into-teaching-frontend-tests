@@ -29,7 +29,7 @@ module.exports = class Navlinks {
 		"https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland";
 	static teachingRoleInEngland = "https://teaching-vacancies.service.gov.uk/";
 	static feedback = "https://docs.google.com/forms/d/e/1FAIpQLSdBXbU5nwP6_3TH7HY5rB4ehkSDNzfKqB5X2G7wG4K6LY97-g/viewform";
-	static internationalCandidates = "/international-candidates";
+	static internationalStudent = "/train-to-teach-in-england-as-an-international-student";
 	static exploreOnlineQAs = "/event-categories/online-q-as";
 	static exploreSchoolAndUniversity = "/event-categories/school-and-university-events";
 	static assessmentOnlyProviders = "/assessment-only-providers";

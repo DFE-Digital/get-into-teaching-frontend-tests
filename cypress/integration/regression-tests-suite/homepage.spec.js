@@ -131,10 +131,10 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.location("pathname").should("equal", Navlinks.waysToTrain);
 	});
 
-	it('Links through to "International candidates" page', () => {
+	it('Links through to "International student" page', () => {
 		homePage.getFundingyourTrainingLink().click();
-		cy.get("a.button[href='" + Navlinks.internationalCandidates + "']").click();
-		cy.location("pathname").should("equal", Navlinks.internationalCandidates);
+		cy.get("a.button[href='" + Navlinks.internationalStudent + "']").click();
+		cy.location("pathname").should("equal", Navlinks.internationalStudent);
 	});
 
 	it('Links through to "Assessment only providers"', () => {
