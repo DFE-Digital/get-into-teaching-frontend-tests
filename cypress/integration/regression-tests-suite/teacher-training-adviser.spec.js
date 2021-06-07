@@ -79,7 +79,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("20", "07", "2000");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Switzerland");
-		cy.enterOverseasTelephoneNumber("0012354758");
+		cy.enterOverseasTelephoneNumber("44012354758");
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
@@ -139,7 +139,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.enterDateOfBirth("31", "03", "1985");
 		cy.doYouLiveInTheUk(false);
 		cy.whichCountryDoYouLiveIn("Poland");
-		cy.enterOverseasTelephoneNumber("38494102834");
+		cy.enterOverseasTelephoneNumber("4438494102834");
 		cy.verifyCheckYourAnswersMessage();
 		cy.clickOnContinueButton();
 		cy.acceptPolicy();
