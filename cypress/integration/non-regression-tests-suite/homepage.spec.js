@@ -103,14 +103,14 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 		cy.location("pathname").should("equal", Navlinks.events);
 	});
 
-	it('Links through to "Sign up for personalised updates"', () => {
-		cy.contains("Sign up for personalised updates")
+	it('Links through to "Find a course"', () => {
+		cy.contains("Find a course")
 			.should((el) => {
-				expect(el).to.have.attr("href", Navlinks.mailingListSignup);
+				expect(el).to.have.attr("href", Navlinks.findACourse);
 			})
 			.click();
 
-		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
+		cy.location("pathname").should("equal", Navlinks.findACourse);
 	});
 
 	/*it("Validate search icon functionality", () => {

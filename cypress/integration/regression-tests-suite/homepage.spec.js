@@ -72,7 +72,7 @@ describe(`Home page tests : Tests execution date and time : ${new Date()}`, () =
 
 	it('Links through to "Sign up for updates"', () => {
 		homePage.getMailingStripButton().click();
-		cy.location("pathname").should("equal", Navlinks.mailingListSignup);
+		cy.location("pathname").should("equal", Navlinks.findACourse);
 	});
 
 	it('Links through to "My story into teaching"', () => {
