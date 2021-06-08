@@ -1556,7 +1556,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 			.should("have.text", "Error: Telephone number is too short (minimum is 5 characters)");
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field-error").clear();
 		cy.get("#teacher-training-adviser-steps-overseas-telephone-address-telephone-field-error").type(
-			"0123456789011223344566"
+			"44123456789011223344566"
 		);
 		cy.clickOnContinueButton();
 		cy.verifyErrorSummaryTitle();
