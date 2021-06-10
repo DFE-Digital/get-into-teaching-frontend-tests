@@ -9,7 +9,7 @@ Cypress.Commands.add("logintoApp", () => {
 		},
 	});
 	cy.injectAxe();
-	cy.get("#cookies-agree").click();
+	cy.get("#biscuits-agree").click();
 });
 
 Cypress.Commands.add("shouldHaveTalkToUsSection", () => {
@@ -70,7 +70,7 @@ Cypress.Commands.add("enterEmailVerificationCode", (email, key) => {
 });
 
 Cypress.Commands.add("acceptCookie", () => {
-	cy.get("#cookies-agree").click();
+	cy.get("#biscuits-agree").click();
 });
 
 Cypress.Commands.add("enterFirstNameLastNameAndEmail", () => {
@@ -295,7 +295,7 @@ Cypress.Commands.add("clickOnStartNowButton", () => {
 });
 
 Cypress.Commands.add("acceptAllCookies", () => {
-	cy.get("#cookies-agree").click();
+	cy.get("#biscuits-agree").click();
 });
 
 Cypress.Commands.add("wouldYouLikeToReceiveEmailUpdate", (personalisedInformation) => {
