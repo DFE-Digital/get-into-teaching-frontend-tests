@@ -29,13 +29,13 @@ jobs:
                    tests='{"tests":[ "visual-regression-tests-suite/homepage", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow", "accessibility-tests-suite/accessibility" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "APP" ]] 
              then
-                   tests='{"tests":[ "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
+                   tests='{"tests":[ "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/event-signup-flow" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "TTA"  ]]
              then
                    tests='{"tests":[ "regression-tests-suite/teacher-training-adviser"]}' 
              elif  [[ "${{github.event.inputs.application}}" == "BOTH" ]]
              then
-                   tests='{"tests":[ "regression-tests-suite/teacher-training-adviser", "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
+                   tests='{"tests":[ "regression-tests-suite/teacher-training-adviser", "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/event-signup-flow" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "VISUAL"  ]]
              then
                    tests='{"tests":[ "visual-regression-tests-suite/homepage" ]}'
