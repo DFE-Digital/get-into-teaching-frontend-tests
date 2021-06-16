@@ -49,7 +49,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
 		cy.contains("Email").next().contains(this.ttaTestData.email);
 		cy.contains("Telephone").next().contains("012345678");
-		cy.contains("Are you returning to teaching?").next().contains("Yes");
+		cy.contains("Are you qualified to teach in the UK?").next().contains("Yes");
 		cy.contains("What is your previous teacher reference number?").next().contains("23478463");
 		cy.contains("Which main subject did you previously teach?").next().contains("Computing");
 		cy.contains("Which subject would you like to teach if you return to teaching?").next().contains("Physics");
@@ -87,7 +87,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary 
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -116,7 +116,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -148,7 +148,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Get the right GCSEs or equivalent qualifications"', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -172,7 +172,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "If you do not have a degree page" if non-returner user has no degree', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - No
 		  Expected - 	If you do not have a degree page	   
 		*/
