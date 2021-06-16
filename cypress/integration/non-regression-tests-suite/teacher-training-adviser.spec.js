@@ -28,7 +28,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in primary stage teaching, have grade 4 (C) or above in english, maths and science GCSE', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -57,7 +57,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in primary stage teaching, have grade 4 (C) or above in English and maths GCSE not in science GCSE but planning to retake science GCSE', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -88,7 +88,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications message" to non-returner user, interesed in primary stage teaching, have grade 4 (C) or above in English and maths and not in science GCSE  nor planning to retake', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -112,7 +112,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in primary stage teaching, have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have grade 4 (C) or above in GCSE science', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -143,7 +143,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in primary stage teaching, have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have grade 4 (C) or above in GCSE science', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -174,7 +174,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in primary stage teaching,have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -207,7 +207,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in primary stage teaching,have no grade 4 (C) or above in English and maths GCSEs but planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -240,7 +240,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 
 	it('It shows "Get the right GCSEs or equivalent qualifications message" to non-returner user, interesed in primary stage teaching,have no grade 4 (C) or above in English and maths GCSEs nor planning to retake, have no grade 4 (C) or above in GCSE science nor planning to retake', function () {
-		/*Are you returning to teaching? - No
+		/*Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -267,7 +267,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in teaching secondary stage ,have grade 4 (C) or above in English and maths GCSEs', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - Yes
@@ -296,7 +296,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in teaching secondary stage, have grade 4 (C) or above in English and maths GCSEs', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - Yes
@@ -325,7 +325,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -356,7 +356,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -387,7 +387,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs nor planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - Yes
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -409,7 +409,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English, maths and science GCSEs', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -440,7 +440,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English, maths and science GCSEs', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -471,7 +471,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English and maths GCSEs, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -504,7 +504,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English and maths GCSEs, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -537,7 +537,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner, studying for a degree, interesed in teaching primary stage, have grade 4 (C) or above in English and maths GCSEs, have no grade 4 (C) or above in GCSE science nor planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? -Yes
@@ -562,7 +562,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have grade 4 (C) or above in GCSE science', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		 Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -595,7 +595,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have grade 4 (C) or above in GCSE science', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		 Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -628,7 +628,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Final year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -663,7 +663,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Second year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -698,7 +698,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- First year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -733,7 +733,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree- Other, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -768,7 +768,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Final year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -803,7 +803,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Second year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -838,7 +838,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - First year, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -873,7 +873,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree - Other, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -908,7 +908,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs and planning to retake, have no grade 4 (C) or above in GCSE science nor planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -934,7 +934,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, studying for a degree, interesed in teaching primary stage, have no grade 4 (C) or above in English and maths GCSEs nor planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - primary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -956,7 +956,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching secondary stage, have grade 4 (C) or above in English and maths GCSEs', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - Yes
@@ -986,7 +986,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching secondary stage, have grade 4 (C) or above in English and maths GCSEs', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - Yes
@@ -1015,7 +1015,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, studying for a degree, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -1046,7 +1046,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, studying for a degree, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs but planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -1077,7 +1077,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Get the right GCSEs or equivalent qualifications" to non-returner user, studying for a degree, interesed in teaching secondary stage, have no grade 4 (C) or above in English and maths GCSEs nor planning to retake', function () {
 		/*
-		  Are you returning to teaching? - No
+		  Are you qualified to teach in the UK? - No
 		  Do you have a degree? - I'm studying for a degree
 		  Which stage are you interested in teaching? - secondary
 		  Do you have grade 4 (C) or above in English and maths GCSEs, or equivalent? - No
@@ -1098,15 +1098,15 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, have an equivalent qualification from another country, interested in teaching secondary stage ', function () {
 		/*
-		  Are you returning to teaching? - No
-		  Do you have a degree? - I have an equivalent qualification from another country
+		  Are you qualified to teach in the UK? - No
+		  Do you have a degree? - I have, or I'm studying for, an equivalent qualification from another country
 		  Which stage are you interested in teaching? - secondary
 		  UK user		 	   
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching("No");
-		cy.doYouHaveDegree("I have an equivalent qualification from another country");
+		cy.doYouHaveDegree("I have, or I'm studying for, an equivalent qualification from another country");
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
@@ -1129,15 +1129,15 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overeas user, have an equivalent qualification from another country, interested in teaching secondary stage ', function () {
 		/*
-		  Are you returning to teaching? - No
-		  Do you have a degree? - I have an equivalent qualification from another country
+		  Are you qualified to teach in the UK? - No
+		  Do you have a degree? - I have, or I'm studying for, an equivalent qualification from another country
 		  Which stage are you interested in teaching? - secondary
 		  Overseas user		 	   
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching("No");
-		cy.doYouHaveDegree("I have an equivalent qualification from another country");
+		cy.doYouHaveDegree("I have, or I'm studying for, an equivalent qualification from another country");
 		cy.selectStage("Secondary");
 		cy.whichSubjectAreYouInterestedInTeaching("Computing");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
@@ -1157,15 +1157,15 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 	});
 	it('It shows "Thank you  Sign up complete" to non-returner UK user, have an equivalent qualification from another country interested in teaching primary stage', function () {
 		/*
-		  Are you returning to teaching? - No
-		  Do you have a degree? - I have an equivalent qualification from another country
+		  Are you qualified to teach in the UK? - No
+		  Do you have a degree? - I have, or I'm studying for, an equivalent qualification from another country
 		  Which stage are you interested in teaching? - primary
 		  UK user		 	   
 		*/
 
 		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching("No");
-		cy.doYouHaveDegree("I have an equivalent qualification from another country");
+		cy.doYouHaveDegree("I have, or I'm studying for, an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("22", "08", "2000");
@@ -1181,14 +1181,14 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 
 	it('It shows "Thank you  Sign up complete" to non-returner overseas user, have an equivalent qualification from another country interested in teaching primary stage', function () {
 		/*
-		  Are you returning to teaching? - No
-		  Do you have a degree? - I have an equivalent qualification from another country
+		  Are you qualified to teach in the UK? - No
+		  Do you have a degree? - I have, or I'm studying for, an equivalent qualification from another country
 		  Which stage are you interested in teaching? - primary
 		  Overseas user		 	   
 		*/
 		cy.enterFirstNameLastNameAndEmail();
 		cy.returningToTeaching("No");
-		cy.doYouHaveDegree("I have an equivalent qualification from another country");
+		cy.doYouHaveDegree("I have, or I'm studying for, an equivalent qualification from another country");
 		cy.selectStage("Primary");
 		cy.whenDoYouWantToStartYourTeacherTraining("2021");
 		cy.enterDateOfBirth("22", "08", "2000");
@@ -1232,7 +1232,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Date of birth").next().contains("31 03 1985");
 		cy.contains("Email").next().contains(this.ttaTestData.email);
 		cy.contains("Telephone").next().contains("441234567890");
-		cy.contains("Are you returning to teaching?").next().contains("No");
+		cy.contains("Are you qualified to teach in the UK?").next().contains("No");
 		cy.contains("Do you have a degree?").next().contains("Yes");
 		cy.contains("Which subject is your degree?").next().contains("Biology");
 		cy.contains("Which class is your degree?").next().contains("First class");
@@ -1346,7 +1346,7 @@ describe("Feature - Get an adviser : Tests execution date and time : " + new Dat
 		cy.contains("Name").next().contains("Sushant Kumar");
 		cy.contains("Date of birth").next().contains("31 03 1987");
 		cy.contains("Telephone").next().contains("102834");
-		cy.contains("Are you returning to teaching?").next().contains("No");
+		cy.contains("Are you qualified to teach in the UK?").next().contains("No");
 		cy.contains("Do you have a degree?").next().contains("Yes");
 		cy.contains("Which subject is your degree?").next().contains("Biology");
 		cy.contains("Which class is your degree?").next().contains("First class");
@@ -1491,7 +1491,7 @@ describe("Matchback feature", () => {
 			cy.contains("Address").next().contains("55 Hollinswood Telford TF3 2BT");
 			cy.contains("Email").next().contains(this.ttaTestData.email);
 			cy.contains("Telephone").next().contains(this.mailingListTestData.phone);
-			cy.contains("Are you returning to teaching?").next().contains("Yes");
+			cy.contains("Are you qualified to teach in the UK?").next().contains("Yes");
 			cy.contains("What is your previous teacher reference number?").next().contains("23478463");
 			cy.contains("Which main subject did you previously teach?").next().contains("Computing");
 			cy.contains("Which subject would you like to teach if you return to teaching?").next().contains("Physics");
