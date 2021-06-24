@@ -22,5 +22,6 @@
 			"html": false,
 			"json": true
 		}
-	}
+	},
+	"retries": 2
 }
