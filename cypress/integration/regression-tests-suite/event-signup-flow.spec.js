@@ -21,7 +21,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		cy.verifyPageResponse("/event_categories/online-events/archive");
 	});
 
-	it("It shows the Sign up complete message - for new candidate", function () {
+	xit("It shows the Sign up complete message - for new candidate", function () {
 		let signedUpeventName;
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		firstName = "Testuser_" + rnum + "_firstname";
