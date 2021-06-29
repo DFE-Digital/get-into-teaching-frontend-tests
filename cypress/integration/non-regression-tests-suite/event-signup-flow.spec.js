@@ -38,7 +38,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		});
 	});
 
-	xit("It shows the Sign up complete message - for new candidate who doesn't like to receive email updates", function () {
+	it.skip("It shows the Sign up complete message - for new candidate who doesn't like to receive email updates", function () {
 		let signedUpeventName;
 		let rnum = Math.floor(Math.random() * 10000000 + 1);
 		firstName = "Testuser_" + rnum + "_firstname";
@@ -73,7 +73,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 			}
 		});
 	});
-	xit("It shows the Sign up complete message - for existing candidate", function () {
+	it.skip("It shows the Sign up complete message - for existing candidate", function () {
 		cy.waitForRegistrationToComplete(5000);
 		let signedUpeventName;
 		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
@@ -116,7 +116,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		});
 	});
 
-	xit("It shows the Sign up complete message - for new candidate who like to receive email updates", function () {
+	it.skip("It shows the Sign up complete message - for new candidate who like to receive email updates", function () {
 		// Scenario - candidate who like to receive email updateslike to receive email updates
 		let signedUpeventName;
 		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
@@ -162,7 +162,7 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		});
 	});
 
-	xit('It sends the another email verification code if user clicks on "resend verification" link', function () {
+	it.skip('It sends the another email verification code if user clicks on "resend verification" link', function () {
 		let signedUpeventName;
 		let rnum = Math.floor(Math.random() * 1000000 + 1);
 		let firstName = "User_" + rnum + "_firstname";
