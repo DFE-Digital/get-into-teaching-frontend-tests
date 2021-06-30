@@ -14,32 +14,32 @@ describe("Feature - Event sign up : Tests execution date and time : " + new Date
 		cy.navigateToPage("/events");
 	});
 
-	it("It shows the Sign up for this event page", function () {
-		cy.updateEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation);
-		cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
-			if (month == "") {
-				searchForEvent.getUpdateResultsButton().click();
-				cy.get(".search-for-events-no-results").should(
-					"include.text",
-					"Sorry your search has not found any events, try a different type, location or month."
-				);
-			} else {
-				searchForEvent.getEventsMonth().select(month);
-				searchForEvent.getUpdateResultsButton().click();
-				eventSignup
-					.getSearchedEventName()
-					.first()
-					.then(function (eventName) {
-						cy.contains(eventName.text().trim()).click();
-						eventSignup.getSignupForThisEventButton().click();
-						cy.VerifyEventName(eventName.text());
-					});
-			}
-		});
-	});
-
 	// Disabled while we don't have any TTT events live.
 	//
+	// it("It shows the Sign up for this event page", function () {
+	// 	cy.updateEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation);
+	// 	cy.setEventMonth(this.eventSignupTestData.eventsType, this.eventSignupTestData.eventLocation).then((month) => {
+	// 		if (month == "") {
+	// 			searchForEvent.getUpdateResultsButton().click();
+	// 			cy.get(".search-for-events-no-results").should(
+	// 				"include.text",
+	// 				"Sorry your search has not found any events, try a different type, location or month."
+	// 			);
+	// 		} else {
+	// 			searchForEvent.getEventsMonth().select(month);
+	// 			searchForEvent.getUpdateResultsButton().click();
+	// 			eventSignup
+	// 				.getSearchedEventName()
+	// 				.first()
+	// 				.then(function (eventName) {
+	// 					cy.contains(eventName.text().trim()).click();
+	// 					eventSignup.getSignupForThisEventButton().click();
+	// 					cy.VerifyEventName(eventName.text());
+	// 				});
+	// 		}
+	// 	});
+	// });
+
 	// it("It shows the Sign up complete message - for new candidate who doesn't like to receive email updates", function () {
 	// 	let signedUpeventName;
 	// 	let rnum = Math.floor(Math.random() * 10000000 + 1);
