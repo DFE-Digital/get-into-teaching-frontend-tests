@@ -12,7 +12,7 @@ Integration tests using [Cypress](https://www.cypress.io/); ensures the GiT syst
 npm install
 ```
 
-3. In the `cypress.json` file edit the `env` section and replace the redacted credentials with real ones, you will need to get these from another dev or team member.
+3. Copy `.env.example` to `.env` and fill in the credentials.
 
 ## Running
 

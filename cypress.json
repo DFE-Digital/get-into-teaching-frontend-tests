@@ -1,12 +1,7 @@
 {
 	"baseUrl": "https://get-into-teaching-app-test.london.cloudapps.digital",
 	"env": {
-		"TTA_ROOT_URL": "https://get-teacher-training-adviser-service-test.london.cloudapps.digital/",
-		"HTTPAUTH_USERNAME": "g*************g",
-		"HTTPAUTH_PASSWORD": "u*******s",
-		"EVENT_USER_EMAIL_API_KEY": "********",
-		"MAILING_LIST_USER_EMAIL_API_KEY": "********",
-		"TTA_USER_EMAIL_API_KEY": "********"
+		"TTA_ROOT_URL": "https://get-teacher-training-adviser-service-test.london.cloudapps.digital/"
 	},
 	"chromeWebSecurity": false,
 	"defaultCommandTimeout": 15000,
