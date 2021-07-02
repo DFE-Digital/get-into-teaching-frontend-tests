@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-let percyHealthCheck = require("@percy/cypress/task");
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -13,22 +12,16 @@ let percyHealthCheck = require("@percy/cypress/task");
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
+const dotenvPlugin = require('cypress-dotenv');
+const dotenv = require('dotenv').config()
+
 /**
  * @type {Cypress.PluginConfig}
  */
-
+// eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-	on("task", percyHealthCheck);
-	on("task", {
-		log(message) {
-			console.log(message);
-
-			return null;
-		},
-		table(message) {
-			console.table(message);
-
-			return null;
-		},
-	});
-};
+  // `on` is used to hook into various events Cypress emits
+  // `config` is the resolved Cypress config
+  config = dotenvPlugin(config, dotenv, true)
+  return config
+}

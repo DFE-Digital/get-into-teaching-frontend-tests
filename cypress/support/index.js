@@ -15,8 +15,6 @@
 
 // Import commands.js using ES2015 syntax:
 import "./commands";
-import "cypress-axe";
-import "@percy/cypress";
 
 Cypress.on("uncaught:exception", (err, runnable) => {
 	// this stops tests automtically failing for console errors
