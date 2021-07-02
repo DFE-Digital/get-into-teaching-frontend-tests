@@ -1,7 +1,6 @@
 {
 	"baseUrl": "https://get-into-teaching-app-test.london.cloudapps.digital",
 	"env": {
-		"baseurl_tta_flow": "https://get-teacher-training-adviser-service-test.london.cloudapps.digital/",
 		"TTA_ROOT_URL": "https://get-teacher-training-adviser-service-test.london.cloudapps.digital/",
 		"HTTPAUTH_USERNAME": "g*************g",
 		"HTTPAUTH_PASSWORD": "u*******s",
