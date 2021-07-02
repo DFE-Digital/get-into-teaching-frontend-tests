@@ -20,7 +20,7 @@ describe('Mailing list sign up', () => {
     })
   })
 
-  it.only('Match back an existing candidate (resends verification code)', () => {    
+  it('Match back an existing candidate (resends verification code)', () => {    
     cy.random().then((rand) => {
       const firstName = `First-${rand}`
       const lastName = `Last-${rand}`
