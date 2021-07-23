@@ -48,6 +48,12 @@ Cypress.Commands.add('waitForJobs', () => {
 	cy.wait(8000)
 })
 
+Cypress.Commands.add('anEventExists', () => {
+  cy.get('body').then(body => {
+    cy.wrap(body.find('.events-featured__list__item').length > 0)
+  })
+})
+
 Cypress.Commands.add('retrieveVerificationCode', (email) => {	
 	const apiKey = Cypress.env('MAILING_LIST_USER_EMAIL_API_KEY')
 	cy.request(`https://mailsac.com/api/addresses/${email}/messages?_mailsacKey=${apiKey}`).as('emails')
