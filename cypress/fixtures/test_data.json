@@ -4,5 +4,8 @@
 	},
 	"getAnAdviser": {
 		"email": "ttauser@mailsac.com"
+	},
+	"events": {
+		"email": "eventsignupuser@mailsac.com"
 	}
 }
