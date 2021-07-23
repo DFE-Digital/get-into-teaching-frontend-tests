@@ -23,5 +23,12 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 
 require("@cypress/skip-test/support");
 
+// Disable Turbolinks
+Cypress.on('window:load', $window => {
+  $window.document.addEventListener('turbolinks:click', event => {
+    event.preventDefault()
+  })
+})
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
