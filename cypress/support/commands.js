@@ -29,7 +29,7 @@ Cypress.Commands.add('clickWithText', (text) => {
 })
 
 Cypress.Commands.add('clickNext', () => {
-	cy.clickWithText('Next Step')
+	cy.clickWithText('Next step')
 })
 
 Cypress.Commands.add('clickContinue', () => {
