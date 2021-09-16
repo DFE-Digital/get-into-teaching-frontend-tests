@@ -1,37 +1,38 @@
 describe('Mailing list sign up', () => {
-  var email
+  let email
+  let firstName
+  let lastName
 
   beforeEach(() => {
     cy.authVisit(Cypress.env('TTA_ROOT_URL'))
     cy.acceptCookie()
     cy.clickWithText('Start now')
-
-    cy.fixture('test_data.json').then((testData) => {
-      email = testData.getAnAdviser.email
+    cy.random().then((rand) => {
+      firstName = `First-${rand}`
+      lastName = `Last-${rand}`
     })
   })
 
-  it('Sign up as a new candidate', () => {    
-    cy.random().then((rand) => {
-      const firstName = `First-${rand}`
-      const lastName = `Last-${rand}`
+  describe('As a new candidate', () => {
+    before(() => {
+      cy.random().then((rand) => {
+        email = `${rand}@${rand}.never`
+      })
+    })
 
+    it('Signing up', () => {    
       signUp(firstName, lastName)
     })
   })
 
-  it('Match back an existing candidate (resends verification code)', () => {    
-    cy.random().then((rand) => {
-      const firstName = `First-${rand}`
-      const lastName = `Last-${rand}`
+  describe('As an existing candidate', () => {
+    before(() => {
+      cy.fixture('test_data.json').then((testData) => {
+        email = testData.getAnAdviser.email
+      })
+    })
 
-      signUp(firstName, lastName)
-
-      cy.waitForJobs()
-
-      cy.authVisit(Cypress.env('TTA_ROOT_URL'))
-      cy.clickWithText('Start now')
-
+    it('Signing up (resends verification code)', () => {    
       submitPersonalDetails(firstName, lastName)
 
       cy.clickWithText('resend verification')
