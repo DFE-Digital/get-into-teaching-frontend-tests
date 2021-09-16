@@ -3,12 +3,6 @@ describe('Mailing list sign up', () => {
   let firstName
   let lastName
 
-  before(() => {
-    cy.fixture('test_data.json').then((testData) => {
-      email = testData.mailingList.email
-    })
-  })
-
   beforeEach(() => {
     cy.authVisit('/mailinglist/signup')
     cy.acceptCookie()
@@ -19,70 +13,78 @@ describe('Mailing list sign up', () => {
     })
   })
 
-  it('Sign up as a new candidate', () => {
-    signUp(firstName, lastName)
-  })
+  describe('As a new candidate', () => {
+    before(() => {
+      cy.random().then((rand) => {
+        email = `${rand}@${rand}.never`
+      })
+    })
 
-  it('Match back an existing candidate (resends verification code)', () => {
-    signUp(firstName, lastName)
-
-    cy.waitForJobs()
-
-    cy.authVisit('/mailinglist/signup')
-
-    cy.contains('Get personalised guidance to your inbox')
-    submitPersonalDetails(firstName, lastName)
-
-    cy.clickWithText('resend verification')
-    cy.contains("We've sent you another email.")
-
-    cy.waitForJobs()
-
-    cy.retrieveVerificationCode(email).then((code) => {
-      cy.contains('Verify your email address')
-      cy.getByLabel(
-        `Check your email and enter the verification code sent to ${email}`
-      ).type(code)
-      cy.clickNext()
-
-      cy.contains('You’ve already signed up')
+    it('Signing up', () => {
+      signUp(firstName, lastName)
     })
   })
 
-  it('Book a callback on completion of the mailing list sign up', () => {
-    signUp(firstName, lastName)
-
-    cy.waitForJobs()
-
-    cy.contains('Book a callback').click()
-
-    submitPersonalDetails(firstName, lastName)
-    cy.clickNext()
-
-    cy.clickWithText('resend verification')
-    cy.contains("We've sent you another email.")
-
-    cy.waitForJobs()
-
-    cy.retrieveVerificationCode(email).then((code) => {
-      cy.contains('Verify your email address')
-      cy.getByLabel(
-        `Check your email and enter the verification code sent to ${email}`
-      ).type(code)
-      cy.clickNext()
+  describe('As an existing candidate', () => {
+    before(() => {
+      cy.fixture('test_data.json').then((testData) => {
+        email = testData.mailingList.email
+      })
     })
 
-    cy.getByLabel('Phone number').type('1234567890')
-    cy.clickNext()
+    it('Signing up (resends verification code)', () => {  
+      cy.contains('Get personalised guidance to your inbox')
+      submitPersonalDetails(firstName, lastName)
+  
+      cy.clickWithText('resend verification')
+      cy.contains("We've sent you another email.")
+  
+      cy.waitForJobs()
+  
+      cy.retrieveVerificationCode(email).then((code) => {
+        cy.contains('Verify your email address')
+        cy.getByLabel(
+          `Check your email and enter the verification code sent to ${email}`
+        ).type(code)
+        cy.clickNext()
+  
+        cy.contains('You’ve already signed up')
+      })
+    })
 
-    cy.getByLabel('Choose an option').select('Eligibility to become a teacher')
-    cy.clickNext()
-
-    cy.contains('Accept privacy policy')
-    cy.clickWithText('Yes')
-
-    cy.clickWithText('Book your callback')
-    cy.contains('Callback confirmed')
+    it('Booking a callback on completion of the mailing list sign up', () => {
+      cy.authVisit('/mailinglist/signup/completed')
+  
+      cy.contains('Book a callback').click()
+  
+      submitPersonalDetails(firstName, lastName)
+      cy.clickNext()
+  
+      cy.clickWithText('resend verification')
+      cy.contains("We've sent you another email.")
+  
+      cy.waitForJobs()
+  
+      cy.retrieveVerificationCode(email).then((code) => {
+        cy.contains('Verify your email address')
+        cy.getByLabel(
+          `Check your email and enter the verification code sent to ${email}`
+        ).type(code)
+        cy.clickNext()
+      })
+  
+      cy.getByLabel('Phone number').clear().type('1234567890')
+      cy.clickNext()
+  
+      cy.getByLabel('Choose an option').select('Eligibility to become a teacher')
+      cy.clickNext()
+  
+      cy.contains('Accept privacy policy')
+      cy.clickWithText('Yes')
+  
+      cy.clickWithText('Book your callback')
+      cy.contains('Callback confirmed')
+    })
   })
 
   const signUp = (firstName, lastName) => {

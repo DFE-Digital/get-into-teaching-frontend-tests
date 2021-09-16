@@ -1,57 +1,54 @@
 describe('Event sign up', () => {
-  var email
+  let email
+  let firstName
+  let lastName
   const eventSelector = '.events-featured__list__item'
 
   beforeEach(() => {
     checkEventSelectorIsCorrect()
     navigateToLastPageOfEvents()
-
-    cy.fixture('test_data.json').then((testData) => {
-      email = testData.events.email
+    cy.random().then((rand) => {
+      firstName = `First-${rand}`
+      lastName = `Last-${rand}`
     })
   })
 
-  it('Sign up as a new candidate (without mailing list)', () => {    
-    cy.random().then((rand) => {
-      const firstName = `First-${rand}`
-      const lastName = `Last-${rand}`
+  describe('As a new candidate', () => {
+    before(() => {
+      cy.random().then((rand) => {
+        email = `${rand}@${rand}.never`
+      })
+    })
 
+    it('Signing up (without mailing list)', () => {    
       cy.anEventExists().then((exists) => {
         if (exists) {
           navigateToLastEventSignUp()
           signUp(firstName, lastName, false)
         }
       })
-    })
-  })
 
-  it('Sign up as a new candidate (with mailing list)', () => {    
-    cy.random().then((rand) => {
-      const firstName = `First-${rand}`
-      const lastName = `Last-${rand}`
-
-      cy.anEventExists().then((exists) => {
-        if (exists) {
-          navigateToLastEventSignUp()
-          signUp(firstName, lastName, true)
-        }
+      it('Signing up (with mailing list)', () => {    
+        cy.anEventExists().then((exists) => {
+          if (exists) {
+            navigateToLastEventSignUp()
+            signUp(firstName, lastName, true)
+          }
+        })
       })
     })
   })
 
-  it('Match back an existing candidate (with mailing list, resends verification code)', () => {    
-    cy.random().then((rand) => {
-      const firstName = `First-${rand}`
-      const lastName = `Last-${rand}`
+  describe('As an existing candidate', () => {
+    before(() => {
+      cy.fixture('test_data.json').then((testData) => {
+        email = testData.events.email
+      })
+    })
 
+    it('Signing up (with mailing list, resends verification code)', () => {    
       cy.anEventExists().then((exists) => {
         if (exists) {
-          navigateToLastEventSignUp()
-          signUp(firstName, lastName, true)
-
-          cy.waitForJobs()
-
-          navigateToLastPageOfEvents()
           navigateToLastEventSignUp()
 
           submitPersonalDetails(firstName, lastName)
