@@ -67,11 +67,47 @@ jobs:
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - uses: Azure/get-keyvault-secrets@v1.2
-        id:   azSecret
+      - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
+        id: SLACK-WEBHOOK
         with:
-           keyvault: ${{ secrets.KEY_VAULT}}
-           secrets: 'SLACK-WEBHOOK, HTTP-USERNAME, HTTP-PASSWORD, EVENT-USER-EMAIL-API-KEY , MAILING-LIST-USER-EMAIL-API-KEY, TTA-USER-EMAIL-API-KEY, PERCY-TOKEN'
+          keyvault: ${{ secrets.KEY_VAULT}}
+          yaml_secret: INFRA-KEYS
+          secret: SLACK-WEBHOOK
+
+      - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
+        id: HTTP-USERNAME
+        with:
+          keyvault: ${{ secrets.KEY_VAULT}}
+          yaml_secret: INFRA-KEYS
+          secret: HTTP-USERNAME
+
+      - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
+        id: EVENT-USER-EMAIL-API-KEY
+        with:
+          keyvault: ${{ secrets.KEY_VAULT}}
+          yaml_secret: INFRA-KEYS
+          secret: EVENT-USER-EMAIL-API-KEY
+
+      - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
+        id: MAILING-LIST-USER-EMAIL-API-KEY
+        with:
+          keyvault: ${{ secrets.KEY_VAULT}}
+          yaml_secret: INFRA-KEYS
+          secret: MAILING-LIST-USER-EMAIL-API-KEY
+
+      - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
+        id: TTA-USER-EMAIL-API-KEY
+        with:
+          keyvault: ${{ secrets.KEY_VAULT}}
+          yaml_secret: INFRA-KEYS
+          secret: TTA-USER-EMAIL-API-KEY
+
+      - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
+        id: PERCY-TOKEN
+        with:
+          keyvault: ${{ secrets.KEY_VAULT}}
+          yaml_secret: INFRA-KEYS
+          secret: PERCY-TOKEN
 
       - name: Set Configuration
         id:   config
@@ -91,13 +127,13 @@ jobs:
                                    -v ${{steps.config.outputs.reports}}:/test/cypress/reports   \
                                    ${{ env.DOCKERHUB_REPOSITORY}}:latest
         env:
-              CYPRESS_HTTPAUTH_PASSWORD:                "${{ steps.azSecret.outputs.HTTP-PASSWORD }}"
-              CYPRESS_HTTPAUTH_USERNAME:                "${{ steps.azSecret.outputs.HTTP-USERNAME }}"
+              CYPRESS_HTTPAUTH_PASSWORD:                "${{ steps.HTTP-PASSWORD.outputs.secret-value }}"
+              CYPRESS_HTTPAUTH_USERNAME:                "${{ steps.HTTP-USERNAME.outputs.secret-value }}"
               CYPRESS_SPEC:                             "cypress/integration/${{ matrix.tests }}.spec.js"
-              CYPRESS_EVENT_USER_EMAIL_API_KEY:         "${{ steps.azSecret.outputs.EVENT-USER-EMAIL-API-KEY }}"
-              CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY:  "${{ steps.azSecret.outputs.MAILING-LIST-USER-EMAIL-API-KEY }}"
-              CYPRESS_TTA_USER_EMAIL_API_KEY:           "${{ steps.azSecret.outputs.TTA-USER-EMAIL-API-KEY }}"
-              PERCY_TOKEN:                              "${{ steps.azSecret.outputs.PERCY-TOKEN }}"
+              CYPRESS_EVENT_USER_EMAIL_API_KEY:         "${{ steps.EVENT-USER-EMAIL-API-KEY.outputs.secret-value }}"
+              CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY:  "${{ steps.MAILING-LIST-USER-EMAIL-API-KEY.outputs.secret-value }}"
+              CYPRESS_TTA_USER_EMAIL_API_KEY:           "${{ steps.TTA-USER-EMAIL-API-KEY.outputs.secret-value }}"
+              PERCY_TOKEN:                              "${{ steps.PERCY-TOKEN.outputs.secret-value }}"
         
                 
       - name: Upload reports artifact
@@ -140,7 +176,7 @@ jobs:
         if: failure()
         uses: rtCamp/action-slack-notify@master
         env:
-           SLACK_WEBHOOK: ${{ steps.azSecret.outputs.SLACK-WEBHOOK }}
+           SLACK_WEBHOOK: ${{ steps.SLACK-WEBHOOK.outputs.secret-value }}
            SLACK_COLOR:   ${{env.SLACK_ERROR}}
            SLACK_TITLE: 'Failure running Cypress test ${{ matrix.tests}}'
            SLACK_MESSAGE: |
