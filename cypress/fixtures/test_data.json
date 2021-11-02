@@ -1,0 +1,11 @@
+{
+	"mailingList": {
+		"email": "mailinglistuser@mailsac.com"
+	},
+	"getAnAdviser": {
+		"email": "ttauser@mailsac.com"
+	},
+	"events": {
+		"email": "eventsignupuser@mailsac.com"
+	}
+}

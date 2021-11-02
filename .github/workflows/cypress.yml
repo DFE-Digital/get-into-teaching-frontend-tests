@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       application:
-        description: 'BOTH, APP, TTA or  VISUAL or ACCESSIBILITY'
+        description: 'BOTH, APP or TTA'
         required: true
         default:  'BOTH'
       reference:
@@ -26,22 +26,16 @@ jobs:
         run: |
              if  [[ "${{github.event_name}}" == "schedule"  ]]
              then
-                   tests='{"tests":[ "visual-regression-tests-suite/homepage", "non-regression-tests-suite/teacher-training-adviser", "non-regression-tests-suite/mailinglist-signup-flow", "non-regression-tests-suite/homepage", "non-regression-tests-suite/event-signup-flow", "accessibility-tests-suite/accessibility" ]}' 
+                   tests='{"tests":[ "get_an_adviser", "mailing_list" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "APP" ]] 
              then
-                   tests='{"tests":[ "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
+                   tests='{"tests":[ "mailing_list" ]}' 
              elif  [[ "${{github.event.inputs.application}}" == "TTA"  ]]
              then
-                   tests='{"tests":[ "regression-tests-suite/teacher-training-adviser"]}' 
+                   tests='{"tests":[ "get_an_adviser"]}' 
              elif  [[ "${{github.event.inputs.application}}" == "BOTH" ]]
              then
-                   tests='{"tests":[ "regression-tests-suite/teacher-training-adviser", "regression-tests-suite/mailinglist-signup-flow", "regression-tests-suite/homepage", "regression-tests-suite/event-signup-flow" ]}' 
-             elif  [[ "${{github.event.inputs.application}}" == "VISUAL"  ]]
-             then
-                   tests='{"tests":[ "visual-regression-tests-suite/homepage" ]}'
-             elif  [[ "${{github.event.inputs.application}}" == "ACCESSIBILITY"  ]]
-             then
-                   tests='{"tests":[ "accessibility-tests-suite/accessibility" ]}'
+                   tests='{"tests":[ "get_an_adviser", "mailing_list" ]}' 
              else
                    exit 1
              fi
@@ -58,12 +52,12 @@ jobs:
       matrix: ${{ fromJson(needs.set-matrix.outputs.tests) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
 
       - name: set-up-environment
         uses: DFE-Digital/github-actions/set-up-environment@master
 
-      - uses: Azure/login@v1.3.0
+      - uses: Azure/login@v1.4.0
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -119,7 +113,7 @@ jobs:
 
       - name: Run ${{ matrix.tests }} Test
         run: |
-              docker run -i --shm-size=1g -e CYPRESS_SPEC -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME -e PERCY_TOKEN \
+              docker run -i --shm-size=1g -e CYPRESS_SPEC -e CYPRESS_HTTPAUTH_PASSWORD -e CYPRESS_HTTPAUTH_USERNAME \
                                           -e CYPRESS_EVENT_USER_EMAIL_API_KEY -e CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY -e CYPRESS_TTA_USER_EMAIL_API_KEY \
                                    -v $PWD:/test -w /test  \
                                    -v ${{steps.config.outputs.screenshots}}:/test/cypress/screenshots   \
@@ -133,8 +127,7 @@ jobs:
               CYPRESS_EVENT_USER_EMAIL_API_KEY:         "${{ steps.EVENT-USER-EMAIL-API-KEY.outputs.secret-value }}"
               CYPRESS_MAILING_LIST_USER_EMAIL_API_KEY:  "${{ steps.MAILING-LIST-USER-EMAIL-API-KEY.outputs.secret-value }}"
               CYPRESS_TTA_USER_EMAIL_API_KEY:           "${{ steps.TTA-USER-EMAIL-API-KEY.outputs.secret-value }}"
-              PERCY_TOKEN:                              "${{ steps.PERCY-TOKEN.outputs.secret-value }}"
-        
+              PERCY_TOKEN:                              "${{ steps.PERCY-TOKEN.outputs.secret-value }}"      
                 
       - name: Upload reports artifact
         uses: actions/upload-artifact@v2

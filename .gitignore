@@ -1,3 +1,6 @@
+.env
 node_modules
-cypress/screenshots/**
-cypress/videos/**
+cypress/screenshots
+cypress/videos
+cypress/reports
+.DS_Store
