@@ -70,9 +70,6 @@ describe("Mailing list sign up", () => {
         cy.clickNext();
       });
 
-      cy.getByLabel("Phone number").clear().type("1234567890");
-      cy.clickNext();
-
       cy.getByLabel("Choose an option").select(
         "Eligibility to become a teacher"
       );

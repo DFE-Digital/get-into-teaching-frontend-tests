@@ -4,3 +4,10 @@ cypress/screenshots
 cypress/videos
 cypress/reports
 .DS_Store
+end-2-end-test-report.json
+fetch_config.rb
+mailing_list/reports mailing_list/screenshots mailing_list/videos
+mailing_list
+reports
+videos
+xunit.xml

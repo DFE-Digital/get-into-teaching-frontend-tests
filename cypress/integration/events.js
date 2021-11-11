@@ -78,9 +78,6 @@ describe("Event sign up", () => {
   const signUp = (firstName, lastName, email, mailingList) => {
     submitPersonalDetails(firstName, lastName, email);
 
-    cy.getByLabel("Phone number (optional)").type("123456789");
-    cy.clickNext();
-
     cy.contains("Are you over 16 and do you agree to our privacy policy?");
     cy.get(".govuk-checkboxes").contains("Yes").click();
 
