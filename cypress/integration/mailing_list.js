@@ -50,9 +50,7 @@ describe("Mailing list sign up", () => {
     });
 
     it("Booking a callback on completion of the mailing list sign up", function () {
-      cy.authVisit("/mailinglist/signup/completed");
-
-      cy.contains("Book a callback").click();
+      cy.authVisit("/callbacks/book");
 
       submitPersonalDetails(this.firstName, this.lastName, this.email);
       cy.clickNext();
@@ -108,7 +106,7 @@ describe("Mailing list sign up", () => {
     cy.clickWithText("Yes");
     cy.clickCompleteSignUp();
 
-    cy.contains("You've signed up");
+    cy.contains("you're signed up");
   };
 
   const submitPersonalDetails = (firstName, lastName, email) => {
