@@ -76,6 +76,13 @@ jobs:
           secret: HTTP-USERNAME
 
       - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
+        id: HTTP-PASSWORD
+        with:
+          keyvault: ${{ secrets.KEY_VAULT}}
+          yaml_secret: INFRA-KEYS
+          secret: HTTP-PASSWORD
+
+      - uses: DFE-Digital/github-actions/keyvault-yaml-secret@master
         id: EVENT-USER-EMAIL-API-KEY
         with:
           keyvault: ${{ secrets.KEY_VAULT}}
@@ -144,7 +151,7 @@ jobs:
         id:  failures
         if: always()
         run: |
-            cat ${{steps.config.outputs.reports}}/*.json | jq  -r ".results[].suites[].suites[].tests[] | {fulltitle , pass} | select(.pass=="false" ) | .fulltitle" > /tmp/$$.tmp
+            cat ${{steps.config.outputs.reports}}/*.json | jq  -r ".results[].suites[].suites[].tests[] | {fullTitle , pass} | select(.pass=="false" ) | .fullTitle" > /tmp/$$.tmp
             if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
                  i=0
