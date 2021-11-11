@@ -63,11 +63,6 @@ describe("Event sign up", () => {
             ).type(code);
             cy.clickNext();
 
-            cy.contains(
-              "Are you over 16 and do you agree to our privacy policy?"
-            );
-            cy.get(".govuk-checkboxes").contains("Yes").click();
-
             cy.clickCompleteSignUp();
           });
         }
@@ -77,9 +72,6 @@ describe("Event sign up", () => {
 
   const signUp = (firstName, lastName, email, mailingList) => {
     submitPersonalDetails(firstName, lastName, email);
-
-    cy.contains("Are you over 16 and do you agree to our privacy policy?");
-    cy.get(".govuk-checkboxes").contains("Yes").click();
 
     cy.contains(
       "Would you like to receive email updates to help you get into teaching?"
