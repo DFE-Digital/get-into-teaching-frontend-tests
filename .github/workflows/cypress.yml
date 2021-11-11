@@ -144,7 +144,7 @@ jobs:
         id:  failures
         if: always()
         run: |
-            cat ${{steps.config.outputs.reports}}/*.json | jq  -r ".results[].suites[].suites[].tests[] | {title , pass} | select(.pass=="false" ) | .title" > /tmp/$$.tmp
+            cat ${{steps.config.outputs.reports}}/*.json | jq  -r ".results[].suites[].suites[].tests[] | {fulltitle , pass} | select(.pass=="false" ) | .fulltitle" > /tmp/$$.tmp
             if [[ $(cat /tmp/$$.tmp | wc -l) -gt 0  ]]
             then
                  i=0
