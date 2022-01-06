@@ -33,19 +33,17 @@ describe("Mailing list sign up", () => {
       cy.contains("Get personalised guidance to your inbox");
       submitPersonalDetails(this.firstName, this.lastName, this.email);
 
-      cy.clickWithText("resend verification");
-      cy.contains("We've sent you another email.");
+      cy.clickWithText("Send another code to verify my details.");
+      cy.contains("We've sent you another email");
 
       cy.waitForJobs();
 
       cy.retrieveVerificationCode(this.email).then((code) => {
-        cy.contains("Verify your email address");
-        cy.getByLabel(
-          `Check your email and enter the verification code sent to ${this.email}`
-        ).type(code);
+        cy.contains("You're already registered with us");
+        cy.getByLabel("To verify your details, we've sent a code to your email address.").type(code);
         cy.clickNext();
 
-        cy.contains("You’ve already signed up");
+        cy.contains("You've already signed up");
       });
     });
 
@@ -55,16 +53,14 @@ describe("Mailing list sign up", () => {
       submitPersonalDetails(this.firstName, this.lastName, this.email);
       cy.clickNext();
 
-      cy.clickWithText("resend verification");
-      cy.contains("We've sent you another email.");
+      cy.clickWithText("Send another code to verify my details.");
+      cy.contains("We've sent you another email");
 
       cy.waitForJobs();
 
       cy.retrieveVerificationCode(this.email).then((code) => {
-        cy.contains("Verify your email address");
-        cy.getByLabel(
-          `Check your email and enter the verification code sent to ${this.email}`
-        ).type(code);
+        cy.contains("You're already registered with us");
+        cy.getByLabel("To verify your details, we've sent a code to your email address.").type(code);
         cy.clickNext();
       });
 

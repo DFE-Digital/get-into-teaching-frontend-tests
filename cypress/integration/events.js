@@ -52,15 +52,13 @@ describe("Event sign up", () => {
 
           submitPersonalDetails(this.firstName, this.lastName, this.email);
 
-          cy.clickWithText("resend verification");
-          cy.contains("We've sent you another email.");
+          cy.clickWithText("Send another code to verify my details.");
+          cy.contains("We've sent you another email");
 
           cy.waitForJobs();
 
           cy.retrieveVerificationCode(this.email).then((code) => {
-            cy.getByLabel(
-              `Check your email and enter the verification code sent to ${this.email}`
-            ).type(code);
+            cy.getByLabel("To verify your details, we've sent a code to your email address.").type(code);
             cy.clickNext();
 
             cy.contains(
