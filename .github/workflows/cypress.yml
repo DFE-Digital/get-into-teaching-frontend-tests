@@ -1,7 +1,21 @@
 ---
 name: Cypress
 on:
-  workflow_dispatch:
+ workflow_call:
+    inputs:
+      application:
+        required: true
+        type: string
+      reference:
+        required: true
+        type: string  
+    secrets:
+      AZURE_CREDENTIALS:
+        required: true
+      KEY_VAULT:
+        required: true
+
+ workflow_dispatch:
     inputs:
       application:
         description: 'BOTH, APP or TTA'
@@ -12,11 +26,22 @@ on:
         required: true
         default:  'Cypress'   
 
-  schedule:
+ schedule:
     - cron: "0 23 * * *"
+
+
 jobs:
   set-matrix:
     runs-on: ubuntu-latest
+    env:
+       SLACK_FAILURE:         '#ff0000'
+       SLACK_SUCCESS:         '#00ff00'
+       SLACK_ICON:            https://raw.githubusercontent.com/DFE-Digital/get-into-teaching-api/master/.github/image.png?size=48
+       SLACK_USERNAME:        GiT Workflows
+       SLACK_FOOTER:          GiT Cypress Tests
+       DOCKERHUB_REPOSITORY:  ghcr.io/dfe-digital/dfecypress
+       DOMAIN:                london.cloudapps.digital
+       APPLICATION:           GiT Cypress Tests
     outputs:
       tests: ${{ steps.select-tests.outputs.tests }}
     steps:
@@ -27,13 +52,13 @@ jobs:
              if  [[ "${{github.event_name}}" == "schedule"  ]]
              then
                    tests='{"tests":[ "get_an_adviser", "mailing_list" ]}' 
-             elif  [[ "${{github.event.inputs.application}}" == "APP" ]] 
+             elif  [[ "${{github.event.inputs.application}}" == "APP" || "${{inputs.application}}" == "APP" ]] 
              then
                    tests='{"tests":[ "mailing_list" ]}' 
-             elif  [[ "${{github.event.inputs.application}}" == "TTA"  ]]
+             elif  [[ "${{github.event.inputs.application}}" == "TTA" || "${{inputs.application}}" == "TTA"  ]]
              then
                    tests='{"tests":[ "get_an_adviser"]}' 
-             elif  [[ "${{github.event.inputs.application}}" == "BOTH" ]]
+             elif  [[ "${{github.event.inputs.application}}" == "BOTH" || "${{inputs.application}}" == "BOTH" ]]
              then
                    tests='{"tests":[ "get_an_adviser", "mailing_list" ]}' 
              else
@@ -53,9 +78,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
-
-      - name: set-up-environment
-        uses: DFE-Digital/github-actions/set-up-environment@master
 
       - uses: Azure/login@v1.4.2
         with:
