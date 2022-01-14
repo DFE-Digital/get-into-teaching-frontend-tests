@@ -1,4 +1,4 @@
-describe("Mailing list sign up", () => {
+describe("Get an adviser list sign up", () => {
   beforeEach(() => {
     cy.authVisit(Cypress.env("TTA_ROOT_URL"));
     cy.acceptCookie();
