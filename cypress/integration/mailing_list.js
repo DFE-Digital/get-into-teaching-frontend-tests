@@ -95,7 +95,8 @@ describe("Mailing list sign up", () => {
     cy.getByLabel("Which subject do you want to teach?").select("Chemistry");
     cy.clickNext();
 
-    cy.getByLabel("Your postcode (optional)").type("TE5 1NG");
+    cy.clickWithText("Yes");
+    cy.getByLabel("Your postcode").type("TE5 1NG");
     cy.clickNext();
 
     cy.contains("Accept privacy policy");
