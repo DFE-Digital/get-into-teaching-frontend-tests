@@ -51,7 +51,6 @@ describe("Mailing list sign up", () => {
       cy.authVisit("/callbacks/book");
 
       submitPersonalDetails(this.firstName, this.lastName, this.email);
-      cy.clickNext();
 
       cy.clickWithText("Send another code to verify my details.");
       cy.contains("We've sent you another email");
