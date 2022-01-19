@@ -112,7 +112,9 @@ describe("Event sign up", () => {
   };
 
   const submitPersonalDetails = (firstName, lastName, email) => {
-    cy.contains("First name");
+    // Short wait to ensure the last page has loaded otherwise
+    // Cypress seems to get ahead of Turbo occasionally.
+    cy.wait(1000)
     cy.getByLabel("First name").type(firstName);
     cy.getByLabel("Last name").type(lastName);
     cy.getByLabel("Email address").type(email);
