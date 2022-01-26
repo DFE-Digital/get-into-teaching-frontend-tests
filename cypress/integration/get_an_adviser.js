@@ -53,13 +53,13 @@ describe("Get an adviser list sign up", () => {
   const signUp = (firstName, lastName, email) => {
     submitPersonalDetails(firstName, lastName, email);
 
-    cy.contains("Are you qualified to teach in the UK?");
+    cy.contains("Are you qualified to teach?");
     cy.clickWithText("No");
     cy.clickContinue();
 
     cy.contains("Do you have a degree?");
     cy.clickWithText(
-      "I have, or I'm studying for, an equivalent qualification from another country"
+      "I am not a UK citizen and have, or am studying for, an equivalent qualification"
     );
     cy.clickContinue();
 
