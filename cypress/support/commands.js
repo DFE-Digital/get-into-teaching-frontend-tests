@@ -64,8 +64,11 @@ Cypress.Commands.add('retrieveVerificationCode', (email) => {
 		cy.request(emailUrl).as('latestEmail');
 
 		cy.get("@latestEmail").then((latestEmailResponse) => {
-			const pos = latestEmailResponse.body.search('is');
-			const code = latestEmailResponse.body.toString().substr(pos + 2, 7)
+			// Strip newlines.
+			const body = latestEmailResponse.body.toString().replace(/\r?\n|\r/g, "");
+			const pos = body.search('code:');
+			const code = body.substr(pos + 5, 6);
+
 			cy.wrap(code);
 		});
 	});
